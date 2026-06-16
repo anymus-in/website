@@ -1,26 +1,183 @@
 @import "tailwindcss";
 
+@theme inline {
+  /* Colors */
+  --color-white: #ffffff;
+  --color-paper: #F2F1ED;
+  --color-paper-alt: #EFEEED;
+  --color-ink: #000000;
+  --color-ink-900: #18181B;
+  --color-ink-700: #3F3F46;
+  --color-ink-600: #52525B;
+  --color-ink-500: #71717A;
+  --color-ink-400: #A1A1AA;
+  --color-line: #E4E4E1;
+  --color-line-strong: #D4D4D1;
+
+  /* Warm accent (used sparingly: links, focus, eyebrows, small marks) */
+  --color-accent: #F0A23C;
+  --color-accent-ink: #C97A1C;
+
+  /* Gradient accent colors */
+  --color-grad-blue: #3B82F6;
+  --color-grad-sky: #9CC9FF;
+  --color-grad-amber: #F5C26B;
+  --color-grad-orange: #F08A3C;
+  --color-grad-green: #3FBF7F;
+  --color-grad-mint: #CFF3E0;
+  --color-grad-lilac: #D7CBF0;
+  --color-user-bubble: #51A0FC;
+
+  /* Fonts */
+  --font-serif: var(--font-newsreader), 'Georgia', serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
+
+  /* Layered soft shadow scale */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px -12px rgba(0, 0, 0, 0.10);
+  --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.05), 0 18px 50px -20px rgba(0, 0, 0, 0.22);
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.03), 0 4px 14px -8px rgba(0, 0, 0, 0.08);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+::selection {
+  background: rgba(240, 162, 60, 0.25);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Keep anchored sections clear of the sticky nav */
+section[id] {
+  scroll-margin-top: 96px;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global film-grain noise overlay for a premium, tactile finish */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* ── Surfaces & hierarchy ─────────────────────────────── */
+
+/* Crafted paper card: hairline border + soft layered shadow */
+.surface {
+  background: #f2f1ed;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-card);
+  border-radius: 20px;
+}
+
+/* Unified section eyebrow label */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-ink);
+}
+
+/* Accent focus-visible ring for inputs & buttons */
+.focus-accent:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(240, 162, 60, 0.35);
+}
+
+/* ── Interaction polish ───────────────────────────────── */
+
+/* Primary CTA: lift + shadow on hover, press on active */
+.cta-lift {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.15s ease;
+  will-change: transform;
+}
+.cta-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.35);
+}
+.cta-lift:active {
+  transform: translateY(0);
+}
+
+/* Card hover: subtle raise + soft shadow */
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Animated underline for nav links */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1.5px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Slow aurora drift for hero glow blobs */
+@keyframes aurora-drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(4%, -3%, 0) scale(1.08); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+.aurora-blob {
+  animation: aurora-drift 14s ease-in-out infinite;
+}
+
+/* Respect reduced-motion globally */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .aurora-blob {
+    animation: none;
+  }
+  .cta-lift:hover,
+  .card-hover:hover {
+    transform: none;
+  }
 }
