@@ -284,7 +284,7 @@ export default function Hero() {
           variants={line}
           className="font-serif font-normal text-[clamp(32px,6vw,68px)] leading-[1.08] tracking-[-1px] text-black mb-4 sm:mb-6"
         >
-          <Highlight color="#E53935">Anymus</Highlight> Is Your
+          <Highlight color="#5F44E0"><span style={{ color: "#5F44E0" }}>Anymus</span></Highlight> Is Your
           <br />
           Technical Growth Partner
         </motion.h1>
