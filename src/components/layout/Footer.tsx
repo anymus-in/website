@@ -5,11 +5,11 @@ function AnymusLogo() {
         aria-hidden
         className="w-6 h-6 bg-white shrink-0"
         style={{
-          maskImage: "url(/anymus-logo.svg)",
+          maskImage: "url(/final-logo.svg)",
           maskSize: "contain",
           maskRepeat: "no-repeat",
           maskPosition: "center",
-          WebkitMaskImage: "url(/anymus-logo.svg)",
+          WebkitMaskImage: "url(/final-logo.svg)",
           WebkitMaskSize: "contain",
           WebkitMaskRepeat: "no-repeat",
           WebkitMaskPosition: "center",
@@ -42,17 +42,18 @@ export default function Footer() {
           {/* Brand + Disclaimer */}
           <div className="max-w-xl">
             <AnymusLogo />
-            <p className="text-[12px] sm:text-[13px] text-[#52525B] leading-relaxed mb-4 sm:mb-5">
-              anymus (&quot;anymus&quot;) provides technology and AI-powered
-              agents designed to help businesses engage visitors, qualify
-              inbound leads, deliver personalized product experiences, and guide
-              users through onboarding. anymus is a software platform and does
-              not provide sales, marketing, legal, or advisory services.
+            <p className="text-[12px] sm:text-[13px] text-[#A1A1AA] leading-relaxed mb-4 sm:mb-5">
+              anymus (&quot;anymus&quot;) helps growing businesses implement
+              ERP and CRM systems, automate manual operations, and
+              integrate AI on top of clean data. anymus is a software and
+              services provider and does not provide legal, financial, or
+              other licensed advisory services.
             </p>
-            <p className="text-[12px] sm:text-[13px] text-[#52525B] leading-relaxed">
-              Any customer interactions, product information, or recommendations
-              generated through anymus agents are based on the configuration and
-              data provided by the customer. By using this website you agree to our{" "}
+            <p className="text-[12px] sm:text-[13px] text-[#A1A1AA] leading-relaxed">
+              Any customer interactions, product information, system
+              configurations, or recommendations generated through anymus
+              services are based on the configuration and data provided by
+              the customer. By using this website you agree to our{" "}
               <a href="/terms" className="text-[#F5C26B]/80 underline underline-offset-1 hover:text-[#F5C26B] transition-colors">
                 Terms of Use
               </a>{" "}
@@ -66,7 +67,7 @@ export default function Footer() {
 
           {/* anymus links */}
           <div>
-            <p className="text-xs sm:text-sm text-[#52525B] mb-3 sm:mb-5 font-medium uppercase tracking-wider">anymus</p>
+            <p className="text-xs sm:text-sm text-[#A1A1AA] mb-3 sm:mb-5 font-medium uppercase tracking-wider">anymus</p>
             <ul className="space-y-3 sm:space-y-4">
               {anymusLinks.map((link) => (
                 <li key={link.label}>
@@ -80,7 +81,7 @@ export default function Footer() {
 
           {/* Legal links */}
           <div>
-            <p className="text-xs sm:text-sm text-[#52525B] mb-3 sm:mb-5 font-medium uppercase tracking-wider">Legal</p>
+            <p className="text-xs sm:text-sm text-[#A1A1AA] mb-3 sm:mb-5 font-medium uppercase tracking-wider">Legal</p>
             <ul className="space-y-3 sm:space-y-4">
               {legalLinks.map((link) => (
                 <li key={link.label}>
