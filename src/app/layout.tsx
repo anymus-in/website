@@ -25,8 +25,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "anymus — A dedicated guide for every buyer",
-  description: "AI agents running tailored demos & onboarding 24/7",
+  title: "anymus — Stop Running Your Business on Spreadsheets",
+  description:
+    "Custom ERP, CRM & Automation Systems Built For Growing Businesses.",
 };
 
 export default function RootLayout({
