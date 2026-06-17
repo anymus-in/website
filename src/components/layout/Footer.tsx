@@ -23,13 +23,13 @@ function AnymusLogo() {
 export default function Footer() {
   const anymusLinks = [
     { label: "Sign in", href: "#" },
-    { label: "Contact us", href: "#" },
+    { label: "Contact us", href: "/contact" },
     { label: "Careers", href: "#" },
   ];
   const legalLinks = [
     { label: "Terms of use", href: "/terms" },
     { label: "Privacy policy", href: "/privacy" },
-    { label: "Cookie policy", href: "#" },
+    { label: "Cookie policy", href: "/cookies" },
     { label: "Responsible disclosure", href: "#" },
   ];
 

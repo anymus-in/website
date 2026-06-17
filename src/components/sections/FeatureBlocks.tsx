@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, MessageCircleMore } from "lucide-react";
 import ChatPlayer, { type ChatMessage } from "@/components/motion/ChatPlayer";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 /* ── Shared ── */
 function Chip({ label }: { label: string }) {
   return (
-    <span className="w-fit border border-[#F0A23C]/40 bg-[#FFF8F0] rounded-full px-3 py-1 text-[11px] font-semibold text-[#C97A1C] mb-4 sm:mb-5 tracking-wide uppercase">
+    <span className="w-fit border border-accent/40 bg-[#FFF8F0] rounded-full px-3 py-1 text-[11px] font-semibold text-accent-ink mb-4 sm:mb-5 tracking-wide uppercase">
       {label}
     </span>
   );
@@ -40,9 +40,11 @@ function BulletList({ items }: { items: Bullet[] }) {
 /* ── Mesh card wrapper: square, image fills entirely ── */
 function MeshCard({
   src,
+  priority,
   children,
 }: {
   src: string;
+  priority?: boolean;
   children: React.ReactNode;
 }) {
   return (
@@ -54,7 +56,7 @@ function MeshCard({
           fill
           className="object-cover"
           sizes="(max-width:1024px) 100vw, 55vw"
-          priority
+          priority={priority}
           style={{ opacity: 0.8 }}
         />
         {/* white overlay to soften brightness */}
@@ -84,24 +86,13 @@ function ChatContent() {
     <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-6 left-4 sm:left-6">
       <ChatPlayer messages={chatScript} />
       <div className="flex items-center gap-2 bg-white/85 backdrop-blur-sm rounded-full px-3 sm:px-4 py-2 sm:py-2.5 mt-2 sm:mt-3">
-        <svg
+        <MessageCircleMore
+          aria-hidden="true"
           className="w-3 sm:w-4 h-3 sm:h-4 text-[#A1A1AA]"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"
-          />
-        </svg>
+          strokeWidth={1.5}
+        />
         <span className="text-xs sm:text-sm text-[#A1A1AA] flex-1">Chat with me...</span>
-        <div
-          className="w-6 sm:w-7 h-6 sm:h-7 rounded-full flex items-center justify-center shrink-0"
-          style={{ background: "#51A0FC" }}
-        >
+        <div className="w-6 sm:w-7 h-6 sm:h-7 rounded-full flex items-center justify-center shrink-0 bg-user-bubble">
           <ArrowUp className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-white" />
         </div>
       </div>
@@ -115,6 +106,7 @@ function AgentCursor({ path }: { path: { x: number; y: number }[] }) {
     <motion.div
       className="absolute z-20 pointer-events-none"
       style={{ left: 0, top: 0 }}
+      aria-hidden="true"
       animate={{
         x: path.map((p) => p.x),
         y: path.map((p) => p.y),
@@ -158,31 +150,29 @@ function DemoContent() {
           ]}
         />
         <div className="bg-white rounded-2xl shadow-lg p-4">
-          <div className="h-2.5 bg-gradient-to-r from-[#F5C26B]/40 to-[#F2F1ED] rounded-full mb-3 w-3/4" />
+          <div className="h-2.5 bg-gradient-to-r from-grad-amber/40 to-paper rounded-full mb-3 w-3/4" />
           <div className="grid grid-cols-3 gap-2 mb-2">
-            <motion.div
-              className="bg-[#E8F4FF] rounded-lg h-20 border-2 border-[#3B82F6]"
-              animate={{
-                boxShadow: [
-                  "0 0 0 0 rgba(59,130,246,0)",
-                  "0 0 0 4px rgba(59,130,246,0.25)",
-                  "0 0 0 0 rgba(59,130,246,0)",
-                ],
-              }}
-              transition={{
-                duration: 2.2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
+            <div className="relative">
+              <div className="bg-[#E8F4FF] rounded-lg h-20 border-2 border-grad-blue" />
+              <motion.div
+                className="absolute inset-0 rounded-lg pointer-events-none"
+                style={{ boxShadow: "0 0 0 4px rgba(59,130,246,0.25)" }}
+                animate={{ opacity: [0, 1, 0] }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </div>
             <div className="col-span-2 grid grid-cols-2 gap-2">
-              <div className="bg-gradient-to-br from-[#F2F1ED] to-[#EAE9E5] rounded-lg h-20" />
-              <div className="bg-gradient-to-br from-[#F2F1ED] to-[#EAE9E5] rounded-lg h-20" />
+              <div className="bg-gradient-to-br from-paper to-[#EAE9E5] rounded-lg h-20" />
+              <div className="bg-gradient-to-br from-paper to-[#EAE9E5] rounded-lg h-20" />
             </div>
           </div>
           <div className="grid grid-cols-4 gap-2">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-8 bg-gradient-to-r from-[#F2F1ED] to-[#EAE9E5] rounded-lg" />
+              <div key={i} className="h-8 bg-gradient-to-r from-paper to-[#EAE9E5] rounded-lg" />
             ))}
           </div>
         </div>
@@ -296,7 +286,7 @@ const features: FeatureData[] = [
       { title: "Retains memory and passes context" },
     ],
     visual: (
-      <MeshCard src="/gradient-mesh/golden.png">
+      <MeshCard src="/gradient-mesh/golden.png" priority>
         <ChatContent />
       </MeshCard>
     ),

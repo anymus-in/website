@@ -5,11 +5,13 @@ export default function StatsBand() {
   return (
     <section className="bg-white border-t border-[#E4E4E1]">
       <div className="max-w-[1232px] mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
-        <Reveal className="flex flex-col lg:flex-row lg:items-center gap-8 sm:gap-10 md:gap-12 lg:gap-16">
+        <Reveal
+          className="flex flex-col lg:flex-row lg:items-center gap-8 sm:gap-10 lg:gap-12 bg-paper rounded-[20px] sm:rounded-[24px] border border-black/[0.06] px-6 sm:px-10 py-8 sm:py-10 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.10)]"
+        >
           {/* Stats left — side by side numbers */}
           <div className="relative flex flex-col sm:flex-row items-start gap-6 sm:gap-8 md:gap-12 shrink-0">
             {/* Subtle amber glow behind stats */}
-            <div className="absolute -inset-4 rounded-2xl bg-[#F5C26B]/5 blur-2xl pointer-events-none" />
+            <div className="absolute -inset-4 rounded-2xl bg-[#F5C26B]/10 blur-2xl pointer-events-none" />
             <div className="flex items-baseline gap-2 sm:gap-3">
               <CountUp
                 to={60}
@@ -36,14 +38,11 @@ export default function StatsBand() {
             </div>
           </div>
 
-          {/* Spacer */}
-          <div className="hidden lg:block flex-1" />
-
           {/* Hairline divider */}
           <div className="hidden lg:block self-stretch w-px bg-[#E4E4E1]" />
 
           {/* Quote right */}
-          <div className="max-w-[480px]">
+          <div className="flex-1 lg:max-w-[480px]">
             <p className="text-[14px] sm:text-[15px] text-[#3F3F46] leading-relaxed mb-4 sm:mb-5">
               &ldquo;Our sales reps are less occupied with bad fit leads,
               creating extra capacity for outbound, and anymus&apos;s agent has
