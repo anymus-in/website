@@ -13,7 +13,7 @@ function DashboardMock() {
   return (
     /* Outer paper wrapper — matches screenshot beige rounded card */
     <div
-      className="relative rounded-[20px] sm:rounded-[24px] bg-[#F2F1ED] border border-black/[0.06] p-4 sm:p-6 pt-6 sm:pt-8"
+      className="relative dot-grid rounded-[20px] sm:rounded-[24px] bg-[#F2F1ED] border border-black/[0.06] p-4 sm:p-6 pt-6 sm:pt-8 overflow-hidden"
       style={{ boxShadow: "var(--shadow-card)" }}
     >
       {/* Inner dashboard card */}
@@ -21,6 +21,8 @@ function DashboardMock() {
         className="rounded-[14px] sm:rounded-[16px] overflow-hidden border border-[#E4E4E1] shadow-sm flex flex-col md:flex-row"
         style={{ minHeight: "auto" }}
       >
+        {/* Gradient top accent bar */}
+        <div className="h-1 bg-gradient-to-r from-[#F5C26B] to-[#3B82F6] w-full absolute top-0 left-0 right-0 rounded-t-[14px]" />
         {/* Sidebar — hidden on mobile, small on tablet */}
         <div className="w-full md:w-40 bg-[#18181B] shrink-0 flex flex-col p-3 sm:p-4 order-last md:order-first">
           {/* Logo */}

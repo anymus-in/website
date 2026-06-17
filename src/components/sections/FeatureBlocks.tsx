@@ -9,7 +9,7 @@ import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 /* ── Shared ── */
 function Chip({ label }: { label: string }) {
   return (
-    <span className="w-fit border border-[#D4D4D1] bg-[#F2F1ED] rounded-full px-3 py-1 text-xs font-medium text-[#3F3F46] mb-4 sm:mb-5">
+    <span className="w-fit border border-[#F0A23C]/40 bg-[#FFF8F0] rounded-full px-3 py-1 text-[11px] font-semibold text-[#C97A1C] mb-4 sm:mb-5 tracking-wide uppercase">
       {label}
     </span>
   );
@@ -158,7 +158,7 @@ function DemoContent() {
           ]}
         />
         <div className="bg-white rounded-2xl shadow-lg p-4">
-          <div className="h-2.5 bg-[#F2F1ED] rounded-full mb-3 w-3/4" />
+          <div className="h-2.5 bg-gradient-to-r from-[#F5C26B]/40 to-[#F2F1ED] rounded-full mb-3 w-3/4" />
           <div className="grid grid-cols-3 gap-2 mb-2">
             <motion.div
               className="bg-[#E8F4FF] rounded-lg h-20 border-2 border-[#3B82F6]"
@@ -176,13 +176,13 @@ function DemoContent() {
               }}
             />
             <div className="col-span-2 grid grid-cols-2 gap-2">
-              <div className="bg-[#F2F1ED] rounded-lg h-20" />
-              <div className="bg-[#F2F1ED] rounded-lg h-20" />
+              <div className="bg-gradient-to-br from-[#F2F1ED] to-[#EAE9E5] rounded-lg h-20" />
+              <div className="bg-gradient-to-br from-[#F2F1ED] to-[#EAE9E5] rounded-lg h-20" />
             </div>
           </div>
           <div className="grid grid-cols-4 gap-2">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-8 bg-[#F2F1ED] rounded-lg" />
+              <div key={i} className="h-8 bg-gradient-to-r from-[#F2F1ED] to-[#EAE9E5] rounded-lg" />
             ))}
           </div>
         </div>

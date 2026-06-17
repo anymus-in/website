@@ -61,17 +61,23 @@ export default function LogoCloud() {
   return (
     <section className="bg-white pt-2 sm:pt-3 md:pt-4 pb-8 sm:pb-12 md:pb-16">
       <div className="max-w-[1232px] mx-auto px-4 sm:px-6 md:px-8">
-        <p className="eyebrow text-center mb-6 sm:mb-8">Trusted by teams at</p>
-        <RevealGroup className="flex flex-wrap items-center justify-center md:justify-between gap-4 sm:gap-6 md:gap-8" stagger={0.07}>
-          {logos.map((logo) => (
-            <RevealItem
-              key={logo.name}
-              className="flex h-6 items-center text-black opacity-70 grayscale transition-all duration-200 hover:opacity-100 hover:grayscale-0"
-            >
-              {logo.svg}
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        <p className="eyebrow justify-center text-center mb-6 sm:mb-8">Trusted by teams at</p>
+        <div className="relative overflow-hidden">
+          {/* Left fade mask */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          {/* Right fade mask */}
+          <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          <RevealGroup className="flex flex-wrap items-center justify-center md:justify-between gap-4 sm:gap-6 md:gap-8" stagger={0.07}>
+            {logos.map((logo) => (
+              <RevealItem
+                key={logo.name}
+                className="flex h-6 items-center text-black opacity-60 grayscale transition-all duration-200 hover:opacity-90 hover:grayscale-0"
+              >
+                {logo.svg}
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
       </div>
     </section>
   );

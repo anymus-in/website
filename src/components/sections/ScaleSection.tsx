@@ -85,7 +85,7 @@ function CreateAgentCard() {
 
   return (
     <div
-      className="bg-[#F2F1ED] rounded-[20px] sm:rounded-[24px] border border-black/[0.06] flex flex-col items-center text-center px-6 sm:px-10 py-8 sm:py-12 h-full"
+      className="relative gradient-border-top bg-[#F2F1ED] rounded-[20px] sm:rounded-[24px] border border-black/[0.06] flex flex-col items-center text-center px-6 sm:px-10 py-8 sm:py-12 h-full overflow-hidden"
       style={{ boxShadow: "var(--shadow-card)" }}
     >
       <h3 className="font-serif text-[22px] sm:text-[26px] md:text-[28px] tracking-[-0.02em] text-black mb-2">
@@ -200,7 +200,7 @@ export default function ScaleSection() {
           <RevealGroup className="flex flex-col gap-4" stagger={0.1}>
             {bentoItems.map((item) => (
               <RevealItem key={item.title} className="flex-1">
-                <div className="card-hover surface px-6 sm:px-8 py-5 sm:py-7 h-full">
+                <div className="card-hover h-full px-6 sm:px-8 py-5 sm:py-7 rounded-[20px] border border-black/[0.06] bg-gradient-to-br from-[#F2F1ED] to-white ring-1 ring-black/[0.04]" style={{ boxShadow: "var(--shadow-card)" }}>
                   <h4 className="font-serif text-[20px] sm:text-[22px] tracking-[-0.01em] text-black mb-2">
                     {item.title}
                   </h4>

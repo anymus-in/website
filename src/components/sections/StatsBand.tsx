@@ -7,7 +7,9 @@ export default function StatsBand() {
       <div className="max-w-[1232px] mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
         <Reveal className="flex flex-col lg:flex-row lg:items-center gap-8 sm:gap-10 md:gap-12 lg:gap-16">
           {/* Stats left — side by side numbers */}
-          <div className="flex flex-col sm:flex-row items-start gap-6 sm:gap-8 md:gap-12 shrink-0">
+          <div className="relative flex flex-col sm:flex-row items-start gap-6 sm:gap-8 md:gap-12 shrink-0">
+            {/* Subtle amber glow behind stats */}
+            <div className="absolute -inset-4 rounded-2xl bg-[#F5C26B]/5 blur-2xl pointer-events-none" />
             <div className="flex items-baseline gap-2 sm:gap-3">
               <CountUp
                 to={60}

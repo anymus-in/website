@@ -1,8 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
+import { ArrowUp, Check } from "lucide-react";
 
 /* Spline is heavy (3D runtime) — load client-only with a gradient fallback */
 const Spline = dynamic(() => import("@splinetool/react-spline"), {
@@ -66,22 +66,25 @@ function EqualizerGlyph({ className }: { className?: string }) {
   );
 }
 
-const container = {
+const container: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
 };
-const line = {
+const line: Variants = {
   hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 
 export default function Hero() {
   return (
-    <section className="relative bg-white overflow-hidden">
+    <section
+      className="relative bg-white overflow-hidden dot-grid"
+      style={{ background: "var(--gradient-hero-bg)" }}
+    >
       {/* Text content */}
       <motion.div
         variants={container}
@@ -108,6 +111,18 @@ export default function Hero() {
           <EqualizerGlyph />
           See AI demo
         </motion.a>
+        {/* Feature pills */}
+        <motion.div variants={line} className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-5">
+          {["24/7 availability", "50+ languages", "Live in minutes"].map((pill) => (
+            <span
+              key={pill}
+              className="inline-flex items-center gap-1.5 bg-[#F2F1ED] border border-[#E4E4E1] rounded-full px-3 py-1 text-[12px] text-[#52525B]"
+            >
+              <Check className="w-3 h-3 text-[#3FBF7F] shrink-0" />
+              {pill}
+            </span>
+          ))}
+        </motion.div>
       </motion.div>
 
       {/* Spline flowing ribbon — the centerpiece */}
@@ -126,17 +141,17 @@ export default function Hero() {
         transition={{ delay: 0.6, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 w-[min(420px,90vw)]"
       >
-        <div className="flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur-xl border border-[#E4E4E1] rounded-full pl-4 sm:pl-5 pr-2 py-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.25)]">
+        <div className="flex items-center gap-3 bg-white/90 backdrop-blur-xl border border-[#E4E4E1] rounded-full pl-5 pr-1.5 py-1.5 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.25)]">
           <input
             type="text"
             placeholder="Ask me anything..."
-            className="focus-accent rounded-full flex-1 min-w-0 bg-transparent text-xs sm:text-sm text-black placeholder:text-[#A1A1AA] outline-none"
+            className="focus:outline-0 flex-1 min-w-0 bg-transparent text-sm text-black placeholder:text-[#A1A1AA] outline-none py-1"
           />
           <button
             aria-label="Send"
-            className="cta-lift shrink-0 w-8 sm:w-9 h-8 sm:h-9 rounded-full bg-[#F2F1ED] hover:bg-[#E4E4E1] flex items-center justify-center min-h-[44px] min-w-[44px]"
+            className="cta-lift shrink-0 w-8 h-8 rounded-full bg-black hover:bg-zinc-800 flex items-center justify-center"
           >
-            <ArrowUp className="w-4 h-4 text-[#3F3F46]" />
+            <ArrowUp className="w-3.5 h-3.5 text-white" />
           </button>
         </div>
       </motion.div>

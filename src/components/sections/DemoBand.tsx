@@ -16,27 +16,27 @@ const demoChat: ChatMessage[] = [
 
 const orbs = [
   {
-    cls: "top-10 left-12 w-9 h-9",
+    cls: "top-10 left-12 w-12 h-12",
     bg: "radial-gradient(circle at 40% 35%, #F8E8D0, #F0C890 60%, #D8C8E8)",
-    o: 0.7,
+    o: 0.85,
     dur: 7,
   },
   {
-    cls: "top-16 right-20 w-7 h-7",
+    cls: "top-16 right-20 w-9 h-9",
     bg: "radial-gradient(circle at 40% 35%, #EAE4F4, #DDD0F0)",
-    o: 0.65,
+    o: 0.80,
     dur: 9,
   },
   {
-    cls: "bottom-16 right-28 w-11 h-11",
+    cls: "bottom-16 right-28 w-14 h-14",
     bg: "radial-gradient(circle at 40% 35%, #F8E8D0, #F0C890)",
-    o: 0.6,
+    o: 0.75,
     dur: 8,
   },
   {
-    cls: "bottom-12 left-20 w-6 h-6",
+    cls: "bottom-12 left-20 w-8 h-8",
     bg: "radial-gradient(circle at 40% 35%, #DDD0F0, #C8B8E0)",
-    o: 0.55,
+    o: 0.70,
     dur: 6,
   },
 ];
@@ -49,8 +49,7 @@ export default function DemoBand() {
           <div
             className="relative rounded-[20px] sm:rounded-[24px] lg:rounded-[28px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 items-center gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 md:px-8 lg:px-14 py-8 sm:py-10 md:py-12 border border-black/[0.06]"
             style={{
-              background: "#F2F1ED",
-              minHeight: "auto",
+              background: "var(--gradient-hero-bg), #F2F1ED",
               boxShadow: "var(--shadow-card)",
             }}
           >
@@ -62,11 +61,7 @@ export default function DemoBand() {
                   className={`absolute ${orb.cls} rounded-full pointer-events-none`}
                   style={{ background: orb.bg, opacity: orb.o }}
                   animate={{ y: [0, -10, 0] }}
-                  transition={{
-                    duration: orb.dur,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
+                  transition={{ duration: orb.dur, repeat: Infinity, ease: "easeInOut" }}
                 />
               ))}
             </div>
@@ -90,7 +85,7 @@ export default function DemoBand() {
               </a>
             </div>
 
-            {/* Right: live chat preview */}
+            {/* Right: live chat preview with browser chrome */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -99,16 +94,22 @@ export default function DemoBand() {
               className="relative z-10 justify-self-center lg:justify-self-end w-[min(360px,90vw)]"
             >
               <div
-                className="rounded-[16px] sm:rounded-[20px] bg-white/75 backdrop-blur-xl border border-black/[0.05] p-3 sm:p-4"
-                style={{ boxShadow: "var(--shadow-soft)" }}
+                className="glass rounded-[16px] sm:rounded-[20px] overflow-hidden"
+                style={{ boxShadow: "var(--shadow-deep)" }}
               >
-                <div className="flex items-center gap-2 mb-2 sm:mb-3 px-1">
-                  <span className="w-2 h-2 rounded-full bg-[#3FBF7F]" />
-                  <span className="eyebrow !tracking-[0.1em] text-[#71717A]">
-                    Demo agent
+                {/* Browser chrome header */}
+                <div className="flex items-center gap-1.5 px-3 py-2.5 bg-[#F2F1ED]/80 border-b border-black/[0.05]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+                  <span className="ml-2 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#3FBF7F]" />
+                    <span className="text-[10px] text-[#71717A] font-medium tracking-wide">Demo agent</span>
                   </span>
                 </div>
-                <ChatPlayer messages={demoChat} />
+                <div className="p-3 sm:p-4">
+                  <ChatPlayer messages={demoChat} />
+                </div>
               </div>
             </motion.div>
           </div>
