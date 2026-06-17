@@ -8,34 +8,44 @@ import { cn } from "@/lib/utils";
 
 const faqs = [
   {
-    question: "How long does it take to set up?",
+    question: "How long does an implementation take?",
     answer:
-      "Your first version is ready in minutes. You link your website and knowledge base, anymus generates the agent, and you can go live in 1-3 days after refining your messaging.",
+      "Most engagements run 4-12 weeks depending on scope — we'll give you a clear timeline after the discovery call, not a generic estimate.",
   },
   {
-    question: "How do my agents stay up to date?",
+    question: "Which ERP and CRM platforms do you work with?",
     answer:
-      "anymus continuously scrapes your website and syncs with connected integrations like Intercom to keep your agents' knowledge current automatically.",
+      "We work with the major ERP and CRM platforms used by growing businesses — the right fit depends on your existing setup. Book a call and we'll scope it with you directly.",
   },
   {
-    question: "How are the sessions personalised?",
+    question: "Do you build custom systems or use existing platforms?",
     answer:
-      "Agents retain memory within a session and adapt responses based on what each visitor has shared — their role, use case, and questions — to give every prospect a tailored experience.",
+      "Both — we configure proven platforms where they fit your business, and build custom where they don't.",
   },
   {
-    question: "What languages does anymus support?",
+    question: "What does the automation actually connect?",
     answer:
-      "anymus supports 50+ languages out of the box. Agents automatically detect and respond in the visitor's language.",
+      "Whatever's currently manual between your tools — data entry, approvals, handoffs, status updates — replaced with workflows that run on their own, triggered by activity in your systems.",
   },
   {
-    question: "What kind of analytics are available?",
+    question: "Do you provide training for our team?",
     answer:
-      "You get full visibility into visitor sessions — questions asked, qualification signals, drop-off points, and lead quality data — all surfaced in the anymus dashboard.",
+      "Yes — training is part of every engagement, not an afterthought. Your team learns the system hands-on before launch.",
   },
   {
-    question: "Is the agent able to show my actual product interface?",
+    question: "What happens after launch?",
     answer:
-      "Yes. The demo agent can navigate inside your live product UI and walk prospects through real workflows in real time.",
+      "We stay involved for support and iteration. Systems evolve as your business does, and we're around for that.",
+  },
+  {
+    question: "How is pricing structured?",
+    answer:
+      "Project-based and scoped after discovery — no surprise hourly billing or vague monthly retainers.",
+  },
+  {
+    question: "Do I need to replace my existing tools?",
+    answer:
+      "Not necessarily. We often integrate what's already working before replacing anything.",
   },
 ];
 
@@ -69,7 +79,7 @@ export default function FAQ() {
                   )}
                 >
                   {open === i ? (
-                    <Minus className="w-4 h-4 text-[#C97A1C]" />
+                    <Minus className="w-4 h-4 text-accent-ink" />
                   ) : (
                     <Plus className="w-4 h-4 text-black" />
                   )}
