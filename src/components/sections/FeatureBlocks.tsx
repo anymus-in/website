@@ -47,7 +47,7 @@ function MeshCard({
 }) {
   return (
     <div className="flex justify-center py-2">
-      <div className="card-hover relative w-[94%] aspect-square rounded-[20px] sm:rounded-[24px] overflow-hidden">
+      <div className=" relative w-[94%] aspect-square rounded-[20px] sm:rounded-[24px] overflow-hidden">
         <Image
           src={src}
           alt=""

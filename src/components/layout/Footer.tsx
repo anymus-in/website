@@ -27,7 +27,8 @@ export default function Footer() {
     { label: "Careers", href: "#" },
   ];
   const legalLinks = [
-    { label: "Privacy policy", href: "#" },
+    { label: "Terms of use", href: "/terms" },
+    { label: "Privacy policy", href: "/privacy" },
     { label: "Cookie policy", href: "#" },
     { label: "Responsible disclosure", href: "#" },
   ];
@@ -52,11 +53,11 @@ export default function Footer() {
               Any customer interactions, product information, or recommendations
               generated through anymus agents are based on the configuration and
               data provided by the customer. By using this website you agree to our{" "}
-              <a href="#" className="text-[#F5C26B]/80 underline underline-offset-1 hover:text-[#F5C26B] transition-colors">
+              <a href="/terms" className="text-[#F5C26B]/80 underline underline-offset-1 hover:text-[#F5C26B] transition-colors">
                 Terms of Use
               </a>{" "}
               and{" "}
-              <a href="#" className="text-[#F5C26B]/80 underline underline-offset-1 hover:text-[#F5C26B] transition-colors">
+              <a href="/privacy" className="text-[#F5C26B]/80 underline underline-offset-1 hover:text-[#F5C26B] transition-colors">
                 Privacy Policy
               </a>
               .
