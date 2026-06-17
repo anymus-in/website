@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "anymus — Stop Running Your Business on Spreadsheets",
+  title: "Anymus",
   description:
     "Custom ERP, CRM & Automation Systems Built For Growing Businesses.",
 };
