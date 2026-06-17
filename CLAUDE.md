@@ -16,7 +16,7 @@ No test suite is configured.
 
 ## Architecture
 
-Single-page marketing site for **anymus** — an AI demo/onboarding product. One route (`/`), no backend.
+Single-page marketing site for **anymus** — an ERP/CRM/business automation implementation agency. One route (`/`), no backend.
 
 ### Stack
 - **Next.js 16** (App Router) — see AGENTS.md: read `node_modules/next/dist/docs/` before writing Next.js code
@@ -48,8 +48,7 @@ All tokens live in `globals.css` under `@theme inline`. Key groups:
 
 ### Motion primitives (`src/components/motion/`)
 - `Reveal` / `RevealGroup` / `RevealItem` — scroll-triggered fade+rise; respects `useReducedMotion`
-- `CountUp` — animates a number from 0 to `to` once it enters the viewport
-- `ChatPlayer` — animated chat UI playback
+- `Highlight` — animated highlighter-marker swipe behind a key word/phrase
 - `ScrollProgress` — fixed top progress bar
 
 Use these primitives for all new animation rather than writing inline Framer Motion variants.
