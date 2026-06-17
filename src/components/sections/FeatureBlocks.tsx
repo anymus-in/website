@@ -2,14 +2,28 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUp, MessageCircleMore } from "lucide-react";
-import ChatPlayer, { type ChatMessage } from "@/components/motion/ChatPlayer";
+import { Sparkles, TrendingUp } from "lucide-react";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import Highlight from "@/components/motion/Highlight";
 
 /* ── Shared ── */
-function Chip({ label }: { label: string }) {
+const chipTints = {
+  amber: "border-grad-amber/40 bg-grad-amber/10",
+  green: "border-grad-green/30 bg-grad-green/10",
+  blue: "border-grad-blue/30 bg-grad-blue/10",
+};
+
+function Chip({
+  label,
+  tint,
+}: {
+  label: string;
+  tint: keyof typeof chipTints;
+}) {
   return (
-    <span className="w-fit border border-accent/40 bg-[#FFF8F0] rounded-full px-3 py-1 text-[11px] font-semibold text-accent-ink mb-4 sm:mb-5 tracking-wide uppercase">
+    <span
+      className={`w-fit border ${chipTints[tint]} rounded-full px-3 py-1 text-[11px] font-semibold text-accent-ink mb-4 sm:mb-5 tracking-wide uppercase`}
+    >
       {label}
     </span>
   );
@@ -37,7 +51,7 @@ function BulletList({ items }: { items: Bullet[] }) {
   );
 }
 
-/* ── Mesh card wrapper: square, image fills entirely ── */
+/* ── Mesh card wrapper: square, gradient-mesh image fills entirely ── */
 function MeshCard({
   src,
   priority,
@@ -49,7 +63,7 @@ function MeshCard({
 }) {
   return (
     <div className="flex justify-center py-2">
-      <div className=" relative w-[94%] aspect-square rounded-[20px] sm:rounded-[24px] overflow-hidden">
+      <div className="relative w-[94%] aspect-square rounded-[20px] sm:rounded-[24px] overflow-hidden">
         <Image
           src={src}
           alt=""
@@ -68,40 +82,8 @@ function MeshCard({
   );
 }
 
-/* ── Chat card content ── */
-const chatScript: ChatMessage[] = [
-  {
-    from: "agent",
-    text: "Are you using some kind of eCommerce platform already?",
-  },
-  { from: "user", text: "I'm using Shopify" },
-  {
-    from: "agent",
-    text: "Got it! I'll make sure to cover Shopify integration in our demo.",
-  },
-];
-
-function ChatContent() {
-  return (
-    <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-6 left-4 sm:left-6">
-      <ChatPlayer messages={chatScript} />
-      <div className="flex items-center gap-2 bg-white/85 backdrop-blur-sm rounded-full px-3 sm:px-4 py-2 sm:py-2.5 mt-2 sm:mt-3">
-        <MessageCircleMore
-          aria-hidden="true"
-          className="w-3 sm:w-4 h-3 sm:h-4 text-[#A1A1AA]"
-          strokeWidth={1.5}
-        />
-        <span className="text-xs sm:text-sm text-[#A1A1AA] flex-1">Chat with me...</span>
-        <div className="w-6 sm:w-7 h-6 sm:h-7 rounded-full flex items-center justify-center shrink-0 bg-user-bubble">
-          <ArrowUp className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-white" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* Looping cursor that drifts across a wireframe to imply the agent driving the UI */
-function AgentCursor({ path }: { path: { x: number; y: number }[] }) {
+/* Looping cursor that drifts across a wireframe to imply the system actively working */
+function CursorTrail({ path }: { path: { x: number; y: number }[] }) {
   return (
     <motion.div
       className="absolute z-20 pointer-events-none"
@@ -135,52 +117,111 @@ function AgentCursor({ path }: { path: { x: number; y: number }[] }) {
   );
 }
 
-/* ── Demo card content ── */
-function DemoContent() {
+/* ── ERP card content: inventory & operations ── */
+function ErpContent() {
   return (
     <div className="absolute inset-0 flex items-center justify-center pb-6 sm:pb-8">
       <div className="relative w-[72%]">
-        <AgentCursor
+        <CursorTrail
           path={[
-            { x: 20, y: 60 },
-            { x: 70, y: 40 },
-            { x: 150, y: 110 },
-            { x: 40, y: 130 },
-            { x: 20, y: 60 },
+            { x: 20, y: 20 },
+            { x: 80, y: 15 },
+            { x: 110, y: 80 },
+            { x: 40, y: 95 },
+            { x: 20, y: 20 },
           ]}
         />
         <div className="bg-white rounded-2xl shadow-lg p-4">
-          <div className="h-2.5 bg-gradient-to-r from-grad-amber/40 to-paper rounded-full mb-3 w-3/4" />
-          <div className="grid grid-cols-3 gap-2 mb-2">
-            <div className="relative">
-              <div className="bg-[#E8F4FF] rounded-lg h-20 border-2 border-grad-blue" />
-              <motion.div
-                className="absolute inset-0 rounded-lg pointer-events-none"
-                style={{ boxShadow: "0 0 0 4px rgba(59,130,246,0.25)" }}
-                animate={{ opacity: [0, 1, 0] }}
-                transition={{
-                  duration: 2.2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            </div>
-            <div className="col-span-2 grid grid-cols-2 gap-2">
-              <div className="bg-gradient-to-br from-paper to-[#EAE9E5] rounded-lg h-20" />
-              <div className="bg-gradient-to-br from-paper to-[#EAE9E5] rounded-lg h-20" />
-            </div>
+          <div className="flex items-center justify-between mb-3">
+            <div className="h-2 bg-paper rounded-full w-20" />
+            <div className="h-2 bg-paper rounded-full w-10" />
           </div>
-          <div className="grid grid-cols-4 gap-2">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-8 bg-gradient-to-r from-paper to-[#EAE9E5] rounded-lg" />
+          {/* Stock-level bars */}
+          <div className="flex items-end gap-1.5 sm:gap-2 h-14 mb-3">
+            {[40, 65, 50, 80, 35, 60].map((h, i) => (
+              <div
+                key={i}
+                className="flex-1 rounded-t-sm bg-gradient-to-t from-paper to-[#EAE9E5]"
+                style={{ height: `${h}%` }}
+              />
+            ))}
+          </div>
+          {/* Order rows */}
+          <div className="space-y-1.5">
+            {[60, 75, 45].map((w, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between bg-[#F7F7F5] rounded-md px-2 py-1.5"
+              >
+                <div className="h-1.5 bg-[#D4D4D1] rounded-full" style={{ width: `${w}%` }} />
+                <div className="h-3.5 w-9 rounded-full bg-grad-green/20 shrink-0" />
+              </div>
             ))}
           </div>
         </div>
-        {/* Pill below the card, inside the z-10 absolute container */}
+        <div className="absolute left-2 -bottom-5 bg-white rounded-full px-3.5 py-2 shadow-md flex items-center gap-2 whitespace-nowrap">
+          <span className="text-sm text-[#3F3F46]">✦</span>
+          <span className="text-xs text-[#3F3F46]">Updating stock levels...</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── CRM card content: contact record + pipeline ── */
+function CrmContent() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pb-6 sm:pb-8">
+      <div className="relative w-[72%]">
+        <CursorTrail
+          path={[
+            { x: 20, y: 15 },
+            { x: 60, y: 20 },
+            { x: 95, y: 70 },
+            { x: 50, y: 90 },
+            { x: 20, y: 15 },
+          ]}
+        />
+        <div className="bg-white rounded-2xl shadow-lg p-4">
+          {/* Contact record header */}
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-paper to-[#EAE9E5] shrink-0" />
+            <div className="flex-1 min-w-0">
+              <div className="h-2 bg-paper rounded-full w-20 mb-1.5" />
+              <div className="h-1.5 bg-paper rounded-full w-14" />
+            </div>
+          </div>
+          {/* Kanban-style pipeline stages */}
+          <div className="grid grid-cols-3 gap-2">
+            <div className="flex flex-col gap-2">
+              <div className="bg-gradient-to-br from-paper to-[#EAE9E5] rounded-lg h-8" />
+              <div className="bg-gradient-to-br from-paper to-[#EAE9E5] rounded-lg h-8" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="relative">
+                <div className="bg-[#E8F4FF] rounded-lg h-8 border-2 border-grad-blue" />
+                <motion.div
+                  className="absolute inset-0 rounded-lg pointer-events-none"
+                  style={{ boxShadow: "0 0 0 4px rgba(59,130,246,0.25)" }}
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{
+                    duration: 2.2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </div>
+              <div className="bg-gradient-to-br from-paper to-[#EAE9E5] rounded-lg h-8" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="bg-gradient-to-br from-paper to-[#EAE9E5] rounded-lg h-8" />
+            </div>
+          </div>
+        </div>
         <div className="absolute left-2 -bottom-5 bg-white rounded-full px-3.5 py-2 shadow-md flex items-center gap-2 whitespace-nowrap">
           <span className="text-sm text-[#3F3F46]">✦</span>
           <span className="text-xs text-[#3F3F46]">
-            Let me pull up our dashboard...
+            Syncing contact record...
           </span>
         </div>
       </div>
@@ -188,39 +229,72 @@ function DemoContent() {
   );
 }
 
-/* ── Onboarding card content ── */
-function OnboardingContent() {
+/* ── Workflow automation card content ── */
+function WorkflowContent() {
   return (
     <div className="absolute inset-0 flex items-center justify-center pb-6 sm:pb-8">
-      <div className="relative w-[65%]">
-        <AgentCursor
-          path={[
-            { x: 30, y: 50 },
-            { x: 120, y: 70 },
-            { x: 60, y: 120 },
-            { x: 30, y: 50 },
-          ]}
-        />
+      <div className="relative w-[72%]">
         <div className="bg-white rounded-2xl shadow-lg p-4">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-[#3F3F46] text-xs font-mono font-bold">
-              &lt;/&gt;
+          <svg viewBox="0 0 180 120" className="w-full h-auto" fill="none">
+            {/* connectors */}
+            <line x1="28" y1="24" x2="140" y2="20" className="stroke-line" strokeWidth="1.5" />
+            <line x1="140" y1="20" x2="150" y2="96" className="stroke-line" strokeWidth="1.5" />
+            <line x1="28" y1="24" x2="36" y2="92" className="stroke-line" strokeWidth="1.5" />
+            <line x1="36" y1="92" x2="150" y2="96" className="stroke-line" strokeWidth="1.5" />
+            {/* dot flowing through the automation */}
+            <motion.circle
+              r="3.5"
+              className="fill-grad-green"
+              animate={{ cx: [28, 140], cy: [24, 20] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* nodes */}
+            <rect x="14" y="10" width="28" height="28" rx="8" className="fill-paper stroke-line" />
+            <rect x="126" y="6" width="28" height="28" rx="8" className="fill-paper stroke-line" />
+            <rect x="22" y="78" width="28" height="28" rx="8" className="fill-paper stroke-line" />
+            <rect x="136" y="82" width="28" height="28" rx="8" fill="#E8F4FF" className="stroke-grad-blue" strokeWidth="2" />
+          </svg>
+        </div>
+        <div className="absolute left-2 -bottom-5 bg-white rounded-full px-3.5 py-2 shadow-md flex items-center gap-2 whitespace-nowrap">
+          <span className="text-sm text-[#3F3F46]">✦</span>
+          <span className="text-xs text-[#3F3F46]">Routing to your CRM...</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── AI Integrations card content: forecast + insight ── */
+function AiInsightContent() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pb-6 sm:pb-8">
+      <div className="relative w-[72%]">
+        <div className="bg-white rounded-2xl shadow-lg p-4">
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-[11px] font-semibold text-black">Forecast</p>
+            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-black">
+              <TrendingUp className="w-3 h-3 text-grad-green" />
+              +12%
             </span>
-            <div className="h-2 bg-[#F2F1ED] rounded-full w-16" />
           </div>
-          <div className="grid grid-cols-2 gap-2 mb-2">
-            <div className="h-16 bg-[#F2F1ED] rounded-lg" />
-            <div className="h-16 bg-[#F2F1ED] rounded-lg" />
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            <div className="h-9 bg-[#F2F1ED] rounded-lg" />
-            <div className="h-9 bg-[#F2F1ED] rounded-lg" />
-            <div className="h-9 bg-[#F2F1ED] rounded-lg" />
+          <svg viewBox="0 0 160 50" className="w-full h-12 mb-3" fill="none">
+            <polyline
+              points="0,40 25,32 50,35 75,20 100,24 125,10 160,6"
+              className="stroke-grad-blue"
+              strokeWidth="2"
+              fill="none"
+            />
+          </svg>
+          <div className="bg-[#F7F7F5] rounded-lg px-3 py-2 flex items-start gap-2">
+            <Sparkles className="w-3.5 h-3.5 text-accent-ink shrink-0 mt-0.5" />
+            <p className="text-[10px] text-ink-700 leading-snug">
+              Inventory for SKU-2291 will run out in 9 days at current pace.
+            </p>
           </div>
         </div>
         <div className="absolute left-2 -bottom-5 bg-white rounded-full px-3.5 py-2 shadow-md flex items-center gap-2 whitespace-nowrap">
-          <span className="text-base leading-none">🌼</span>
-          <span className="text-xs text-[#3F3F46]">Mapping the product...</span>
+          <span className="text-sm text-[#3F3F46]">✦</span>
+          <span className="text-xs text-[#3F3F46]">Generating insight...</span>
         </div>
       </div>
     </div>
@@ -230,7 +304,8 @@ function OnboardingContent() {
 /* ── Feature block layout ── */
 interface FeatureData {
   badge: string;
-  heading: string;
+  tint: keyof typeof chipTints;
+  heading: React.ReactNode;
   bullets: Bullet[];
   visual: React.ReactNode;
   reversed?: boolean;
@@ -238,6 +313,7 @@ interface FeatureData {
 
 function FeatureBlock({
   badge,
+  tint,
   heading,
   bullets,
   visual,
@@ -246,7 +322,7 @@ function FeatureBlock({
   const textCol = (
     <div className="flex flex-col justify-center py-8 sm:py-10 md:py-14">
       <Reveal className="flex flex-col items-start">
-        <Chip label={badge} />
+        <Chip label={badge} tint={tint} />
         <h3 className="font-serif text-[22px] sm:text-[26px] md:text-[30px] leading-[1.2] tracking-tight text-black max-w-[340px]">
           {heading}
         </h3>
@@ -274,76 +350,119 @@ function FeatureBlock({
 
 const features: FeatureData[] = [
   {
-    badge: "Inbound Q&A agent",
-    heading: "Help leads validate with AI chat",
+    badge: "ERP Implementation",
+    tint: "amber",
+    heading: (
+      <>
+        An <Highlight color="var(--color-grad-amber)">ERP</Highlight> that
+        finally matches how you operate
+      </>
+    ),
     bullets: [
       {
-        title: "Engages visitors and answers their questions",
+        title: "Inventory, orders, and operations in one connected system",
         description:
-          "Discovers what customers are looking for, responds in real time, and turns curiosity into meaningful interactions.",
+          "Configured around your real processes, not a generic out-of-the-box template.",
       },
-      { title: "Qualifies leads and nudges them towards next steps" },
-      { title: "Retains memory and passes context" },
+      { title: "Real-time visibility into stock, costs, and fulfillment" },
+      { title: "Built to grow with you, not be replaced in two years" },
     ],
     visual: (
       <MeshCard src="/gradient-mesh/golden.png" priority>
-        <ChatContent />
+        <ErpContent />
       </MeshCard>
     ),
     reversed: false,
   },
   {
-    badge: "Demo agent",
-    heading: "Give 1:1 demos at scale with an AI expert",
+    badge: "CRM Solutions",
+    tint: "amber",
+    heading: (
+      <>
+        A <Highlight color="var(--color-grad-amber)">CRM</Highlight> your
+        sales team actually uses
+      </>
+    ),
     bullets: [
       {
-        title: "Runs deep-dive demo sessions",
+        title: "Pipelines, fields, and reporting built around how you sell",
         description:
-          "Delivers interactive, personalised demos by showing your live product in real time.",
+          "We implement and configure your CRM around real pipelines, fields, permissions, and reporting — not a generic template.",
       },
-      { title: "Gathers insights from conversations" },
-      { title: "Turns visitors into customers" },
+      { title: "No more leads lost in spreadsheets or inboxes" },
+      { title: "Every rep sees the same, trusted customer record" },
     ],
     visual: (
-      <MeshCard src="/gradient-mesh/green.png">
-        <DemoContent />
+      <MeshCard src="/gradient-mesh/orange.png">
+        <CrmContent />
       </MeshCard>
     ),
     reversed: true,
   },
   {
-    badge: "Onboarding agent",
-    heading: "Provide tailored onboarding with an AI guide",
+    badge: "Business Automation",
+    tint: "green",
+    heading: (
+      <>
+        <Highlight color="var(--color-grad-green)">Workflows</Highlight> that
+        run themselves
+      </>
+    ),
     bullets: [
       {
-        title: "Knows your product inside out",
+        title: "Replaces busywork with workflows that run themselves",
         description:
-          "Ingests your knowledge base, indexes your entire product, and keeps itself up to date.",
+          "Manual data entry, handoffs, and status updates — automated between the tools you already use, so nothing depends on someone remembering to do it.",
       },
-      { title: "Navigates directly inside your UI" },
-      { title: "Helps your users reach their goals" },
+      { title: "Triggers the right action the moment something changes" },
+      { title: "Flags exceptions instead of letting them slip through" },
     ],
     visual: (
-      <MeshCard src="/gradient-mesh/orange.png">
-        <OnboardingContent />
+      <MeshCard src="/gradient-mesh/green.png">
+        <WorkflowContent />
       </MeshCard>
     ),
     reversed: false,
+  },
+  {
+    badge: "AI Integrations",
+    tint: "blue",
+    heading: (
+      <>
+        <Highlight color="var(--color-grad-blue)">AI</Highlight> that works
+        on top of clean data
+      </>
+    ),
+    bullets: [
+      {
+        title: "Smarter reporting and forecasting, not just dashboards",
+        description:
+          "Once your systems and workflows are in place, AI has clean, reliable data to actually work with.",
+      },
+      { title: "Surfaces what needs attention before it becomes a problem" },
+      { title: "Built on top of your systems — never a replacement for them" },
+    ],
+    visual: (
+      <MeshCard src="/gradient-mesh/golden.png">
+        <AiInsightContent />
+      </MeshCard>
+    ),
+    reversed: true,
   },
 ];
 
 export default function FeatureBlocks() {
   return (
-    <section id="product" className="bg-white">
+    <section id="services" className="bg-white">
       <div className="max-w-[1232px] mx-auto px-4 sm:px-6 md:px-8">
         <Reveal className="pt-12 sm:pt-16 md:pt-24 pb-2">
+          <p className="eyebrow mb-3 sm:mb-4">Services</p>
           <h2 className="font-serif text-[28px] sm:text-[34px] md:text-[40px] leading-[1.1] tracking-[-0.02em] text-black mb-3 sm:mb-4 max-w-[440px]">
-            Deploy agents across your customer journey
+            Four services. One connected system.
           </h2>
           <p className="text-[14px] sm:text-[15px] md:text-[16px] text-[#52525B] max-w-[460px] leading-relaxed">
-            Most buyer journeys are full of hurdles, each contributing to
-            drop-off. Let our agents anymus your prospects from intent to
-            activation.
+            Most agencies pick one piece. We build the whole stack —
+            systems, workflows, and the automation that connects them.
           </p>
         </Reveal>
 
