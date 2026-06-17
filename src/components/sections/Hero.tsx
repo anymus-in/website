@@ -116,7 +116,7 @@ export default function Hero() {
           <Spline scene="https://prod.spline.design/F-nKRrS5AnCe0xod/scene.splinecode" />
         </div>
         {/* Cover the "Built with Spline" watermark */}
-        <div className="absolute bottom-0 right-0 w-32 sm:w-40 md:w-48 h-12 sm:h-14 bg-white z-10" />
+        <div className="absolute bottom-0 right-0 w-40 h-16 bg-white z-10" />
       </div>
 
       {/* Floating "Ask me anything" launcher */}
