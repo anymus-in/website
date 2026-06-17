@@ -49,11 +49,6 @@ export default function CookiePolicyPage() {
             pages are viewed and how visitors navigate the site, so we can
             improve it over time.
           </li>
-          <li>
-            <span className="text-[#18181B] font-medium">Chat and agent cookies</span>{" "}
-            — used by anymus agents embedded on our or a Customer&apos;s site
-            to maintain conversation context across a session.
-          </li>
         </ul>
       </LegalSection>
 

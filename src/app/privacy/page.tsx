@@ -15,9 +15,9 @@ export default function PrivacyPolicyPage() {
           &quot;us,&quot; or &quot;our&quot;) collects, uses, discloses, and protects
           information when you visit our website or use our platform
           (collectively, the &quot;Service&quot;). It applies to visitors,
-          prospective customers, and Customers who use anymus to deploy AI
-          agents on their own sites (each, a &quot;Customer&quot;), as well as the
-          end users who interact with those agents.
+          prospective customers, and Customers who engage anymus to
+          implement ERP or CRM systems, automate workflows, or integrate
+          AI on top of their data (each, a &quot;Customer&quot;).
         </p>
       </LegalSection>
 
@@ -31,14 +31,9 @@ export default function PrivacyPolicyPage() {
           </li>
           <li>
             <span className="text-[#18181B] font-medium">Customer Content</span>{" "}
-            — product information, documents, and configuration data
-            Customers upload to power their AI agents.
-          </li>
-          <li>
-            <span className="text-[#18181B] font-medium">Conversation data</span>{" "}
-            — messages exchanged between end users and anymus agents,
-            including questions asked and information shared during a demo
-            or onboarding session.
+            — business data, documents, and system configuration
+            information Customers provide to power their ERP, CRM, and
+            automation systems.
           </li>
           <li>
             <span className="text-[#18181B] font-medium">Usage and device data</span>{" "}
@@ -54,8 +49,8 @@ export default function PrivacyPolicyPage() {
         <ul className="list-disc pl-5 space-y-2">
           <li>Provide, operate, and maintain the Service;</li>
           <li>
-            Power AI agents that engage visitors, qualify leads, and guide
-            onboarding on behalf of our Customers;
+            Power the systems, workflows, and AI integrations we implement
+            on behalf of our Customers;
           </li>
           <li>Respond to support requests and communicate with you;</li>
           <li>Monitor, analyze, and improve the performance and safety of the Service; and</li>
@@ -65,14 +60,14 @@ export default function PrivacyPolicyPage() {
 
       <LegalSection heading="4. AI processing">
         <p>
-          anymus agents use artificial intelligence, including large language
-          models, to process conversation data and Customer Content in order
-          to generate responses in real time. This processing may involve
-          sending relevant data to third-party AI model providers under
-          contractual terms that restrict their use of the data to providing
-          the requested processing. anymus does not use Customer Content or
-          end-user conversation data to train models for the benefit of other
-          customers.
+          Where a Customer engages anymus for AI integrations, anymus may
+          use artificial intelligence to process Customer Content in order
+          to generate reporting, forecasting, or other insights. This
+          processing may involve sending relevant data to third-party AI
+          model providers under contractual terms that restrict their use
+          of the data to providing the requested processing. anymus does
+          not use Customer Content to train models for the benefit of
+          other customers.
         </p>
       </LegalSection>
 
@@ -96,9 +91,8 @@ export default function PrivacyPolicyPage() {
           </li>
           <li>
             <span className="text-[#18181B] font-medium">The Customer</span>{" "}
-            — when you interact with an anymus agent embedded on a
-            Customer&apos;s site, your conversation data is shared with that
-            Customer;
+            — system configuration and business data you provide is used to
+            deliver the engagement you&apos;ve contracted us for;
           </li>
           <li>
             <span className="text-[#18181B] font-medium">Legal and safety</span>{" "}
@@ -120,8 +114,7 @@ export default function PrivacyPolicyPage() {
           We retain information for as long as needed to provide the
           Service, comply with our legal obligations, resolve disputes, and
           enforce our agreements. Customers can request deletion of their
-          Customer Content and associated conversation data, subject to any
-          legal retention requirements.
+          Customer Content, subject to any legal retention requirements.
         </p>
       </LegalSection>
 
@@ -130,10 +123,7 @@ export default function PrivacyPolicyPage() {
           Depending on your location, you may have the right to access,
           correct, export, or delete your personal information, or to object
           to or restrict certain processing. To exercise these rights,
-          contact us using the details below. If you are an end user who
-          interacted with an anymus agent on a Customer&apos;s website, you may
-          also need to contact that Customer directly, as they control the
-          underlying data.
+          contact us using the details below.
         </p>
       </LegalSection>
 

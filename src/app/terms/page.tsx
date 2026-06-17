@@ -24,14 +24,20 @@ export default function TermsOfUsePage() {
 
       <LegalSection heading="2. Description of the service">
         <p>
-          anymus provides technology and AI-powered agents designed to help
-          businesses engage website visitors, qualify inbound leads, deliver
-          personalized product demonstrations, and guide users through
-          onboarding. anymus is a software platform and does not provide
-          sales, marketing, legal, or advisory services. Any customer
-          interactions, product information, or recommendations generated
-          through anymus agents are based on the configuration and data
-          provided by the customer using the Service (&quot;Customer&quot;).
+          anymus provides implementation and consulting services for
+          growing businesses, delivered individually or together: (a)
+          implementation and configuration of enterprise resource planning
+          (ERP) systems; (b) implementation and configuration of customer
+          relationship management (CRM) systems; (c) design and deployment
+          of automation and workflows that connect those systems and
+          reduce manual operational work; and (d) integration of
+          AI-powered features, such as reporting and forecasting, on top
+          of a Customer&apos;s systems and data. anymus is a software and
+          services provider and does not provide legal, financial, or
+          other licensed advisory services. Any system configurations,
+          workflows, or recommendations generated through anymus services
+          are based on the configuration and data provided by the customer
+          using the Service (&quot;Customer&quot;).
         </p>
       </LegalSection>
 
@@ -49,8 +55,7 @@ export default function TermsOfUsePage() {
         <p>You agree not to:</p>
         <ul className="list-disc pl-5 space-y-2">
           <li>
-            Use the Service to deceive, defraud, or mislead any person or
-            misrepresent the identity of an agent as a human;
+            Use the Service to deceive, defraud, or mislead any person;
           </li>
           <li>
             Upload or configure content that is unlawful, infringing,
@@ -80,21 +85,21 @@ export default function TermsOfUsePage() {
           non-exclusive license to host, process, and use Customer Content
           solely to provide and improve the Service. You are responsible for
           ensuring that you have the necessary rights and consents to submit
-          Customer Content, including any end-user data shared with anymus
-          agents.
+          Customer Content.
         </p>
       </LegalSection>
 
       <LegalSection heading="6. AI-generated content">
         <p>
-          The Service uses artificial intelligence to generate responses,
-          demos, and recommendations in real time. While we work to make
-          agent output accurate and helpful, AI-generated content may
-          occasionally be incomplete, outdated, or incorrect. anymus agents
-          act on the configuration and data supplied by the Customer, and
-          neither anymus nor the Customer guarantees the accuracy of any
-          specific agent output. You should independently verify any
-          information that is material to a purchasing or business decision.
+          Where the Service includes AI integrations, anymus uses
+          artificial intelligence to generate reporting, forecasting, or
+          other recommendations based on Customer data. While we work to
+          make this output accurate and helpful, AI-generated content may
+          occasionally be incomplete, outdated, or incorrect. This output
+          is based on the configuration and data supplied by the Customer,
+          and neither anymus nor the Customer guarantees its accuracy. You
+          should independently verify any information that is material to
+          a business decision.
         </p>
       </LegalSection>
 

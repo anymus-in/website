@@ -2,7 +2,11 @@ import { Sparkles } from "lucide-react";
 
 export default function AnnouncementBar() {
   return (
-    <div className="w-full bg-[#18181B] py-2.5 sm:py-3 text-center text-xs sm:text-sm font-medium text-white/80 px-4 flex items-center justify-center gap-2">
+    <div
+      role="region"
+      aria-label="Announcement"
+      className="w-full bg-[#18181B] py-2.5 sm:py-3 text-center text-xs sm:text-sm font-medium text-white/80 px-4 flex items-center justify-center gap-2"
+    >
       <Sparkles className="w-3 h-3 text-[#F5C26B] shrink-0" />
       We raised €3M to grow your revenue on autopilot.{" "}
       <a
