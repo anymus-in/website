@@ -68,14 +68,15 @@ function EqualizerGlyph({ className }: { className?: string }) {
 
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.13, delayChildren: 0.08 } },
 };
 const line: Variants = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 
@@ -114,19 +115,25 @@ export default function Hero() {
       </motion.div>
 
       {/* Spline flowing ribbon — the centerpiece */}
-      <div className="relative w-full -mt-2 sm:-mt-4" style={{ minHeight: "300px", height: "clamp(300px, 50vw, 560px)" }}>
+      <motion.div
+        initial={{ opacity: 0, y: 28, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ delay: 0.44, duration: 1.1, ease: [0.22, 1, 0.36, 1] as const }}
+        className="relative w-full -mt-2 sm:-mt-4"
+        style={{ minHeight: "300px", height: "clamp(300px, 50vw, 560px)" }}
+      >
         <div className="absolute inset-0" style={{ opacity: 1 }}>
           <Spline scene="https://prod.spline.design/F-nKRrS5AnCe0xod/scene.splinecode" />
         </div>
         {/* Cover the "Built with Spline" watermark */}
         <div className="absolute bottom-0 right-0 w-40 h-16 bg-white z-10" />
-      </div>
+      </motion.div>
 
       {/* Floating "Ask me anything" launcher */}
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ opacity: 0, y: 36, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ delay: 0.72, type: "spring", stiffness: 280, damping: 26 }}
         className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 w-[min(420px,90vw)]"
       >
         <div className="flex items-center gap-3 bg-white/90 backdrop-blur-xl border border-[#E4E4E1] rounded-full pl-5 pr-1.5 py-1.5 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.25)]">

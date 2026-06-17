@@ -107,7 +107,7 @@ export default function DemoBand() {
                     <span className="text-[10px] text-[#71717A] font-medium tracking-wide">Demo agent</span>
                   </span>
                 </div>
-                <div className="p-3 sm:p-4">
+                <div className="p-3 sm:p-4 h-[260px] overflow-hidden flex flex-col justify-end">
                   <ChatPlayer messages={demoChat} />
                 </div>
               </div>
