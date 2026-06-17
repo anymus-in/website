@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { LogIn, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 function AnymusLogo() {
   return (
     <a href="/" className="flex items-center gap-2 text-black">
       <Image
-        src="/anymus-logo.svg"
-        alt="anymus"
+        src="/final-logo.svg"
+        alt=""
         width={28}
         height={28}
         className="shrink-0"
@@ -24,7 +24,6 @@ function AnymusLogo() {
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [resourcesOpen, setResourcesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -36,58 +35,29 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "fixed left-0 right-0 z-50 transition-all duration-300",
-        /* sit below 44px announcement bar until scrolled past it */
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "top-0 bg-white/95 backdrop-blur-sm border-b border-[#E4E4E1] py-3 sm:py-4"
-          : "top-[44px] bg-transparent py-4 sm:py-5",
+          ? "bg-white/95 backdrop-blur-sm border-b border-[#E4E4E1] py-3 sm:py-4"
+          : "bg-transparent py-4 sm:py-5",
       )}
     >
       <div className="max-w-[1232px] mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-between">
         <AnymusLogo />
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-10">
-          {/* Resources dropdown */}
-          <div className="relative">
-            <button
-              className="focus-accent rounded-md flex items-center gap-1 text-[14px] md:text-[15px] text-black hover:opacity-70 transition-opacity"
-              onClick={() => setResourcesOpen((v) => !v)}
-            >
-              Resources
-              <ChevronDown
-                className={cn(
-                  "w-4 h-4 transition-transform duration-200",
-                  resourcesOpen && "rotate-180",
-                )}
-              />
-            </button>
-            {resourcesOpen && (
-              <div className="absolute top-full right-0 mt-2 w-44 bg-white border border-[#E4E4E1] rounded-xl shadow-lg py-2 z-50">
-                {["Blog", "Docs", "Changelog"].map((item) => (
-                  <a
-                    key={item}
-                    href="#"
-                    className="block px-4 py-2 text-sm text-[#18181B] hover:bg-[#F2F1ED] transition-colors"
-                  >
-                    {item}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-
+        <nav className="hidden md:flex items-center gap-3 lg:gap-4">
           <a
-            href="#"
-            className="focus-accent rounded-md link-underline text-[14px] md:text-[15px] text-black"
+            href="/client-sign-in"
+            className="focus-accent inline-flex items-center gap-1.5 border border-[#D4D4D1] text-black rounded-full px-4 py-2.5 text-[13px] md:text-[14px] font-medium tracking-[-0.01em] hover:bg-[#F2F1ED] transition-colors min-h-[40px]"
           >
-            Get started
+            <LogIn className="w-3.5 h-3.5" />
+            Client Sign In
           </a>
           <a
-            href="#"
-            className="focus-accent rounded-md link-underline text-[14px] md:text-[15px] text-black"
+            href="/schedule-call"
+            className="cta-lift focus-accent inline-flex items-center bg-black text-white rounded-full px-5 py-2.5 text-[13px] md:text-[14px] font-medium tracking-[-0.01em] min-h-[40px]"
           >
-            Sign in
+            Schedule Call
           </a>
         </nav>
 
@@ -96,6 +66,7 @@ export default function Navbar() {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="md:hidden p-2 focus-accent rounded-md text-black"
           aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
         >
           {mobileMenuOpen ? (
             <X className="w-5 h-5" />
@@ -109,42 +80,18 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <nav className="md:hidden bg-white/95 backdrop-blur-sm border-t border-[#E4E4E1] mt-2">
           <div className="max-w-[1232px] mx-auto px-4 sm:px-6 py-4 space-y-3">
-            <button
-              className="focus-accent w-full text-left rounded-md flex items-center gap-1 text-sm text-black hover:opacity-70 transition-opacity py-2 px-3"
-              onClick={() => setResourcesOpen((v) => !v)}
-            >
-              Resources
-              <ChevronDown
-                className={cn(
-                  "w-4 h-4 transition-transform duration-200 ml-auto",
-                  resourcesOpen && "rotate-180",
-                )}
-              />
-            </button>
-            {resourcesOpen && (
-              <div className="pl-3 space-y-2 bg-[#F2F1ED] rounded-lg py-2 px-2">
-                {["Blog", "Docs", "Changelog"].map((item) => (
-                  <a
-                    key={item}
-                    href="#"
-                    className="block px-2 py-1.5 text-xs text-[#18181B] hover:opacity-70 transition-opacity"
-                  >
-                    {item}
-                  </a>
-                ))}
-              </div>
-            )}
             <a
-              href="#"
-              className="focus-accent block rounded-md text-sm text-black hover:opacity-70 transition-opacity py-2 px-3"
+              href="/client-sign-in"
+              className="focus-accent inline-flex items-center justify-center gap-1.5 w-full border border-[#D4D4D1] text-black rounded-full text-sm font-medium py-2.5 px-3 min-h-[44px]"
             >
-              Get started
+              <LogIn className="w-4 h-4" />
+              Client Sign In
             </a>
             <a
-              href="#"
-              className="focus-accent block rounded-md text-sm text-black hover:opacity-70 transition-opacity py-2 px-3"
+              href="/schedule-call"
+              className="cta-lift focus-accent inline-flex items-center justify-center w-full bg-black text-white rounded-full text-sm font-medium py-2.5 px-3 min-h-[44px]"
             >
-              Sign in
+              Schedule Call
             </a>
           </div>
         </nav>
