@@ -1,50 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 function AnymusLogo() {
   return (
     <a href="/" className="flex items-center gap-2 text-black">
-      {/* Spark/equalizer glyph */}
-      <svg
-        width="26"
-        height="22"
-        viewBox="0 0 26 22"
-        fill="none"
+      <Image
+        src="/anymus-logo.svg"
+        alt="anymus"
+        width={28}
+        height={28}
         className="shrink-0"
-      >
-        <rect
-          x="0"
-          y="6"
-          width="4"
-          height="10"
-          rx="2"
-          fill="currentColor"
-          opacity="0.9"
-        />
-        <rect x="6" y="2" width="4" height="18" rx="2" fill="currentColor" />
-        <rect x="12" y="0" width="4" height="22" rx="2" fill="currentColor" />
-        <rect
-          x="18"
-          y="4"
-          width="4"
-          height="14"
-          rx="2"
-          fill="currentColor"
-          opacity="0.85"
-        />
-        <rect
-          x="24"
-          y="8"
-          width="2"
-          height="8"
-          rx="1"
-          fill="currentColor"
-          opacity="0.7"
-        />
-      </svg>
+      />
       <span className="font-serif text-[16px] sm:text-[18px] md:text-[22px] font-medium tracking-tight">
         anymus
       </span>

@@ -1,13 +1,20 @@
 function AnymusLogo() {
   return (
     <div className="flex items-center gap-2 text-white mb-4">
-      <svg width="22" height="18" viewBox="0 0 26 22" fill="none">
-        <rect x="0" y="6" width="4" height="10" rx="2" fill="currentColor" opacity="0.9" />
-        <rect x="6" y="2" width="4" height="18" rx="2" fill="currentColor" />
-        <rect x="12" y="0" width="4" height="22" rx="2" fill="currentColor" />
-        <rect x="18" y="4" width="4" height="14" rx="2" fill="currentColor" opacity="0.85" />
-        <rect x="24" y="8" width="2" height="8" rx="1" fill="currentColor" opacity="0.7" />
-      </svg>
+      <span
+        aria-hidden
+        className="w-6 h-6 bg-white shrink-0"
+        style={{
+          maskImage: "url(/anymus-logo.svg)",
+          maskSize: "contain",
+          maskRepeat: "no-repeat",
+          maskPosition: "center",
+          WebkitMaskImage: "url(/anymus-logo.svg)",
+          WebkitMaskSize: "contain",
+          WebkitMaskRepeat: "no-repeat",
+          WebkitMaskPosition: "center",
+        }}
+      />
       <span className="font-serif text-[20px] font-medium tracking-tight">anymus</span>
     </div>
   );
