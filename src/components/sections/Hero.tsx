@@ -111,18 +111,6 @@ export default function Hero() {
           <EqualizerGlyph />
           See AI demo
         </motion.a>
-        {/* Feature pills */}
-        <motion.div variants={line} className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-5">
-          {["24/7 availability", "50+ languages", "Live in minutes"].map((pill) => (
-            <span
-              key={pill}
-              className="inline-flex items-center gap-1.5 bg-[#F2F1ED] border border-[#E4E4E1] rounded-full px-3 py-1 text-[12px] text-[#52525B]"
-            >
-              <Check className="w-3 h-3 text-[#3FBF7F] shrink-0" />
-              {pill}
-            </span>
-          ))}
-        </motion.div>
       </motion.div>
 
       {/* Spline flowing ribbon — the centerpiece */}
