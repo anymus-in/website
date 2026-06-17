@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { motion, type Variants } from "framer-motion";
-import { ArrowUp, Check } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 
 /* Spline is heavy (3D runtime) — load client-only with a gradient fallback */
 const Spline = dynamic(() => import("@splinetool/react-spline"), {
