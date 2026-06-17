@@ -43,45 +43,47 @@ const orbs = [
 
 export default function DemoBand() {
   return (
-    <section id="demo" className="bg-white py-6 px-8">
+    <section id="demo" className="bg-white py-4 sm:py-6 px-4 sm:px-6 md:px-8">
       <div className="max-w-[1232px] mx-auto">
         <Reveal>
           <div
-            className="relative rounded-[28px] overflow-hidden grid lg:grid-cols-2 items-center gap-8 px-8 py-12 lg:px-14 border border-black/[0.06]"
+            className="relative rounded-[20px] sm:rounded-[24px] lg:rounded-[28px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 items-center gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 md:px-8 lg:px-14 py-8 sm:py-10 md:py-12 border border-black/[0.06]"
             style={{
               background: "#F2F1ED",
-              minHeight: 440,
+              minHeight: "auto",
               boxShadow: "var(--shadow-card)",
             }}
           >
-            {/* Floating orbs */}
-            {orbs.map((orb, i) => (
-              <motion.div
-                key={i}
-                className={`absolute ${orb.cls} rounded-full pointer-events-none`}
-                style={{ background: orb.bg, opacity: orb.o }}
-                animate={{ y: [0, -10, 0] }}
-                transition={{
-                  duration: orb.dur,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
+            {/* Floating orbs — hidden on mobile */}
+            <div className="hidden md:block">
+              {orbs.map((orb, i) => (
+                <motion.div
+                  key={i}
+                  className={`absolute ${orb.cls} rounded-full pointer-events-none`}
+                  style={{ background: orb.bg, opacity: orb.o }}
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{
+                    duration: orb.dur,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+            </div>
 
             {/* Left: copy + CTA */}
             <div className="relative z-10 max-w-[400px]">
-              <p className="eyebrow mb-3">AI Demo</p>
-              <h2 className="font-serif text-[34px] tracking-[-0.02em] text-black leading-[1.1] mb-3">
+              <p className="eyebrow mb-2 sm:mb-3">AI Demo</p>
+              <h2 className="font-serif text-[24px] sm:text-[28px] md:text-[34px] tracking-[-0.02em] text-black leading-[1.1] mb-2 sm:mb-3">
                 See anymus in action
               </h2>
-              <p className="text-[15px] text-[#52525B] mb-7 leading-relaxed">
+              <p className="text-[14px] sm:text-[15px] text-[#52525B] mb-5 sm:mb-7 leading-relaxed">
                 Let our agent walk you through the product — live, personalised,
                 and answering as you go.
               </p>
               <a
                 href="#"
-                className="cta-lift inline-flex items-center gap-2 bg-black text-white rounded-full px-7 py-3.5 text-[15px] font-medium tracking-[-0.01em] shadow-[var(--shadow-card)]"
+                className="cta-lift inline-flex items-center gap-2 bg-black text-white rounded-full px-6 sm:px-7 py-3 sm:py-3.5 text-[14px] sm:text-[15px] font-medium tracking-[-0.01em] shadow-[var(--shadow-card)] min-h-[44px]"
               >
                 <Sparkles className="w-4 h-4" />
                 Start demo
@@ -94,13 +96,13 @@ export default function DemoBand() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-10 justify-self-center lg:justify-self-end w-[min(360px,92%)]"
+              className="relative z-10 justify-self-center lg:justify-self-end w-[min(360px,90vw)]"
             >
               <div
-                className="rounded-[20px] bg-white/75 backdrop-blur-xl border border-black/[0.05] p-4"
+                className="rounded-[16px] sm:rounded-[20px] bg-white/75 backdrop-blur-xl border border-black/[0.05] p-3 sm:p-4"
                 style={{ boxShadow: "var(--shadow-soft)" }}
               >
-                <div className="flex items-center gap-2 mb-3 px-1">
+                <div className="flex items-center gap-2 mb-2 sm:mb-3 px-1">
                   <span className="w-2 h-2 rounded-full bg-[#3FBF7F]" />
                   <span className="eyebrow !tracking-[0.1em] text-[#71717A]">
                     Demo agent

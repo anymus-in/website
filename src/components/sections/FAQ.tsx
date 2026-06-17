@@ -44,25 +44,25 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="bg-[#EFEEED]">
-      <div className="max-w-[1232px] mx-auto px-8 py-16">
+      <div className="max-w-[1232px] mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
         <Reveal>
-          <p className="eyebrow mb-8">Frequently Asked Questions</p>
+          <p className="eyebrow mb-6 sm:mb-8">Frequently Asked Questions</p>
         </Reveal>
 
         <RevealGroup stagger={0.06}>
           {faqs.map((faq, i) => (
             <RevealItem key={i} className="border-t border-[#E4E4E1]">
               <button
-                className="w-full flex items-center justify-between py-5 text-left group"
+                className="w-full flex items-center justify-between py-4 sm:py-5 text-left group"
                 onClick={() => setOpen(open === i ? null : i)}
                 aria-expanded={open === i}
               >
-                <span className="font-serif text-[20px] text-black group-hover:opacity-70 transition-opacity pr-8">
+                <span className="font-serif text-[16px] sm:text-[18px] md:text-[20px] text-black group-hover:opacity-70 transition-opacity pr-4 sm:pr-8 flex-1">
                   {faq.question}
                 </span>
                 <span
                   className={cn(
-                    "w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-colors",
+                    "w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-colors min-h-[44px] min-w-[44px]",
                     open === i
                       ? "bg-[#F0A23C]/12 border-[#F0A23C]/50"
                       : "bg-[#F2F1ED] border-[#D4D4D1]",
@@ -84,7 +84,7 @@ export default function FAQ() {
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     className="overflow-hidden"
                   >
-                    <p className="text-sm text-[#3F3F46] leading-relaxed max-w-2xl pb-5">
+                    <p className="text-xs sm:text-sm text-[#3F3F46] leading-relaxed max-w-2xl pb-4 sm:pb-5">
                       {faq.answer}
                     </p>
                   </motion.div>

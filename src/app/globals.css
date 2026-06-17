@@ -64,9 +64,9 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Keep anchored sections clear of the sticky nav */
+/* Keep anchored sections clear of the sticky nav — responsive for mobile */
 section[id] {
-  scroll-margin-top: 96px;
+  scroll-margin-top: clamp(60px, 10vw, 96px);
 }
 
 body {

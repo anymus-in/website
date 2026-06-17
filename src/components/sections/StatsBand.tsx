@@ -4,29 +4,29 @@ import Reveal from "@/components/motion/Reveal";
 export default function StatsBand() {
   return (
     <section className="bg-white border-t border-[#E4E4E1]">
-      <div className="max-w-[1232px] mx-auto px-8 py-16">
-        <Reveal className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
+      <div className="max-w-[1232px] mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+        <Reveal className="flex flex-col lg:flex-row lg:items-center gap-8 sm:gap-10 md:gap-12 lg:gap-16">
           {/* Stats left — side by side numbers */}
-          <div className="flex items-start gap-12 shrink-0">
-            <div className="flex items-baseline gap-3">
+          <div className="flex flex-col sm:flex-row items-start gap-6 sm:gap-8 md:gap-12 shrink-0">
+            <div className="flex items-baseline gap-2 sm:gap-3">
               <CountUp
                 to={60}
                 suffix="%"
-                className="font-serif text-[60px] leading-[0.95] tracking-[-0.02em] text-[#18181B]"
+                className="font-serif text-[40px] sm:text-[50px] md:text-[60px] leading-[0.95] tracking-[-0.02em] text-[#18181B]"
               />
-              <p className="text-[13px] text-[#52525B] leading-snug max-w-[110px]">
+              <p className="text-[12px] sm:text-[13px] text-[#52525B] leading-snug max-w-[110px]">
                 reduction in bad fit
                 <br />
                 sales calls
               </p>
             </div>
-            <div className="flex items-baseline gap-3">
+            <div className="flex items-baseline gap-2 sm:gap-3">
               <CountUp
                 to={20}
                 suffix="%"
-                className="font-serif text-[60px] leading-[0.95] tracking-[-0.02em] text-[#18181B]"
+                className="font-serif text-[40px] sm:text-[50px] md:text-[60px] leading-[0.95] tracking-[-0.02em] text-[#18181B]"
               />
-              <p className="text-[13px] text-[#52525B] leading-snug max-w-[120px]">
+              <p className="text-[12px] sm:text-[13px] text-[#52525B] leading-snug max-w-[120px]">
                 month-on-month
                 <br />
                 increase in total SQLs
@@ -42,7 +42,7 @@ export default function StatsBand() {
 
           {/* Quote right */}
           <div className="max-w-[480px]">
-            <p className="text-[15px] text-[#3F3F46] leading-relaxed mb-5">
+            <p className="text-[14px] sm:text-[15px] text-[#3F3F46] leading-relaxed mb-4 sm:mb-5">
               &ldquo;Our sales reps are less occupied with bad fit leads,
               creating extra capacity for outbound, and anymus&apos;s agent has
               been super useful for coverage outside of regular business
@@ -60,10 +60,10 @@ export default function StatsBand() {
                 </svg>
               </div>
               <div className="text-right">
-                <p className="text-[13px] font-semibold text-black">
+                <p className="text-[12px] sm:text-[13px] font-semibold text-black">
                   Alasdair Reynolds
                 </p>
-                <p className="text-[13px] text-[#71717A]">
+                <p className="text-[12px] sm:text-[13px] text-[#71717A]">
                   Head of Growth at Parim
                 </p>
               </div>
