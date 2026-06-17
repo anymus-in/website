@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Mail } from "lucide-react";
 import ScrollProgress from "@/components/motion/ScrollProgress";
-import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Reveal from "@/components/motion/Reveal";
@@ -17,7 +16,6 @@ export default function ContactPage() {
   return (
     <>
       <ScrollProgress />
-      <AnnouncementBar />
       <Navbar />
       <main className="pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-24 md:pb-32">
         <div className="max-w-[760px] mx-auto px-4 sm:px-6 md:px-8">
