@@ -1,16 +1,11 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
+import { services } from "@/lib/services";
 
 const CONTACT_EMAIL = "anymus.shared@gmail.com";
 
-const products = [
-  "ERP Implementation",
-  "CRM Solutions",
-  "Business Automation",
-  "AI Integrations",
-  "Not sure yet",
-];
+const products = [...services.map((s) => s.name), "Not sure yet"];
 
 const fieldClass =
   "focus-accent w-full bg-white border border-[#D4D4D1] rounded-xl px-3.5 py-2.5 text-sm text-black placeholder:text-ink-400 outline-none min-h-[44px]";

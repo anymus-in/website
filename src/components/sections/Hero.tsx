@@ -12,7 +12,6 @@ import {
   ClipboardCheck,
 } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
-import Highlight from "@/components/motion/Highlight";
 
 /* Spline is heavy (3D runtime) — load client-only with a gradient fallback */
 const Spline = dynamic(() => import("@splinetool/react-spline"), {
@@ -60,9 +59,9 @@ const modules = [
 ];
 
 const kpis = [
-  { label: "Total Revenue", value: "$284,500", trend: "+12%" },
+  { label: "Total Revenue", value: "₹2,84,500", trend: "+12%" },
   { label: "Open Deals", value: "34", trend: "+5" },
-  { label: "Inventory Value", value: "$96,200", trend: "+3%" },
+  { label: "Inventory Value", value: "₹96,200", trend: "+3%" },
   { label: "Approvals Cleared", value: "21", trend: "+8" },
 ];
 
@@ -77,9 +76,9 @@ const pipelineStages = [
 ];
 
 const approvals = [
-  { name: "PO #4471 — Office supplies", status: "Pending" },
-  { name: "Expense report — J. Marsh", status: "Pending" },
-  { name: "Vendor contract — Acme Co.", status: "Approved" },
+  { name: "Supplier payment — Patel & Sons", status: "Pending" },
+  { name: "Staff advance — R. Kumar", status: "Pending" },
+  { name: "GST invoice — Sharma Traders", status: "Approved" },
 ];
 
 /* Enterprise dashboard mockup — the hero centerpiece visual */
@@ -143,8 +142,13 @@ function EnterpriseDashboard() {
               <p className="text-[15px] sm:text-[17px] font-semibold text-black">
                 Revenue overview
               </p>
-              <span className="text-[11px] sm:text-[12px] text-ink-500 bg-[#F7F7F5] rounded-full px-3 py-1">
-                This month
+              <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-[12px] text-ink-500 bg-[#F7F7F5] rounded-full px-3 py-1">
+                <motion.span
+                  className="w-1.5 h-1.5 rounded-full bg-[#1F8A56]"
+                  animate={{ opacity: [1, 0.25, 1], scale: [1, 0.8, 1] }}
+                  transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                />
+                Live · This month
               </span>
             </div>
 
@@ -174,26 +178,39 @@ function EnterpriseDashboard() {
             {/* Chart */}
             <div className="relative mb-6 sm:mb-8">
               <div className="absolute left-0 top-0 w-9 sm:w-10 h-28 sm:h-36 flex flex-col justify-between text-right pr-1">
-                <span className="text-[9px] sm:text-[10px] text-ink-400">$100k</span>
-                <span className="text-[9px] sm:text-[10px] text-ink-400">$50k</span>
-                <span className="text-[9px] sm:text-[10px] text-ink-400">$0</span>
+                <span className="text-[9px] sm:text-[10px] text-ink-400">₹1L</span>
+                <span className="text-[9px] sm:text-[10px] text-ink-400">₹50k</span>
+                <span className="text-[9px] sm:text-[10px] text-ink-400">₹0</span>
               </div>
               <div className="absolute left-9 sm:left-10 right-0 top-0 h-28 sm:h-36 flex flex-col justify-between pointer-events-none">
                 <div className="h-px bg-[#F0F0EE]" />
                 <div className="h-px bg-[#F0F0EE]" />
                 <div className="h-px bg-[#F0F0EE]" />
               </div>
-              <div className="flex items-end gap-2 sm:gap-3 h-28 sm:h-36 pl-9 sm:pl-10">
+              <motion.div
+                className="flex items-end gap-2 sm:gap-3 h-28 sm:h-36 pl-9 sm:pl-10"
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.5 }}
+                variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
+              >
                 {revenueBars.map((h, i) => (
-                  <div
+                  <motion.div
                     key={i}
-                    className={`flex-1 rounded-t-sm ${
+                    className={`flex-1 rounded-t-sm origin-bottom ${
                       i === revenueBars.length - 1 ? "bg-grad-blue" : "bg-[#E4E4E1]"
                     }`}
                     style={{ height: `${h}%` }}
+                    variants={{
+                      hidden: { scaleY: 0 },
+                      show: {
+                        scaleY: 1,
+                        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+                      },
+                    }}
                   />
                 ))}
-              </div>
+              </motion.div>
               <div className="flex gap-2 sm:gap-3 pl-9 sm:pl-10 mt-1.5">
                 {months.map((m) => (
                   <span
@@ -282,7 +299,7 @@ export default function Hero() {
           variants={line}
           className="font-serif font-normal text-[clamp(32px,6vw,68px)] leading-[1.08] tracking-[-1px] text-black mb-4 sm:mb-6"
         >
-          <Highlight color="#5F44E0"><span style={{ color: "#5F44E0" }}>Anymus</span></Highlight> Is Your
+          <span style={{ color: "#5F44E0" }}>Anymus</span> Is Your
           <br />
           Technical Growth Partner
         </motion.h1>

@@ -11,13 +11,11 @@ import JsonLd from "@/components/seo/JsonLd";
 import {
   organizationSchema,
   websiteSchema,
-  faqSchema,
 } from "@/lib/structured-data";
 
 /* Below-the-fold sections — still server-rendered (ssr defaults to true),
    but split into separate chunks so their client JS isn't in the main bundle. */
 const FeatureBlocks = dynamic(() => import("@/components/sections/FeatureBlocks"));
-const FAQ = dynamic(() => import("@/components/sections/FAQ"));
 
 export const metadata: Metadata = {
   title: {
@@ -31,7 +29,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <JsonLd data={[organizationSchema, websiteSchema, faqSchema]} />
+      <JsonLd data={[organizationSchema, websiteSchema]} />
       <ScrollProgress />
       <Navbar />
       <main>
@@ -39,7 +37,6 @@ export default function Home() {
         <ProblemsSection />
         <FeatureBlocks />
         <GetStarted />
-        <FAQ />
         <CtaBand />
       </main>
       <Footer />
