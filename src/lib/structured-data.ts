@@ -6,6 +6,7 @@ import {
   SOCIALS,
 } from "./site";
 import { faqs } from "./faqs";
+import { services, type Service } from "./services";
 
 /** schema.org Organization — brand entity for Google's Knowledge Graph. */
 export const organizationSchema = {
@@ -17,6 +18,32 @@ export const organizationSchema = {
   logo: `${SITE_URL}/final-logo.svg`,
   description: SITE_DESCRIPTION,
   email: CONTACT_EMAIL,
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: CONTACT_EMAIL,
+    contactType: "sales",
+  },
+  areaServed: "Worldwide",
+  knowsAbout: [
+    "ERP implementation",
+    "CRM implementation",
+    "business process automation",
+    "workflow automation",
+    "website design and development",
+    "systems integration",
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Implementation services",
+    itemListElement: services.map((s) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: s.name,
+        url: `${SITE_URL}/services/${s.slug}`,
+      },
+    })),
+  },
   ...(SOCIALS.length > 0 ? { sameAs: SOCIALS } : {}),
 };
 
@@ -44,3 +71,31 @@ export const faqSchema = {
     },
   })),
 };
+
+/** schema.org Service for a single service detail page. */
+export function serviceSchema(service: Service) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.name,
+    serviceType: service.serviceType,
+    description: service.metaDescription,
+    url: `${SITE_URL}/services/${service.slug}`,
+    provider: { "@id": `${SITE_URL}/#organization` },
+    areaServed: "Worldwide",
+  };
+}
+
+/** schema.org BreadcrumbList from an ordered list of { name, path } crumbs. */
+export function breadcrumbList(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path}`,
+    })),
+  };
+}
