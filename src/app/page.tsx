@@ -4,7 +4,6 @@ import ScrollProgress from "@/components/motion/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
-import ProblemsSection from "@/components/sections/ProblemsSection";
 import GetStarted from "@/components/sections/GetStarted";
 import CtaBand from "@/components/sections/CtaBand";
 import JsonLd from "@/components/seo/JsonLd";
@@ -34,7 +33,6 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <ProblemsSection />
         <FeatureBlocks />
         <GetStarted />
         <CtaBand />
