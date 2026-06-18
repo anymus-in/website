@@ -337,7 +337,7 @@ export default function Hero() {
         className="relative w-full -mt-2 sm:-mt-4"
         style={{ minHeight: "260px", height: "clamp(260px, 42vw, 460px)" }}
       >
-        <div className="absolute inset-0" style={{ opacity: 1 }}>
+        <div className="absolute inset-0 pointer-events-none sm:pointer-events-auto" style={{ opacity: 1 }}>
           <Spline scene="https://prod.spline.design/F-nKRrS5AnCe0xod/scene.splinecode" />
         </div>
         {/* Cover the "Built with Spline" watermark */}
