@@ -42,7 +42,7 @@ export default function CommunicationTab() {
 
   return (
     <div>
-      <TabHeader title="Communication" subtitle="Updates from the anymus team." />
+      <TabHeader title="Messages" subtitle="Direct line to your anymus team." />
 
       <PortalCard className="p-3 sm:p-4 mb-5 sm:mb-6">
         <textarea

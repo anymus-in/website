@@ -49,7 +49,7 @@ export default function AccountTab() {
 
   return (
     <div>
-      <TabHeader title="Account" subtitle="Your workspace and notification preferences." />
+      <TabHeader title="Settings" subtitle="Your workspace and notification preferences." />
 
       <PortalCard className="p-5 sm:p-7 mb-5 sm:mb-6">
         <p className="text-[12px] text-ink-500 mb-4">Workspace</p>

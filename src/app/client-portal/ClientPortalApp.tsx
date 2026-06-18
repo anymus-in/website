@@ -10,29 +10,37 @@ import {
   Receipt,
   ListChecks,
   Calendar,
+  CalendarClock,
   MessageSquare,
+  LifeBuoy,
   Settings,
   LogOut,
   Bell,
   ChevronDown,
+  Phone,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { TabId } from "./types";
+import { Avatar, Badge, ScoreRing } from "./components";
 import OverviewTab from "./tabs/OverviewTab";
 import DocumentsTab from "./tabs/DocumentsTab";
 import InvoicesTab from "./tabs/InvoicesTab";
 import DeliverablesTab from "./tabs/DeliverablesTab";
 import TimelineTab from "./tabs/TimelineTab";
+import MeetingsTab from "./tabs/MeetingsTab";
 import CommunicationTab from "./tabs/CommunicationTab";
+import SupportTab from "./tabs/SupportTab";
 import AccountTab from "./tabs/AccountTab";
 
 const mainTabs = [
-  { id: "overview", label: "Overview", icon: LayoutDashboard },
+  { id: "overview", label: "Dashboard", icon: LayoutDashboard },
+  { id: "deliverables", label: "Deliverables", icon: ListChecks },
   { id: "documents", label: "Documents", icon: FileText },
   { id: "invoices", label: "Invoices", icon: Receipt },
-  { id: "deliverables", label: "Deliverables", icon: ListChecks },
   { id: "timeline", label: "Timeline", icon: Calendar },
-  { id: "communication", label: "Communication", icon: MessageSquare },
+  { id: "meetings", label: "Meetings", icon: CalendarClock },
+  { id: "communication", label: "Messages", icon: MessageSquare },
+  { id: "support", label: "Support", icon: LifeBuoy },
 ] as const;
 
 const notifications = [
@@ -72,10 +80,6 @@ export default function ClientPortalApp() {
           <span className="font-serif text-[16px] sm:text-[18px] text-black">anymus</span>
         </Link>
         <div className="flex items-center gap-2 sm:gap-3">
-          <span className="hidden sm:inline text-[13px] text-ink-500 mr-1">
-            Acme Co. Workspace
-          </span>
-
           {/* Notifications */}
           <div className="relative">
             <button
@@ -123,7 +127,7 @@ export default function ClientPortalApp() {
               aria-expanded={accountOpen}
               className="focus-accent flex items-center gap-1.5 pl-1 pr-2 py-1 rounded-full hover:bg-[#F2F1ED] transition-colors"
             >
-              <span className="w-8 h-8 rounded-full bg-gradient-to-br from-grad-amber to-grad-blue shrink-0" />
+              <Avatar name="Jane Cooper" size={32} />
               <ChevronDown className="w-3.5 h-3.5 text-ink-500" />
             </button>
             {accountOpen && (
@@ -137,7 +141,7 @@ export default function ClientPortalApp() {
                   className="focus-accent w-full flex items-center gap-2 px-4 py-2 text-[13px] text-ink-700 hover:bg-[#F2F1ED] transition-colors text-left"
                 >
                   <Settings className="w-3.5 h-3.5" />
-                  Account settings
+                  Settings
                 </button>
                 <a
                   href="/client-sign-in"
@@ -152,6 +156,50 @@ export default function ClientPortalApp() {
         </div>
       </header>
 
+      {/* Project header band — persistent project identity + status + quick actions */}
+      <div className="relative z-30 bg-white border-b border-[#E4E4E1] shrink-0">
+        <div className="max-w-[1232px] mx-auto px-4 sm:px-6 py-4 sm:py-5 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+            <span className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#18181B] flex items-center justify-center text-white font-serif text-[16px] shrink-0">
+              AC
+            </span>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h1 className="font-serif text-[17px] sm:text-[19px] text-black truncate">
+                  Acme Co.
+                </h1>
+                <Badge tint="bg-grad-blue/15" dot="bg-grad-blue">
+                  On Track
+                </Badge>
+              </div>
+              <p className="text-[12px] sm:text-[13px] text-ink-500 truncate">
+                CRM &amp; Automation Implementation — Phase 2 of 3
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <ScoreRing value={86} size={44} stroke={4} label="health" />
+            <div className="hidden sm:flex items-center gap-2">
+              <button
+                onClick={() => go("meetings")}
+                className="focus-accent inline-flex items-center gap-1.5 border border-[#D4D4D1] text-black rounded-full px-3.5 py-2 text-[12px] sm:text-[13px] font-medium hover:bg-[#F2F1ED] transition-colors min-h-[36px]"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                Schedule call
+              </button>
+              <button
+                onClick={() => go("support")}
+                className="cta-lift focus-accent inline-flex items-center gap-1.5 bg-black text-white rounded-full px-3.5 py-2 text-[12px] sm:text-[13px] font-medium min-h-[36px]"
+              >
+                <LifeBuoy className="w-3.5 h-3.5" />
+                Get support
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="flex-1 flex flex-col lg:flex-row max-w-[1232px] w-full mx-auto">
         {/* Sidebar */}
         <nav className="lg:w-56 shrink-0 border-b lg:border-b-0 lg:border-r border-[#E4E4E1] p-3 sm:p-4 flex lg:flex-col gap-1 overflow-x-auto">
@@ -160,7 +208,7 @@ export default function ClientPortalApp() {
               key={t.id}
               onClick={() => go(t.id)}
               className={cn(
-                "focus-accent flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-[13px] sm:text-[14px] font-medium whitespace-nowrap shrink-0",
+                "focus-accent flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-[13px] sm:text-[14px] font-medium whitespace-nowrap shrink-0 transition-colors",
                 active === t.id ? "bg-black text-white" : "text-ink-700 hover:bg-[#F2F1ED]",
               )}
             >
@@ -172,12 +220,12 @@ export default function ClientPortalApp() {
           <button
             onClick={() => go("account")}
             className={cn(
-              "focus-accent flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-[13px] sm:text-[14px] font-medium whitespace-nowrap shrink-0",
+              "focus-accent flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-[13px] sm:text-[14px] font-medium whitespace-nowrap shrink-0 transition-colors",
               active === "account" ? "bg-black text-white" : "text-ink-700 hover:bg-[#F2F1ED]",
             )}
           >
             <Settings className="w-4 h-4 shrink-0" />
-            Account
+            Settings
           </button>
         </nav>
 
@@ -192,11 +240,13 @@ export default function ClientPortalApp() {
               transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
               {active === "overview" && <OverviewTab onNavigate={go} />}
+              {active === "deliverables" && <DeliverablesTab />}
               {active === "documents" && <DocumentsTab />}
               {active === "invoices" && <InvoicesTab />}
-              {active === "deliverables" && <DeliverablesTab />}
               {active === "timeline" && <TimelineTab />}
+              {active === "meetings" && <MeetingsTab />}
               {active === "communication" && <CommunicationTab />}
+              {active === "support" && <SupportTab onNavigate={go} />}
               {active === "account" && <AccountTab />}
             </motion.div>
           </AnimatePresence>

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Sparkles, TrendingUp } from "lucide-react";
+import { Globe } from "lucide-react";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import Highlight from "@/components/motion/Highlight";
 
@@ -264,37 +264,50 @@ function WorkflowContent() {
   );
 }
 
-/* ── AI Integrations card content: forecast + insight ── */
-function AiInsightContent() {
+/* ── Website build card content: browser chrome + homepage wireframe ── */
+function WebsiteContent() {
   return (
     <div className="absolute inset-0 flex items-center justify-center pb-6 sm:pb-8">
       <div className="relative w-[72%]">
-        <div className="bg-white rounded-2xl shadow-lg p-4">
-          <div className="flex items-center justify-between mb-2">
-            <p className="text-[11px] font-semibold text-black">Forecast</p>
-            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-black">
-              <TrendingUp className="w-3 h-3 text-grad-green" />
-              +12%
-            </span>
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+          {/* Browser chrome */}
+          <div className="flex items-center gap-1.5 px-3 py-2.5 border-b border-line">
+            <span className="w-2 h-2 rounded-full bg-[#E4E4E1]" />
+            <span className="w-2 h-2 rounded-full bg-[#E4E4E1]" />
+            <span className="w-2 h-2 rounded-full bg-[#E4E4E1]" />
+            <div className="flex-1 flex items-center justify-center">
+              <div className="flex items-center gap-1.5 bg-paper rounded-full px-3 py-1">
+                <Globe className="w-2.5 h-2.5 text-ink-500" />
+                <span className="h-1.5 bg-[#D4D4D1] rounded-full w-16" />
+              </div>
+            </div>
           </div>
-          <svg viewBox="0 0 160 50" className="w-full h-12 mb-3" fill="none">
-            <polyline
-              points="0,40 25,32 50,35 75,20 100,24 125,10 160,6"
-              className="stroke-grad-blue"
-              strokeWidth="2"
-              fill="none"
-            />
-          </svg>
-          <div className="bg-[#F7F7F5] rounded-lg px-3 py-2 flex items-start gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-accent-ink shrink-0 mt-0.5" />
-            <p className="text-[10px] text-ink-700 leading-snug">
-              Inventory for SKU-2291 will run out in 9 days at current pace.
-            </p>
+          {/* Homepage wireframe */}
+          <div className="p-4">
+            <div className="flex items-center justify-between mb-4">
+              <div className="h-2.5 bg-paper rounded-full w-12" />
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 bg-paper rounded-full w-6" />
+                <div className="h-1.5 bg-paper rounded-full w-6" />
+                <div className="h-4 w-12 rounded-full bg-grad-blue/20" />
+              </div>
+            </div>
+            <div className="h-3 bg-gradient-to-r from-paper to-[#EAE9E5] rounded-full w-3/4 mb-2" />
+            <div className="h-3 bg-gradient-to-r from-paper to-[#EAE9E5] rounded-full w-1/2 mb-3" />
+            <div className="h-6 w-20 rounded-full bg-black/90 mb-4" />
+            <div className="grid grid-cols-3 gap-2">
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="aspect-square rounded-lg bg-gradient-to-br from-paper to-[#EAE9E5]"
+                />
+              ))}
+            </div>
           </div>
         </div>
         <div className="absolute left-2 -bottom-5 bg-white rounded-full px-3.5 py-2 shadow-md flex items-center gap-2 whitespace-nowrap">
           <span className="text-sm text-[#3F3F46]">✦</span>
-          <span className="text-xs text-[#3F3F46]">Generating insight...</span>
+          <span className="text-xs text-[#3F3F46]">Publishing your new site...</span>
         </div>
       </div>
     </div>
@@ -425,26 +438,26 @@ const features: FeatureData[] = [
     reversed: false,
   },
   {
-    badge: "AI Integrations",
+    badge: "Website Design & Development",
     tint: "blue",
     heading: (
       <>
-        <Highlight color="var(--color-grad-blue)">AI</Highlight> that works
-        on top of clean data
+        A <Highlight color="var(--color-grad-blue)">website   </Highlight> when
+        you don&apos;t have one yet
       </>
     ),
     bullets: [
       {
-        title: "Smarter reporting and forecasting, not just dashboards",
+        title: "A fast, professional site built and launched for you",
         description:
-          "Once your systems and workflows are in place, AI has clean, reliable data to actually work with.",
+          "No website, an outdated one, or just a Google Business listing? We design, build, and ship a site that actually represents the business.",
       },
-      { title: "Surfaces what needs attention before it becomes a problem" },
-      { title: "Built on top of your systems — never a replacement for them" },
+      { title: "Connected to the same CRM and systems we set up for you" },
+      { title: "Ready in weeks, not months — content, copy, and all" },
     ],
     visual: (
       <MeshCard src="/gradient-mesh/golden.png">
-        <AiInsightContent />
+        <WebsiteContent />
       </MeshCard>
     ),
     reversed: true,

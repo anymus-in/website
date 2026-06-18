@@ -1,8 +1,10 @@
 export type TabId =
   | "overview"
+  | "deliverables"
   | "documents"
   | "invoices"
-  | "deliverables"
   | "timeline"
+  | "meetings"
   | "communication"
+  | "support"
   | "account";
