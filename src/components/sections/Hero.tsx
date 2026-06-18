@@ -390,6 +390,15 @@ export default function Hero() {
           Built by <span style={{ color: "#5F44E0" }}>Anymus</span>
         </motion.p>
 
+        <motion.p
+          variants={line}
+          className="text-[14px] md:text-[15px] mb-8 md:mb-9 max-w-[300px] md:max-w-xl text-ink-500 md:text-[#5f6368] leading-relaxed"
+        >
+          We help companies automate operations, sales, inventory,
+          approvals, and reporting — so teams spend less time on manual
+          work and more time growing the business.
+        </motion.p>
+
         <motion.div
           variants={line}
           className="flex flex-col items-center gap-3.5 md:flex-row md:gap-4 mb-7 md:mb-8 w-full md:w-auto"
