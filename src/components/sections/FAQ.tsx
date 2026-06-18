@@ -59,7 +59,7 @@ export default function FAQ() {
           <p className="eyebrow mb-6 sm:mb-8">Frequently Asked Questions</p>
         </Reveal>
 
-        <RevealGroup stagger={0.06}>
+        <RevealGroup stagger={0.04}>
           {faqs.map((faq, i) => (
             <RevealItem key={i} className="border-t border-[#E4E4E1]">
               <button

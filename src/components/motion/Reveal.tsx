@@ -25,7 +25,7 @@ export default function Reveal({
   className,
   y = 24,
   delay = 0,
-  amount = 0.2,
+  amount = 0.1,
   as = "div",
 }: RevealProps) {
   const reduce = useReducedMotion();
@@ -57,7 +57,7 @@ export function RevealGroup({
   children,
   className,
   stagger = 0.08,
-  amount = 0.2,
+  amount = 0.1,
 }: {
   children: ReactNode;
   className?: string;

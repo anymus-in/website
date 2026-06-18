@@ -14,6 +14,7 @@ function AnymusLogo() {
         width={28}
         height={28}
         className="shrink-0"
+        priority
       />
       <span className="font-serif text-[16px] sm:text-[18px] md:text-[22px] font-medium tracking-tight">
         anymus

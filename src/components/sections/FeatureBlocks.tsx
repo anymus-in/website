@@ -381,7 +381,7 @@ const features: FeatureData[] = [
       { title: "Built to grow with you, not be replaced in two years" },
     ],
     visual: (
-      <MeshCard src="/gradient-mesh/golden.png" priority>
+      <MeshCard src="/gradient-mesh/golden.webp">
         <ErpContent />
       </MeshCard>
     ),
@@ -406,7 +406,7 @@ const features: FeatureData[] = [
       { title: "Every rep sees the same, trusted customer record" },
     ],
     visual: (
-      <MeshCard src="/gradient-mesh/orange.png">
+      <MeshCard src="/gradient-mesh/orange.webp">
         <CrmContent />
       </MeshCard>
     ),
@@ -431,7 +431,7 @@ const features: FeatureData[] = [
       { title: "Flags exceptions instead of letting them slip through" },
     ],
     visual: (
-      <MeshCard src="/gradient-mesh/green.png">
+      <MeshCard src="/gradient-mesh/green.webp">
         <WorkflowContent />
       </MeshCard>
     ),
@@ -456,7 +456,7 @@ const features: FeatureData[] = [
       { title: "Ready in weeks, not months — content, copy, and all" },
     ],
     visual: (
-      <MeshCard src="/gradient-mesh/golden.png">
+      <MeshCard src="/gradient-mesh/golden.webp">
         <WebsiteContent />
       </MeshCard>
     ),
