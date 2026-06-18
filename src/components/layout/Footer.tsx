@@ -1,3 +1,5 @@
+import { services } from "@/lib/services";
+
 function AnymusLogo() {
   return (
     <div className="flex items-center gap-2 text-white mb-4">
@@ -21,16 +23,19 @@ function AnymusLogo() {
 }
 
 export default function Footer() {
+  const serviceLinks = [
+    { label: "All services", href: "/services" },
+    ...services.map((s) => ({ label: s.name, href: `/services/${s.slug}` })),
+  ];
   const anymusLinks = [
-    { label: "Sign in", href: "#" },
+    { label: "Sign in", href: "/client-sign-in" },
     { label: "Contact us", href: "/contact" },
-    { label: "Careers", href: "#" },
+    { label: "Schedule a call", href: "/schedule-call" },
   ];
   const legalLinks = [
     { label: "Terms of use", href: "/terms" },
     { label: "Privacy policy", href: "/privacy" },
     { label: "Cookie policy", href: "/cookies" },
-    { label: "Responsible disclosure", href: "#" },
   ];
 
   return (
@@ -38,7 +43,7 @@ export default function Footer() {
       style={{ borderImage: "linear-gradient(135deg, #F5C26B 0%, #F08A3C 50%, #3B82F6 100%) 1" }}
     >
       <div className="max-w-[1232px] mx-auto px-4 sm:px-6 md:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto] gap-8 sm:gap-12 lg:gap-16 md:gap-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto] gap-8 sm:gap-12 lg:gap-16 md:gap-20">
           {/* Brand + Disclaimer */}
           <div className="max-w-xl">
             <AnymusLogo />
@@ -63,6 +68,20 @@ export default function Footer() {
               </a>
               .
             </p>
+          </div>
+
+          {/* Service links */}
+          <div>
+            <p className="text-xs sm:text-sm text-[#A1A1AA] mb-3 sm:mb-5 font-medium uppercase tracking-wider">Services</p>
+            <ul className="space-y-3 sm:space-y-4">
+              {serviceLinks.map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="text-[13px] sm:text-[15px] text-[#A1A1AA] hover:text-[#F5C26B] transition-colors">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* anymus links */}

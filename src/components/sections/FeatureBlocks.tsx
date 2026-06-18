@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Globe } from "lucide-react";
+import { ArrowRight, Globe } from "lucide-react";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import Highlight from "@/components/motion/Highlight";
 
@@ -317,6 +318,7 @@ function WebsiteContent() {
 /* ── Feature block layout ── */
 interface FeatureData {
   badge: string;
+  slug: string;
   tint: keyof typeof chipTints;
   heading: React.ReactNode;
   bullets: Bullet[];
@@ -326,6 +328,7 @@ interface FeatureData {
 
 function FeatureBlock({
   badge,
+  slug,
   tint,
   heading,
   bullets,
@@ -341,6 +344,13 @@ function FeatureBlock({
         </h3>
       </Reveal>
       <BulletList items={bullets} />
+      <Link
+        href={`/services/${slug}`}
+        className="focus-accent inline-flex items-center gap-1.5 mt-5 sm:mt-6 text-[13px] sm:text-[14px] font-medium text-accent-ink hover:gap-2.5 transition-all"
+      >
+        Learn more about {badge}
+        <ArrowRight className="w-3.5 h-3.5" />
+      </Link>
     </div>
   );
 
@@ -364,6 +374,7 @@ function FeatureBlock({
 const features: FeatureData[] = [
   {
     badge: "ERP Implementation",
+    slug: "erp-implementation",
     tint: "amber",
     heading: (
       <>
@@ -389,6 +400,7 @@ const features: FeatureData[] = [
   },
   {
     badge: "CRM Solutions",
+    slug: "crm",
     tint: "amber",
     heading: (
       <>
@@ -414,6 +426,7 @@ const features: FeatureData[] = [
   },
   {
     badge: "Business Automation",
+    slug: "business-automation",
     tint: "green",
     heading: (
       <>
@@ -439,11 +452,12 @@ const features: FeatureData[] = [
   },
   {
     badge: "Website Design & Development",
+    slug: "website-design",
     tint: "blue",
     heading: (
       <>
-        A <Highlight color="var(--color-grad-blue)">website   </Highlight> when
-        you don&apos;t have one yet
+        A <Highlight color="var(--color-grad-blue)">website</Highlight>{" "}
+        when you don&apos;t have one yet
       </>
     ),
     bullets: [
