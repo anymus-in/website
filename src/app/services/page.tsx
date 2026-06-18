@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import ScrollProgress from "@/components/motion/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CtaBand from "@/components/sections/CtaBand";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
-import Highlight from "@/components/motion/Highlight";
 import JsonLd from "@/components/seo/JsonLd";
-import { services, accentClasses } from "@/lib/services";
+import { services, accentTile } from "@/lib/services";
 import { breadcrumbList } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
@@ -37,15 +36,13 @@ export default function ServicesHubPage() {
       <Navbar />
       <main className="pt-24 sm:pt-28 md:pt-32">
         {/* Hero */}
-        <section className="max-w-[1232px] mx-auto px-4 sm:px-6 md:px-8 pt-8 sm:pt-12 pb-12 sm:pb-16">
+        <section className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8 pt-8 sm:pt-12 pb-10 sm:pb-14">
           <Reveal className="flex flex-col items-start">
             <p className="eyebrow mb-4 sm:mb-5">Services</p>
-            <h1 className="font-serif text-[34px] sm:text-[46px] md:text-[56px] leading-[1.04] tracking-[-0.02em] text-black mb-5 max-w-[760px]">
-              Four services.{" "}
-              <Highlight color="var(--color-grad-blue)">One</Highlight> connected
-              system.
+            <h1 className="font-serif text-[34px] sm:text-[44px] md:text-[52px] leading-[1.05] tracking-[-0.02em] text-black mb-5 max-w-[680px]">
+              Four services. One connected system.
             </h1>
-            <p className="text-[15px] sm:text-[16px] md:text-[18px] text-[#52525B] leading-relaxed max-w-[600px]">
+            <p className="text-[15px] sm:text-[16px] md:text-[17px] text-ink-600 leading-relaxed max-w-[600px]">
               Most agencies pick one piece. We build the whole stack — systems,
               workflows, automation, and the website in front of it — so nothing
               is stitched together after the fact.
@@ -54,46 +51,43 @@ export default function ServicesHubPage() {
         </section>
 
         {/* Service cards */}
-        <section className="max-w-[1232px] mx-auto px-4 sm:px-6 md:px-8 pb-16 sm:pb-24">
+        <section className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8 pb-16 sm:pb-24">
           <RevealGroup
-            className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
-            stagger={0.07}
+            className="grid grid-cols-1 md:grid-cols-2 gap-px bg-line rounded-[20px] sm:rounded-[24px] overflow-hidden border border-line"
+            stagger={0.06}
           >
             {services.map((s, i) => {
-              const accent = accentClasses[s.accent];
               const Icon = s.icon;
+              const a = accentTile[s.accent];
               return (
-                <RevealItem key={s.slug}>
+                <RevealItem key={s.slug} className="bg-white">
                   <Link
                     href={`/services/${s.slug}`}
-                    className="cta-lift group relative block h-full bg-white border border-black/[0.06] rounded-[20px] sm:rounded-[24px] overflow-hidden"
-                    style={{ boxShadow: "var(--shadow-card)" }}
+                    className="group relative block h-full p-7 sm:p-9 hover:bg-[#FAFAF8] transition-colors"
                   >
-                    <div
-                      className={`absolute inset-x-0 top-0 h-28 bg-gradient-to-b ${accent.gradient} opacity-70 pointer-events-none`}
+                    <span
+                      className={`absolute top-0 left-0 h-[3px] w-0 group-hover:w-full ${a.bar} transition-all duration-500`}
                     />
-                    <div className="relative p-6 sm:p-8 flex flex-col h-full">
-                      <div className="flex items-center justify-between mb-5 sm:mb-6">
-                        <span
-                          className={`w-12 h-12 rounded-2xl ${accent.iconWrap} flex items-center justify-center`}
-                        >
-                          <Icon className="w-6 h-6" strokeWidth={1.5} />
-                        </span>
-                        <span className="font-serif text-[15px] text-ink-400">
-                          0{i + 1}
-                        </span>
-                      </div>
-                      <h2 className="font-serif text-[21px] sm:text-[25px] tracking-tight text-black mb-2 group-hover:text-accent-ink transition-colors">
-                        {s.name}
-                      </h2>
-                      <p className="text-[14px] sm:text-[15px] text-[#52525B] leading-relaxed flex-1 mb-5">
-                        {s.intro}
-                      </p>
-                      <span className="inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-medium text-accent-ink group-hover:gap-2.5 transition-all">
-                        Learn more about {s.name}
-                        <ArrowRight className="w-3.5 h-3.5" />
+                    <div className="flex items-start justify-between mb-8 sm:mb-10">
+                      <span
+                        className={`w-11 h-11 rounded-xl ${a.tile} ${a.text} flex items-center justify-center`}
+                      >
+                        <Icon className="w-5 h-5" strokeWidth={1.7} />
+                      </span>
+                      <span className="font-mono text-[12px] text-ink-400">
+                        0{i + 1}
                       </span>
                     </div>
+                    <h2 className="font-serif text-[21px] sm:text-[24px] tracking-tight text-black mb-2">
+                      {s.name}
+                    </h2>
+                    <p className="text-[14px] sm:text-[15px] text-ink-600 leading-relaxed mb-6 max-w-[360px]">
+                      {s.intro}
+                    </p>
+                    <span className="inline-flex items-center gap-1 text-[13px] sm:text-[14px] font-medium text-black">
+                      Learn more
+                      <ArrowUpRight className="w-4 h-4 text-ink-500 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    </span>
                   </Link>
                 </RevealItem>
               );

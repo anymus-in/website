@@ -32,39 +32,28 @@ export interface Service {
   body: string;
   /** Concrete outcomes/what's included. */
   outcomes: ServiceOutcome[];
-  /** Brand accent + icon for visual theming. */
-  accent: ServiceAccent;
+  /** Icon used in cards and page headers. */
   icon: LucideIcon;
+  /** Brand accent for the icon tile + small color cues (solid, no gradients). */
+  accent: ServiceAccent;
 }
 
-/** Tailwind class sets per accent — shared by the hub and detail pages. */
-export const accentClasses: Record<
+/** Solid accent classes per service — restrained color, no gradient washes. */
+export const accentTile: Record<
   ServiceAccent,
-  { chip: string; iconWrap: string; gradient: string }
+  { tile: string; text: string; bar: string }
 > = {
-  amber: {
-    chip: "border-grad-amber/40 bg-grad-amber/10 text-accent-ink",
-    iconWrap: "bg-grad-amber/15 text-accent-ink",
-    gradient: "from-grad-amber/25 via-grad-amber/5 to-transparent",
-  },
-  green: {
-    chip: "border-grad-green/30 bg-grad-green/10 text-[#1F8A56]",
-    iconWrap: "bg-grad-green/15 text-[#1F8A56]",
-    gradient: "from-grad-green/25 via-grad-green/5 to-transparent",
-  },
-  blue: {
-    chip: "border-grad-blue/30 bg-grad-blue/10 text-grad-blue",
-    iconWrap: "bg-grad-blue/15 text-grad-blue",
-    gradient: "from-grad-blue/25 via-grad-blue/5 to-transparent",
-  },
+  amber: { tile: "bg-grad-amber/15", text: "text-accent-ink", bar: "bg-grad-amber" },
+  green: { tile: "bg-grad-green/15", text: "text-[#1F8A56]", bar: "bg-grad-green" },
+  blue: { tile: "bg-grad-blue/15", text: "text-grad-blue", bar: "bg-grad-blue" },
 };
 
 export const services: Service[] = [
   {
     slug: "erp-implementation",
     name: "ERP Implementation",
-    accent: "amber",
     icon: Boxes,
+    accent: "amber",
     serviceType: "ERP implementation and configuration",
     seoTitle: "ERP Implementation Services",
     metaDescription:
@@ -93,8 +82,8 @@ export const services: Service[] = [
   {
     slug: "crm",
     name: "CRM Implementation",
-    accent: "blue",
     icon: Users,
+    accent: "blue",
     serviceType: "CRM implementation and configuration",
     seoTitle: "CRM Implementation Services",
     metaDescription:
@@ -123,8 +112,8 @@ export const services: Service[] = [
   {
     slug: "business-automation",
     name: "Business Automation",
-    accent: "green",
     icon: Workflow,
+    accent: "green",
     serviceType: "Business process automation",
     seoTitle: "Business Automation & Workflow Services",
     metaDescription:
@@ -153,8 +142,8 @@ export const services: Service[] = [
   {
     slug: "website-design",
     name: "Website Design & Development",
-    accent: "amber",
     icon: Globe,
+    accent: "amber",
     serviceType: "Website design and development",
     seoTitle: "Website Design & Development Services",
     metaDescription:
