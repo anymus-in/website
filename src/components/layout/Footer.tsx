@@ -48,7 +48,7 @@ export default function Footer() {
           <div className="max-w-xl">
             <AnymusLogo />
             <p className="text-[12px] sm:text-[13px] text-[#A1A1AA] leading-relaxed mb-4 sm:mb-5">
-              anymus (&quot;anymus&quot;) helps growing businesses implement
+              anymus helps growing businesses implement
               ERP and CRM systems, automate manual operations, and
               integrate AI on top of clean data. anymus is a software and
               services provider and does not provide legal, financial, or
