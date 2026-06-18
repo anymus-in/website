@@ -27,7 +27,6 @@ function SplineFallback() {
       style={{
         background:
           "radial-gradient(50% 70% at 22% 60%, rgba(245,194,107,0.55), transparent 70%), radial-gradient(45% 70% at 70% 50%, rgba(59,130,246,0.45), transparent 70%)",
-        filter: "blur(10px)",
       }}
     />
   );
@@ -38,11 +37,10 @@ const container: Variants = {
   show: { transition: { staggerChildren: 0.13, delayChildren: 0.08 } },
 };
 const line: Variants = {
-  hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 24 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
   },
 };

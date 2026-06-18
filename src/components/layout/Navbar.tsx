@@ -37,7 +37,7 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-white/95 backdrop-blur-sm border-b border-[#E4E4E1] py-3 sm:py-4"
+          ? "bg-white border-b border-[#E4E4E1] py-3 sm:py-4"
           : "bg-transparent py-4 sm:py-5",
       )}
     >
@@ -78,7 +78,7 @@ export default function Navbar() {
 
       {/* Mobile nav */}
       {mobileMenuOpen && (
-        <nav className="md:hidden bg-white/95 backdrop-blur-sm border-t border-[#E4E4E1] mt-2">
+        <nav className="md:hidden bg-white border-t border-[#E4E4E1] mt-2">
           <div className="max-w-[1232px] mx-auto px-4 sm:px-6 py-4 space-y-3">
             <a
               href="/client-sign-in"

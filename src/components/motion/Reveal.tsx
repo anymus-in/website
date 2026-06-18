@@ -39,8 +39,8 @@ export default function Reveal({
   return (
     <MotionTag
       className={className}
-      initial={{ opacity: 0, y, filter: "blur(5px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
     >
@@ -99,8 +99,8 @@ export function RevealItem({
   if (reduce) return <div className={className}>{children}</div>;
 
   const item: Variants = {
-    hidden: { opacity: 0, y, filter: "blur(5px)" },
-    show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+    hidden: { opacity: 0, y },
+    show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
   };
 
   return (
