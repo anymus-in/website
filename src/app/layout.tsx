@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Newsreader, Inter, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const newsreader = Newsreader({
@@ -40,7 +42,11 @@ export default function RootLayout({
       lang="en"
       className={`${newsreader.variable} ${inter.variable} ${jetbrainsMono.variable} h-full`}
     >
-      <body className="min-h-full antialiased">{children}</body>
+      <body className="min-h-full antialiased">
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
