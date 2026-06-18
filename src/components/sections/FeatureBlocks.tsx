@@ -347,8 +347,8 @@ function FeatureBlock({
   if (reversed) {
     return (
       <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-6 sm:gap-8 md:gap-10 items-center">
-        <div className="py-6 sm:py-8 md:py-10">{visual}</div>
         {textCol}
+        <div className="py-6 sm:py-8 md:py-10 lg:order-first">{visual}</div>
       </div>
     );
   }
