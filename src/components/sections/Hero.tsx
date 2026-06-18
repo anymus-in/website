@@ -2,11 +2,13 @@
 
 import {
   Bell,
-  Check,
+  Box,
   ChevronDown,
   GitBranch,
   LayoutGrid,
+  Lock,
   Package,
+  Phone,
   Plus,
   Search,
   Settings,
@@ -29,13 +31,11 @@ const line: Variants = {
   },
 };
 
-const trustPoints = [
-  "Free discovery call",
-  "Built around your existing tools",
-  "No long-term lock-in",
+const trustBadgesMobile = [
+  { icon: Phone, label: "Free discovery call" },
+  { icon: Box, label: "Built around your existing tools" },
+  { icon: Lock, label: "No long-term lock-in" },
 ];
-
-const trustPillsMobile = ["Free Audit", "Custom Built", "No Lock-In"];
 
 const modules = [
   { label: "Overview", icon: LayoutGrid, count: null, active: true },
@@ -379,24 +379,15 @@ export default function Hero() {
           variants={line}
           className="font-serif font-normal text-[clamp(26px,7vw,34px)] md:text-[clamp(32px,6vw,68px)] leading-[1.25] md:leading-[1.18] tracking-[-0.01em] md:tracking-[-1px] text-black mb-5 md:mb-4 max-w-[300px] md:max-w-3xl"
         >
-          Scale Operations Faster
+          <span style={{ color: "#5F44E0" }}>Anymus</span> Is Your
           <br />
-          With Systems Built For You
+          Technical Growth Partner
         </motion.h1>
         <motion.p
           variants={line}
           className="hidden md:block text-[13px] text-ink-400 mb-6"
         >
           Built by <span style={{ color: "#5F44E0" }}>Anymus</span>
-        </motion.p>
-
-        <motion.p
-          variants={line}
-          className="text-[14px] md:text-[15px] mb-8 md:mb-9 max-w-[300px] md:max-w-xl text-ink-500 md:text-[#5f6368] leading-relaxed"
-        >
-          We help companies automate operations, sales, inventory,
-          approvals, and reporting — so teams spend less time on manual
-          work and more time growing the business.
         </motion.p>
 
         <motion.div
@@ -418,23 +409,25 @@ export default function Hero() {
         </motion.div>
 
         <motion.div variants={line} className="w-full">
-          {/* Mobile — subtle, lightweight badges */}
-          <p className="flex md:hidden flex-wrap items-center justify-center gap-x-2 gap-y-1.5 text-[12px] text-ink-400">
-            {trustPillsMobile.map((t, i) => (
-              <span key={t} className="inline-flex items-center">
-                {t}
-                {i < trustPillsMobile.length - 1 && (
-                  <span className="mx-2 text-ink-300">·</span>
-                )}
-              </span>
+          {/* Mobile — icon badges */}
+          <div className="flex md:hidden items-start justify-center gap-3">
+            {trustBadgesMobile.map((t) => (
+              <div key={t.label} className="flex-1 flex items-center gap-2">
+                <div className="w-9 h-9 rounded-xl bg-[#EFE9FB] text-[#5F44E0] flex items-center justify-center shrink-0">
+                  <t.icon className="w-4 h-4" />
+                </div>
+                <span className="text-[11px] text-ink-700 leading-snug">
+                  {t.label}
+                </span>
+              </div>
             ))}
-          </p>
+          </div>
           {/* Desktop — unchanged */}
           <div className="hidden md:flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[12px] sm:text-[13px] text-ink-500">
-            {trustPoints.map((t) => (
-              <span key={t} className="inline-flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-grad-green" />
-                {t}
+            {trustBadgesMobile.map((t) => (
+              <span key={t.label} className="inline-flex items-center gap-1.5">
+                <t.icon className="w-3.5 h-3.5 text-grad-green" />
+                {t.label}
               </span>
             ))}
           </div>
