@@ -197,14 +197,14 @@ function EnterpriseDashboard({ compact = false }: { compact?: boolean }) {
                     <p className="text-[9px] sm:text-[10px] text-ink-500 truncate">
                       {k.label}
                     </p>
-                    <k.icon className={`w-3 h-3 ${k.accent} shrink-0`} />
+                    <k.icon className={`w-3.5 h-3.5 sm:w-3 sm:h-3 ${k.accent} shrink-0`} />
                   </div>
                   <div className="flex items-baseline gap-1.5">
                     <p className="text-[16px] sm:text-[20px] font-semibold text-black">
                       {k.value}
                     </p>
                     <span className="inline-flex items-center gap-0.5 text-[9px] sm:text-[10px] font-medium text-[#1F8A56] shrink-0">
-                      <TrendingUp className="w-2.5 h-2.5" />
+                      <TrendingUp className="w-3 h-3 sm:w-2.5 sm:h-2.5" />
                       {k.trend}
                     </span>
                   </div>
