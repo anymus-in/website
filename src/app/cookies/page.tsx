@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import LegalLayout, { LegalSection } from "@/components/legal/LegalLayout";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy — anymus",
+  title: "Cookie Policy",
   description: "How anymus uses cookies and similar technologies on our website.",
+  alternates: { canonical: "/cookies" },
 };
 
 export default function CookiePolicyPage() {

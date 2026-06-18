@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import LegalLayout, { LegalSection } from "@/components/legal/LegalLayout";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — anymus",
+  title: "Privacy Policy",
   description: "How anymus collects, uses, and protects your information.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPolicyPage() {

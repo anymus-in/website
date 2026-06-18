@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import LegalLayout, { LegalSection } from "@/components/legal/LegalLayout";
 
 export const metadata: Metadata = {
-  title: "Terms of Use — anymus",
+  title: "Terms of Use",
   description: "The terms governing your use of the anymus website and platform.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsOfUsePage() {

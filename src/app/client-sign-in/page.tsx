@@ -4,8 +4,10 @@ import Link from "next/link";
 import ClientSignInForm from "./ClientSignInForm";
 
 export const metadata: Metadata = {
-  title: "Client Sign In — anymus",
+  title: "Client Sign In",
   description: "Sign in to your anymus client portal.",
+  alternates: { canonical: "/client-sign-in" },
+  robots: { index: false, follow: false },
 };
 
 export default function ClientSignInPage() {

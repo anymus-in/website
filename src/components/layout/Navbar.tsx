@@ -10,7 +10,7 @@ function AnymusLogo() {
     <a href="/" className="flex items-center gap-2 text-black">
       <Image
         src="/final-logo.svg"
-        alt=""
+        alt="anymus"
         width={28}
         height={28}
         className="shrink-0"

@@ -6,8 +6,15 @@ import Footer from "@/components/layout/Footer";
 import Reveal from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: "Contact Us — anymus",
-  description: "Get in touch with the anymus team.",
+  title: "Contact Us",
+  description:
+    "Get in touch with the anymus team about ERP, CRM, and automation implementation, a demo, or a project scope.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact Us — anymus",
+    description: "Get in touch with the anymus team.",
+    url: "/contact",
+  },
 };
 
 const CONTACT_EMAIL = "anymus.shared@gmail.com";

@@ -7,8 +7,15 @@ import Reveal from "@/components/motion/Reveal";
 import ScheduleCallForm from "./ScheduleCallForm";
 
 export const metadata: Metadata = {
-  title: "Schedule a Call — anymus",
-  description: "Book a free discovery call with the anymus team.",
+  title: "Schedule a Call",
+  description:
+    "Book a free 30-minute discovery call with the anymus team to scope your ERP, CRM, or automation project.",
+  alternates: { canonical: "/schedule-call" },
+  openGraph: {
+    title: "Schedule a Call — anymus",
+    description: "Book a free discovery call with the anymus team.",
+    url: "/schedule-call",
+  },
 };
 
 const trustPoints = [
