@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import ScrollProgress from "@/components/motion/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CtaBand from "@/components/sections/CtaBand";
+import ServiceFaq from "@/components/sections/ServiceFaq";
+import { ServiceVisual } from "@/components/sections/service-visuals";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { services, accentTile, type Service } from "@/lib/services";
 
@@ -40,7 +42,7 @@ export default function ServiceLayout({ service }: { service: Service }) {
             </ol>
           </nav>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-10 lg:gap-14 items-center">
             <Reveal className="flex flex-col items-start">
               <span className={`w-12 h-12 rounded-xl ${a.tile} ${a.text} flex items-center justify-center mb-6`}>
                 <Icon className="w-6 h-6" strokeWidth={1.7} />
@@ -69,24 +71,47 @@ export default function ServiceLayout({ service }: { service: Service }) {
               </div>
             </Reveal>
 
-            {/* Stat / summary panel */}
-            <Reveal className="w-full lg:w-[300px]">
-              <div className="rounded-2xl border border-line bg-[#FAFAF8] overflow-hidden">
-                <div className={`h-1 w-full ${a.bar}`} />
-                <div className="divide-y divide-line">
-                  {service.outcomes.map((o) => (
-                    <div key={o.title} className="flex items-start gap-3 p-4 sm:p-5">
-                      <span className={`w-5 h-5 rounded-full ${a.tile} ${a.text} flex items-center justify-center shrink-0 mt-0.5`}>
-                        <Check className="w-3 h-3" />
-                      </span>
-                      <p className="text-[13px] sm:text-[14px] text-ink-700 leading-snug">
-                        {o.title}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {/* Live product mockup */}
+            <Reveal className="w-full">
+              <ServiceVisual visualKey={service.visualKey} accent={service.accent} priority />
             </Reveal>
+          </div>
+        </section>
+
+        {/* Who this is for */}
+        <section className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8 pb-14 sm:pb-20">
+          <div>
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-8 lg:gap-16">
+              <Reveal className="flex flex-col items-start">
+                <p className="eyebrow mb-3 sm:mb-4">Is this you?</p>
+                <h2 className="font-serif text-[24px] sm:text-[30px] md:text-[34px] leading-[1.15] tracking-tight text-black mb-5 max-w-[360px]">
+                  Signs it&apos;s time for {service.eyebrow.toLowerCase()}
+                </h2>
+                <p className="text-[14px] sm:text-[15px] text-ink-600 leading-relaxed max-w-[340px] mb-6">
+                  If more than one of these sounds familiar, it&apos;s worth a
+                  conversation.
+                </p>
+                <a
+                  href="/schedule-call"
+                  className="focus-accent inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-medium text-accent-ink hover:gap-2.5 transition-all"
+                >
+                  Talk it through
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </Reveal>
+              <RevealGroup stagger={0.06}>
+                {service.signs.map((sign) => (
+                  <RevealItem key={sign} className="border-t border-line py-4 sm:py-5">
+                    <p
+                      className={`text-[14px] sm:text-[15px] text-ink-700 leading-relaxed border-l-2 ${a.bar.replace("bg-", "border-")} pl-3 sm:pl-4`}
+                    >
+                      {sign}
+                    </p>
+                  </RevealItem>
+                ))}
+                <div className="border-t border-line" />
+              </RevealGroup>
+            </div>
           </div>
         </section>
 
@@ -120,6 +145,47 @@ export default function ServiceLayout({ service }: { service: Service }) {
                 </RevealItem>
               ))}
             </RevealGroup>
+          </div>
+        </section>
+
+        {/* Process */}
+        <section className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8 py-14 sm:py-20">
+          <Reveal>
+            <p className="eyebrow mb-3 sm:mb-4">How it works</p>
+            <h2 className="font-serif text-[24px] sm:text-[30px] md:text-[34px] leading-[1.15] tracking-tight text-black mb-8 sm:mb-12 max-w-[520px]">
+              What an engagement looks like
+            </h2>
+          </Reveal>
+          <div>
+            {service.process.map((step, i) => (
+              <div key={step.title} className="border-t border-line py-6 sm:py-8">
+                <div className="flex items-baseline gap-3 sm:gap-4">
+                  <p className={`font-serif text-[22px] sm:text-[26px] ${a.text} shrink-0`}>
+                    {i + 1}.
+                  </p>
+                  <p className="text-[17px] sm:text-[19px] font-semibold text-black">
+                    {step.title}
+                  </p>
+                </div>
+                <p className="text-[15px] sm:text-[16px] text-ink-600 leading-relaxed mt-2 ml-[32px] sm:ml-[38px] max-w-[640px]">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+            <div className="border-t border-line" />
+          </div>
+        </section>
+
+        {/* Service-specific FAQ */}
+        <section className="bg-[#EFEEED]">
+          <div className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8 py-14 sm:py-20">
+            <Reveal>
+              <p className="eyebrow mb-3 sm:mb-4">Questions</p>
+              <h2 className="font-serif text-[24px] sm:text-[30px] md:text-[34px] leading-[1.15] tracking-tight text-black mb-8 sm:mb-10 max-w-[520px]">
+                Frequently asked about {service.eyebrow.toLowerCase()}
+              </h2>
+            </Reveal>
+            <ServiceFaq faqs={service.faqs} />
           </div>
         </section>
 

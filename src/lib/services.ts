@@ -12,7 +12,20 @@ export interface ServiceOutcome {
   description: string;
 }
 
+export interface ServiceProcessStep {
+  title: string;
+  description: string;
+}
+
+export interface ServiceFaqItem {
+  question: string;
+  answer: string;
+}
+
 export type ServiceAccent = "amber" | "green" | "blue";
+
+/** Selects which animated mock-UI visual (defined in service-visuals.tsx) renders in the hero. */
+export type ServiceVisualKey = "erp" | "crm" | "automation" | "website";
 
 export interface Service {
   slug: string;
@@ -36,6 +49,14 @@ export interface Service {
   icon: LucideIcon;
   /** Brand accent for the icon tile + small color cues (solid, no gradients). */
   accent: ServiceAccent;
+  /** Animated mock-UI visual shown in the page hero. */
+  visualKey: ServiceVisualKey;
+  /** Short signs/symptoms that indicate a business needs this service. */
+  signs: string[];
+  /** Service-specific implementation steps (3-4), shown on the detail page. */
+  process: ServiceProcessStep[];
+  /** Service-specific FAQs (3-4), shown on the detail page. */
+  faqs: ServiceFaqItem[];
 }
 
 /** Solid accent classes per service — restrained color, no gradient washes. */
@@ -54,6 +75,7 @@ export const services: Service[] = [
     name: "ERP Implementation",
     icon: Boxes,
     accent: "amber",
+    visualKey: "erp",
     serviceType: "ERP implementation and configuration",
     seoTitle: "ERP Implementation Services",
     metaDescription:
@@ -78,12 +100,63 @@ export const services: Service[] = [
           "We design for where your business is heading, so the system scales instead of becoming the next thing you rip out.",
       },
     ],
+    signs: [
+      "Inventory counts in your system never quite match what's actually on the shelf",
+      "Stock, orders, and finance live in different tools that don't talk to each other",
+      "Closing the books takes days of manually reconciling spreadsheets",
+      "You've outgrown your current setup but dread the idea of switching systems",
+    ],
+    process: [
+      {
+        title: "Discovery & data audit",
+        description:
+          "We map your current inventory, purchasing, and fulfillment workflows, and audit the state of your existing data before anything gets migrated.",
+      },
+      {
+        title: "Configuration & migration",
+        description:
+          "We configure the ERP around your real processes and migrate your existing data in, cleaning up inconsistencies as we go rather than carrying them over.",
+      },
+      {
+        title: "Integration",
+        description:
+          "We connect the ERP to the other systems you rely on — accounting, e-commerce, CRM — so data moves automatically instead of being re-entered by hand.",
+      },
+      {
+        title: "Go-live & training",
+        description:
+          "Your team learns the system hands-on before cutover, with support on hand through the first weeks of going live.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Will there be downtime while we switch over?",
+        answer:
+          "We plan the cutover around your operations — typically a short, scheduled window rather than an open-ended migration — and confirm a rollback plan before go-live.",
+      },
+      {
+        question: "What if our current data is messy or incomplete?",
+        answer:
+          "That's normal. The data audit in discovery is where we catch and clean up inconsistencies, rather than migrating bad data into a new system.",
+      },
+      {
+        question: "Which ERP platforms do you implement?",
+        answer:
+          "The right platform depends on your size, industry, and existing tools — we'll recommend a fit after discovery rather than pushing a single platform.",
+      },
+      {
+        question: "Can it connect to our existing accounting or e-commerce tools?",
+        answer:
+          "Yes — integration with the tools you already use is part of the implementation, not a separate project.",
+      },
+    ],
   },
   {
     slug: "crm",
     name: "CRM Implementation",
     icon: Users,
     accent: "blue",
+    visualKey: "crm",
     serviceType: "CRM implementation and configuration",
     seoTitle: "CRM Implementation Services",
     metaDescription:
@@ -108,12 +181,63 @@ export const services: Service[] = [
           "One clean record per customer, shared across the team — no conflicting versions.",
       },
     ],
+    signs: [
+      "Leads are tracked across spreadsheets, inboxes, and someone's memory",
+      "Reps can't say with confidence where a deal actually stands",
+      "Follow-ups get missed because nothing reminds anyone to send them",
+      "Sales reporting takes manual compiling instead of opening a dashboard",
+    ],
+    process: [
+      {
+        title: "Discovery & pipeline mapping",
+        description:
+          "We map your real sales motion — stages, fields, and the people involved — instead of starting from a vendor's default pipeline.",
+      },
+      {
+        title: "Configuration",
+        description:
+          "We build out pipelines, fields, permissions, and reporting around that real motion, so the CRM matches how your team actually sells.",
+      },
+      {
+        title: "Migration & integration",
+        description:
+          "Existing contacts and deal history move in, and the CRM connects to your inbox, calendar, and other tools so reps aren't duplicating work.",
+      },
+      {
+        title: "Launch & adoption",
+        description:
+          "We train the team hands-on before go-live, since a CRM only pays off if reps actually use it day to day.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Our team has resisted CRMs before — how is this different?",
+        answer:
+          "Most CRM rollouts fail because the system doesn't match how the team actually sells. We configure around your real pipeline first, then train hands-on, instead of handing over a generic default setup.",
+      },
+      {
+        question: "Which CRM platforms do you work with?",
+        answer:
+          "The right platform depends on your sales motion, team size, and existing tools — we'll recommend a fit after discovery rather than pushing a single platform.",
+      },
+      {
+        question: "Can you migrate our existing contacts and deal history?",
+        answer:
+          "Yes — migrating what you already have is part of the implementation, cleaned up along the way rather than carried over as-is.",
+      },
+      {
+        question: "Will it connect to our email and calendar?",
+        answer:
+          "Yes — connecting the tools reps already work in is part of the setup, so logging activity doesn't become a second job.",
+      },
+    ],
   },
   {
     slug: "business-automation",
     name: "Business Automation",
     icon: Workflow,
     accent: "green",
+    visualKey: "automation",
     serviceType: "Business process automation",
     seoTitle: "Business Automation & Workflow Services",
     metaDescription:
@@ -138,12 +262,63 @@ export const services: Service[] = [
           "When something doesn't fit the rules, the system surfaces it rather than burying it.",
       },
     ],
+    signs: [
+      "Someone is copying the same data between two or more tools by hand",
+      "Status updates depend on people remembering to send them",
+      "Approvals stall in someone's inbox waiting to be noticed",
+      "Exceptions get caught only after a customer complains, not before",
+    ],
+    process: [
+      {
+        title: "Process mapping",
+        description:
+          "We document the manual steps as they actually happen today — the handoffs, the workarounds, the things nobody wrote down.",
+      },
+      {
+        title: "Workflow design",
+        description:
+          "We design automations that trigger off real activity in your systems, replacing manual steps without changing how your team works day to day.",
+      },
+      {
+        title: "Build & connect",
+        description:
+          "We build and connect the automations between the tools you already use, with exception handling so edge cases get flagged, not buried.",
+      },
+      {
+        title: "Launch & monitor",
+        description:
+          "We launch the workflows, watch how they behave against real activity, and tune them based on what actually happens.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What kinds of tasks can actually be automated?",
+        answer:
+          "Anything currently manual between your tools — data entry, approvals, handoffs, status updates — as long as it follows a consistent trigger and rule.",
+      },
+      {
+        question: "What happens when something doesn't fit the rules?",
+        answer:
+          "Exceptions get flagged and routed to a person instead of failing silently or getting forced through incorrectly.",
+      },
+      {
+        question: "Do we need to replace our existing tools?",
+        answer:
+          "No — automation typically connects the tools you already use rather than requiring you to switch platforms.",
+      },
+      {
+        question: "How do we know the automation is working correctly?",
+        answer:
+          "We monitor it against real activity after launch and tune the rules based on what actually happens, not just what we expected to happen.",
+      },
+    ],
   },
   {
     slug: "website-design",
     name: "Website Design & Development",
     icon: Globe,
     accent: "amber",
+    visualKey: "website",
     serviceType: "Website design and development",
     seoTitle: "Website Design & Development Services",
     metaDescription:
@@ -166,6 +341,56 @@ export const services: Service[] = [
         title: "Ready in weeks, not months",
         description:
           "A clear scope and timeline so you're live quickly, with something your team and customers actually use.",
+      },
+    ],
+    signs: [
+      "You don't have a website, or it's just a Google Business listing",
+      "Your current site hasn't been updated in years and doesn't reflect the business anymore",
+      "Enquiries from your site land in a generic inbox instead of your CRM",
+      "You're losing credibility to competitors with a more professional online presence",
+    ],
+    process: [
+      {
+        title: "Discovery & content",
+        description:
+          "We map what the site needs to communicate and pull together the content and copy, rather than handing you a template to fill in yourself.",
+      },
+      {
+        title: "Design",
+        description:
+          "We design a site that represents the business — fast, professional, and built around how customers actually find and contact you.",
+      },
+      {
+        title: "Build & integrate",
+        description:
+          "We build the site and connect it to the same CRM and systems we set up for you, so enquiries flow straight into your pipeline.",
+      },
+      {
+        title: "Launch",
+        description:
+          "We publish the site and confirm everything — forms, tracking, integrations — is working before handing it over.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How long does a website take from start to launch?",
+        answer:
+          "Most sites are ready in weeks, not months — we'll give you a clear timeline after scoping the content and pages you need.",
+      },
+      {
+        question: "Do you write the content and copy too?",
+        answer:
+          "Yes — content and copy are handled as part of the build, not handed back to you as a half-finished template.",
+      },
+      {
+        question: "Will it connect to our CRM?",
+        answer:
+          "Yes — if we've implemented your CRM, the site connects to it directly so enquiries land in your pipeline instead of a separate inbox.",
+      },
+      {
+        question: "What if we already have a website but it's outdated?",
+        answer:
+          "We can rebuild on top of what you have or start fresh — whichever gets you to a site that actually represents the business faster.",
       },
     ],
   },
