@@ -35,7 +35,7 @@ export default function ScheduleCallPage() {
             {/* Copy */}
             <Reveal className="lg:pt-3">
               <p className="eyebrow mb-4 sm:mb-5">Get in touch</p>
-              <h1 className="font-serif text-[34px] sm:text-[42px] md:text-[48px] leading-[1.08] tracking-[-0.02em] text-black mb-4 sm:mb-5 max-w-[420px]">
+              <h1 className="font-serif font-medium text-[34px] sm:text-[42px] md:text-[48px] leading-[1.08] tracking-[-0.02em] text-black mb-4 sm:mb-5 max-w-[420px]">
                 Schedule a free discovery call
               </h1>
               <p className="text-[15px] sm:text-[16px] text-[#52525B] leading-relaxed max-w-[420px] mb-8 sm:mb-10">
@@ -47,9 +47,11 @@ export default function ScheduleCallPage() {
                 {trustPoints.map((t) => (
                   <div
                     key={t}
-                    className="flex items-center gap-2.5 text-[13px] sm:text-[14px] text-ink-700"
+                    className="flex items-center gap-2.5 text-[13px] sm:text-[14px] font-medium text-ink-700"
                   >
-                    <Check className="w-4 h-4 text-grad-green shrink-0" />
+                    <span className="w-5 h-5 rounded-full bg-grad-amber/15 text-accent-ink flex items-center justify-center shrink-0">
+                      <Check className="w-3 h-3" strokeWidth={2.5} />
+                    </span>
                     {t}
                   </div>
                 ))}
