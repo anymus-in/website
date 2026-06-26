@@ -396,7 +396,7 @@ export default function Hero() {
 
         <motion.div
           variants={line}
-          className="flex flex-col items-center gap-3.5 md:flex-row md:gap-4 mb-7 md:mb-8 w-full md:w-auto"
+          className="flex flex-col items-center gap-3.5 md:flex-row md:gap-4  md:mb-8 w-full md:w-auto"
         >
           <a
             href="/schedule-call"
@@ -415,7 +415,7 @@ export default function Hero() {
         <motion.div variants={line} className="w-full">
           {/* Mobile — icon badges */}
           <div className="flex md:hidden items-start justify-center gap-3">
-            {trustBadgesMobile.map((t) => (
+            {/* {trustBadgesMobile.map((t) => (
               <div key={t.label} className="flex-1 flex items-center gap-2">
                 <div className="w-9 h-9 rounded-xl bg-[#EFE9FB] text-[#5F44E0] flex items-center justify-center shrink-0">
                   <t.icon className="w-4 h-4" />
@@ -424,7 +424,7 @@ export default function Hero() {
                   {t.label}
                 </span>
               </div>
-            ))}
+            ))} */}
           </div>
           {/* Desktop — unchanged */}
           <div className="hidden md:flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[12px] sm:text-[13px] text-ink-500">
