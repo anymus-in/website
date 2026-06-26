@@ -1,7 +1,7 @@
 import { SITE_TAGLINE } from "@/lib/site";
 import { renderOgImage, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og";
 
-export const alt = "anymus — Custom ERP, CRM & Automation Systems";
+export const alt = "anymus — Websites, Automation & Internal Systems";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

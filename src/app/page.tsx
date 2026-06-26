@@ -4,6 +4,9 @@ import ScrollProgress from "@/components/motion/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
+import ProblemsWeSolve from "@/components/sections/ProblemsWeSolve";
+import Industries from "@/components/sections/Industries";
+import WhyChooseAnymus from "@/components/sections/WhyChooseAnymus";
 import GetStarted from "@/components/sections/GetStarted";
 import CtaBand from "@/components/sections/CtaBand";
 import JsonLd from "@/components/seo/JsonLd";
@@ -18,10 +21,10 @@ const FeatureBlocks = dynamic(() => import("@/components/sections/FeatureBlocks"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "anymus — Custom ERP, CRM & Automation Systems for Growing Businesses",
+    absolute: "anymus — Websites, Automation & Internal Systems for Growing Businesses",
   },
   description:
-    "anymus is an implementation agency that builds custom ERP, CRM, and business-automation systems — and websites — for growing businesses. A clear process, not a black box.",
+    "anymus designs and builds the websites, automations, and internal tools that growing businesses run on — one connected system, built around the tools you already use.",
   alternates: { canonical: "/" },
 };
 
@@ -33,7 +36,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <ProblemsWeSolve />
         <FeatureBlocks />
+        <Industries />
+        <WhyChooseAnymus />
         <GetStarted />
         <CtaBand />
       </main>

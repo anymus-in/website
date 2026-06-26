@@ -7,7 +7,7 @@ const steps = [
   {
     num: "2.",
     label: "Build & Automate",
-    body: "We configure your ERP, CRM, or automation system around that reality, and connect your tools so handoffs run themselves.",
+    body: "We build your website, automation, or internal system around that reality, and connect your tools so handoffs run themselves.",
   },
   {
     num: "3.",

@@ -101,7 +101,7 @@ function CursorTrail({ path }: { path: { x: number; y: number }[] }) {
   );
 }
 
-/* ── ERP card content: inventory & operations ── */
+/* ── Internal-systems card content: operations dashboard ── */
 export function ErpContent({ accent }: { accent: ServiceAccent }) {
   const a = accentTile[accent];
   return (
@@ -117,7 +117,7 @@ export function ErpContent({ accent }: { accent: ServiceAccent }) {
           ]}
         />
         <div className="relative bg-white rounded-2xl shadow-lg p-4">
-          <CardTag label="ERP" accent={accent} />
+          <CardTag label="Internal Systems" accent={accent} />
           <div className="flex items-center justify-between mb-3 pl-12">
             <div className="h-2 bg-paper rounded-full w-20" />
             <div className="h-2 bg-paper rounded-full w-10" />
@@ -145,65 +145,7 @@ export function ErpContent({ accent }: { accent: ServiceAccent }) {
             ))}
           </div>
         </div>
-        <StatusPill text="Updating stock levels..." accent={accent} />
-      </div>
-    </div>
-  );
-}
-
-/* ── CRM card content: contact record + pipeline ── */
-export function CrmContent({ accent }: { accent: ServiceAccent }) {
-  const a = accentTile[accent];
-  return (
-    <div className="absolute inset-0 flex items-center justify-center pb-6 sm:pb-8">
-      <div className="relative w-[72%]">
-        <CursorTrail
-          path={[
-            { x: 20, y: 15 },
-            { x: 60, y: 20 },
-            { x: 95, y: 70 },
-            { x: 50, y: 90 },
-            { x: 20, y: 15 },
-          ]}
-        />
-        <div className="relative bg-white rounded-2xl shadow-lg p-4">
-          <CardTag label="CRM" accent={accent} />
-          {/* Contact record header */}
-          <div className="flex items-center gap-2 mb-3 pl-12">
-            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-paper to-[#EAE9E5] shrink-0" />
-            <div className="flex-1 min-w-0">
-              <div className="h-2 bg-paper rounded-full w-20 mb-1.5" />
-              <div className="h-1.5 bg-paper rounded-full w-14" />
-            </div>
-          </div>
-          {/* Kanban-style pipeline stages */}
-          <div className="grid grid-cols-3 gap-2">
-            <div className="flex flex-col gap-2">
-              <div className="bg-gradient-to-br from-paper to-[#EAE9E5] rounded-lg h-8" />
-              <div className="bg-gradient-to-br from-paper to-[#EAE9E5] rounded-lg h-8" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="relative">
-                <div className={`${a.tile} rounded-lg h-8 border-2 ${a.bar.replace("bg-", "border-")}`} />
-                <motion.div
-                  className="absolute inset-0 rounded-lg pointer-events-none"
-                  style={{ boxShadow: "0 0 0 4px rgba(0,0,0,0.08)" }}
-                  animate={{ opacity: [0, 1, 0] }}
-                  transition={{
-                    duration: 2.2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-              </div>
-              <div className="bg-gradient-to-br from-paper to-[#EAE9E5] rounded-lg h-8" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="bg-gradient-to-br from-paper to-[#EAE9E5] rounded-lg h-8" />
-            </div>
-          </div>
-        </div>
-        <StatusPill text="Syncing contact record..." accent={accent} />
+        <StatusPill text="Syncing live data..." accent={accent} />
       </div>
     </div>
   );
@@ -265,7 +207,7 @@ export function WebsiteContent({ accent }: { accent: ServiceAccent }) {
     <div className="absolute inset-0 flex items-center justify-center pb-6 sm:pb-8">
       <div className="relative w-[72%]">
         <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden">
-          <CardTag label="Website" accent={accent} />
+          <CardTag label="Digital Presence" accent={accent} />
           {/* Browser chrome */}
           <div className="flex items-center gap-1.5 px-3 py-2.5 border-b border-line">
             <span className="w-2 h-2 rounded-full bg-[#E4E4E1]" />
@@ -312,10 +254,9 @@ const serviceVisuals: Record<
   ServiceVisualKey,
   { Content: (props: { accent: ServiceAccent }) => React.JSX.Element; src: string }
 > = {
-  erp: { Content: ErpContent, src: "/gradient-mesh/golden.webp" },
-  crm: { Content: CrmContent, src: "/gradient-mesh/orange.webp" },
-  automation: { Content: WorkflowContent, src: "/gradient-mesh/green.webp" },
   website: { Content: WebsiteContent, src: "/gradient-mesh/golden.webp" },
+  automation: { Content: WorkflowContent, src: "/gradient-mesh/green.webp" },
+  internal: { Content: ErpContent, src: "/gradient-mesh/orange.webp" },
 };
 
 /** Renders the right animated mock-UI visual for a service, wrapped in its MeshCard and tinted to its accent. */

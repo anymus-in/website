@@ -7,7 +7,6 @@ import Highlight from "@/components/motion/Highlight";
 import {
   MeshCard,
   ErpContent,
-  CrmContent,
   WorkflowContent,
   WebsiteContent,
 } from "@/components/sections/service-visuals";
@@ -115,60 +114,34 @@ function FeatureBlock({
 
 const features: FeatureData[] = [
   {
-    badge: "ERP Implementation",
-    slug: "erp-implementation",
-    tint: "amber",
+    badge: "Digital Presence",
+    slug: "digital-presence",
+    tint: "blue",
     heading: (
       <>
-        An <Highlight color="var(--color-grad-amber)">ERP</Highlight> that
-        finally matches how you operate
+        A <Highlight color="var(--color-grad-blue)">website</Highlight> that
+        turns visitors into customers
       </>
     ),
     bullets: [
       {
-        title: "Inventory, orders, and operations in one connected system",
+        title: "A fast, conversion-focused site built end to end",
         description:
-          "Configured around your real processes, not a generic out-of-the-box template.",
+          "Design, build, content, and copy — handled for you, not handed back as a half-finished template.",
       },
-      { title: "Real-time visibility into stock, costs, and fulfillment" },
-      { title: "Built to grow with you, not be replaced in two years" },
+      { title: "Wired into your CRM and automations from day one" },
+      { title: "Live in weeks, built to scale with the business" },
     ],
     visual: (
       <MeshCard src="/gradient-mesh/golden.webp">
-        <ErpContent accent="amber" />
+        <WebsiteContent accent="blue" />
       </MeshCard>
     ),
     reversed: false,
   },
   {
-    badge: "CRM Solutions",
-    slug: "crm",
-    tint: "amber",
-    heading: (
-      <>
-        A <Highlight color="var(--color-grad-amber)">CRM</Highlight> your
-        sales team actually uses
-      </>
-    ),
-    bullets: [
-      {
-        title: "Pipelines, fields, and reporting built around how you sell",
-        description:
-          "We implement and configure your CRM around real pipelines, fields, permissions, and reporting — not a generic template.",
-      },
-      { title: "No more leads lost in spreadsheets or inboxes" },
-      { title: "Every rep sees the same, trusted customer record" },
-    ],
-    visual: (
-      <MeshCard src="/gradient-mesh/orange.webp">
-        <CrmContent accent="blue" />
-      </MeshCard>
-    ),
-    reversed: true,
-  },
-  {
-    badge: "Business Automation",
-    slug: "business-automation",
+    badge: "Automation",
+    slug: "automation",
     tint: "green",
     heading: (
       <>
@@ -178,45 +151,45 @@ const features: FeatureData[] = [
     ),
     bullets: [
       {
-        title: "Replaces busywork with workflows that run themselves",
+        title: "Leads captured and routed automatically",
         description:
-          "Manual data entry, handoffs, and status updates — automated between the tools you already use, so nothing depends on someone remembering to do it.",
+          "Enquiries from WhatsApp, forms, and calls land in one CRM and reach the right person instantly — no lead lost in an inbox.",
       },
-      { title: "Triggers the right action the moment something changes" },
-      { title: "Flags exceptions instead of letting them slip through" },
+      { title: "Follow-ups, reminders, and updates that send themselves" },
+      { title: "Exceptions flagged for a person, not buried" },
     ],
     visual: (
       <MeshCard src="/gradient-mesh/green.webp">
         <WorkflowContent accent="green" />
       </MeshCard>
     ),
-    reversed: false,
+    reversed: true,
   },
   {
-    badge: "Website Design & Development",
-    slug: "website-design",
-    tint: "blue",
+    badge: "Internal Systems",
+    slug: "internal-systems",
+    tint: "amber",
     heading: (
       <>
-        A <Highlight color="var(--color-grad-blue)">website</Highlight>{" "}
-        when you don&apos;t have one yet
+        The <Highlight color="var(--color-grad-amber)">dashboards</Highlight>{" "}
+        to run your operations
       </>
     ),
     bullets: [
       {
-        title: "A fast, professional site built and launched for you",
+        title: "One dashboard instead of a dozen spreadsheets",
         description:
-          "No website, an outdated one, or just a Google Business listing? We design, build, and ship a site that actually represents the business.",
+          "Revenue, operations, and pipeline in one real-time view — not scattered across files and people.",
       },
-      { title: "Connected to the same CRM and systems we set up for you" },
-      { title: "Ready in weeks, not months — content, copy, and all" },
+      { title: "Portals and tools built around how you actually work" },
+      { title: "Live numbers you can make real decisions on" },
     ],
     visual: (
-      <MeshCard src="/gradient-mesh/golden.webp">
-        <WebsiteContent accent="amber" />
+      <MeshCard src="/gradient-mesh/orange.webp">
+        <ErpContent accent="amber" />
       </MeshCard>
     ),
-    reversed: true,
+    reversed: false,
   },
 ];
 
@@ -227,11 +200,12 @@ export default function FeatureBlocks() {
         <Reveal className="pt-12 sm:pt-16 md:pt-24 pb-2">
           <p className="eyebrow mb-3 sm:mb-4">Services</p>
           <h2 className="font-serif text-[28px] sm:text-[34px] md:text-[40px] leading-[1.1] tracking-[-0.02em] text-black mb-3 sm:mb-4 max-w-[440px]">
-            Four services. One connected system.
+            Three services. One connected system.
           </h2>
           <p className="text-[14px] sm:text-[15px] md:text-[16px] text-[#52525B] max-w-[460px] leading-relaxed">
-            Most agencies pick one piece. We build the whole stack —
-            systems, workflows, and the automation that connects them.
+            Most agencies hand you one piece and leave you to wire it
+            together. We build the whole stack — the site out front, the
+            automations behind it, and the tools you run on — as one system.
           </p>
         </Reveal>
 

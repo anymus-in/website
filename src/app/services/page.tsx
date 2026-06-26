@@ -11,14 +11,14 @@ import { services, accentTile } from "@/lib/services";
 import { breadcrumbList } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
-  title: "Services — ERP, CRM, Automation & Websites",
+  title: "Services — Websites, Automation & Internal Systems",
   description:
-    "anymus builds the whole stack — ERP and CRM implementation, business automation, and websites — as one connected system for growing businesses.",
+    "anymus builds the whole stack — websites, automation, and internal systems — as one connected system for growing businesses.",
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Services — anymus",
     description:
-      "ERP and CRM implementation, business automation, and website design — one connected system.",
+      "Digital presence, automation, and internal systems — one connected stack.",
     url: "/services",
   },
 };
@@ -40,12 +40,13 @@ export default function ServicesHubPage() {
           <Reveal className="flex flex-col items-start">
             <p className="eyebrow mb-4 sm:mb-5">Services</p>
             <h1 className="font-serif text-[34px] sm:text-[44px] md:text-[52px] leading-[1.05] tracking-[-0.02em] text-black mb-5 max-w-[680px]">
-              Four services. One connected system.
+              Three services. One connected system.
             </h1>
             <p className="text-[15px] sm:text-[16px] md:text-[17px] text-ink-600 leading-relaxed max-w-[600px]">
-              Most agencies pick one piece. We build the whole stack — systems,
-              workflows, automation, and the website in front of it — so nothing
-              is stitched together after the fact.
+              Most agencies hand you one piece and leave you to wire it
+              together. We build the whole stack — the site out front, the
+              automations behind it, and the tools you run on — so nothing is
+              stitched together after the fact.
             </p>
           </Reveal>
         </section>
@@ -53,7 +54,7 @@ export default function ServicesHubPage() {
         {/* Service cards */}
         <section className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8 pb-16 sm:pb-24">
           <RevealGroup
-            className="grid grid-cols-1 md:grid-cols-2 gap-px bg-line rounded-[20px] sm:rounded-[24px] overflow-hidden border border-line"
+            className="grid grid-cols-1 md:grid-cols-3 gap-px bg-line rounded-[20px] sm:rounded-[24px] overflow-hidden border border-line"
             stagger={0.06}
           >
             {services.map((s, i) => {

@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Boxes, Globe, Users, Workflow } from "lucide-react";
+import { Globe, LayoutGrid, Workflow } from "lucide-react";
 
 /**
  * Canonical service definitions — the single source of truth shared by the
@@ -25,7 +25,7 @@ export interface ServiceFaqItem {
 export type ServiceAccent = "amber" | "green" | "blue";
 
 /** Selects which animated mock-UI visual (defined in service-visuals.tsx) renders in the hero. */
-export type ServiceVisualKey = "erp" | "crm" | "automation" | "website";
+export type ServiceVisualKey = "website" | "automation" | "internal";
 
 export interface Service {
   slug: string;
@@ -71,283 +71,40 @@ export const accentTile: Record<
 
 export const services: Service[] = [
   {
-    slug: "erp-implementation",
-    name: "ERP Implementation",
-    icon: Boxes,
-    accent: "amber",
-    visualKey: "erp",
-    serviceType: "ERP implementation and configuration",
-    seoTitle: "ERP Implementation Services",
-    metaDescription:
-      "anymus implements and configures ERP systems around how your business actually operates — inventory, orders, and operations in one connected system, with real-time visibility.",
-    eyebrow: "ERP Implementation",
-    intro: "An ERP that finally matches how you operate.",
-    body: "We implement and configure your ERP around your real processes — not a generic out-of-the-box template. Inventory, purchasing, orders, and operations live in one connected system, so your team stops reconciling spreadsheets and starts trusting a single source of truth.",
-    outcomes: [
-      {
-        title: "Inventory, orders, and operations in one connected system",
-        description:
-          "Configured around your real processes, not a generic out-of-the-box template.",
-      },
-      {
-        title: "Real-time visibility into stock, costs, and fulfillment",
-        description:
-          "Know what's in stock, what it costs, and where every order stands — without chasing people.",
-      },
-      {
-        title: "Built to grow with you, not be replaced in two years",
-        description:
-          "We design for where your business is heading, so the system scales instead of becoming the next thing you rip out.",
-      },
-    ],
-    signs: [
-      "Inventory counts in your system never quite match what's actually on the shelf",
-      "Stock, orders, and finance live in different tools that don't talk to each other",
-      "Closing the books takes days of manually reconciling spreadsheets",
-      "You've outgrown your current setup but dread the idea of switching systems",
-    ],
-    process: [
-      {
-        title: "Discovery & data audit",
-        description:
-          "We map your current inventory, purchasing, and fulfillment workflows, and audit the state of your existing data before anything gets migrated.",
-      },
-      {
-        title: "Configuration & migration",
-        description:
-          "We configure the ERP around your real processes and migrate your existing data in, cleaning up inconsistencies as we go rather than carrying them over.",
-      },
-      {
-        title: "Integration",
-        description:
-          "We connect the ERP to the other systems you rely on — accounting, e-commerce, CRM — so data moves automatically instead of being re-entered by hand.",
-      },
-      {
-        title: "Go-live & training",
-        description:
-          "Your team learns the system hands-on before cutover, with support on hand through the first weeks of going live.",
-      },
-    ],
-    faqs: [
-      {
-        question: "Will there be downtime while we switch over?",
-        answer:
-          "We plan the cutover around your operations — typically a short, scheduled window rather than an open-ended migration — and confirm a rollback plan before go-live.",
-      },
-      {
-        question: "What if our current data is messy or incomplete?",
-        answer:
-          "That's normal. The data audit in discovery is where we catch and clean up inconsistencies, rather than migrating bad data into a new system.",
-      },
-      {
-        question: "Which ERP platforms do you implement?",
-        answer:
-          "The right platform depends on your size, industry, and existing tools — we'll recommend a fit after discovery rather than pushing a single platform.",
-      },
-      {
-        question: "Can it connect to our existing accounting or e-commerce tools?",
-        answer:
-          "Yes — integration with the tools you already use is part of the implementation, not a separate project.",
-      },
-    ],
-  },
-  {
-    slug: "crm",
-    name: "CRM Implementation",
-    icon: Users,
-    accent: "blue",
-    visualKey: "crm",
-    serviceType: "CRM implementation and configuration",
-    seoTitle: "CRM Implementation Services",
-    metaDescription:
-      "anymus configures a CRM your sales team actually uses — pipelines, fields, permissions, and reporting built around how you sell, so no lead is ever lost in a spreadsheet again.",
-    eyebrow: "CRM Solutions",
-    intro: "A CRM your sales team actually uses.",
-    body: "We implement and configure your CRM around real pipelines, fields, permissions, and reporting — not a generic template. Every rep works from the same trusted customer record, so leads stop falling through the cracks and management finally gets reporting it can rely on.",
-    outcomes: [
-      {
-        title: "Pipelines, fields, and reporting built around how you sell",
-        description:
-          "We configure your CRM around your real sales motion, not a vendor's default setup.",
-      },
-      {
-        title: "No more leads lost in spreadsheets or inboxes",
-        description:
-          "Every inquiry lands in one place and gets routed to the right person automatically.",
-      },
-      {
-        title: "Every rep sees the same, trusted customer record",
-        description:
-          "One clean record per customer, shared across the team — no conflicting versions.",
-      },
-    ],
-    signs: [
-      "Leads are tracked across spreadsheets, inboxes, and someone's memory",
-      "Reps can't say with confidence where a deal actually stands",
-      "Follow-ups get missed because nothing reminds anyone to send them",
-      "Sales reporting takes manual compiling instead of opening a dashboard",
-    ],
-    process: [
-      {
-        title: "Discovery & pipeline mapping",
-        description:
-          "We map your real sales motion — stages, fields, and the people involved — instead of starting from a vendor's default pipeline.",
-      },
-      {
-        title: "Configuration",
-        description:
-          "We build out pipelines, fields, permissions, and reporting around that real motion, so the CRM matches how your team actually sells.",
-      },
-      {
-        title: "Migration & integration",
-        description:
-          "Existing contacts and deal history move in, and the CRM connects to your inbox, calendar, and other tools so reps aren't duplicating work.",
-      },
-      {
-        title: "Launch & adoption",
-        description:
-          "We train the team hands-on before go-live, since a CRM only pays off if reps actually use it day to day.",
-      },
-    ],
-    faqs: [
-      {
-        question: "Our team has resisted CRMs before — how is this different?",
-        answer:
-          "Most CRM rollouts fail because the system doesn't match how the team actually sells. We configure around your real pipeline first, then train hands-on, instead of handing over a generic default setup.",
-      },
-      {
-        question: "Which CRM platforms do you work with?",
-        answer:
-          "The right platform depends on your sales motion, team size, and existing tools — we'll recommend a fit after discovery rather than pushing a single platform.",
-      },
-      {
-        question: "Can you migrate our existing contacts and deal history?",
-        answer:
-          "Yes — migrating what you already have is part of the implementation, cleaned up along the way rather than carried over as-is.",
-      },
-      {
-        question: "Will it connect to our email and calendar?",
-        answer:
-          "Yes — connecting the tools reps already work in is part of the setup, so logging activity doesn't become a second job.",
-      },
-    ],
-  },
-  {
-    slug: "business-automation",
-    name: "Business Automation",
-    icon: Workflow,
-    accent: "green",
-    visualKey: "automation",
-    serviceType: "Business process automation",
-    seoTitle: "Business Automation & Workflow Services",
-    metaDescription:
-      "anymus replaces manual busywork with automated workflows that run between the tools you already use — data entry, approvals, handoffs, and status updates that run themselves.",
-    eyebrow: "Business Automation",
-    intro: "Workflows that run themselves.",
-    body: "Whatever's currently manual between your tools — data entry, approvals, handoffs, status updates — we replace with workflows that run on their own, triggered by activity in your systems. Nothing depends on someone remembering to do it, and exceptions get flagged instead of slipping through.",
-    outcomes: [
-      {
-        title: "Replaces busywork with workflows that run themselves",
-        description:
-          "Manual handoffs and updates are automated between the tools you already use.",
-      },
-      {
-        title: "Triggers the right action the moment something changes",
-        description:
-          "Activity in one system kicks off the next step automatically — no waiting, no reminders.",
-      },
-      {
-        title: "Flags exceptions instead of letting them slip through",
-        description:
-          "When something doesn't fit the rules, the system surfaces it rather than burying it.",
-      },
-    ],
-    signs: [
-      "Someone is copying the same data between two or more tools by hand",
-      "Status updates depend on people remembering to send them",
-      "Approvals stall in someone's inbox waiting to be noticed",
-      "Exceptions get caught only after a customer complains, not before",
-    ],
-    process: [
-      {
-        title: "Process mapping",
-        description:
-          "We document the manual steps as they actually happen today — the handoffs, the workarounds, the things nobody wrote down.",
-      },
-      {
-        title: "Workflow design",
-        description:
-          "We design automations that trigger off real activity in your systems, replacing manual steps without changing how your team works day to day.",
-      },
-      {
-        title: "Build & connect",
-        description:
-          "We build and connect the automations between the tools you already use, with exception handling so edge cases get flagged, not buried.",
-      },
-      {
-        title: "Launch & monitor",
-        description:
-          "We launch the workflows, watch how they behave against real activity, and tune them based on what actually happens.",
-      },
-    ],
-    faqs: [
-      {
-        question: "What kinds of tasks can actually be automated?",
-        answer:
-          "Anything currently manual between your tools — data entry, approvals, handoffs, status updates — as long as it follows a consistent trigger and rule.",
-      },
-      {
-        question: "What happens when something doesn't fit the rules?",
-        answer:
-          "Exceptions get flagged and routed to a person instead of failing silently or getting forced through incorrectly.",
-      },
-      {
-        question: "Do we need to replace our existing tools?",
-        answer:
-          "No — automation typically connects the tools you already use rather than requiring you to switch platforms.",
-      },
-      {
-        question: "How do we know the automation is working correctly?",
-        answer:
-          "We monitor it against real activity after launch and tune the rules based on what actually happens, not just what we expected to happen.",
-      },
-    ],
-  },
-  {
-    slug: "website-design",
-    name: "Website Design & Development",
+    slug: "digital-presence",
+    name: "Digital Presence",
     icon: Globe,
-    accent: "amber",
+    accent: "blue",
     visualKey: "website",
     serviceType: "Website design and development",
-    seoTitle: "Website Design & Development Services",
+    seoTitle: "Digital Presence — Websites & Landing Pages",
     metaDescription:
-      "No website yet, an outdated one, or just a Google Business listing? anymus designs, builds, and launches a fast, professional site — connected to the CRM and systems we set up for you.",
-    eyebrow: "Website Design & Development",
-    intro: "A website when you don't have one yet.",
-    body: "No website, an outdated one, or just a Google Business listing? We design, build, and ship a site that actually represents the business — fast, professional, and connected to the same CRM and systems we set up for you, so enquiries flow straight into your pipeline.",
+      "anymus designs and builds fast, conversion-focused websites and landing pages — wired into the CRM and automations that turn every visitor into a tracked, followed-up lead.",
+    eyebrow: "Digital Presence",
+    intro: "A website that turns visitors into customers.",
+    body: "Your website is the first impression and the front door to everything else. We design and build fast, polished sites and landing pages that look like the company you're becoming — then wire them into your CRM and automations so every enquiry is captured, routed, and followed up, instead of lost in an inbox.",
     outcomes: [
       {
-        title: "A fast, professional site built and launched for you",
+        title: "A fast, conversion-focused site built end to end",
         description:
-          "Design, build, content, and copy — handled end to end, not handed back as a half-finished template.",
+          "Design, build, content, and copy — handled for you, not handed back as a half-finished template.",
       },
       {
-        title: "Connected to the same CRM and systems we set up for you",
+        title: "Wired into your CRM and automations from day one",
         description:
-          "Enquiries land directly in your pipeline instead of a disconnected inbox.",
+          "Every enquiry lands in your pipeline and triggers a follow-up, not a dead inbox.",
       },
       {
-        title: "Ready in weeks, not months",
+        title: "Live in weeks, built to scale",
         description:
-          "A clear scope and timeline so you're live quickly, with something your team and customers actually use.",
+          "A clear scope and timeline get you launched fast, on a foundation that grows with the business.",
       },
     ],
     signs: [
       "You don't have a website, or it's just a Google Business listing",
-      "Your current site hasn't been updated in years and doesn't reflect the business anymore",
-      "Enquiries from your site land in a generic inbox instead of your CRM",
-      "You're losing credibility to competitors with a more professional online presence",
+      "Your current site looks dated and no longer reflects the business",
+      "Enquiries from your site disappear into a generic inbox",
+      "You're losing credibility to competitors with a sharper online presence",
     ],
     process: [
       {
@@ -358,12 +115,12 @@ export const services: Service[] = [
       {
         title: "Design",
         description:
-          "We design a site that represents the business — fast, professional, and built around how customers actually find and contact you.",
+          "We design a site that represents the business — fast, professional, and built around how customers actually find and decide.",
       },
       {
         title: "Build & integrate",
         description:
-          "We build the site and connect it to the same CRM and systems we set up for you, so enquiries flow straight into your pipeline.",
+          "We develop the site and connect it to your CRM and automations, so enquiries flow straight into your pipeline and get followed up.",
       },
       {
         title: "Launch",
@@ -383,14 +140,176 @@ export const services: Service[] = [
           "Yes — content and copy are handled as part of the build, not handed back to you as a half-finished template.",
       },
       {
-        question: "Will it connect to our CRM?",
+        question: "Will it connect to our CRM and automations?",
         answer:
-          "Yes — if we've implemented your CRM, the site connects to it directly so enquiries land in your pipeline instead of a separate inbox.",
+          "Yes — the site plugs into the CRM and automations we set up, so enquiries land in your pipeline and trigger follow-ups automatically.",
       },
       {
         question: "What if we already have a website but it's outdated?",
         answer:
-          "We can rebuild on top of what you have or start fresh — whichever gets you to a site that actually represents the business faster.",
+          "We can rebuild on what you have or start fresh — whichever gets you to a site that actually represents the business faster.",
+      },
+    ],
+  },
+  {
+    slug: "automation",
+    name: "Automation",
+    icon: Workflow,
+    accent: "green",
+    visualKey: "automation",
+    serviceType: "Business process and workflow automation",
+    seoTitle: "Automation — WhatsApp, CRM & Workflows",
+    metaDescription:
+      "anymus automates the busywork between your tools — WhatsApp and CRM workflows, lead routing, and follow-ups that run themselves — so no enquiry is ever lost or forgotten.",
+    eyebrow: "Automation",
+    intro: "Workflows that run themselves.",
+    body: "Every lead, follow-up, and handoff that depends on someone remembering is a leak in the business. We automate the work between your tools — capturing enquiries from WhatsApp and your website into a CRM, routing them to the right person, and firing off follow-ups the moment something changes. Nothing waits on a reminder, and exceptions get flagged instead of slipping through.",
+    outcomes: [
+      {
+        title: "Leads captured and routed automatically",
+        description:
+          "Enquiries from WhatsApp, forms, and calls land in one CRM and reach the right person instantly — no lead lost in an inbox.",
+      },
+      {
+        title: "Follow-ups that send themselves",
+        description:
+          "Reminders, status updates, and nudges fire off real activity, so the manual chasing stops.",
+      },
+      {
+        title: "Exceptions flagged, not buried",
+        description:
+          "When something doesn't fit the rules, the system surfaces it for a person instead of failing silently.",
+      },
+    ],
+    signs: [
+      "Leads get lost between WhatsApp, inboxes, and someone's memory",
+      "Your team spends hours a week on manual follow-ups and data entry",
+      "The same information gets copied by hand between two or more tools",
+      "Approvals and handoffs stall because nothing moves them along",
+    ],
+    process: [
+      {
+        title: "Process mapping",
+        description:
+          "We document the manual steps as they actually happen today — the handoffs, the workarounds, the things nobody wrote down.",
+      },
+      {
+        title: "Workflow design",
+        description:
+          "We design automations that trigger off real activity, replacing manual steps without changing how your team works day to day.",
+      },
+      {
+        title: "Build & connect",
+        description:
+          "We build and connect the workflows across WhatsApp, your CRM, and the rest of your tools, with exception handling so edge cases get flagged, not buried.",
+      },
+      {
+        title: "Launch & monitor",
+        description:
+          "We launch the workflows, watch how they behave against real activity, and tune them based on what actually happens.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What kinds of work can actually be automated?",
+        answer:
+          "Lead capture, routing, follow-ups, data entry, approvals, and status updates — anything between your tools that follows a consistent trigger and rule.",
+      },
+      {
+        question: "We don't have a CRM yet — is that a problem?",
+        answer:
+          "No. Setting up and configuring a CRM around how you sell is part of the work, so your automations have one clean place to capture and route leads.",
+      },
+      {
+        question: "Do we need to replace our existing tools?",
+        answer:
+          "No — automation typically connects the tools you already use, including WhatsApp, rather than requiring you to switch platforms.",
+      },
+      {
+        question: "How do we know the automation is working correctly?",
+        answer:
+          "We monitor it against real activity after launch and tune the rules based on what actually happens, not just what we expected.",
+      },
+    ],
+  },
+  {
+    slug: "internal-systems",
+    name: "Internal Systems",
+    icon: LayoutGrid,
+    accent: "amber",
+    visualKey: "internal",
+    serviceType: "Custom internal tools, dashboards, and portals",
+    seoTitle: "Internal Systems — Dashboards & Portals",
+    metaDescription:
+      "anymus builds the dashboards, portals, and internal tools that run your operations — real-time visibility and one source of truth, instead of a dozen disconnected spreadsheets.",
+    eyebrow: "Internal Systems",
+    intro: "Custom tools to run your operations.",
+    body: "When the business runs on a dozen spreadsheets and gut feel, growth gets risky. We build the internal tools that give you a single source of truth — dashboards that show how the business is really doing, client and team portals, and management software shaped around how you actually operate. Real-time visibility, one trusted record, decisions you can stand behind.",
+    outcomes: [
+      {
+        title: "One dashboard instead of a dozen spreadsheets",
+        description:
+          "Revenue, operations, and pipeline in one real-time view — not scattered across files and people.",
+      },
+      {
+        title: "Tools built around how you actually work",
+        description:
+          "Portals, trackers, and internal apps configured to your processes, not a rigid off-the-shelf box.",
+      },
+      {
+        title: "Visibility you can make decisions on",
+        description:
+          "Live numbers you trust, so planning is based on data instead of whoever asked last.",
+      },
+    ],
+    signs: [
+      "The business runs on a dozen spreadsheets that don't agree with each other",
+      "You can't get a clear, current view of how the business is performing",
+      "Reporting means someone manually compiling numbers every week",
+      "Critical information lives in people's heads instead of a system",
+    ],
+    process: [
+      {
+        title: "Discovery & data audit",
+        description:
+          "We map how your operations actually run and audit the data you already have before anything gets built or migrated.",
+      },
+      {
+        title: "Design & configuration",
+        description:
+          "We design the dashboards, portals, and tools around your real processes, so the system matches how your team works.",
+      },
+      {
+        title: "Build & integrate",
+        description:
+          "We build the tools and connect them to your existing systems, so data flows in automatically instead of being re-entered by hand.",
+      },
+      {
+        title: "Go-live & training",
+        description:
+          "Your team learns the system hands-on before cutover, with support on hand through the first weeks of going live.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Is this custom software, or off-the-shelf tools?",
+        answer:
+          "Whichever fits — we configure proven platforms where they work and build custom where your process needs it, rather than forcing the business into a rigid box.",
+      },
+      {
+        question: "Will it connect to our existing tools?",
+        answer:
+          "Yes — connecting to the systems you already use so data flows in automatically is part of the build, not a separate project.",
+      },
+      {
+        question: "What if our data is messy or spread across spreadsheets?",
+        answer:
+          "That's normal. The data audit in discovery is where we consolidate and clean things up, rather than carrying inconsistencies into the new system.",
+      },
+      {
+        question: "Can it grow with us?",
+        answer:
+          "Yes — we design for where the business is heading, so the system scales instead of becoming the next thing you rip out.",
       },
     ],
   },

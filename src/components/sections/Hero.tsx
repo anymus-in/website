@@ -373,30 +373,24 @@ export default function Hero() {
         className="relative z-10 flex flex-col items-center text-center px-6 pt-24 md:pt-40 max-w-4xl mx-auto"
       >
         <motion.p variants={line} className="eyebrow mb-3 md:mb-5">
-          Business Systems &amp; Automation
+          Digital Presence · Automation · Internal Systems
         </motion.p>
         <motion.h1
           variants={line}
-          className="font-serif font-normal text-[clamp(26px,7vw,34px)] md:text-[clamp(32px,6vw,68px)] leading-[1.25] md:leading-[1.18] tracking-[-0.01em] md:tracking-[-1px] text-black mb-5 md:mb-4 max-w-[300px] md:max-w-3xl"
+          className="font-serif font-normal text-[clamp(26px,7vw,34px)] md:text-[clamp(32px,6vw,68px)] leading-[1.25] md:leading-[1.18] tracking-[-0.01em] md:tracking-[-1px] text-black mb-5 md:mb-4 max-w-[320px] md:max-w-3xl"
         >
-          <span style={{ color: "#5F44E0" }}>Anymus</span> Is Your
+          Build the systems that
           <br />
-          Technical Growth Partner
+          help your business scale
         </motion.h1>
         <motion.p
           variants={line}
-          className="hidden md:block text-[13px] text-ink-400 mb-6"
+          className="text-[14px] md:text-[15px] mb-8 md:mb-9 max-w-[320px] md:max-w-xl text-ink-500 md:text-[#5f6368] leading-relaxed"
         >
-          Built by <span style={{ color: "#5F44E0" }}>Anymus</span>
-        </motion.p>
-
-        <motion.p
-          variants={line}
-          className="text-[14px] md:text-[15px] mb-8 md:mb-9 max-w-[300px] md:max-w-xl text-ink-500 md:text-[#5f6368] leading-relaxed"
-        >
-          We help companies automate operations, sales, inventory,
-          approvals, and reporting — so teams spend less time on manual
-          work and more time growing the business.
+          <span style={{ color: "#5F44E0" }}>Anymus</span> designs and builds
+          the websites, automations, and internal tools that save your team
+          time, tighten operations, and turn more enquiries into customers —
+          built around the tools you already use.
         </motion.p>
 
         <motion.div

@@ -14,9 +14,9 @@ export const faqs: Faq[] = [
       "Most engagements run 4-12 weeks depending on scope — we'll give you a clear timeline after the discovery call, not a generic estimate.",
   },
   {
-    question: "Which ERP and CRM platforms do you work with?",
+    question: "Which platforms and tools do you work with?",
     answer:
-      "We work with the major ERP and CRM platforms used by growing businesses — the right fit depends on your existing setup. Book a call and we'll scope it with you directly.",
+      "We work with the major website, automation, and CRM platforms growing businesses rely on — and build custom where they fit better. The right setup depends on your existing tools; book a call and we'll scope it with you directly.",
   },
   {
     question: "Do you build custom systems or use existing platforms?",

@@ -7,10 +7,10 @@ export const SITE_URL = "https://anymus.in";
 
 export const SITE_NAME = "anymus";
 
-export const SITE_TAGLINE = "Custom ERP, CRM & Automation Systems";
+export const SITE_TAGLINE = "Websites, Automation & Internal Systems";
 
 export const SITE_DESCRIPTION =
-  "anymus is an implementation agency that builds custom ERP, CRM, and business-automation systems — and websites — for growing businesses. A clear process, not a black box.";
+  "anymus designs and builds the websites, automations, and internal tools that growing businesses run on — one connected system, built around the tools you already use.";
 
 export const CONTACT_EMAIL = "anymus.shared@gmail.com";
 
@@ -22,13 +22,14 @@ export const SOCIALS: string[] = [];
 
 /** SEO keywords for the homepage / default metadata. */
 export const SITE_KEYWORDS = [
-  "ERP implementation",
-  "CRM implementation",
+  "website design and development",
+  "landing page design",
   "business automation",
   "workflow automation",
-  "ERP agency",
-  "CRM agency",
-  "custom business systems",
-  "website design and development",
+  "WhatsApp automation",
+  "CRM automation",
+  "custom internal tools",
+  "business dashboards",
+  "client portals",
   "systems integration",
 ];

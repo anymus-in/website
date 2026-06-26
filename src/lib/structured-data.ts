@@ -25,16 +25,16 @@ export const organizationSchema = {
   },
   areaServed: "Worldwide",
   knowsAbout: [
-    "ERP implementation",
-    "CRM implementation",
+    "website design and development",
     "business process automation",
     "workflow automation",
-    "website design and development",
+    "WhatsApp and CRM automation",
+    "custom internal tools and dashboards",
     "systems integration",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Implementation services",
+    name: "Services",
     itemListElement: services.map((s) => ({
       "@type": "Offer",
       itemOffered: {
