@@ -17,6 +17,7 @@ import {
   ClipboardCheck,
 } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
+import Highlight from "@/components/motion/Highlight";
 
 const container: Variants = {
   hidden: {},
@@ -379,7 +380,7 @@ export default function Hero() {
           variants={line}
           className="font-serif font-normal text-[clamp(26px,7vw,34px)] md:text-[clamp(32px,6vw,68px)] leading-[1.25] md:leading-[1.18] tracking-[-0.01em] md:tracking-[-1px] text-black mb-5 md:mb-4 max-w-[320px] md:max-w-3xl"
         >
-          Build the systems that
+          Build the <Highlight color="#5F44E0">systems</Highlight> that
           <br />
           help your business scale
         </motion.h1>

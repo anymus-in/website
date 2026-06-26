@@ -36,7 +36,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <ProblemsWeSolve />
+<ProblemsWeSolve />
         <FeatureBlocks />
         <Industries />
         <WhyChooseAnymus />

@@ -6,7 +6,6 @@ import {
   UtensilsCrossed,
   Building2,
   Wrench,
-  ChevronRight,
   ArrowRight,
   type LucideIcon,
 } from "lucide-react";
@@ -15,30 +14,41 @@ import Reveal from "@/components/motion/Reveal";
 
 type Pillar = "digital" | "automation" | "internal";
 
-const pillarMeta: Record<Pillar, { label: string; dot: string; tag: string }> = {
-  digital: {
-    label: "Digital Presence",
-    dot: "bg-grad-blue",
-    tag: "text-grad-blue bg-grad-blue/10",
-  },
-  automation: {
-    label: "Automation",
-    dot: "bg-grad-green",
-    tag: "text-[#1F8A56] bg-grad-green/10",
-  },
-  internal: {
-    label: "Internal Systems",
-    dot: "bg-grad-amber",
-    tag: "text-accent-ink bg-grad-amber/15",
-  },
+const pillarTag: Record<Pillar, string> = {
+  digital: "bg-grad-blue/10 text-[#1d4ed8]",
+  automation: "bg-grad-green/10 text-[#1F8A56]",
+  internal: "bg-grad-amber/15 text-accent-ink",
 };
+
+/* Simple Icons CDN — SVG logos with official brand colours */
+const LOGO: Record<string, string> = {
+  gmail:    "https://cdn.simpleicons.org/gmail/EA4335",
+  gcal:     "https://cdn.simpleicons.org/googlecalendar/4285F4",
+  gmeet:    "https://cdn.simpleicons.org/googlemeet/00897B",
+  gsheets:  "https://cdn.simpleicons.org/googlesheets/34A853",
+  whatsapp: "https://cdn.simpleicons.org/whatsapp/25D366",
+  calendly: "https://cdn.simpleicons.org/calendly/006BFF",
+  hubspot:  "https://cdn.simpleicons.org/hubspot/FF7A59",
+  notion:   "https://cdn.simpleicons.org/notion/000000",
+  airtable: "https://cdn.simpleicons.org/airtable/18BFFF",
+  mailchimp:"https://cdn.simpleicons.org/mailchimp/FFE01B",
+  meta:     "https://cdn.simpleicons.org/meta/0467DF",
+  instagram:"https://cdn.simpleicons.org/instagram/E4405F",
+  google:   "https://cdn.simpleicons.org/google/4285F4",
+};
+
+interface Step {
+  label: string;
+  pillar: Pillar;
+  tool: keyof typeof LOGO;
+}
 
 interface Industry {
   icon: LucideIcon;
   name: string;
   short: string;
   scenario: string;
-  steps: { label: string; pillar: Pillar }[];
+  steps: Step[];
   result: string;
 }
 
@@ -50,10 +60,10 @@ const industries: Industry[] = [
     scenario:
       "A patient finds you on Google, books a slot online, and gets a reminder the day before — no front-desk phone tag.",
     steps: [
-      { label: "Professional website", pillar: "digital" },
-      { label: "Online appointment booking", pillar: "automation" },
-      { label: "Automatic patient reminders", pillar: "automation" },
-      { label: "Records & schedule dashboard", pillar: "internal" },
+      { label: "Professional website",    pillar: "digital",     tool: "google" },
+      { label: "Online booking",          pillar: "automation",  tool: "calendly" },
+      { label: "Patient reminders",       pillar: "automation",  tool: "whatsapp" },
+      { label: "Records dashboard",       pillar: "internal",    tool: "gsheets" },
     ],
     result: "Fewer no-shows, zero phone tag.",
   },
@@ -64,10 +74,10 @@ const industries: Industry[] = [
     scenario:
       "Guests order online, join your list automatically, and come back because the system actually remembers them.",
     steps: [
-      { label: "Website with your menu", pillar: "digital" },
-      { label: "Online ordering & reservations", pillar: "automation" },
-      { label: "Customer database", pillar: "internal" },
-      { label: "Win-back offers & campaigns", pillar: "automation" },
+      { label: "Menu website",            pillar: "digital",     tool: "google" },
+      { label: "Online ordering",         pillar: "automation",  tool: "whatsapp" },
+      { label: "Customer database",       pillar: "internal",    tool: "airtable" },
+      { label: "Win-back campaigns",      pillar: "automation",  tool: "mailchimp" },
     ],
     result: "More repeat orders, less paid to third parties.",
   },
@@ -78,10 +88,10 @@ const industries: Industry[] = [
     scenario:
       "A lead fills out a landing page at midnight and gets a reply before a competitor is even awake.",
     steps: [
-      { label: "High-converting landing pages", pillar: "digital" },
-      { label: "Instant lead capture", pillar: "automation" },
-      { label: "CRM follow-up sequences", pillar: "automation" },
-      { label: "Live deal pipeline", pillar: "internal" },
+      { label: "Landing pages",           pillar: "digital",     tool: "meta" },
+      { label: "Lead capture",            pillar: "automation",  tool: "instagram" },
+      { label: "CRM sequences",           pillar: "automation",  tool: "hubspot" },
+      { label: "Deal pipeline",           pillar: "internal",    tool: "notion" },
     ],
     result: "Faster response, no lead left cold.",
   },
@@ -92,64 +102,14 @@ const industries: Industry[] = [
     scenario:
       "An enquiry becomes a booked job without anyone copy-pasting between five different apps.",
     steps: [
-      { label: "Website built to convert", pillar: "digital" },
-      { label: "Lead funnel & qualification", pillar: "automation" },
-      { label: "Job scheduling automation", pillar: "automation" },
-      { label: "Operations dashboard", pillar: "internal" },
+      { label: "Conversion website",      pillar: "digital",     tool: "google" },
+      { label: "Lead qualification",      pillar: "automation",  tool: "whatsapp" },
+      { label: "Job scheduling",          pillar: "automation",  tool: "gmeet" },
+      { label: "Ops dashboard",           pillar: "internal",    tool: "gsheets" },
     ],
     result: "More jobs booked, far less admin.",
   },
 ];
-
-function StackFlow({ industry }: { industry: Industry }) {
-  const reduce = useReducedMotion();
-  return (
-    <motion.ol
-      className="relative"
-      initial={reduce ? undefined : "hidden"}
-      animate={reduce ? undefined : "show"}
-      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07 } } }}
-    >
-      {industry.steps.map((s, i) => {
-        const meta = pillarMeta[s.pillar];
-        const last = i === industry.steps.length - 1;
-        return (
-          <motion.li
-            key={s.label}
-            className="relative flex items-center gap-3 sm:gap-4 pb-4 sm:pb-5 last:pb-0"
-            variants={{
-              hidden: { opacity: 0, x: -10 },
-              show: {
-                opacity: 1,
-                x: 0,
-                transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-              },
-            }}
-          >
-            {/* connector line */}
-            {!last && (
-              <span className="absolute left-[13px] sm:left-[15px] top-7 sm:top-8 bottom-0 w-px bg-line" />
-            )}
-            {/* node */}
-            <span
-              className={`relative z-10 grid place-items-center w-[26px] h-[26px] sm:w-[30px] sm:h-[30px] rounded-full ${meta.dot} shrink-0`}
-            >
-              <span className="w-2 h-2 rounded-full bg-white" />
-            </span>
-            <span className="flex-1 text-[14px] sm:text-[15px] font-medium text-black leading-snug">
-              {s.label}
-            </span>
-            <span
-              className={`hidden sm:inline-flex shrink-0 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide ${meta.tag}`}
-            >
-              {meta.label}
-            </span>
-          </motion.li>
-        );
-      })}
-    </motion.ol>
-  );
-}
 
 export default function Industries() {
   const [active, setActive] = useState(0);
@@ -157,115 +117,125 @@ export default function Industries() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="bg-white border-t border-[#E4E4E1]">
-      <div className="max-w-[1232px] mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-24">
+    <section className="bg-white border-t border-line">
+      <div className="max-w-308 mx-auto px-4 sm:px-6 md:px-8 py-14 sm:py-18 md:py-24">
+
         <Reveal>
-          <p className="eyebrow mb-3 sm:mb-4">Use cases</p>
-          <h2 className="font-serif text-[28px] sm:text-[34px] md:text-[40px] leading-[1.1] tracking-[-0.02em] text-black mb-3 sm:mb-4 max-w-[560px]">
+          <p className="eyebrow mb-3">Use cases</p>
+          <h2 className="font-serif text-[26px] sm:text-[34px] md:text-[40px] leading-[1.1] tracking-[-0.025em] text-black">
             What this looks like for your business
           </h2>
-          <p className="text-[14px] sm:text-[15px] md:text-[16px] text-[#52525B] max-w-[520px] leading-relaxed">
-            Every business is different, but the patterns repeat. Pick yours and
-            see how the three pillars wire together into one connected system.
-          </p>
         </Reveal>
 
-        <div className="mt-8 sm:mt-12 grid grid-cols-1 lg:grid-cols-[minmax(260px,1fr)_1.55fr] gap-4 sm:gap-6 lg:gap-8 items-start">
-          {/* Selector */}
-          <div
-            role="tablist"
-            aria-label="Industries"
-            className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible -mx-4 px-4 lg:mx-0 lg:px-0 pb-1 lg:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {industries.map((ind, i) => {
-              const selected = i === active;
-              const Icon = ind.icon;
-              return (
-                <button
-                  key={ind.name}
-                  role="tab"
-                  aria-selected={selected}
-                  onClick={() => setActive(i)}
-                  className={`group flex items-center gap-3 rounded-2xl border px-3.5 sm:px-4 py-3 sm:py-3.5 text-left shrink-0 lg:shrink lg:w-full transition-all duration-200 ${
-                    selected
-                      ? "border-line-strong bg-paper shadow-[var(--shadow-soft)]"
-                      : "border-transparent hover:bg-paper/60"
+        {/* Tab Selector — 2 col mobile, 4 col desktop, no overflow trickery */}
+        <div
+          role="tablist"
+          aria-label="Industries"
+          className="mt-6 sm:mt-8 grid grid-cols-2 lg:grid-cols-4 gap-1 bg-paper rounded-2xl p-1.5"
+        >
+          {industries.map((ind, i) => {
+            const selected = i === active;
+            const Icon = ind.icon;
+            return (
+              <button
+                key={ind.name}
+                role="tab"
+                aria-selected={selected}
+                onClick={() => setActive(i)}
+                className={`flex items-center gap-2 lg:gap-2.5 rounded-xl px-3 py-2.5 lg:py-3 text-left min-w-0 transition-all duration-200 ${
+                  selected
+                    ? "bg-white shadow-(--shadow-soft)"
+                    : "hover:bg-white/60"
+                }`}
+              >
+                <span
+                  className={`grid place-items-center w-7 h-7 lg:w-8 lg:h-8 rounded-lg shrink-0 transition-all duration-200 ${
+                    selected ? "bg-ink-900 text-white" : "bg-white/80 text-ink-400"
                   }`}
                 >
+                  <Icon className="w-3.5 h-3.5 lg:w-[15px] lg:h-[15px]" strokeWidth={1.8} />
+                </span>
+                <span className="min-w-0">
                   <span
-                    className={`grid place-items-center w-10 h-10 rounded-xl shrink-0 transition-colors ${
-                      selected
-                        ? "bg-white border border-line"
-                        : "bg-paper border border-line group-hover:bg-white"
+                    className={`block text-[11px] lg:text-[13px] font-semibold leading-tight truncate transition-colors ${
+                      selected ? "text-black" : "text-ink-600"
                     }`}
                   >
-                    <Icon
-                      className={`w-[18px] h-[18px] ${selected ? "text-accent-ink" : "text-ink-500"}`}
-                      strokeWidth={1.8}
-                    />
-                  </span>
-                  <span className="flex-1 min-w-0 hidden sm:block">
-                    <span className="block font-serif text-[16px] sm:text-[17px] text-black leading-tight truncate">
-                      {ind.name}
-                    </span>
-                    <span className="block text-[12px] text-ink-500 truncate">
-                      {ind.short}
-                    </span>
-                  </span>
-                  <span className="font-serif text-[15px] text-black sm:hidden whitespace-nowrap">
                     {ind.name}
                   </span>
-                  <ChevronRight
-                    className={`hidden lg:block w-4 h-4 shrink-0 transition-all ${
-                      selected
-                        ? "text-accent-ink translate-x-0"
-                        : "text-ink-300 -translate-x-1 group-hover:translate-x-0"
-                    }`}
-                  />
-                </button>
-              );
-            })}
-          </div>
+                  <span className="hidden lg:block text-[11px] text-ink-400 truncate leading-snug mt-0.5">
+                    {ind.short}
+                  </span>
+                </span>
+              </button>
+            );
+          })}
+        </div>
 
-          {/* Preview */}
-          <div className="relative rounded-[22px] sm:rounded-[26px] border border-line bg-paper overflow-hidden shadow-[var(--shadow-card)]">
-            <div className="h-[3px] w-full bg-gradient-to-r from-grad-blue via-grad-green to-grad-amber" />
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current.name}
-                initial={reduce ? false : { opacity: 0, y: 8 }}
-                animate={reduce ? {} : { opacity: 1, y: 0 }}
-                exit={reduce ? {} : { opacity: 0, y: -8 }}
-                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                className="p-6 sm:p-8 md:p-10"
-              >
-                <p className="text-[12px] font-semibold uppercase tracking-wide text-accent-ink mb-3">
-                  {current.name}
-                </p>
-                <p className="font-serif text-[19px] sm:text-[22px] md:text-[24px] leading-[1.3] tracking-tight text-black max-w-[560px]">
-                  {current.scenario}
-                </p>
+        {/* Content Card */}
+        <div className="mt-2">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.name}
+              initial={reduce ? false : { opacity: 0, y: 10 }}
+              animate={reduce ? {} : { opacity: 1, y: 0 }}
+              exit={reduce ? {} : { opacity: 0, y: -6 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="rounded-[20px] sm:rounded-[24px] border border-line bg-paper px-7 py-8 sm:px-10 sm:py-10 md:px-14 md:py-12 shadow-(--shadow-card)"
+            >
+              <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-400 mb-4 sm:mb-5">
+                {current.name}
+              </p>
 
-                <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-400 mt-7 sm:mt-8 mb-4">
-                  What we&apos;d build
-                </p>
-                <StackFlow industry={current} />
+              <p className="font-serif text-[20px] sm:text-[26px] lg:text-[30px] text-black leading-[1.38] tracking-[-0.01em] max-w-[720px]">
+                {current.scenario}
+              </p>
 
-                <div className="mt-6 sm:mt-7 flex items-center gap-2.5 rounded-xl bg-white border border-line px-4 py-3">
-                  <ArrowRight className="w-4 h-4 text-accent-ink shrink-0" />
-                  <span className="text-[14px] sm:text-[15px] font-medium text-black">
+              <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
+                {/* Result */}
+                <div className="flex items-center gap-2.5 shrink-0">
+                  <ArrowRight className="w-3.5 h-3.5 text-accent shrink-0" strokeWidth={2.2} />
+                  <span className="text-[13px] sm:text-[14px] font-semibold text-black">
                     {current.result}
                   </span>
                 </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+
+                {/* Tool chips with real logos */}
+                <motion.div
+                  key={current.name + "-chips"}
+                  className="flex flex-wrap gap-2"
+                  initial={reduce ? undefined : "hidden"}
+                  animate={reduce ? undefined : "show"}
+                  variants={{
+                    hidden: {},
+                    show: { transition: { staggerChildren: 0.05, delayChildren: 0.08 } },
+                  }}
+                >
+                  {current.steps.map((s) => (
+                    <motion.span
+                      key={s.label}
+                      variants={{
+                        hidden: { opacity: 0, scale: 0.92 },
+                        show: { opacity: 1, scale: 1, transition: { duration: 0.22, ease: "easeOut" } },
+                      }}
+                      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] sm:text-[12px] font-medium ${pillarTag[s.pillar]}`}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={LOGO[s.tool]}
+                        alt=""
+                        aria-hidden
+                        className="w-3.5 h-3.5 rounded-sm object-contain shrink-0"
+                      />
+                      {s.label}
+                    </motion.span>
+                  ))}
+                </motion.div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        <p className="mt-6 sm:mt-8 text-[13px] text-ink-500 max-w-[560px] leading-relaxed">
-          Example builds — every engagement is scoped to what your business
-          actually needs.
-        </p>
       </div>
     </section>
   );
