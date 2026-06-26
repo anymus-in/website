@@ -55,17 +55,17 @@ export default function ScheduleCallForm() {
         <Field label="Full name">
           <input
             required
-            placeholder="Aarav Sharma"
+            placeholder="Your name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             className={fieldClass}
           />
         </Field>
-        <Field label="Work email">
+        <Field label="Email">
           <input
             required
             type="email"
-            placeholder="aarav@company.com"
+            placeholder="Your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={fieldClass}
@@ -76,7 +76,7 @@ export default function ScheduleCallForm() {
       <Field label="Company name">
         <input
           required
-          placeholder="Sharma Industries"
+          placeholder="Your company name"
           value={company}
           onChange={(e) => setCompany(e.target.value)}
           className={fieldClass}
