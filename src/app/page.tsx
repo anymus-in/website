@@ -4,7 +4,6 @@ import ScrollProgress from "@/components/motion/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
-import Industries from "@/components/sections/Industries";
 import WhyChooseAnymus from "@/components/sections/WhyChooseAnymus";
 import GetStarted from "@/components/sections/GetStarted";
 import CtaBand from "@/components/sections/CtaBand";
@@ -36,7 +35,6 @@ export default function Home() {
       <main>
         <Hero />
         <FeatureBlocks />
-        <Industries />
         <WhyChooseAnymus />
         <GetStarted />
         <CtaBand />
