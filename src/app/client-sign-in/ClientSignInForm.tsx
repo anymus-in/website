@@ -50,14 +50,11 @@ export default function ClientSignInForm() {
         />
       </label>
 
-      <div className="flex items-center justify-between text-[13px]">
+      <div className="flex items-center text-[13px]">
         <label className="flex items-center gap-2 text-ink-700">
           <input type="checkbox" className="focus-accent rounded accent-black" />
           Remember me
         </label>
-        <a href="/contact" className="text-accent-ink hover:underline">
-          Forgot password?
-        </a>
       </div>
 
       <button

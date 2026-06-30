@@ -127,7 +127,7 @@ const features: FeatureData[] = [
       {
         title: "A fast, conversion-focused site built end to end",
         description:
-          "Design, build, content, and copy — handled for you, not handed back as a half-finished template.",
+          "Design, build, content, and copy, handled for you, not handed back as a half-finished template.",
       },
       { title: "Wired into your CRM and automations from day one" },
       { title: "Live in weeks, built to scale with the business" },
@@ -153,7 +153,7 @@ const features: FeatureData[] = [
       {
         title: "Leads captured and routed automatically",
         description:
-          "Enquiries from WhatsApp, forms, and calls land in one CRM and reach the right person instantly — no lead lost in an inbox.",
+          "Enquiries from WhatsApp, forms, and calls land in one CRM and reach the right person instantly. No lead lost in an inbox.",
       },
       { title: "Follow-ups, reminders, and updates that send themselves" },
       { title: "Exceptions flagged for a person, not buried" },
@@ -179,7 +179,7 @@ const features: FeatureData[] = [
       {
         title: "One dashboard instead of a dozen spreadsheets",
         description:
-          "Revenue, operations, and pipeline in one real-time view — not scattered across files and people.",
+          "Revenue, operations, and pipeline in one real-time view, not scattered across files and people.",
       },
       { title: "Portals and tools built around how you actually work" },
       { title: "Live numbers you can make real decisions on" },
@@ -204,8 +204,8 @@ export default function FeatureBlocks() {
           </h2>
           <p className="text-[14px] sm:text-[15px] md:text-[16px] text-[#52525B] max-w-[460px] leading-relaxed">
             Most agencies hand you one piece and leave you to wire it
-            together. We build the whole stack — the site out front, the
-            automations behind it, and the tools you run on — as one system.
+            together. We build the whole stack: the site out front, the
+            automations behind it, and the tools you run on, as one system.
           </p>
         </Reveal>
 

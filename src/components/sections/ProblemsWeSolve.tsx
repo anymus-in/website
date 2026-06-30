@@ -71,7 +71,7 @@ export default function ProblemsWeSolve() {
         <Reveal className="mt-3">
           <div className="rounded-2xl border border-line bg-ink-900 px-7 py-8 sm:px-10 sm:py-10 md:px-12">
             <p className="font-serif text-[19px] sm:text-[23px] md:text-[27px] leading-[1.4] text-white tracking-[-0.01em] max-w-[680px]">
-              We fix all of this —{" "}
+              We fix all of this:{" "}
               <span className="text-accent">
                 websites, automation, and internal systems
               </span>

@@ -25,9 +25,9 @@ const initial: Deliverable[] = [
     version: "v3.0",
     approval: "pending",
   },
-  { id: "d5", name: "Team training sessions", status: "Upcoming", version: "—" },
-  { id: "d6", name: "Go-live support", status: "Upcoming", version: "—" },
-  { id: "d7", name: "Phase 2 scoping", status: "Upcoming", version: "—" },
+  { id: "d5", name: "Team training sessions", status: "Upcoming", version: "N/A" },
+  { id: "d6", name: "Go-live support", status: "Upcoming", version: "N/A" },
+  { id: "d7", name: "Phase 2 scoping", status: "Upcoming", version: "N/A" },
 ];
 
 const statusOrder: Status[] = ["Complete", "In Review", "In Progress", "Upcoming"];

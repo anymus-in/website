@@ -80,7 +80,7 @@ export default function SupportTab({ onNavigate }: { onNavigate: (tab: TabId) =>
           />
           <div className="flex items-center justify-between">
             {sent ? (
-              <p className="text-[12px] text-[#1F8A56]">Request sent — we&apos;ll be in touch shortly.</p>
+              <p className="text-[12px] text-[#1F8A56]">Request sent. We&apos;ll be in touch shortly.</p>
             ) : (
               <span />
             )}

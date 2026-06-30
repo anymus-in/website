@@ -58,7 +58,7 @@ const industries: Industry[] = [
     name: "Clinics & Healthcare",
     short: "Bookings & reminders",
     scenario:
-      "A patient finds you on Google, books a slot online, and gets a reminder the day before — no front-desk phone tag.",
+      "A patient finds you on Google, books a slot online, and gets a reminder the day before. No front-desk phone tag.",
     steps: [
       { label: "Professional website",    pillar: "digital",     tool: "google" },
       { label: "Online booking",          pillar: "automation",  tool: "calendly" },

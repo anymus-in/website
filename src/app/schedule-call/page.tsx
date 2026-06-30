@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "Book a free 30-minute discovery call with the anymus team to scope your website, automation, or internal systems project.",
   alternates: { canonical: "/schedule-call" },
   openGraph: {
-    title: "Schedule a Call — anymus",
+    title: "Schedule a Call | anymus",
     description: "Book a free discovery call with the anymus team.",
     url: "/schedule-call",
   },
@@ -40,7 +40,7 @@ export default function ScheduleCallPage() {
               </h1>
               <p className="text-[15px] sm:text-[16px] text-[#52525B] leading-relaxed max-w-[420px] mb-8 sm:mb-10">
                 Tell us a bit about your business and what you need.
-                We&apos;ll follow up to set up a 30-minute call — no pitch,
+                We&apos;ll follow up to set up a 30-minute call, no pitch,
                 just a clear next step.
               </p>
               <div className="space-y-3 sm:space-y-4">

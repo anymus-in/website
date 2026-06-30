@@ -4,7 +4,7 @@ import { Calendar, FileText, Play, Video } from "lucide-react";
 import { PortalCard, TabHeader, Avatar, Badge } from "../components";
 
 const upcoming = {
-  title: "Bi-weekly sync — Build & Automate review",
+  title: "Bi-weekly sync: Build & Automate review",
   date: "Jun 23, 2026",
   time: "10:00 AM PST",
   attendees: ["Sarah Chen", "Marcus Yu", "Jane Cooper"],
@@ -68,7 +68,7 @@ export default function MeetingsTab() {
         <PortalCard className="p-5 sm:p-7 flex flex-col">
           <p className="text-[13px] font-semibold text-black mb-1.5">Need time on the calendar?</p>
           <p className="text-[12px] text-ink-500 mb-4 flex-1">
-            Book a slot directly with your account lead — no back-and-forth emails.
+            Book a slot directly with your account lead. No back-and-forth emails.
           </p>
           <button className="focus-accent inline-flex items-center justify-center gap-1.5 border border-[#D4D4D1] text-black rounded-full px-4 py-2.5 text-[13px] font-medium hover:bg-[#F2F1ED] transition-colors min-h-[40px]">
             <Calendar className="w-3.5 h-3.5" />

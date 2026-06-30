@@ -2,7 +2,7 @@ const steps = [
   {
     num: "1.",
     label: "Discovery",
-    body: "We map your current tools, workflows, and pain points, then document how work actually happens — not how it's supposed to.",
+    body: "We map your current tools, workflows, and pain points, then document how work actually happens, not how it's supposed to.",
   },
   {
     num: "2.",
@@ -25,7 +25,7 @@ export default function GetStarted() {
           How we get you there
         </h2>
         <p className="text-[14px] sm:text-[15px] md:text-[16px] text-[#52525B] max-w-[460px] leading-relaxed mb-8 sm:mb-12 md:mb-16">
-          A clear process, not a black box — here&apos;s exactly what an
+          A clear process, not a black box. Here&apos;s exactly what an
           engagement looks like.
         </p>
 
@@ -47,17 +47,7 @@ export default function GetStarted() {
                 </p>
               </div>
             ))}
-            <div className="mt-8 sm:mt-10">
-              <a
-                href="/schedule-call"
-                className="cta-lift inline-flex items-center bg-black text-white rounded-full px-6 sm:px-7 py-3 sm:py-3.5 text-[14px] sm:text-[15px] font-medium tracking-[-0.01em] shadow-[var(--shadow-card)] min-h-[44px]"
-              >
-                Book Free Consultation
-              </a>
-              <p className="text-[11px] sm:text-[12px] text-ink-500 mt-2 sm:mt-3">
-                Free 30-minute discovery call
-              </p>
-            </div>
+     
           </div>
         </div>
       </div>

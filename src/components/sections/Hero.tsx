@@ -66,9 +66,9 @@ const pipelineStages = [
 ];
 
 const approvals = [
-  { name: "Supplier payment — Patel & Sons", initials: "PS", status: "Pending", time: "2h ago" },
-  { name: "Staff advance — R. Kumar", initials: "RK", status: "Pending", time: "5h ago" },
-  { name: "GST invoice — Sharma Traders", initials: "ST", status: "Approved", time: "1d ago" },
+  { name: "Supplier payment: Patel & Sons", initials: "PS", status: "Pending", time: "2h ago" },
+  { name: "Staff advance: R. Kumar", initials: "RK", status: "Pending", time: "5h ago" },
+  { name: "GST invoice: Sharma Traders", initials: "ST", status: "Approved", time: "1d ago" },
 ];
 
 const activity = [
@@ -390,7 +390,7 @@ export default function Hero() {
         >
           <span style={{ color: "#5F44E0" }}>Anymus</span> designs and builds
           the websites, automations, and internal tools that save your team
-          time, tighten operations, and turn more enquiries into customers —
+          time, tighten operations, and turn more enquiries into customers,
           built around the tools you already use.
         </motion.p>
 
@@ -402,7 +402,7 @@ export default function Hero() {
             href="/schedule-call"
             className="cta-lift inline-flex w-full md:w-auto items-center justify-center gap-2 bg-black text-white rounded-full px-7 py-4 md:py-3.5 text-[15px] font-medium tracking-[-0.01em] shadow-[var(--shadow-card)] min-h-[50px] md:min-h-[44px]"
           >
-            Book Free Consultation
+            Book a Free Consultation
           </a>
           <a
             href="#process"

@@ -13,7 +13,7 @@ const reasons: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: Cpu,
     title: "A technical-first team",
-    body: "We build the systems ourselves — not advise from the sidelines and outsource the hard part.",
+    body: "We build the systems ourselves, not advise from the sidelines and outsource the hard part.",
   },
   {
     icon: Wrench,
@@ -23,7 +23,7 @@ const reasons: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: Workflow,
     title: "One connected stack",
-    body: "Your site, automations, and internal tools talk to each other — nothing stitched together after the fact.",
+    body: "Your site, automations, and internal tools talk to each other, nothing stitched together after the fact.",
   },
   {
     icon: Target,
@@ -33,7 +33,7 @@ const reasons: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: LifeBuoy,
     title: "Here for the long run",
-    body: "We support and evolve what we build — we don't disappear the moment you go live.",
+    body: "We support and evolve what we build. We don't disappear the moment you go live.",
   },
 ];
 
@@ -48,13 +48,13 @@ export default function WhyChooseAnymus() {
           </h2>
           <p className="text-[14px] sm:text-[15px] md:text-[16px] text-[#52525B] max-w-[420px] leading-relaxed mb-6 sm:mb-8">
             We&apos;re a small, technical team that treats your systems like our
-            own product — built to last, and built to actually get used.
+            own product, built to last, and built to actually get used.
           </p>
           <Link
             href="/schedule-call"
             className="cta-lift inline-flex items-center bg-black text-white rounded-full px-6 py-3 text-[14px] sm:text-[15px] font-medium tracking-[-0.01em] shadow-[var(--shadow-card)] min-h-[44px]"
           >
-            Book a free consultation
+            Book a Free Consultation
           </Link>
         </Reveal>
 

@@ -64,7 +64,7 @@ const activity = [
   {
     id: 2,
     icon: Receipt,
-    text: "Invoice INV-1071 was issued — due Jul 1",
+    text: "Invoice INV-1071 was issued, due Jul 1",
     time: "1d ago",
   },
   {

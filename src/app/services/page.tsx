@@ -11,14 +11,14 @@ import { services, accentTile } from "@/lib/services";
 import { breadcrumbList } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
-  title: "Services — Websites, Automation & Internal Systems",
+  title: "Services | Websites, Automation & Internal Systems",
   description:
-    "anymus builds the whole stack — websites, automation, and internal systems — as one connected system for growing businesses.",
+    "anymus builds the whole stack: websites, automation, and internal systems, as one connected system for growing businesses.",
   alternates: { canonical: "/services" },
   openGraph: {
-    title: "Services — anymus",
+    title: "Services | anymus",
     description:
-      "Digital presence, automation, and internal systems — one connected stack.",
+      "Digital presence, automation, and internal systems. One connected stack.",
     url: "/services",
   },
 };
@@ -44,8 +44,8 @@ export default function ServicesHubPage() {
             </h1>
             <p className="text-[15px] sm:text-[16px] md:text-[17px] text-ink-600 leading-relaxed max-w-[600px]">
               Most agencies hand you one piece and leave you to wire it
-              together. We build the whole stack — the site out front, the
-              automations behind it, and the tools you run on — so nothing is
+              together. We build the whole stack: the site out front, the
+              automations behind it, and the tools you run on, so nothing is
               stitched together after the fact.
             </p>
           </Reveal>

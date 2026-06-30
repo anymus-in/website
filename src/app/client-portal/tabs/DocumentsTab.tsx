@@ -8,7 +8,7 @@ const categories = ["All", "Contracts", "Reports", "Guides"] as const;
 
 const documents = [
   { name: "Master Services Agreement.pdf", date: "May 2, 2026", size: "480 KB", category: "Contracts" },
-  { name: "Statement of Work — Phase 1.pdf", date: "May 5, 2026", size: "310 KB", category: "Contracts" },
+  { name: "Statement of Work: Phase 1.pdf", date: "May 5, 2026", size: "310 KB", category: "Contracts" },
   { name: "Discovery Summary.pdf", date: "Jun 2, 2026", size: "1.2 MB", category: "Reports" },
   { name: "System Architecture.pdf", date: "Jun 9, 2026", size: "3.4 MB", category: "Reports" },
   { name: "Training Guide.pdf", date: "Jun 16, 2026", size: "2.1 MB", category: "Guides" },

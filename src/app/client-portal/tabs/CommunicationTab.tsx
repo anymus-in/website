@@ -17,7 +17,7 @@ const initialUpdates = [
     author: "anymus Team",
     date: "Jun 9, 2026",
     message:
-      "Training guide draft uploaded to Documents — let us know if anything needs adjusting.",
+      "Training guide draft uploaded to Documents. Let us know if anything needs adjusting.",
   },
   {
     id: 3,

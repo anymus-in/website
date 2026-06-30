@@ -48,15 +48,15 @@ export default function Footer() {
           <div className="max-w-xl">
             <AnymusLogo />
             <p className="text-[12px] sm:text-[13px] text-[#A1A1AA] leading-relaxed mb-4 sm:mb-5">
-              anymus helps growing businesses build modern websites,
+              We help growing businesses build modern websites,
               automate manual operations, and run on internal tools and
-              dashboards built around clean data. anymus is a software and
-              services provider and does not provide legal, financial, or
+              dashboards built around clean data. We are a software and
+              services provider and do not provide legal, financial, or
               other licensed advisory services.
             </p>
             <p className="text-[12px] sm:text-[13px] text-[#A1A1AA] leading-relaxed">
               Any customer interactions, product information, system
-              configurations, or recommendations generated through anymus
+              configurations, or recommendations generated through our
               services are based on the configuration and data provided by
               the customer. By using this website you agree to our{" "}
               <a href="/terms" className="text-[#F5C26B]/80 underline underline-offset-1 hover:text-[#F5C26B] transition-colors">

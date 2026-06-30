@@ -173,7 +173,7 @@ export default function ClientPortalApp() {
                 </Badge>
               </div>
               <p className="text-[12px] sm:text-[13px] text-ink-500 truncate">
-                CRM &amp; Automation Implementation — Phase 2 of 3
+                CRM &amp; Automation Implementation: Phase 2 of 3
               </p>
             </div>
           </div>

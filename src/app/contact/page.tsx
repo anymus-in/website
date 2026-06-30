@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "Get in touch with the anymus team about websites, automation, and internal systems, a demo, or a project scope.",
   alternates: { canonical: "/contact" },
   openGraph: {
-    title: "Contact Us — anymus",
+    title: "Contact Us | anymus",
     description: "Get in touch with the anymus team.",
     url: "/contact",
   },

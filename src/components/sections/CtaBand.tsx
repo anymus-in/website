@@ -11,7 +11,7 @@ export default function CtaBand() {
           href="/schedule-call"
           className="cta-lift inline-flex items-center bg-white text-black rounded-full px-6 sm:px-7 py-3 sm:py-3.5 text-[14px] sm:text-[15px] font-medium tracking-[-0.01em] shadow-[var(--shadow-card)] min-h-[44px]"
         >
-          Book Free Consultation
+          Book a Free Consultation
         </a>
         <p className="text-[13px] text-[#A1A1AA] mt-3">
           Free 30-minute discovery call · No obligation

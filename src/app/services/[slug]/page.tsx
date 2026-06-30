@@ -24,7 +24,7 @@ export async function generateMetadata({
     description: service.metaDescription,
     alternates: { canonical: path },
     openGraph: {
-      title: `${service.seoTitle} — anymus`,
+      title: `${service.seoTitle} | anymus`,
       description: service.metaDescription,
       url: path,
     },

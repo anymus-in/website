@@ -59,7 +59,7 @@ export default function ServiceLayout({ service }: { service: Service }) {
                   href="/schedule-call"
                   className="cta-lift inline-flex items-center gap-2 bg-black text-white rounded-full px-6 sm:px-7 py-3 sm:py-3.5 text-[14px] sm:text-[15px] font-medium tracking-[-0.01em] shadow-[var(--shadow-card)] min-h-[44px]"
                 >
-                  Book Free Consultation
+                  Book a Free Consultation
                   <ArrowRight className="w-4 h-4" />
                 </a>
                 <Link
