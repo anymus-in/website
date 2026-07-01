@@ -57,3 +57,4 @@ Use these primitives for all new animation rather than writing inline Framer Mot
 1. Create `src/components/sections/MySection.tsx`
 2. Import and place it in `src/app/page.tsx`
 3. Use `Reveal` / `RevealGroup` for scroll animations; use design tokens for colors
+adf
