@@ -1,4 +1,5 @@
 import { services } from "@/lib/services";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 const COLUMNS = [
   {
@@ -36,45 +37,36 @@ const COLUMNS = [
 export default function Footer() {
   return (
     <footer className="bg-[#14110C] text-sheet border-t-2 border-mark overflow-hidden">
-      {/* Link ledger — ruled columns */}
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-8">
+      <div className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-10 sm:pt-14">
+        {/* Document header rule */}
+        <div className="flex items-baseline justify-between border-b border-sheet/20 pb-3">
+          <span className="anno !text-sheet/45">Anymus — Colophon</span>
+          <span className="anno !text-sheet/45 inline-flex items-center gap-2">
+            <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-live live-dot" />
+            All systems running
+          </span>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-8 py-12 sm:py-16">
-          {/* Colophon */}
-          <div className="lg:col-span-5 lg:pr-10 lg:border-r lg:border-sheet/15">
-            <p className="anno !text-sheet/45 block mb-5">Colophon</p>
-            <p className="text-[12.5px] text-sheet/55 leading-relaxed mb-4 max-w-[440px]">
-              We help growing businesses build modern websites, automate manual
-              operations, and run on internal tools and dashboards built around
-              clean data. We are a software and services provider and do not
-              provide legal, financial, or other licensed advisory services.
+          {/* Brand + contact */}
+          <div className="lg:col-span-5 lg:pr-12 lg:border-r lg:border-sheet/15 flex flex-col">
+            <p className="font-serif font-light text-[clamp(22px,2.8vw,32px)] leading-[1.18] tracking-[-0.015em] text-sheet/90 max-w-[400px] mb-8">
+              The system your business runs on — designed, built, and wired by{" "}
+              <span className="italic text-mark">anymus</span>.
             </p>
-            <p className="text-[12.5px] text-sheet/55 leading-relaxed max-w-[440px]">
-              Any customer interactions, product information, system
-              configurations, or recommendations generated through our services
-              are based on the configuration and data provided by the customer.
-              By using this website you agree to our{" "}
+            <div className="mt-auto space-y-3">
+              <p className="anno !text-sheet/45">Write to us</p>
               <a
-                href="/terms"
-                className="text-sheet/80 underline underline-offset-2 decoration-mark/60 hover:text-sheet transition-colors"
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="u-draw inline-block font-mono text-[13px] tracking-[0.04em] text-sheet/85 hover:text-sheet transition-colors"
               >
-                Terms of Use
-              </a>{" "}
-              and{" "}
-              <a
-                href="/privacy"
-                className="text-sheet/80 underline underline-offset-2 decoration-mark/60 hover:text-sheet transition-colors"
-              >
-                Privacy Policy
+                {CONTACT_EMAIL}
               </a>
-              .
-            </p>
-            <div className="mt-8 flex items-center gap-3">
-              <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-live live-dot" />
-              <span className="anno !text-sheet/45">All systems running</span>
+              <p className="anno !text-sheet/40">Reply &lt; 24h · no obligation</p>
             </div>
           </div>
 
-          {/* Columns */}
+          {/* Link ledger */}
           <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-10 sm:gap-8 lg:pl-6">
             {COLUMNS.map((col) => (
               <div key={col.label}>
@@ -106,8 +98,41 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Small print — the disclaimer, demoted but intact */}
+        <div className="border-t border-sheet/15 pt-6 pb-2">
+          <p className="anno !text-sheet/35 mb-3">Small print</p>
+          <div className="lg:columns-2 lg:gap-12 text-[11.5px] text-sheet/45 leading-relaxed max-w-[980px] space-y-3">
+            <p>
+              We help growing businesses build modern websites, automate manual
+              operations, and run on internal tools and dashboards built around
+              clean data. We are a software and services provider and do not
+              provide legal, financial, or other licensed advisory services.
+            </p>
+            <p>
+              Any customer interactions, product information, system
+              configurations, or recommendations generated through our services
+              are based on the configuration and data provided by the customer.
+              By using this website you agree to our{" "}
+              <a
+                href="/terms"
+                className="text-sheet/70 underline underline-offset-2 decoration-mark/60 hover:text-sheet transition-colors"
+              >
+                Terms of Use
+              </a>{" "}
+              and{" "}
+              <a
+                href="/privacy"
+                className="text-sheet/70 underline underline-offset-2 decoration-mark/60 hover:text-sheet transition-colors"
+              >
+                Privacy Policy
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+
         {/* Bottom line */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-t border-sheet/15 py-5">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-t border-sheet/15 py-5 mt-6">
           <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-sheet/40">
             © {new Date().getFullYear()} anymus
           </span>
