@@ -344,6 +344,30 @@ function SystemSchematic() {
   );
 }
 
+/* A hand-drawn red pencil stroke that draws itself under a word */
+function PencilStroke({ delay = 1.15 }: { delay?: number }) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.svg
+      aria-hidden
+      viewBox="0 0 100 10"
+      preserveAspectRatio="none"
+      className="absolute left-[-3%] bottom-[-0.06em] w-[106%] h-[0.13em] pointer-events-none"
+    >
+      <motion.path
+        d="M2 6.5 C 22 3.5, 44 8, 63 5.5 S 90 4, 98 6"
+        fill="none"
+        stroke="var(--color-mark)"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+        initial={reduce ? { pathLength: 1 } : { pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ delay, duration: 0.55, ease: "easeOut" }}
+      />
+    </motion.svg>
+  );
+}
+
 /* ── Hero — an editorial opening spread ── */
 
 export default function Hero() {
@@ -382,13 +406,22 @@ export default function Hero() {
             as="h1"
             className="font-serif font-light text-[clamp(46px,10.5vw,150px)] leading-[0.98] tracking-[-0.03em] text-inkwarm"
             lineClassName={(i) =>
-              i === 1 ? "sm:pl-[8vw]" : i === 2 ? "sm:pl-[2vw]" : undefined
+              i === 1
+                ? "sm:pl-[8vw]"
+                : i === 2
+                  ? "sm:pl-[2vw] pb-[0.1em] -mb-[0.1em]"
+                  : undefined
             }
             lines={[
               <span key="l1">We build</span>,
               <span key="l2">the system</span>,
               <span key="l3">
-                your business <span className="italic text-mark">runs</span> on.
+                your business{" "}
+                <span className="relative inline-block">
+                  <span className="italic">runs</span>
+                  <PencilStroke />
+                </span>{" "}
+                on.
               </span>,
             ]}
           />
@@ -426,6 +459,10 @@ export default function Hero() {
             >
               Or read the index first ↓
             </a>
+            <p className="anno !text-[9.5px] lg:pl-5 border-t rule pt-3 w-full whitespace-nowrap">
+              <span className="text-mark">✳</span> Free 30-min call · no
+              lock-in · 24h reply
+            </p>
           </motion.div>
         </motion.div>
       </div>
