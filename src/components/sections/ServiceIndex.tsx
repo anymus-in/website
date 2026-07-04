@@ -75,7 +75,7 @@ function ServiceSpread({ service, index }: { service: Service; index: number }) 
             </span>
           </Link>
 
-          <RevealGroup className="mt-10" stagger={0.09}>
+          <RevealGroup className="mt-10 hidden md:block" stagger={0.09}>
             {service.outcomes.map((o, j) => (
               <RevealItem
                 key={o.title}

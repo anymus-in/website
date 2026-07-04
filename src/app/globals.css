@@ -459,10 +459,10 @@ a:hover .u-draw,
 /* Fine graph-paper grid — engineering drawing ground */
 .graph-bg {
   background-image:
-    linear-gradient(var(--color-hairline) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-hairline) 1px, transparent 1px),
-    linear-gradient(rgba(28, 24, 18, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(28, 24, 18, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(28, 24, 18, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28, 24, 18, 0.11) 1px, transparent 1px),
+    linear-gradient(rgba(28, 24, 18, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28, 24, 18, 0.035) 1px, transparent 1px);
   background-size:
     120px 120px,
     120px 120px,
@@ -471,10 +471,10 @@ a:hover .u-draw,
 }
 .graph-bg-dark {
   background-image:
-    linear-gradient(rgba(244, 241, 232, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(244, 241, 232, 0.07) 1px, transparent 1px),
-    linear-gradient(rgba(244, 241, 232, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(244, 241, 232, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(244, 241, 232, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 241, 232, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(244, 241, 232, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 241, 232, 0.022) 1px, transparent 1px);
   background-size:
     120px 120px,
     120px 120px,
@@ -552,6 +552,14 @@ a:hover .u-draw,
 }
 .marquee:hover .marquee-track-rev {
   animation-play-state: paused;
+}
+
+/* Hide scrollbars on snap carousels */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* Live pulse dot */

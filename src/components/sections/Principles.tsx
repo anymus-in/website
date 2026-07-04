@@ -64,15 +64,12 @@ export default function Principles() {
               key={p.tag}
               className="group border-t border-sheet/20 last:border-b grid grid-cols-[64px_1fr] sm:grid-cols-[120px_1fr] lg:grid-cols-[160px_1fr] gap-x-5 sm:gap-x-8 py-10 sm:py-14 items-start"
             >
-              {/* Hollow numeral */}
-              <div className="relative">
-                <span
-                  aria-hidden
-                  className="text-hollow-sheet font-serif font-light leading-[0.8] text-[clamp(56px,8vw,120px)] tracking-[-0.04em] block group-hover:[-webkit-text-stroke-color:rgba(200,57,27,0.75)] transition-all duration-500"
-                >
-                  {i + 1}
+              {/* Index */}
+              <div className="pt-2 sm:pt-3">
+                <span className="anno anno-mark block mb-2 group-hover:!text-mark transition-colors duration-300">
+                  {`0${i + 1}`}
                 </span>
-                <span className="anno !text-sheet/40 block mt-3">{p.tag}</span>
+                <span className="anno !text-sheet/40 block">{p.tag}</span>
               </div>
 
               {/* Statement */}

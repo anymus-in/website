@@ -3,7 +3,6 @@ import { CONTACT_EMAIL } from "@/lib/site";
 
 const COLUMNS = [
   {
-    num: "A",
     label: "Index",
     links: [
       { label: "All services", href: "/services" },
@@ -15,7 +14,6 @@ const COLUMNS = [
     ],
   },
   {
-    num: "B",
     label: "Anymus",
     links: [
       { label: "Client sign-in", href: "/client-sign-in" },
@@ -24,7 +22,6 @@ const COLUMNS = [
     ],
   },
   {
-    num: "C",
     label: "Legal",
     links: [
       { label: "Terms of use", href: "/terms" },
@@ -40,11 +37,8 @@ export default function Footer() {
       <div className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-10 sm:pt-14">
         {/* Document header rule */}
         <div className="flex items-baseline justify-between border-b border-sheet/20 pb-3">
-          <span className="anno !text-sheet/45">Anymus — Colophon</span>
-          <span className="anno !text-sheet/45 inline-flex items-center gap-2">
-            <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-live live-dot" />
-            All systems running
-          </span>
+          <span className="anno !text-sheet/45">Anymus</span>
+          
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-8 py-12 sm:py-16">
@@ -70,9 +64,8 @@ export default function Footer() {
           <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-10 sm:gap-8 lg:pl-6">
             {COLUMNS.map((col) => (
               <div key={col.label}>
-                <p className="flex items-baseline justify-between border-b border-sheet/15 pb-2.5 mb-5">
+                <p className="border-b border-sheet/15 pb-2.5 mb-5">
                   <span className="anno !text-sheet/45">{col.label}</span>
-                  <span className="anno anno-mark !text-[9px]">{col.num}</span>
                 </p>
                 <ul className="space-y-3.5">
                   {col.links.map((link) => (
