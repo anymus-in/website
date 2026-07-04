@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 
 const fieldClass =
-  "focus-accent w-full bg-white border border-[#D4D4D1] rounded-xl px-3.5 py-2.5 text-sm text-black placeholder:text-ink-400 outline-none min-h-[44px]";
+  "w-full bg-sheet-lift border rounded-[2px] px-3.5 py-2.5 text-sm text-inkwarm placeholder:text-inkwarm-faint outline-none min-h-[44px] transition-colors border-[rgba(28,24,18,0.16)] hover:border-[rgba(28,24,18,0.42)] focus-visible:border-mark focus-visible:shadow-[2px_2px_0_0_var(--color-mark)]";
 
 export default function ClientSignInForm() {
   const router = useRouter();
@@ -19,13 +19,11 @@ export default function ClientSignInForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white border border-black/[0.06] rounded-[24px] p-6 sm:p-8 space-y-4"
-      style={{ boxShadow: "var(--shadow-card)" }}
+      className="plate relative overflow-hidden p-6 sm:p-8 space-y-4"
     >
+      <span className="absolute top-0 left-0 right-0 h-[2px] bg-mark" />
       <label className="block">
-        <span className="block text-[13px] font-medium text-ink-700 mb-1.5">
-          Email
-        </span>
+        <span className="anno !text-[10px] block mb-2">Email</span>
         <input
           required
           type="email"
@@ -37,9 +35,7 @@ export default function ClientSignInForm() {
       </label>
 
       <label className="block">
-        <span className="block text-[13px] font-medium text-ink-700 mb-1.5">
-          Password
-        </span>
+        <span className="anno !text-[10px] block mb-2">Password</span>
         <input
           required
           type="password"
@@ -51,17 +47,18 @@ export default function ClientSignInForm() {
       </label>
 
       <div className="flex items-center text-[13px]">
-        <label className="flex items-center gap-2 text-ink-700">
-          <input type="checkbox" className="focus-accent rounded accent-black" />
+        <label className="flex items-center gap-2 text-inkwarm-soft">
+          <input type="checkbox" className="accent-[#C8391B]" />
           Remember me
         </label>
       </div>
 
       <button
         type="submit"
-        className="cta-lift focus-accent w-full inline-flex items-center justify-center bg-black text-white rounded-xl px-7 py-3.5 text-[14px] sm:text-[15px] font-semibold min-h-[48px]"
+        className="btn-stamp w-full px-7 py-3.5 text-[14px] sm:text-[15px] font-medium min-h-[48px]"
       >
-        Sign In
+        Sign in
+        <span aria-hidden className="font-mono text-[12px]">→</span>
       </button>
     </form>
   );

@@ -17,16 +17,18 @@ export default function LegalLayout({
     <>
       <ScrollProgress />
       <Navbar />
-      <main className="pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-24 md:pb-32">
-        <div className="max-w-[760px] mx-auto px-4 sm:px-6 md:px-8">
+      <main className="pt-[92px] sm:pt-[116px] pb-16 sm:pb-24 md:pb-32">
+        <div className="max-w-[760px] mx-auto px-5 sm:px-8">
           <Reveal>
-            <p className="eyebrow mb-4 sm:mb-5">Legal</p>
-            <h1 className="font-serif text-[32px] sm:text-[40px] md:text-[48px] leading-[1.1] tracking-[-0.02em] text-black mb-3">
+            <div className="flex items-baseline justify-between border-b rule-strong pb-3 mb-10 sm:mb-14">
+              <span className="anno">Anymus — Legal</span>
+              <span className="anno hidden sm:block">Last updated {updated}</span>
+            </div>
+            <h1 className="font-serif font-light text-[clamp(32px,5.5vw,52px)] leading-[1.05] tracking-[-0.025em] text-inkwarm mb-3">
               {title}
             </h1>
-            <p className="text-[13px] sm:text-sm text-[#71717A] mb-10 sm:mb-14">
-              Last updated {updated}
-            </p>
+            <p className="anno sm:hidden mb-10">Last updated {updated}</p>
+            <div className="hidden sm:block mb-10 sm:mb-14" />
           </Reveal>
           <div className="space-y-8 sm:space-y-10">{children}</div>
         </div>
@@ -45,10 +47,10 @@ export function LegalSection({
 }) {
   return (
     <Reveal as="section" amount={0.1}>
-      <h2 className="font-serif text-[19px] sm:text-[22px] text-black mb-3 sm:mb-4">
+      <h2 className="font-serif text-[20px] sm:text-[23px] text-inkwarm mb-3 sm:mb-4 border-t rule pt-6">
         {heading}
       </h2>
-      <div className="space-y-4 text-[14px] sm:text-[15px] text-[#52525B] leading-relaxed">
+      <div className="space-y-4 text-[14px] sm:text-[15px] text-inkwarm-soft leading-relaxed">
         {children}
       </div>
     </Reveal>

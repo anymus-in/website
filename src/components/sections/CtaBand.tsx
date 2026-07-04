@@ -2,19 +2,22 @@ import Reveal from "@/components/motion/Reveal";
 
 export default function CtaBand() {
   return (
-    <section className="relative bg-[#0F0F10] py-20 sm:py-28 md:py-[140px]">
-      <Reveal className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 md:px-8">
-        <h2 className="font-serif text-[24px] sm:text-[28px] md:text-[36px] leading-[1.12] tracking-[-0.02em] text-white mb-6 sm:mb-8 max-w-[480px]">
-          Ready to stop running your business on spreadsheets?
+    <section className="relative bg-inkwarm graph-bg-dark py-20 sm:py-28 md:py-32 overflow-hidden">
+      <Reveal className="relative z-10 flex flex-col items-center text-center px-5 sm:px-8">
+        <p className="anno anno-mark mb-6">Start</p>
+        <h2 className="font-serif font-light text-[clamp(28px,4.5vw,48px)] leading-[1.08] tracking-[-0.02em] text-sheet mb-8 sm:mb-10 max-w-[560px]">
+          Ready to stop running your business on{" "}
+          <span className="italic">spreadsheets</span>?
         </h2>
         <a
           href="/schedule-call"
-          className="cta-lift inline-flex items-center bg-white text-black rounded-full px-6 sm:px-7 py-3 sm:py-3.5 text-[14px] sm:text-[15px] font-medium tracking-[-0.01em] shadow-[var(--shadow-card)] min-h-[44px]"
+          className="btn-stamp btn-stamp-paper px-7 sm:px-9 py-4 text-[15px] font-medium tracking-[-0.01em]"
         >
-          Book a Free Consultation
+          Book a discovery call
+          <span aria-hidden className="font-mono text-[12px]">→</span>
         </a>
-        <p className="text-[13px] text-[#A1A1AA] mt-3">
-          Free 30-minute discovery call · No obligation
+        <p className="anno !text-sheet/45 mt-6">
+          Free 30-minute call · no obligation · reply &lt; 24h
         </p>
       </Reveal>
     </section>

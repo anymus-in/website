@@ -8,12 +8,12 @@ import { submitDiscoveryCall } from "./actions";
 const products = [...services.map((s) => s.name), "Not sure yet"];
 
 const fieldClass =
-  "focus-accent w-full bg-white border border-[#D4D4D1] rounded-md px-3.5 py-2.5 text-sm text-black placeholder:text-ink-400 outline-none min-h-12 transition-colors hover:border-ink-400 disabled:opacity-50 disabled:cursor-not-allowed";
+  "w-full bg-sheet-lift border rounded-[2px] px-3.5 py-2.5 text-sm text-inkwarm placeholder:text-inkwarm-faint outline-none min-h-12 transition-colors border-[rgba(28,24,18,0.16)] hover:border-[rgba(28,24,18,0.42)] focus-visible:border-mark focus-visible:shadow-[2px_2px_0_0_var(--color-mark)] disabled:opacity-50 disabled:cursor-not-allowed";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-[13px] font-medium text-ink-700 mb-1.5">{label}</span>
+      <span className="anno !text-[10px] block mb-2">{label}</span>
       {children}
     </label>
   );
@@ -58,24 +58,21 @@ export default function ScheduleCallForm() {
 
   if (status === "success") {
     return (
-      <div
-        className="relative bg-white border border-black/6 rounded-[18px] overflow-hidden p-8 sm:p-10 flex flex-col items-center text-center gap-5"
-        style={{ boxShadow: "var(--shadow-card)" }}
-      >
-        <span className="absolute top-0 left-0 right-0 h-0.75 bg-grad-amber" />
-        <div className="w-14 h-14 rounded-full bg-grad-green/10 flex items-center justify-center">
-          <CheckCircle className="w-7 h-7 text-[#1F8A56]" strokeWidth={1.8} />
+      <div className="plate relative overflow-hidden p-8 sm:p-10 flex flex-col items-center text-center gap-5">
+        <span className="absolute top-0 left-0 right-0 h-[2px] bg-mark" />
+        <div className="w-14 h-14 rounded-[2px] border rule bg-sheet flex items-center justify-center">
+          <CheckCircle className="w-7 h-7 text-live" strokeWidth={1.6} />
         </div>
         <div>
-          <p className="font-serif text-[22px] text-black mb-2">Request sent</p>
-          <p className="text-[14px] text-ink-600 leading-relaxed max-w-[320px]">
+          <p className="font-serif font-light text-[26px] text-inkwarm mb-2">Request sent</p>
+          <p className="text-[14px] text-inkwarm-soft leading-relaxed max-w-[320px]">
             We&apos;ve received your details and will follow up within 24 hours to
             schedule your call.
           </p>
         </div>
         <button
           onClick={() => setStatus("idle")}
-          className="text-[13px] font-medium text-ink-500 hover:text-black transition-colors underline underline-offset-2"
+          className="u-draw text-[13px] font-medium text-inkwarm-soft hover:text-inkwarm transition-colors"
         >
           Submit another request
         </button>
@@ -86,10 +83,9 @@ export default function ScheduleCallForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative bg-white border border-black/6 rounded-[18px] overflow-hidden p-6 sm:p-8 space-y-4 sm:space-y-5"
-      style={{ boxShadow: "var(--shadow-card)" }}
+      className="plate relative overflow-hidden p-6 sm:p-8 space-y-4 sm:space-y-5"
     >
-      <span className="absolute top-0 left-0 right-0 h-0.75 bg-grad-amber" />
+      <span className="absolute top-0 left-0 right-0 h-[2px] bg-mark" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="Full name">
@@ -154,16 +150,16 @@ export default function ScheduleCallForm() {
       </Field>
 
       {status === "error" && (
-        <div className="flex items-center gap-2.5 rounded-lg bg-red-50 border border-red-200 px-4 py-3">
-          <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
-          <p className="text-[13px] text-red-700">{errorMsg}</p>
+        <div className="flex items-center gap-2.5 rounded-[2px] bg-mark/[0.06] border border-mark/50 px-4 py-3">
+          <AlertCircle className="w-4 h-4 text-mark shrink-0" />
+          <p className="text-[13px] text-mark-deep">{errorMsg}</p>
         </div>
       )}
 
       <button
         type="submit"
         disabled={isPending}
-        className="cta-lift focus-accent w-full inline-flex items-center justify-center gap-2 bg-black text-white rounded-md px-7 py-3.5 text-[14px] sm:text-[15px] font-semibold min-h-12 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity"
+        className="btn-stamp w-full px-7 py-3.5 text-[14px] sm:text-[15px] font-medium min-h-12 disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isPending ? (
           <>
@@ -172,15 +168,13 @@ export default function ScheduleCallForm() {
           </>
         ) : (
           <>
-            Schedule My Call
+            Schedule my call
             <ArrowRight className="w-4 h-4" />
           </>
         )}
       </button>
 
-      <p className="text-[11px] sm:text-[12px] text-ink-500 text-center">
-        We typically respond within 24 hours.
-      </p>
+      <p className="anno !text-[9px] text-center block">We typically respond within 24 hours</p>
     </form>
   );
 }

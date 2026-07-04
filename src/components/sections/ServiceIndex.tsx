@@ -36,7 +36,6 @@ function ServiceSpread({ service, index }: { service: Service; index: number }) 
     stiffness: 70,
     damping: 22,
   });
-  const numeralY = useTransform(scrollYProgress, [0, 1], [40, -80]);
 
   return (
     <article
@@ -45,17 +44,6 @@ function ServiceSpread({ service, index }: { service: Service; index: number }) 
         flipped ? "graph-bg bg-sheet-deep/60" : ""
       }`}
     >
-      {/* Giant cropped numeral — the spread's anchor */}
-      <motion.span
-        aria-hidden
-        style={reduce ? undefined : { y: numeralY }}
-        className={`text-hollow pointer-events-none select-none absolute -top-[0.16em] font-serif font-light leading-none text-[clamp(200px,30vw,460px)] tracking-[-0.04em] ${
-          flipped ? "left-[-0.06em]" : "right-[-0.06em]"
-        }`}
-      >
-        {`0${index + 1}`}
-      </motion.span>
-
       <div className="relative max-w-[1380px] mx-auto px-5 sm:px-8 py-16 sm:py-24 md:py-32 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-8 items-center">
         {/* Text column */}
         <div

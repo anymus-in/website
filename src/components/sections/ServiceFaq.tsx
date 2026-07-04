@@ -20,17 +20,17 @@ export default function ServiceFaq({ faqs }: { faqs: ServiceFaqItem[] }) {
                   </h3>
                   <span
                     className={cn(
-                      "w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-colors min-h-[44px] min-w-[44px]",
-                      "data-[state=open]:bg-[#F0A23C]/12 data-[state=open]:border-[#F0A23C]/50 bg-[#F2F1ED] border-[#D4D4D1]",
+                      "w-8 h-8 rounded-[2px] border flex items-center justify-center shrink-0 transition-colors min-h-[44px] min-w-[44px]",
+                      "data-[state=open]:bg-mark/[0.08] data-[state=open]:border-mark bg-sheet-lift rule",
                     )}
                   >
-                    <Plus className="w-4 h-4 text-black group-data-[state=open]:hidden" />
-                    <Minus className="w-4 h-4 text-accent-ink hidden group-data-[state=open]:block" />
+                    <Plus className="w-4 h-4 text-inkwarm group-data-[state=open]:hidden" />
+                    <Minus className="w-4 h-4 text-mark hidden group-data-[state=open]:block" />
                   </span>
                 </Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Content className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
-                <p className="text-[13px] sm:text-[14px] text-ink-600 leading-relaxed max-w-2xl pb-4 sm:pb-5 border-l-2 border-[#F0A23C] pl-3">
+                <p className="text-[13px] sm:text-[14px] text-inkwarm-soft leading-relaxed max-w-2xl pb-4 sm:pb-5 border-l-2 border-mark pl-3">
                   {faq.answer}
                 </p>
               </Accordion.Content>

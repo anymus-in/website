@@ -29,16 +29,22 @@ export default function ScheduleCallPage() {
     <>
       <ScrollProgress />
       <Navbar />
-      <main className="pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-24 md:pb-32">
-        <div className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8">
+      <main className="pt-[92px] sm:pt-[116px] pb-16 sm:pb-24 md:pb-32">
+        <div className="max-w-[1100px] mx-auto px-5 sm:px-8">
+          <Reveal>
+            <div className="flex items-baseline justify-between border-b rule-strong pb-3 mb-10 sm:mb-14">
+              <span className="anno">Anymus — Start</span>
+              <span className="anno anno-mark hidden sm:block">Reply &lt; 24h · no obligation</span>
+            </div>
+          </Reveal>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 sm:gap-12 lg:gap-16 items-start">
             {/* Copy */}
             <Reveal className="lg:pt-3">
-              <p className="eyebrow mb-4 sm:mb-5">Get in touch</p>
-              <h1 className="font-serif font-medium text-[34px] sm:text-[42px] md:text-[48px] leading-[1.08] tracking-[-0.02em] text-black mb-4 sm:mb-5 max-w-[420px]">
-                Schedule a free discovery call
+              <h1 className="font-serif font-light text-[clamp(34px,5.5vw,56px)] leading-[1.04] tracking-[-0.025em] text-inkwarm mb-4 sm:mb-5 max-w-[440px]">
+                Schedule a free{" "}
+                <span className="italic text-mark">discovery</span> call
               </h1>
-              <p className="text-[15px] sm:text-[16px] text-[#52525B] leading-relaxed max-w-[420px] mb-8 sm:mb-10">
+              <p className="text-[14.5px] sm:text-[15.5px] text-inkwarm-soft leading-relaxed max-w-[420px] mb-8 sm:mb-10">
                 Tell us a bit about your business and what you need.
                 We&apos;ll follow up to set up a 30-minute call, no pitch,
                 just a clear next step.
@@ -47,11 +53,9 @@ export default function ScheduleCallPage() {
                 {trustPoints.map((t) => (
                   <div
                     key={t}
-                    className="flex items-center gap-2.5 text-[13px] sm:text-[14px] font-medium text-ink-700"
+                    className="flex items-center gap-3 text-[13px] sm:text-[14px] font-medium text-inkwarm border-t rule pt-3"
                   >
-                    <span className="w-5 h-5 rounded-full bg-grad-amber/15 text-accent-ink flex items-center justify-center shrink-0">
-                      <Check className="w-3 h-3" strokeWidth={2.5} />
-                    </span>
+                    <Check className="w-3.5 h-3.5 text-mark shrink-0" strokeWidth={2.5} />
                     {t}
                   </div>
                 ))}
