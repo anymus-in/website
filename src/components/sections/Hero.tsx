@@ -239,14 +239,6 @@ export default function Hero() {
 
   return (
     <section ref={ref} id="top" className="relative">
-      {/* Vertical margin note (desktop) */}
-      <span
-        aria-hidden
-        className="hidden xl:block absolute right-4 top-[220px] anno whitespace-nowrap [writing-mode:vertical-rl]"
-      >
-        Doc. 00 — Systems for operations / issued 2025
-      </span>
-
       <div className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-[92px] sm:pt-[116px]">
         {/* Document header rule */}
         <motion.div
@@ -329,16 +321,8 @@ export default function Hero() {
         >
           <motion.div style={reduce ? undefined : { y: drift }}>
             <SystemSchematic />
-            {/* Dimension line — a drafting flourish under the figure */}
-            <div className="hidden sm:flex items-center gap-4 mt-6 px-2">
-              <div className="dim-line flex-1" />
-              <span className="anno shrink-0">
-                Fig. 01 — How work moves once the system is in
-              </span>
-              <div className="dim-line flex-1" />
-            </div>
-            <p className="sm:hidden anno mt-5 text-center">
-              Fig. 01 — Work, moving on its own
+            <p className="anno mt-5 sm:mt-6 text-center">
+              Fig. 01 — How work moves once the system is in
             </p>
           </motion.div>
         </motion.div>

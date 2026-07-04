@@ -130,15 +130,12 @@ export default function BuildSheet() {
             {PHASES.map((p, i) => (
               <RevealItem key={p.title} className={i % 2 === 1 ? "lg:mt-12" : ""}>
                 <div className="group relative border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[6px_6px_0_0_rgba(200,57,27,0.9)] hover:border-mark">
-                  <span
-                    aria-hidden
-                    className="text-hollow font-serif font-light leading-[0.8] text-[64px] tracking-[-0.04em] block mb-4 group-hover:[-webkit-text-stroke-color:rgba(200,57,27,0.6)] transition-all duration-300"
-                  >
-                    {i + 1}
-                  </span>
-                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-mark block mb-2">
-                    {p.week}
-                  </span>
+                  <div className="flex items-baseline justify-between mb-4">
+                    <span className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-mark">
+                      {p.week}
+                    </span>
+                    <span className="anno !text-[9px]">{`0${i + 1}/04`}</span>
+                  </div>
                   <h3 className="font-serif text-[26px] leading-none text-inkwarm mb-3">
                     {p.title}
                   </h3>

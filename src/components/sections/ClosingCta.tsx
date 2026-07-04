@@ -80,9 +80,6 @@ export default function ClosingCta() {
             >
               Prefer writing? {CONTACT_EMAIL}
             </a>
-            <span className="anno !text-sheet/40 hidden sm:block">
-              Continued below — colophon
-            </span>
           </div>
         </Reveal>
       </div>

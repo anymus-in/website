@@ -111,15 +111,6 @@ export default function Principles() {
           ))}
         </div>
 
-        <Reveal delay={0.1}>
-          <div className="mt-10 flex items-center justify-center gap-4">
-            <span className="dim-line w-16 opacity-40 invert" aria-hidden />
-            <span className="anno !text-sheet/40">
-              Disagree with one? Good — let&rsquo;s argue about it on a call.
-            </span>
-            <span className="dim-line w-16 opacity-40 invert" aria-hidden />
-          </div>
-        </Reveal>
       </div>
     </section>
   );

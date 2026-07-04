@@ -135,9 +135,6 @@ export default function Footer() {
             © {new Date().getFullYear()} anymus
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-sheet/40">
-            Doc. 00 — rev. {new Date().getFullYear()}.07
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-sheet/40">
             Set in Newsreader &amp; JetBrains Mono
           </span>
         </div>

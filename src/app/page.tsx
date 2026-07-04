@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import Ticker from "@/components/sections/Ticker";
 import ServiceIndex from "@/components/sections/ServiceIndex";
+import Interlude from "@/components/sections/Interlude";
 import BuildSheet from "@/components/sections/BuildSheet";
 import Principles from "@/components/sections/Principles";
 import ClosingCta from "@/components/sections/ClosingCta";
@@ -33,6 +34,7 @@ export default function Home() {
         <Ticker />
         <ServiceIndex />
         <Principles />
+        <Interlude />
         <BuildSheet />
         <ClosingCta />
       </main>

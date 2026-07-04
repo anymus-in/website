@@ -148,11 +148,7 @@ function ServiceSpread({ service, index }: { service: Service; index: number }) 
               <SpreadVisual visualKey={service.visualKey} />
             </figure>
             {/* Dimension caption */}
-            <div className="flex items-center gap-4 mt-5">
-              <div className="dim-line w-10 shrink-0" />
-              <span className="anno">{`Fig. 0${index + 2} — ${FIG_CAPTIONS[service.visualKey]}`}</span>
-              <span className="anno ml-auto hidden sm:block">{`Plate ${index + 1}/3`}</span>
-            </div>
+            <p className="anno relative mt-8">{`Fig. 0${index + 2} — ${FIG_CAPTIONS[service.visualKey]}`}</p>
           </motion.div>
         </div>
       </div>
@@ -173,9 +169,6 @@ export default function ServiceIndex() {
         </Reveal>
 
         <div className="py-16 sm:py-24 text-center flex flex-col items-center">
-          <Reveal>
-            <span className="anno anno-mark block mb-6">What we build</span>
-          </Reveal>
           <LineReveal
             as="h2"
             className="font-serif font-light text-[clamp(34px,6.5vw,84px)] leading-[1.0] tracking-[-0.025em] text-inkwarm"
@@ -192,13 +185,6 @@ export default function ServiceIndex() {
               We build the site out front, the automations behind it, and the
               tools you run on — nothing stitched together after the fact.
             </p>
-          </Reveal>
-          <Reveal delay={0.35}>
-            <div className="mt-10 flex items-center gap-3" aria-hidden>
-              <span className="dim-line w-16" />
-              <span className="anno">3 plates follow</span>
-              <span className="dim-line w-16" />
-            </div>
           </Reveal>
         </div>
       </div>

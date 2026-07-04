@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import type { ServiceVisualKey } from "@/lib/services";
 
@@ -66,10 +67,24 @@ function WebsiteScene() {
             <div className="h-4 w-14 rounded-[2px] bg-inkwarm/85" />
           </div>
         </div>
-        <div className="h-4 sm:h-5 w-[75%] rounded-full bg-inkwarm/85 mb-2.5" />
-        <div className="h-4 sm:h-5 w-[52%] rounded-full bg-inkwarm/85 mb-4" />
-        <div className="h-2 w-[62%] rounded-full bg-inkwarm/15 mb-1.5" />
-        <div className="h-2 w-[48%] rounded-full bg-inkwarm/15 mb-6" />
+        <div className="flex gap-4 mb-5">
+          <div className="flex-1 min-w-0">
+            <div className="h-4 sm:h-5 w-[92%] rounded-full bg-inkwarm/85 mb-2.5" />
+            <div className="h-4 sm:h-5 w-[64%] rounded-full bg-inkwarm/85 mb-4" />
+            <div className="h-2 w-[78%] rounded-full bg-inkwarm/15 mb-1.5" />
+            <div className="h-2 w-[58%] rounded-full bg-inkwarm/15" />
+          </div>
+          {/* Real product photography inside the mock site */}
+          <div className="relative w-[38%] shrink-0 aspect-[4/3] rounded-[3px] overflow-hidden border rule">
+            <Image
+              src="/images/rack.jpg"
+              alt=""
+              fill
+              sizes="300px"
+              className="object-cover"
+            />
+          </div>
+        </div>
 
         {/* Enquiry form */}
         <div className="border rule rounded-[3px] p-4 max-w-[290px] bg-sheet-lift/70">
