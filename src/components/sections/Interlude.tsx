@@ -95,7 +95,7 @@ export default function Interlude() {
       <div className="absolute inset-x-0 bottom-0">
         <div className="max-w-[1380px] mx-auto px-5 sm:px-8 pb-10 sm:pb-14">
           <Reveal>
-            <p className="anno !text-sheet/70 mb-4">The businesses we build for</p>
+            <p className="anno !text-sheet/70 mb-4">The businesses anymus builds for</p>
             <p className="font-serif font-light text-[clamp(24px,4vw,44px)] leading-[1.12] tracking-[-0.015em] text-sheet max-w-[720px]">
               Shops, factories, clinics, agencies —{" "}
               <span className="italic">
@@ -106,7 +106,7 @@ export default function Interlude() {
         </div>
         <div className="border-t border-sheet/25">
           <div className="max-w-[1380px] mx-auto px-5 sm:px-8 py-3 flex items-baseline justify-between">
-            <span className="anno !text-sheet/50">Fig. 05 — A system, in use</span>
+            <span className="anno !text-sheet/50">Fig. 05 — An anymus system, in use</span>
             <span className="anno !text-sheet/50 hidden sm:block">
               Every day, without being asked
             </span>

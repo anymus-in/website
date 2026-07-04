@@ -401,8 +401,11 @@ export default function Hero() {
             className="lg:absolute lg:right-0 lg:top-[calc(2.5rem+0.35em)] lg:max-w-[330px] mt-9 lg:mt-0 flex flex-col items-start gap-6"
           >
             <p className="text-[15px] sm:text-[16px] text-inkwarm-soft leading-relaxed max-w-[440px] lg:max-w-none lg:border-l lg:rule lg:pl-5">
-              Websites, automations, and internal tools — designed, built, and
-              wired together around the ones you already use.{" "}
+              <span className="font-serif text-[17px] sm:text-[18px] text-inkwarm">
+                anymus
+              </span>{" "}
+              designs, builds, and wires together your websites, automations,
+              and internal tools — around the ones you already use.{" "}
               <em className="text-inkwarm not-italic font-medium">
                 One connected system,
               </em>{" "}
@@ -445,7 +448,7 @@ export default function Hero() {
           <motion.div style={reduce ? undefined : { y: drift }}>
             <SystemSchematic />
             <p className="anno mt-5 sm:mt-6 text-center">
-              Fig. 01 — How work moves once the system is in
+              Fig. 01 — How work moves once anymus is in
             </p>
           </motion.div>
         </motion.div>

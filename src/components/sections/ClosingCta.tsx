@@ -74,7 +74,7 @@ export default function ClosingCta() {
 
         <Reveal delay={0.1}>
           <div className="flex flex-col sm:flex-row items-start sm:items-baseline justify-between gap-3 border-t border-sheet/25 pt-4">
-            <span className="anno !text-sheet/40">End of document</span>
+            <span className="anno !text-sheet/40">anymus — end of document</span>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
               className="u-draw font-mono text-[11px] uppercase tracking-[0.14em] text-sheet/60 hover:text-sheet transition-colors"

@@ -24,7 +24,12 @@ function WindowChrome({ label, url }: { label: string; url?: string }) {
       ) : (
         <span className="flex-1" />
       )}
-      <span className="anno !text-[8px]">{label}</span>
+      <span className="anno !text-[8px] flex items-center gap-1.5">
+        <span className="font-serif normal-case tracking-normal text-[11px] text-inkwarm/70">
+          anymus
+        </span>
+        · {label}
+      </span>
     </div>
   );
 }

@@ -52,7 +52,7 @@ export default function Principles() {
         <Reveal>
           <div className="pt-14 sm:pt-20 pb-12 sm:pb-16 max-w-[560px]">
             <p className="font-serif font-light text-[clamp(24px,3.4vw,38px)] leading-[1.15] tracking-[-0.015em] text-sheet/85">
-              Four rules we won&rsquo;t bend —{" "}
+              Four rules anymus won&rsquo;t bend —{" "}
               <span className="italic">even when it would be easier to.</span>
             </p>
           </div>
