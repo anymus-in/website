@@ -1,3 +1,5 @@
+import { WhatsAppIcon } from "@/components/icons";
+
 const TRANSFORMS = [
   ["WhatsApp", "CRM"],
   ["Spreadsheet", "Dashboard"],
@@ -16,6 +18,9 @@ function Run() {
           <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-sheet/50 px-6 sm:px-10">
             {`№ ${String(i + 1).padStart(2, "0")}`}
           </span>
+          {from === "WhatsApp" && (
+            <WhatsAppIcon className="w-[0.62em] h-[0.62em] text-sheet/75 self-center mr-[0.18em] text-[clamp(26px,3.8vw,52px)]" />
+          )}
           <span className="font-serif font-light text-[clamp(26px,3.8vw,52px)] leading-none tracking-[-0.02em] text-sheet/75">
             {from}
           </span>

@@ -9,8 +9,10 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
+import { Globe, Phone } from "lucide-react";
 import LineReveal from "@/components/motion/LineReveal";
 import SignalTraces from "@/components/motion/SignalTraces";
+import { WhatsAppIcon } from "@/components/icons";
 
 /* ── The schematic — one enquiry travelling through the system ── */
 
@@ -60,7 +62,14 @@ function EnquiryBody({ active }: { active: boolean }) {
   return (
     <div className="space-y-1.5">
       <MiniRow active={active}>
-        <span className={`${mono} text-inkwarm`}>WhatsApp</span>
+        <span className="flex items-center gap-1.5 min-w-0">
+          <WhatsAppIcon
+            className={`w-3 h-3 shrink-0 transition-colors duration-500 ${
+              active ? "text-[#25D366]" : "text-inkwarm-soft"
+            }`}
+          />
+          <span className={`${mono} text-inkwarm`}>WhatsApp</span>
+        </span>
         <span
           className={`${mono} text-mark transition-opacity duration-500 ${
             active ? "opacity-100" : "opacity-0"
@@ -70,11 +79,17 @@ function EnquiryBody({ active }: { active: boolean }) {
         </span>
       </MiniRow>
       <MiniRow>
-        <span className={`${mono} text-inkwarm-soft`}>Website</span>
+        <span className="flex items-center gap-1.5">
+          <Globe className="w-3 h-3 text-inkwarm-soft shrink-0" strokeWidth={1.8} aria-hidden />
+          <span className={`${mono} text-inkwarm-soft`}>Website</span>
+        </span>
         <span aria-hidden className="w-1 h-1 rounded-full bg-hairline" />
       </MiniRow>
       <MiniRow>
-        <span className={`${mono} text-inkwarm-soft`}>Phone</span>
+        <span className="flex items-center gap-1.5">
+          <Phone className="w-3 h-3 text-inkwarm-soft shrink-0" strokeWidth={1.8} aria-hidden />
+          <span className={`${mono} text-inkwarm-soft`}>Phone</span>
+        </span>
         <span aria-hidden className="w-1 h-1 rounded-full bg-hairline" />
       </MiniRow>
     </div>

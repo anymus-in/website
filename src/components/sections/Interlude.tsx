@@ -4,11 +4,12 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Reveal from "@/components/motion/Reveal";
+import { WhatsAppIcon } from "@/components/icons";
 
 const SYSTEM_EVENTS = [
-  "Sale recorded — ₹2,340",
-  "Inventory −2 · reorder point checked",
-  "Receipt sent on WhatsApp · ledger updated",
+  { text: "Sale recorded — ₹2,340" },
+  { text: "Inventory −2 · reorder point checked" },
+  { text: "Receipt sent on WhatsApp · ledger updated", icon: WhatsAppIcon },
 ];
 
 /* What the system did during this checkout — annotated over the photo */
@@ -33,7 +34,7 @@ function SystemAnnotations() {
         <div className="space-y-2.5">
           {SYSTEM_EVENTS.map((e, i) => (
             <motion.div
-              key={e}
+              key={e.text}
               initial={reduce ? {} : { opacity: 0, x: 14 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.6 }}
@@ -44,8 +45,10 @@ function SystemAnnotations() {
               }}
               className="border border-sheet/25 bg-inkwarm/70 backdrop-blur-sm rounded-[2px] px-3.5 py-2.5"
             >
-              <span className="font-mono text-[10px] text-sheet/85 leading-snug">
-                <span className="text-mark">✓</span> {e}
+              <span className="flex items-center gap-1.5 font-mono text-[10px] text-sheet/85 leading-snug">
+                <span className="text-mark">✓</span>
+                {e.icon && <e.icon className="w-3 h-3 text-[#25D366] shrink-0" />}
+                {e.text}
               </span>
             </motion.div>
           ))}

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
+import { WhatsAppIcon } from "@/components/icons";
 import type { ServiceVisualKey } from "@/lib/services";
 
 /* Richer homepage-only product scenes. Each fills its plate edge-to-edge
@@ -191,7 +192,8 @@ function AutomationScene() {
           {/* The conversation being handled */}
           <div className="hidden sm:flex flex-col border rule rounded-[3px] bg-sheet-lift/60 p-3 min-h-0">
             <div className="flex items-center justify-between border-b rule pb-2 mb-3">
-              <span className="font-mono text-[8.5px] uppercase tracking-[0.12em] text-inkwarm-soft">
+              <span className="flex items-center gap-1.5 font-mono text-[8.5px] uppercase tracking-[0.12em] text-inkwarm-soft">
+                <WhatsAppIcon className="w-3 h-3 text-[#25D366] shrink-0" />
                 WhatsApp · Mehta Textiles
               </span>
               <span className="anno !text-[8px]">Live thread</span>
