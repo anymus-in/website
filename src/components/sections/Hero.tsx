@@ -1,463 +1,253 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import {
-  Bell,
-  Box,
-  ChevronDown,
-  GitBranch,
-  LayoutGrid,
-  Lock,
-  Package,
-  Phone,
-  Plus,
-  Search,
-  Settings,
-  TrendingUp,
-  Zap,
-  ClipboardCheck,
-} from "lucide-react";
-import { motion, type Variants } from "framer-motion";
-import Highlight from "@/components/motion/Highlight";
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
 
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.13, delayChildren: 0.08 } },
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
 };
-const line: Variants = {
-  hidden: { opacity: 0, y: 24 },
+const rise: Variants = {
+  hidden: { opacity: 0, y: 26 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 
-const trustBadgesMobile = [
-  { icon: Phone, label: "Free discovery call" },
-  { icon: Box, label: "Built around your existing tools" },
-  { icon: Lock, label: "No long-term lock-in" },
+/* ── The schematic — how work moves once the system is in ── */
+
+const STAGES = [
+  {
+    key: "capture",
+    title: "Enquiry",
+    lines: ["WhatsApp", "Website", "Phone"],
+    note: "Every channel, captured",
+  },
+  {
+    key: "crm",
+    title: "CRM",
+    lines: ["One record", "Assigned owner", "Full history"],
+    note: "Nothing lives in an inbox",
+  },
+  {
+    key: "automation",
+    title: "Automation",
+    lines: ["Routed", "Followed up", "Escalated"],
+    note: "No one has to remember",
+  },
+  {
+    key: "dashboard",
+    title: "Dashboard",
+    lines: ["Live pipeline", "Real numbers", "One truth"],
+    note: "Decisions on data",
+  },
 ];
 
-const modules = [
-  { label: "Overview", icon: LayoutGrid, count: null, active: true },
-  { label: "Pipeline", icon: GitBranch, count: "59", active: false },
-  { label: "Inventory", icon: Package, count: "312", active: false },
-  { label: "Automations", icon: Zap, count: "12", active: false },
-  { label: "Approvals", icon: ClipboardCheck, count: "7", active: false },
+const FEED: { t: string; text: string; stage: number }[] = [
+  { t: "10:42", text: "Enquiry via WhatsApp — Mehta Textiles", stage: 0 },
+  { t: "10:42", text: "Contact created in CRM · assigned to Priya", stage: 1 },
+  { t: "10:43", text: "Follow-up scheduled · quote drafted", stage: 2 },
+  { t: "10:44", text: "Pipeline updated · ₹1.4L added", stage: 3 },
+  { t: "10:51", text: "Enquiry via website form — Sharma Traders", stage: 0 },
+  { t: "10:51", text: "Duplicate check passed · record created", stage: 1 },
+  { t: "10:52", text: "Intro message sent automatically", stage: 2 },
+  { t: "10:52", text: "Dashboard refreshed · 2 new this hour", stage: 3 },
 ];
 
-const kpis = [
-  { label: "Total Revenue", value: "₹2,84,500", trend: "+12%", icon: TrendingUp, accent: "text-grad-blue" },
-  { label: "Open Deals", value: "34", trend: "+5", icon: GitBranch, accent: "text-grad-amber" },
-  { label: "Inventory Value", value: "₹96,200", trend: "+3%", icon: Package, accent: "text-grad-green" },
-  { label: "Approvals Cleared", value: "21", trend: "+8", icon: ClipboardCheck, accent: "text-grad-blue" },
-];
-
-const timeRanges = ["7D", "30D", "90D"];
-
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
-const revenueBars = [42, 55, 48, 64, 72, 80, 95];
-
-const pipelineStages = [
-  { label: "New", count: 24, total: 24 },
-  { label: "Qualified", count: 16, total: 24 },
-  { label: "Proposal", count: 9, total: 24 },
-  { label: "Won", count: 5, total: 24 },
-];
-
-const approvals = [
-  { name: "Supplier payment: Patel & Sons", initials: "PS", status: "Pending", time: "2h ago" },
-  { name: "Staff advance: R. Kumar", initials: "RK", status: "Pending", time: "5h ago" },
-  { name: "GST invoice: Sharma Traders", initials: "ST", status: "Approved", time: "1d ago" },
-];
-
-const activity = [
-  { actor: "Anita", initials: "AN", action: "moved", target: "Mehta Textiles deal to Proposal", time: "12m ago" },
-  { actor: "Automation", initials: "⚡", action: "synced", target: "248 SKUs from Tally", time: "34m ago" },
-  { actor: "Rohan", initials: "RJ", action: "approved", target: "GST invoice #4471", time: "1h ago" },
-];
-
-/* Enterprise dashboard mockup — the hero centerpiece visual */
-function EnterpriseDashboard({ compact = false }: { compact?: boolean }) {
+function StageCard({
+  stage,
+  active,
+  index,
+}: {
+  stage: (typeof STAGES)[number];
+  active: boolean;
+  index: number;
+}) {
   return (
     <div
-      className="relative rounded-[24px] sm:rounded-[28px] bg-paper border border-black/[0.06] p-2 sm:p-3 overflow-hidden"
-      style={{ boxShadow: "var(--shadow-deep)" }}
+      className={`relative flex-1 border rounded-[2px] px-4 py-3.5 sm:px-5 sm:py-4 transition-colors duration-500 ${
+        active ? "border-mark bg-sheet-lift" : "rule bg-sheet-lift/60"
+      }`}
     >
-      <div className="relative rounded-[18px] sm:rounded-[22px] overflow-hidden border border-[#E4E4E1] bg-white flex flex-col">
-        <div className="h-[3px] bg-gradient-to-r from-grad-amber via-grad-green to-grad-blue w-full shrink-0" />
-
-        {/* Top app bar */}
-        <div className="flex items-center justify-between gap-3 sm:gap-5 px-4 sm:px-7 py-3 sm:py-4 border-b border-[#E4E4E1] shrink-0">
-          <div className="flex items-center gap-5 sm:gap-7 shrink-0">
-            <div className="flex items-center gap-2">
-              <div className="flex items-end gap-[2px]">
-                {[3, 5, 7, 5, 3].map((h, i) => (
-                  <div
-                    key={i}
-                    className="w-[2px] rounded-full bg-black"
-                    style={{ height: h * 1.8 }}
-                  />
-                ))}
-              </div>
-              <span className="font-serif text-[13px] sm:text-[15px] text-black">
-                anymus
-              </span>
-            </div>
-            <div className="hidden xl:flex items-center gap-5 text-[12px] font-medium">
-              {["Overview", "Pipeline", "Inventory", "Reports"].map((t, i) => (
-                <span key={t} className={i === 0 ? "text-black" : "text-ink-400"}>
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="hidden md:flex items-center gap-2 bg-[#F7F7F5] rounded-full px-3.5 py-2 w-full max-w-[260px]">
-            <Search className="w-3.5 h-3.5 text-ink-500 shrink-0" />
-            <span className="text-[12px] text-ink-500">Search...</span>
-          </div>
-          <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-            <Bell className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-ink-700" />
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-grad-amber to-grad-blue" />
-          </div>
-        </div>
-
-        <div className="flex flex-col lg:flex-row">
-          {/* Sidebar */}
-          <div className="hidden lg:flex w-56 bg-[#18181B] shrink-0 flex-col p-4 pt-6">
-            <button className="flex items-center justify-center gap-1.5 bg-zinc-700/60 text-white text-[12px] font-medium rounded-lg py-2.5 mb-5">
-              <Plus className="w-3.5 h-3.5" />
-              New record
-            </button>
-            {modules.map((m) => (
-              <div
-                key={m.label}
-                className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg mb-1 text-[12px] ${
-                  m.active ? "bg-zinc-700 text-white" : "text-zinc-500"
-                }`}
-              >
-                <m.icon className="w-3.5 h-3.5 shrink-0" />
-                <span className="flex-1">{m.label}</span>
-                {m.count && (
-                  <span className="text-[10px] text-zinc-500">{m.count}</span>
-                )}
-              </div>
-            ))}
-            <div className="flex-1" />
-            <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-[12px] text-zinc-500 border-t border-zinc-700/60 mt-2 pt-4">
-              <Settings className="w-3.5 h-3.5 shrink-0" />
-              <span className="flex-1">Settings</span>
-            </div>
-            <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-grad-amber to-grad-blue shrink-0" />
-              <span className="text-[11px] text-zinc-300 truncate">Priya Sharma</span>
-            </div>
-          </div>
-
-          {/* Main panel */}
-          <div className="flex-1 bg-white p-5 sm:p-8 md:p-10 min-w-0">
-            <div className="flex items-center justify-between mb-6 sm:mb-7">
-              <div>
-                <p className="text-[11px] text-ink-400 mb-1">Overview</p>
-                <p className="text-[17px] sm:text-[20px] font-semibold text-black">
-                  Revenue overview
-                </p>
-              </div>
-              <div className="flex items-center gap-2.5 shrink-0">
-                <div className="hidden sm:flex items-center gap-1 bg-[#F7F7F5] rounded-full p-1">
-                  {timeRanges.map((r, i) => (
-                    <span
-                      key={r}
-                      className={`text-[11px] font-medium rounded-full px-2.5 py-1 ${
-                        i === 1 ? "bg-white text-black shadow-sm" : "text-ink-500"
-                      }`}
-                    >
-                      {r}
-                    </span>
-                  ))}
-                </div>
-                <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-[12px] text-ink-500 bg-[#F7F7F5] rounded-full px-3 py-1.5">
-                  <motion.span
-                    className="w-1.5 h-1.5 rounded-full bg-[#1F8A56]"
-                    animate={{ opacity: [1, 0.25, 1], scale: [1, 0.8, 1] }}
-                    transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  Live
-                </span>
-              </div>
-            </div>
-
-            {/* KPI row */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-7 sm:mb-9">
-              {kpis.map((k) => (
-                <div
-                  key={k.label}
-                  className="bg-[#F7F7F5] rounded-xl px-3.5 sm:px-4 py-3.5 sm:py-4"
-                >
-                  <div className="flex items-center justify-between mb-2.5">
-                    <p className="text-[9px] sm:text-[10px] text-ink-500 truncate">
-                      {k.label}
-                    </p>
-                    <k.icon className={`w-3.5 h-3.5 sm:w-3 sm:h-3 ${k.accent} shrink-0`} />
-                  </div>
-                  <div className="flex items-baseline gap-1.5">
-                    <p className="text-[16px] sm:text-[20px] font-semibold text-black">
-                      {k.value}
-                    </p>
-                    <span className="inline-flex items-center gap-0.5 text-[9px] sm:text-[10px] font-medium text-[#1F8A56] shrink-0">
-                      <TrendingUp className="w-3 h-3 sm:w-2.5 sm:h-2.5" />
-                      {k.trend}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Chart */}
-            <div className="relative mb-7 sm:mb-9">
-              <div className="absolute left-0 top-0 w-9 sm:w-10 h-32 sm:h-44 flex flex-col justify-between text-right pr-1">
-                <span className="text-[9px] sm:text-[10px] text-ink-400">₹1L</span>
-                <span className="text-[9px] sm:text-[10px] text-ink-400">₹50k</span>
-                <span className="text-[9px] sm:text-[10px] text-ink-400">₹0</span>
-              </div>
-              <div className="absolute left-9 sm:left-10 right-0 top-0 h-32 sm:h-44 flex flex-col justify-between pointer-events-none">
-                <div className="h-px bg-[#F0F0EE]" />
-                <div className="h-px bg-[#F0F0EE]" />
-                <div className="h-px bg-[#F0F0EE]" />
-              </div>
-              <motion.div
-                className="flex items-end gap-2.5 sm:gap-4 h-32 sm:h-44 pl-9 sm:pl-10"
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.5 }}
-                variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
-              >
-                {revenueBars.map((h, i) => (
-                  <motion.div
-                    key={i}
-                    className="flex-1 relative group"
-                    variants={{
-                      hidden: { scaleY: 0 },
-                      show: {
-                        scaleY: 1,
-                        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-                      },
-                    }}
-                    style={{ height: `${h}%`, transformOrigin: "bottom" }}
-                  >
-                    {i === revenueBars.length - 1 && (
-                      <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-black text-white text-[9px] font-medium rounded-md px-2 py-1 whitespace-nowrap">
-                        ₹95k
-                      </div>
-                    )}
-                    <div
-                      className={`w-full h-full rounded-t-sm ${
-                        i === revenueBars.length - 1 ? "bg-grad-blue" : "bg-[#E4E4E1]"
-                      }`}
-                    />
-                  </motion.div>
-                ))}
-              </motion.div>
-              <div className="flex gap-2.5 sm:gap-4 pl-9 sm:pl-10 mt-1.5">
-                {months.map((m) => (
-                  <span
-                    key={m}
-                    className="flex-1 text-center text-[9px] sm:text-[10px] text-ink-500"
-                  >
-                    {m}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {!compact && (
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
-                {/* Pipeline */}
-                <div>
-                  <p className="text-[11px] sm:text-[12px] font-semibold text-black mb-2.5 sm:mb-3">
-                    Pipeline
-                  </p>
-                  <div className="space-y-2">
-                    {pipelineStages.map((s) => (
-                      <div key={s.label}>
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-[10px] sm:text-[11px] text-ink-700">
-                            {s.label}
-                          </span>
-                          <span className="text-[10px] sm:text-[11px] font-semibold text-black">
-                            {s.count}
-                          </span>
-                        </div>
-                        <div className="h-1.5 rounded-full bg-[#F0F0EE] overflow-hidden">
-                          <div
-                            className="h-full rounded-full bg-grad-blue"
-                            style={{ width: `${(s.count / s.total) * 100}%` }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Approvals */}
-                <div>
-                  <p className="text-[11px] sm:text-[12px] font-semibold text-black mb-2.5 sm:mb-3">
-                    Approvals
-                  </p>
-                  <div className="space-y-1.5">
-                    {approvals.map((a) => (
-                      <div
-                        key={a.name}
-                        className="flex items-center gap-2 bg-[#F7F7F5] rounded-lg px-2.5 py-2"
-                      >
-                        <div className="w-5 h-5 rounded-full bg-zinc-200 text-zinc-600 text-[8px] font-semibold flex items-center justify-center shrink-0">
-                          {a.initials}
-                        </div>
-                        <span className="text-[10px] sm:text-[11px] text-ink-700 truncate flex-1">
-                          {a.name}
-                        </span>
-                        <span
-                          className={`text-[9px] font-medium px-2 py-0.5 rounded-full text-ink-700 shrink-0 ${
-                            a.status === "Approved" ? "bg-grad-green/20" : "bg-grad-amber/25"
-                          }`}
-                        >
-                          {a.status}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Activity feed */}
-                <div>
-                  <div className="flex items-center justify-between mb-2.5 sm:mb-3">
-                    <p className="text-[11px] sm:text-[12px] font-semibold text-black">
-                      Recent activity
-                    </p>
-                    <ChevronDown className="w-3 h-3 text-ink-400" />
-                  </div>
-                  <div className="space-y-1.5">
-                    {activity.map((a) => (
-                      <div key={a.target} className="flex items-start gap-2 px-2.5 py-2">
-                        <div className="w-5 h-5 rounded-full bg-grad-blue/15 text-grad-blue text-[8px] font-semibold flex items-center justify-center shrink-0 mt-0.5">
-                          {a.initials}
-                        </div>
-                        <p className="text-[10px] sm:text-[11px] text-ink-700 leading-snug">
-                          <span className="font-medium text-black">{a.actor}</span>{" "}
-                          {a.action} {a.target}
-                          <span className="text-ink-400"> · {a.time}</span>
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+      <div className="flex items-baseline justify-between mb-2.5">
+        <span
+          className={`anno !text-[9px] transition-colors duration-500 ${
+            active ? "text-mark" : ""
+          }`}
+        >
+          {`0${index + 1}`}
+        </span>
+        <span
+          aria-hidden
+          className={`w-1.5 h-1.5 rounded-full transition-colors duration-500 ${
+            active ? "bg-mark live-dot" : "bg-hairline"
+          }`}
+        />
       </div>
+      <p className="font-serif text-[17px] sm:text-[19px] leading-none text-inkwarm mb-2.5">
+        {stage.title}
+      </p>
+      <ul className="space-y-1">
+        {stage.lines.map((l) => (
+          <li
+            key={l}
+            className="text-[10.5px] sm:text-[11px] font-mono text-inkwarm-soft leading-snug"
+          >
+            {l}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
+function SystemSchematic() {
+  const reduce = useReducedMotion();
+  const [tick, setTick] = useState(0);
+
+  useEffect(() => {
+    if (reduce) return;
+    const id = setInterval(() => setTick((t) => t + 1), 2600);
+    return () => clearInterval(id);
+  }, [reduce]);
+
+  const event = FEED[tick % FEED.length];
+  const activeStage = reduce ? 3 : event.stage;
+
+  return (
+    <figure className="reg-marks border rule bg-sheet-deep/40 p-4 sm:p-6 md:p-8">
+      <span aria-hidden className="reg reg-tl" />
+      <span aria-hidden className="reg reg-tr" />
+      <span aria-hidden className="reg reg-bl" />
+      <span aria-hidden className="reg reg-br" />
+
+      {/* Stage flow */}
+      <div className="flex flex-col md:flex-row md:items-stretch gap-0">
+        {STAGES.map((s, i) => (
+          <div key={s.key} className="contents">
+            <StageCard stage={s} active={activeStage === i} index={i} />
+            {i < STAGES.length - 1 && (
+              <>
+                {/* Horizontal connector (desktop) */}
+                <div className="hidden md:flex items-center w-10 lg:w-14 shrink-0 px-1">
+                  <div className="flow-line w-full" />
+                </div>
+                {/* Vertical connector (mobile) */}
+                <div className="md:hidden flex justify-center h-7">
+                  <div className="flow-line-y h-full" />
+                </div>
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Live feed */}
+      <div className="mt-5 sm:mt-6 border-t rule pt-3.5 flex items-center gap-3 sm:gap-4 overflow-hidden">
+        <span className="inline-flex items-center gap-1.5 shrink-0">
+          <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-live live-dot" />
+          <span className="anno !text-[9px] !text-live">Live</span>
+        </span>
+        <div className="relative flex-1 h-[16px]">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={reduce ? "static" : tick}
+              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? { opacity: 1 } : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="absolute inset-0 font-mono text-[10.5px] sm:text-[11.5px] text-inkwarm-soft whitespace-nowrap overflow-hidden text-ellipsis leading-[16px]"
+            >
+              <span className="text-inkwarm-faint">{event.t}</span>
+              {"  —  "}
+              {event.text}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+        <span className="anno !text-[9px] hidden sm:block shrink-0">
+          {STAGES[activeStage].note}
+        </span>
+      </div>
+
+      <figcaption className="mt-3.5 flex items-center justify-between">
+        <span className="anno">Fig. 01 — How work moves once the system is in</span>
+        <span className="anno hidden sm:block">Scale — one enquiry, zero touches</span>
+      </figcaption>
+    </figure>
+  );
+}
+
+/* ── Hero ── */
+
 export default function Hero() {
   return (
-    <section
-      className="relative bg-white overflow-hidden dot-grid"
-      style={{ background: "var(--gradient-hero-bg)" }}
-    >
-      {/* Text content */}
+    <section className="relative overflow-hidden">
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative z-10 flex flex-col items-center text-center px-6 pt-24 md:pt-40 max-w-4xl mx-auto"
+        className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-[96px] sm:pt-[120px]"
       >
-        <motion.p variants={line} className="eyebrow mb-3 md:mb-5">
-          Digital Presence · Automation · Internal Systems
-        </motion.p>
-        <motion.h1
-          variants={line}
-          className="font-serif font-normal text-[clamp(26px,7vw,34px)] md:text-[clamp(32px,6vw,68px)] leading-[1.25] md:leading-[1.18] tracking-[-0.01em] md:tracking-[-1px] text-black mb-5 md:mb-4 max-w-[320px] md:max-w-3xl"
-        >
-          Build the <Highlight color="#5F44E0">systems</Highlight> that
-          <br />
-          help your business scale
-        </motion.h1>
-        <motion.p
-          variants={line}
-          className="text-[14px] md:text-[15px] mb-8 md:mb-9 max-w-[320px] md:max-w-xl text-ink-500 md:text-[#5f6368] leading-relaxed"
-        >
-          <span style={{ color: "#5F44E0" }}>Anymus</span> designs and builds
-          the websites, automations, and internal tools that save your team
-          time, tighten operations, and turn more enquiries into customers,
-          built around the tools you already use.
-        </motion.p>
-
+        {/* Document header rule */}
         <motion.div
-          variants={line}
-          className="flex flex-col items-center gap-3.5 md:flex-row md:gap-4  md:mb-8 w-full md:w-auto"
+          variants={rise}
+          className="flex items-baseline justify-between border-b rule-strong pb-3 mb-10 sm:mb-14"
         >
-          <a
-            href="/schedule-call"
-            className="cta-lift inline-flex w-full md:w-auto items-center justify-center gap-2 bg-black text-white rounded-full px-7 py-4 md:py-3.5 text-[15px] font-medium tracking-[-0.01em] shadow-[var(--shadow-card)] min-h-[50px] md:min-h-[44px]"
-          >
-            Book a Free Consultation
-          </a>
-          <a
-            href="#process"
-            className="focus-accent inline-flex items-center justify-center gap-1.5 text-ink-500 text-[13px] md:text-[15px] font-medium tracking-[-0.01em] py-2 md:py-3.5 md:px-7 md:text-black md:border md:border-[#D4D4D1] md:rounded-full md:w-auto hover:text-black md:hover:bg-[#F2F1ED] transition-colors md:min-h-[44px]"
-          >
-            See How It Works
-          </a>
+          <span className="anno">Anymus — Websites · Automation · Internal systems</span>
+          <span className="anno anno-mark hidden sm:block">Doc. 00 / Index</span>
         </motion.div>
 
-        <motion.div variants={line} className="w-full">
-          {/* Mobile — icon badges */}
-          <div className="flex md:hidden items-start justify-center gap-3">
-            {/* {trustBadgesMobile.map((t) => (
-              <div key={t.label} className="flex-1 flex items-center gap-2">
-                <div className="w-9 h-9 rounded-xl bg-[#EFE9FB] text-[#5F44E0] flex items-center justify-center shrink-0">
-                  <t.icon className="w-4 h-4" />
-                </div>
-                <span className="text-[11px] text-ink-700 leading-snug">
-                  {t.label}
-                </span>
-              </div>
-            ))} */}
-          </div>
-          {/* Desktop — unchanged */}
-          <div className="hidden md:flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[12px] sm:text-[13px] text-ink-500">
-            {trustBadgesMobile.map((t) => (
-              <span key={t.label} className="inline-flex items-center gap-1.5">
-                <t.icon className="w-3.5 h-3.5 text-grad-green" />
-                {t.label}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-      </motion.div>
+        <div className="max-w-[1080px]">
+          <motion.h1
+            variants={rise}
+            className="font-serif font-light text-[clamp(42px,9.5vw,104px)] leading-[1.02] tracking-[-0.025em] text-inkwarm mb-7 sm:mb-9"
+          >
+            We build the system
+            <br />
+            your business{" "}
+            <em className="font-normal not-italic">
+              <span className="italic text-mark">runs</span>
+            </em>{" "}
+            on.
+          </motion.h1>
 
-      {/* Dashboard mockup — business outcomes visual */}
-      <motion.div
-        initial={{ opacity: 0, y: 28, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ delay: 0.6, duration: 0.9, ease: [0.22, 1, 0.36, 1] as const }}
-        className="relative z-10 w-full max-w-[1320px] mx-auto px-4 sm:px-6 mt-10 md:mt-6 mb-14 md:mb-24"
-      >
-        {/* Desktop — full dashboard, unchanged */}
-        <div className="hidden md:block">
-          <EnterpriseDashboard />
+          <motion.div
+            variants={rise}
+            className="flex flex-col md:flex-row md:items-end gap-7 md:gap-14 mb-12 sm:mb-16"
+          >
+            <p className="text-[15px] sm:text-[16.5px] text-inkwarm-soft leading-relaxed max-w-[520px]">
+              Websites, automations, and internal tools — designed, built, and
+              wired together around the tools you already use. One connected
+              system, instead of ten disconnected apps and a very tired team.
+            </p>
+            <div className="flex items-center gap-6 sm:gap-8 shrink-0">
+              <a
+                href="/schedule-call"
+                className="btn-stamp px-6 sm:px-7 py-3.5 text-[14px] sm:text-[15px] font-medium tracking-[-0.01em]"
+              >
+                Book a discovery call
+                <span aria-hidden className="font-mono text-[12px]">→</span>
+              </a>
+              <a
+                href="#index"
+                className="u-draw text-[14px] font-medium text-inkwarm hidden sm:inline-block"
+              >
+                Browse the index ↓
+              </a>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Mobile — premium showcase preview, ~90% width, gently floating */}
-        <motion.div
-          className="md:hidden w-[90%] mx-auto rounded-[28px]"
-          style={{ filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.12))" }}
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <EnterpriseDashboard compact />
+        {/* Fig. 01 — the schematic */}
+        <motion.div variants={rise} className="pb-16 sm:pb-24 px-1.5 sm:px-0">
+          <SystemSchematic />
         </motion.div>
       </motion.div>
     </section>
