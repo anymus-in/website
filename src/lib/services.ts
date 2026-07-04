@@ -4,8 +4,7 @@ import { Globe, LayoutGrid, Workflow } from "lucide-react";
 /**
  * Canonical service definitions — the single source of truth shared by the
  * service detail pages, the services hub, the sitemap, JSON-LD, and internal
- * links. Keep marketing copy here consistent with the homepage FeatureBlocks
- * section.
+ * links. Keep marketing copy here consistent with the homepage service index.
  */
 export interface ServiceOutcome {
   title: string;

@@ -1,465 +1,458 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import {
-  Bell,
-  Box,
-  ChevronDown,
-  GitBranch,
-  LayoutGrid,
-  Lock,
-  Package,
-  Phone,
-  Plus,
-  Search,
-  Settings,
-  TrendingUp,
-  Zap,
-  ClipboardCheck,
-} from "lucide-react";
-import { motion, type Variants } from "framer-motion";
-import Highlight from "@/components/motion/Highlight";
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import { Globe, Phone } from "lucide-react";
+import LineReveal from "@/components/motion/LineReveal";
+import SignalTraces from "@/components/motion/SignalTraces";
+import { WhatsAppIcon } from "@/components/icons";
 
-const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.13, delayChildren: 0.08 } },
-};
-const line: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
+/* ── The schematic — one enquiry travelling through the system ── */
 
-const trustBadgesMobile = [
-  { icon: Phone, label: "Free discovery call" },
-  { icon: Box, label: "Built around your existing tools" },
-  { icon: Lock, label: "No long-term lock-in" },
+const FEED: { t: string; text: string; stage: number }[] = [
+  { t: "10:42", text: "Enquiry via WhatsApp — Mehta Textiles", stage: 0 },
+  { t: "10:42", text: "Contact created in CRM · assigned to Priya", stage: 1 },
+  { t: "10:43", text: "Follow-up scheduled · quote drafted", stage: 2 },
+  { t: "10:44", text: "Pipeline updated · ₹1.4L added", stage: 3 },
+  { t: "10:51", text: "Enquiry via website form — Sharma Traders", stage: 0 },
+  { t: "10:51", text: "Duplicate check passed · record created", stage: 1 },
+  { t: "10:52", text: "AI-drafted intro sent after review", stage: 2 },
+  { t: "10:52", text: "Dashboard refreshed · 2 new this hour", stage: 3 },
 ];
 
-const modules = [
-  { label: "Overview", icon: LayoutGrid, count: null, active: true },
-  { label: "Pipeline", icon: GitBranch, count: "59", active: false },
-  { label: "Inventory", icon: Package, count: "312", active: false },
-  { label: "Automations", icon: Zap, count: "12", active: false },
-  { label: "Approvals", icon: ClipboardCheck, count: "7", active: false },
+const STAGE_META = [
+  { title: "Enquiry", verb: "capture", metric: "3 new today", note: "Every channel, captured" },
+  { title: "CRM", verb: "record", metric: "1,204 records", note: "Nothing lives in an inbox" },
+  { title: "Automation", verb: "act", metric: "12 rules live", note: "No one has to remember" },
+  { title: "Dashboard", verb: "see", metric: "one truth", note: "Decisions on data" },
 ];
 
-const kpis = [
-  { label: "Total Revenue", value: "₹2,84,500", trend: "+12%", icon: TrendingUp, accent: "text-grad-blue" },
-  { label: "Open Deals", value: "34", trend: "+5", icon: GitBranch, accent: "text-grad-amber" },
-  { label: "Inventory Value", value: "₹96,200", trend: "+3%", icon: Package, accent: "text-grad-green" },
-  { label: "Approvals Cleared", value: "21", trend: "+8", icon: ClipboardCheck, accent: "text-grad-blue" },
-];
-
-const timeRanges = ["7D", "30D", "90D"];
-
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
-const revenueBars = [42, 55, 48, 64, 72, 80, 95];
-
-const pipelineStages = [
-  { label: "New", count: 24, total: 24 },
-  { label: "Qualified", count: 16, total: 24 },
-  { label: "Proposal", count: 9, total: 24 },
-  { label: "Won", count: 5, total: 24 },
-];
-
-const approvals = [
-  { name: "Supplier payment: Patel & Sons", initials: "PS", status: "Pending", time: "2h ago" },
-  { name: "Staff advance: R. Kumar", initials: "RK", status: "Pending", time: "5h ago" },
-  { name: "GST invoice: Sharma Traders", initials: "ST", status: "Approved", time: "1d ago" },
-];
-
-const activity = [
-  { actor: "Anita", initials: "AN", action: "moved", target: "Mehta Textiles deal to Proposal", time: "12m ago" },
-  { actor: "Automation", initials: "⚡", action: "synced", target: "248 SKUs from Tally", time: "34m ago" },
-  { actor: "Rohan", initials: "RJ", action: "approved", target: "GST invoice #4471", time: "1h ago" },
-];
-
-/* Enterprise dashboard mockup — the hero centerpiece visual */
-function EnterpriseDashboard({ compact = false }: { compact?: boolean }) {
+/* A mini interface row inside a stage card */
+function MiniRow({
+  active,
+  className,
+  children,
+}: {
+  active?: boolean;
+  className?: string;
+  children: React.ReactNode;
+}) {
   return (
     <div
-      className="relative rounded-[24px] sm:rounded-[28px] bg-paper border border-black/[0.06] p-2 sm:p-3 overflow-hidden"
-      style={{ boxShadow: "var(--shadow-deep)" }}
+      className={`flex items-center justify-between gap-2 h-[26px] px-2.5 border rounded-[2px] transition-colors duration-500 ${
+        active ? "border-mark/70 bg-mark/[0.06]" : "rule bg-white/50"
+      } ${className ?? ""}`}
     >
-      <div className="relative rounded-[18px] sm:rounded-[22px] overflow-hidden border border-[#E4E4E1] bg-white flex flex-col">
-        <div className="h-[3px] bg-gradient-to-r from-grad-amber via-grad-green to-grad-blue w-full shrink-0" />
+      {children}
+    </div>
+  );
+}
 
-        {/* Top app bar */}
-        <div className="flex items-center justify-between gap-3 sm:gap-5 px-4 sm:px-7 py-3 sm:py-4 border-b border-[#E4E4E1] shrink-0">
-          <div className="flex items-center gap-5 sm:gap-7 shrink-0">
-            <div className="flex items-center gap-2">
-              <div className="flex items-end gap-[2px]">
-                {[3, 5, 7, 5, 3].map((h, i) => (
-                  <div
-                    key={i}
-                    className="w-[2px] rounded-full bg-black"
-                    style={{ height: h * 1.8 }}
-                  />
-                ))}
-              </div>
-              <span className="font-serif text-[13px] sm:text-[15px] text-black">
-                anymus
-              </span>
-            </div>
-            <div className="hidden xl:flex items-center gap-5 text-[12px] font-medium">
-              {["Overview", "Pipeline", "Inventory", "Reports"].map((t, i) => (
-                <span key={t} className={i === 0 ? "text-black" : "text-ink-400"}>
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="hidden md:flex items-center gap-2 bg-[#F7F7F5] rounded-full px-3.5 py-2 w-full max-w-[260px]">
-            <Search className="w-3.5 h-3.5 text-ink-500 shrink-0" />
-            <span className="text-[12px] text-ink-500">Search...</span>
-          </div>
-          <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-            <Bell className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-ink-700" />
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-grad-amber to-grad-blue" />
-          </div>
-        </div>
+const mono = "font-mono text-[9.5px] sm:text-[10px] leading-none";
 
-        <div className="flex flex-col lg:flex-row">
-          {/* Sidebar */}
-          <div className="hidden lg:flex w-56 bg-[#18181B] shrink-0 flex-col p-4 pt-6">
-            <button className="flex items-center justify-center gap-1.5 bg-zinc-700/60 text-white text-[12px] font-medium rounded-lg py-2.5 mb-5">
-              <Plus className="w-3.5 h-3.5" />
-              New record
-            </button>
-            {modules.map((m) => (
-              <div
-                key={m.label}
-                className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg mb-1 text-[12px] ${
-                  m.active ? "bg-zinc-700 text-white" : "text-zinc-500"
-                }`}
-              >
-                <m.icon className="w-3.5 h-3.5 shrink-0" />
-                <span className="flex-1">{m.label}</span>
-                {m.count && (
-                  <span className="text-[10px] text-zinc-500">{m.count}</span>
-                )}
-              </div>
-            ))}
-            <div className="flex-1" />
-            <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-[12px] text-zinc-500 border-t border-zinc-700/60 mt-2 pt-4">
-              <Settings className="w-3.5 h-3.5 shrink-0" />
-              <span className="flex-1">Settings</span>
-            </div>
-            <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-grad-amber to-grad-blue shrink-0" />
-              <span className="text-[11px] text-zinc-300 truncate">Priya Sharma</span>
-            </div>
-          </div>
+/* 01 — channels; WhatsApp lights up when the enquiry arrives */
+function EnquiryBody({ active }: { active: boolean }) {
+  return (
+    <div className="space-y-1.5">
+      <MiniRow active={active}>
+        <span className="flex items-center gap-1.5 min-w-0">
+          <WhatsAppIcon
+            className={`w-3 h-3 shrink-0 transition-colors duration-500 ${
+              active ? "text-[#25D366]" : "text-inkwarm-soft"
+            }`}
+          />
+          <span className={`${mono} text-inkwarm`}>WhatsApp</span>
+        </span>
+        <span
+          className={`${mono} text-mark transition-opacity duration-500 ${
+            active ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          Mehta Textiles →
+        </span>
+      </MiniRow>
+      <MiniRow>
+        <span className="flex items-center gap-1.5">
+          <Globe className="w-3 h-3 text-inkwarm-soft shrink-0" strokeWidth={1.8} aria-hidden />
+          <span className={`${mono} text-inkwarm-soft`}>Website</span>
+        </span>
+        <span aria-hidden className="w-1 h-1 rounded-full bg-hairline" />
+      </MiniRow>
+      <MiniRow>
+        <span className="flex items-center gap-1.5">
+          <Phone className="w-3 h-3 text-inkwarm-soft shrink-0" strokeWidth={1.8} aria-hidden />
+          <span className={`${mono} text-inkwarm-soft`}>Phone</span>
+        </span>
+        <span aria-hidden className="w-1 h-1 rounded-full bg-hairline" />
+      </MiniRow>
+    </div>
+  );
+}
 
-          {/* Main panel */}
-          <div className="flex-1 bg-white p-5 sm:p-8 md:p-10 min-w-0">
-            <div className="flex items-center justify-between mb-6 sm:mb-7">
-              <div>
-                <p className="text-[11px] text-ink-400 mb-1">Overview</p>
-                <p className="text-[17px] sm:text-[20px] font-semibold text-black">
-                  Revenue overview
-                </p>
-              </div>
-              <div className="flex items-center gap-2.5 shrink-0">
-                <div className="hidden sm:flex items-center gap-1 bg-[#F7F7F5] rounded-full p-1">
-                  {timeRanges.map((r, i) => (
-                    <span
-                      key={r}
-                      className={`text-[11px] font-medium rounded-full px-2.5 py-1 ${
-                        i === 1 ? "bg-white text-black shadow-sm" : "text-ink-500"
-                      }`}
-                    >
-                      {r}
-                    </span>
-                  ))}
-                </div>
-                <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-[12px] text-ink-500 bg-[#F7F7F5] rounded-full px-3 py-1.5">
-                  <motion.span
-                    className="w-1.5 h-1.5 rounded-full bg-[#1F8A56]"
-                    animate={{ opacity: [1, 0.25, 1], scale: [1, 0.8, 1] }}
-                    transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  Live
-                </span>
-              </div>
-            </div>
+/* 02 — the record appears among the ledger */
+function CrmBody({ active }: { active: boolean }) {
+  return (
+    <div className="space-y-1.5">
+      <motion.div
+        animate={active ? { scale: [0.96, 1] } : {}}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <MiniRow active={active}>
+          <span className="flex items-center gap-2 min-w-0">
+            <span
+              className={`w-[16px] h-[16px] rounded-full flex items-center justify-center text-[7px] font-mono shrink-0 transition-colors duration-500 ${
+                active ? "bg-mark text-sheet" : "bg-inkwarm/15 text-inkwarm"
+              }`}
+            >
+              MT
+            </span>
+            <span className={`${mono} text-inkwarm truncate`}>Mehta Textiles</span>
+          </span>
+          <span className={`${mono} text-inkwarm-faint shrink-0`}>Priya</span>
+        </MiniRow>
+      </motion.div>
+      {[14, 10].map((w, i) => (
+        <MiniRow key={i}>
+          <span className="flex items-center gap-2">
+            <span aria-hidden className="w-[16px] h-[16px] rounded-full bg-inkwarm/10 shrink-0" />
+            <span aria-hidden className="h-[5px] rounded-full bg-inkwarm/15" style={{ width: w * 4 }} />
+          </span>
+          <span aria-hidden className="h-[5px] w-6 rounded-full bg-inkwarm/10" />
+        </MiniRow>
+      ))}
+    </div>
+  );
+}
 
-            {/* KPI row */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-7 sm:mb-9">
-              {kpis.map((k) => (
-                <div
-                  key={k.label}
-                  className="bg-[#F7F7F5] rounded-xl px-3.5 sm:px-4 py-3.5 sm:py-4"
-                >
-                  <div className="flex items-center justify-between mb-2.5">
-                    <p className="text-[9px] sm:text-[10px] text-ink-500 truncate">
-                      {k.label}
-                    </p>
-                    <k.icon className={`w-3.5 h-3.5 sm:w-3 sm:h-3 ${k.accent} shrink-0`} />
-                  </div>
-                  <div className="flex items-baseline gap-1.5">
-                    <p className="text-[16px] sm:text-[20px] font-semibold text-black">
-                      {k.value}
-                    </p>
-                    <span className="inline-flex items-center gap-0.5 text-[9px] sm:text-[10px] font-medium text-[#1F8A56] shrink-0">
-                      <TrendingUp className="w-3 h-3 sm:w-2.5 sm:h-2.5" />
-                      {k.trend}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
+/* 03 — rules fire in order while active */
+const RULES = ["Route to owner", "AI drafts reply", "Nudge in 2 days"];
 
-            {/* Chart */}
-            <div className="relative mb-7 sm:mb-9">
-              <div className="absolute left-0 top-0 w-9 sm:w-10 h-32 sm:h-44 flex flex-col justify-between text-right pr-1">
-                <span className="text-[9px] sm:text-[10px] text-ink-400">₹1L</span>
-                <span className="text-[9px] sm:text-[10px] text-ink-400">₹50k</span>
-                <span className="text-[9px] sm:text-[10px] text-ink-400">₹0</span>
-              </div>
-              <div className="absolute left-9 sm:left-10 right-0 top-0 h-32 sm:h-44 flex flex-col justify-between pointer-events-none">
-                <div className="h-px bg-[#F0F0EE]" />
-                <div className="h-px bg-[#F0F0EE]" />
-                <div className="h-px bg-[#F0F0EE]" />
-              </div>
-              <motion.div
-                className="flex items-end gap-2.5 sm:gap-4 h-32 sm:h-44 pl-9 sm:pl-10"
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.5 }}
-                variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
-              >
-                {revenueBars.map((h, i) => (
-                  <motion.div
-                    key={i}
-                    className="flex-1 relative group"
-                    variants={{
-                      hidden: { scaleY: 0 },
-                      show: {
-                        scaleY: 1,
-                        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-                      },
-                    }}
-                    style={{ height: `${h}%`, transformOrigin: "bottom" }}
-                  >
-                    {i === revenueBars.length - 1 && (
-                      <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-black text-white text-[9px] font-medium rounded-md px-2 py-1 whitespace-nowrap">
-                        ₹95k
-                      </div>
-                    )}
-                    <div
-                      className={`w-full h-full rounded-t-sm ${
-                        i === revenueBars.length - 1 ? "bg-grad-blue" : "bg-[#E4E4E1]"
-                      }`}
-                    />
-                  </motion.div>
-                ))}
-              </motion.div>
-              <div className="flex gap-2.5 sm:gap-4 pl-9 sm:pl-10 mt-1.5">
-                {months.map((m) => (
-                  <span
-                    key={m}
-                    className="flex-1 text-center text-[9px] sm:text-[10px] text-ink-500"
-                  >
-                    {m}
-                  </span>
-                ))}
-              </div>
-            </div>
+function AutomationBody({ active }: { active: boolean }) {
+  const reduce = useReducedMotion();
+  return (
+    <div className="space-y-1.5">
+      {RULES.map((r, i) => (
+        <MiniRow key={r} active={active && i < 2}>
+          <span className={`${mono} ${active && i < 2 ? "text-inkwarm" : "text-inkwarm-soft"}`}>
+            {r}
+          </span>
+          <motion.span
+            className={`${mono} ${i < 2 ? "text-live" : "text-inkwarm-faint"}`}
+            animate={
+              active && !reduce
+                ? { opacity: [0, 1] }
+                : { opacity: i < 2 ? 0.9 : 0.6 }
+            }
+            transition={{ delay: 0.25 + i * 0.35, duration: 0.3 }}
+          >
+            {i < 2 ? "✓" : "◷ 2d"}
+          </motion.span>
+        </MiniRow>
+      ))}
+    </div>
+  );
+}
 
-            {!compact && (
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
-                {/* Pipeline */}
-                <div>
-                  <p className="text-[11px] sm:text-[12px] font-semibold text-black mb-2.5 sm:mb-3">
-                    Pipeline
-                  </p>
-                  <div className="space-y-2">
-                    {pipelineStages.map((s) => (
-                      <div key={s.label}>
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-[10px] sm:text-[11px] text-ink-700">
-                            {s.label}
-                          </span>
-                          <span className="text-[10px] sm:text-[11px] font-semibold text-black">
-                            {s.count}
-                          </span>
-                        </div>
-                        <div className="h-1.5 rounded-full bg-[#F0F0EE] overflow-hidden">
-                          <div
-                            className="h-full rounded-full bg-grad-blue"
-                            style={{ width: `${(s.count / s.total) * 100}%` }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+/* 04 — the number moves */
+const SPARK = [5, 8, 6, 10, 9, 12, 15];
 
-                {/* Approvals */}
-                <div>
-                  <p className="text-[11px] sm:text-[12px] font-semibold text-black mb-2.5 sm:mb-3">
-                    Approvals
-                  </p>
-                  <div className="space-y-1.5">
-                    {approvals.map((a) => (
-                      <div
-                        key={a.name}
-                        className="flex items-center gap-2 bg-[#F7F7F5] rounded-lg px-2.5 py-2"
-                      >
-                        <div className="w-5 h-5 rounded-full bg-zinc-200 text-zinc-600 text-[8px] font-semibold flex items-center justify-center shrink-0">
-                          {a.initials}
-                        </div>
-                        <span className="text-[10px] sm:text-[11px] text-ink-700 truncate flex-1">
-                          {a.name}
-                        </span>
-                        <span
-                          className={`text-[9px] font-medium px-2 py-0.5 rounded-full text-ink-700 shrink-0 ${
-                            a.status === "Approved" ? "bg-grad-green/20" : "bg-grad-amber/25"
-                          }`}
-                        >
-                          {a.status}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+function DashboardBody({ active }: { active: boolean }) {
+  return (
+    <div className="space-y-1.5">
+      <MiniRow active={active}>
+        <span className={`${mono} text-inkwarm-soft`}>Pipeline</span>
+        <span className="flex items-baseline gap-1.5">
+          <span className={`${mono} !text-[11px] font-medium text-inkwarm`}>
+            {active ? "₹96.2L" : "₹94.8L"}
+          </span>
+          <span
+            className={`${mono} text-mark transition-opacity duration-500 ${
+              active ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            +1.4
+          </span>
+        </span>
+      </MiniRow>
+      <div className="flex items-end gap-[3px] h-[24px] px-1 pt-1" aria-hidden>
+        {SPARK.map((h, i) => (
+          <span
+            key={i}
+            className={`flex-1 rounded-t-[1px] transition-colors duration-500 ${
+              active && i === SPARK.length - 1 ? "bg-mark" : "bg-inkwarm/15"
+            }`}
+            style={{ height: `${h + 4}px` }}
+          />
+        ))}
+      </div>
+      <MiniRow>
+        <span className={`${mono} text-inkwarm-soft`}>Overdue follow-ups</span>
+        <span className={`${mono} text-live`}>0</span>
+      </MiniRow>
+    </div>
+  );
+}
 
-                {/* Activity feed */}
-                <div>
-                  <div className="flex items-center justify-between mb-2.5 sm:mb-3">
-                    <p className="text-[11px] sm:text-[12px] font-semibold text-black">
-                      Recent activity
-                    </p>
-                    <ChevronDown className="w-3 h-3 text-ink-400" />
-                  </div>
-                  <div className="space-y-1.5">
-                    {activity.map((a) => (
-                      <div key={a.target} className="flex items-start gap-2 px-2.5 py-2">
-                        <div className="w-5 h-5 rounded-full bg-grad-blue/15 text-grad-blue text-[8px] font-semibold flex items-center justify-center shrink-0 mt-0.5">
-                          {a.initials}
-                        </div>
-                        <p className="text-[10px] sm:text-[11px] text-ink-700 leading-snug">
-                          <span className="font-medium text-black">{a.actor}</span>{" "}
-                          {a.action} {a.target}
-                          <span className="text-ink-400"> · {a.time}</span>
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+const STAGE_BODIES = [EnquiryBody, CrmBody, AutomationBody, DashboardBody];
+
+function StageCard({ active, index }: { active: boolean; index: number }) {
+  const meta = STAGE_META[index];
+  const Body = STAGE_BODIES[index];
+  return (
+    <div
+      className={`relative flex-1 border rounded-[2px] px-3.5 py-3.5 sm:px-4 sm:py-4 transition-all duration-500 ${
+        active
+          ? "border-mark bg-sheet-lift shadow-[4px_4px_0_0_rgba(200,57,27,0.18)] md:-translate-y-1"
+          : "rule bg-sheet-lift/80"
+      }`}
+    >
+      <div className="flex items-baseline justify-between mb-2">
+        <span
+          className={`anno !text-[9px] transition-colors duration-500 ${
+            active ? "text-mark" : ""
+          }`}
+        >
+          {`0${index + 1} · ${meta.verb}`}
+        </span>
+        <span
+          aria-hidden
+          className={`w-1.5 h-1.5 rounded-full transition-colors duration-500 ${
+            active ? "bg-mark live-dot" : "bg-hairline"
+          }`}
+        />
+      </div>
+      <p className="font-serif text-[17px] sm:text-[19px] leading-none text-inkwarm mb-3">
+        {meta.title}
+      </p>
+      <Body active={active} />
+      <div className="border-t rule mt-3 pt-2 flex items-center justify-between">
+        <span
+          className={`font-mono text-[9px] transition-colors duration-500 ${
+            active ? "text-mark" : "text-inkwarm-faint"
+          }`}
+        >
+          {meta.metric}
+        </span>
       </div>
     </div>
   );
 }
 
-export default function Hero() {
+/* A red pulse that travels the connector feeding the active stage */
+function Connector({ active, tick }: { active: boolean; tick: number }) {
+  const reduce = useReducedMotion();
   return (
-    <section
-      className="relative bg-white overflow-hidden dot-grid"
-      style={{ background: "var(--gradient-hero-bg)" }}
-    >
-      {/* Text content */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="relative z-10 flex flex-col items-center text-center px-6 pt-24 md:pt-40 max-w-4xl mx-auto"
-      >
-        <motion.p variants={line} className="eyebrow mb-3 md:mb-5">
-          Digital Presence · Automation · Internal Systems
-        </motion.p>
-        <motion.h1
-          variants={line}
-          className="font-serif font-normal text-[clamp(26px,7vw,34px)] md:text-[clamp(32px,6vw,68px)] leading-[1.25] md:leading-[1.18] tracking-[-0.01em] md:tracking-[-1px] text-black mb-5 md:mb-4 max-w-[320px] md:max-w-3xl"
+    <>
+      <div className="hidden md:flex items-center w-10 lg:w-14 shrink-0 px-1 relative">
+        <div
+          className={`flow-line w-full transition-opacity duration-500 ${
+            active ? "flow-line-mark" : ""
+          }`}
+        />
+        <span
+          aria-hidden
+          className={`font-mono text-[11px] leading-none -ml-1 transition-colors duration-500 ${
+            active ? "text-mark" : "text-inkwarm-faint/60"
+          }`}
         >
-          Build the <Highlight color="#5F44E0">systems</Highlight> that
-          <br />
-          help your business scale
-        </motion.h1>
-        <motion.p
-          variants={line}
-          className="text-[14px] md:text-[15px] mb-8 md:mb-9 max-w-[320px] md:max-w-xl text-ink-500 md:text-[#5f6368] leading-relaxed"
-        >
-          <span style={{ color: "#5F44E0" }}>Anymus</span> designs and builds
-          the websites, automations, and internal tools that save your team
-          time, tighten operations, and turn more enquiries into customers,
-          built around the tools you already use.
-        </motion.p>
+          ›
+        </span>
+        {active && !reduce && (
+          <motion.span
+            key={tick}
+            aria-hidden
+            className="absolute top-1/2 -mt-[3px] left-1 w-[6px] h-[6px] rounded-full bg-mark"
+            initial={{ x: 0, opacity: 0 }}
+            animate={{ x: "calc(100% + 28px)", opacity: [0, 1, 1, 0] }}
+            transition={{ duration: 1.1, ease: "easeInOut" }}
+          />
+        )}
+      </div>
+      <div className="md:hidden flex justify-center h-7">
+        <div className={`flow-line-y h-full ${active ? "opacity-100" : "opacity-70"}`} />
+      </div>
+    </>
+  );
+}
 
-        <motion.div
-          variants={line}
-          className="flex flex-col items-center gap-3.5 md:flex-row md:gap-4  md:mb-8 w-full md:w-auto"
-        >
-          <a
-            href="/schedule-call"
-            className="cta-lift inline-flex w-full md:w-auto items-center justify-center gap-2 bg-black text-white rounded-full px-7 py-4 md:py-3.5 text-[15px] font-medium tracking-[-0.01em] shadow-[var(--shadow-card)] min-h-[50px] md:min-h-[44px]"
-          >
-            Book a Free Consultation
-          </a>
-          <a
-            href="#process"
-            className="focus-accent inline-flex items-center justify-center gap-1.5 text-ink-500 text-[13px] md:text-[15px] font-medium tracking-[-0.01em] py-2 md:py-3.5 md:px-7 md:text-black md:border md:border-[#D4D4D1] md:rounded-full md:w-auto hover:text-black md:hover:bg-[#F2F1ED] transition-colors md:min-h-[44px]"
-          >
-            See How It Works
-          </a>
-        </motion.div>
+function SystemSchematic() {
+  const reduce = useReducedMotion();
+  const [tick, setTick] = useState(0);
 
-        <motion.div variants={line} className="w-full">
-          {/* Mobile — icon badges */}
-          <div className="flex md:hidden items-start justify-center gap-3">
-            {/* {trustBadgesMobile.map((t) => (
-              <div key={t.label} className="flex-1 flex items-center gap-2">
-                <div className="w-9 h-9 rounded-xl bg-[#EFE9FB] text-[#5F44E0] flex items-center justify-center shrink-0">
-                  <t.icon className="w-4 h-4" />
-                </div>
-                <span className="text-[11px] text-ink-700 leading-snug">
-                  {t.label}
-                </span>
-              </div>
-            ))} */}
+  useEffect(() => {
+    if (reduce) return;
+    const id = setInterval(() => setTick((t) => t + 1), 2600);
+    return () => clearInterval(id);
+  }, [reduce]);
+
+  const event = FEED[tick % FEED.length];
+  const activeStage = reduce ? 3 : event.stage;
+
+  return (
+    <figure className="reg-marks plate p-4 sm:p-6 md:p-8">
+      <span aria-hidden className="reg reg-tl" />
+      <span aria-hidden className="reg reg-tr" />
+      <span aria-hidden className="reg reg-bl" />
+      <span aria-hidden className="reg reg-br" />
+
+      {/* Stage flow */}
+      <div className="flex flex-col md:flex-row md:items-stretch gap-0">
+        {STAGE_META.map((s, i) => (
+          <div key={s.title} className="contents">
+            <StageCard active={activeStage === i} index={i} />
+            {i < STAGE_META.length - 1 && (
+              <Connector active={activeStage === i + 1} tick={tick} />
+            )}
           </div>
-          {/* Desktop — unchanged */}
-          <div className="hidden md:flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[12px] sm:text-[13px] text-ink-500">
-            {trustBadgesMobile.map((t) => (
-              <span key={t.label} className="inline-flex items-center gap-1.5">
-                <t.icon className="w-3.5 h-3.5 text-grad-green" />
-                {t.label}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-      </motion.div>
+        ))}
+      </div>
 
-      {/* Dashboard mockup — business outcomes visual */}
-      <motion.div
-        initial={{ opacity: 0, y: 28, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ delay: 0.6, duration: 0.9, ease: [0.22, 1, 0.36, 1] as const }}
-        className="relative z-10 w-full max-w-[1320px] mx-auto px-4 sm:px-6 mt-10 md:mt-6 mb-14 md:mb-24"
-      >
-        {/* Desktop — full dashboard, unchanged */}
-        <div className="hidden md:block">
-          <EnterpriseDashboard />
+      {/* Live feed */}
+      <div className="mt-5 sm:mt-6 border-t rule pt-3.5 flex items-center gap-3 sm:gap-4 overflow-hidden">
+        <span className="inline-flex items-center gap-1.5 shrink-0">
+          <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-live live-dot" />
+          <span className="anno !text-[9px] !text-live">Live</span>
+        </span>
+        <div className="relative flex-1 h-[16px]">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={reduce ? "static" : tick}
+              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? { opacity: 1 } : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="absolute inset-0 font-mono text-[10.5px] sm:text-[11.5px] text-inkwarm-soft whitespace-nowrap overflow-hidden text-ellipsis leading-[16px]"
+            >
+              <span className="text-inkwarm-faint">{event.t}</span>
+              {"  —  "}
+              {event.text}
+            </motion.p>
+          </AnimatePresence>
         </div>
+        <span className="anno !text-[9px] hidden sm:block shrink-0">
+          {STAGE_META[activeStage].note}
+        </span>
+      </div>
+    </figure>
+  );
+}
 
-        {/* Mobile — premium showcase preview, ~90% width, gently floating */}
+/* ── Hero — an editorial opening spread ── */
+
+export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const drift = useSpring(useTransform(scrollYProgress, [0, 1], [0, -60]), {
+    stiffness: 80,
+    damping: 24,
+  });
+  const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0.35]);
+
+  return (
+    <section ref={ref} id="top" className="relative">
+      <div className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-[92px] sm:pt-[116px]">
+        {/* Document header rule */}
         <motion.div
-          className="md:hidden w-[90%] mx-auto rounded-[28px]"
-          style={{ filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.12))" }}
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          initial={reduce ? {} : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="flex items-baseline justify-between border-b rule-strong pb-3"
         >
-          <EnterpriseDashboard compact />
+          <span className="anno">Anymus — Websites · Automation · Internal systems</span>
+          <span className="anno anno-mark hidden sm:block">Doc. 00 / Index</span>
         </motion.div>
-      </motion.div>
+
+        {/* The statement — sub-copy set into the headline's whitespace */}
+        <motion.div
+          style={reduce ? undefined : { opacity: fade }}
+          className="relative pt-10 sm:pt-16 pb-14 sm:pb-24"
+        >
+          <LineReveal
+            as="h1"
+            className="font-serif font-light text-[clamp(46px,10.5vw,150px)] leading-[0.98] tracking-[-0.03em] text-inkwarm"
+            lineClassName={(i) =>
+              i === 1 ? "sm:pl-[8vw]" : i === 2 ? "sm:pl-[2vw]" : undefined
+            }
+            lines={[
+              <span key="l1">We build</span>,
+              <span key="l2">the system</span>,
+              <span key="l3">
+                your business <span className="italic text-mark">runs</span> on.
+              </span>,
+            ]}
+          />
+
+          {/* Sub + CTA — occupies the void beside "We build" */}
+          <motion.div
+            initial={reduce ? {} : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:absolute lg:right-0 lg:top-[calc(2.5rem+0.35em)] lg:max-w-[330px] mt-9 lg:mt-0 flex flex-col items-start gap-6"
+          >
+            <p className="text-[15px] sm:text-[16px] text-inkwarm-soft leading-relaxed max-w-[440px] lg:max-w-none lg:border-l lg:rule lg:pl-5">
+              <span className="font-serif text-[17px] sm:text-[18px] text-inkwarm">
+                anymus
+              </span>{" "}
+              designs, builds, and wires together your websites, automations,
+              and internal tools — around the ones you already use.{" "}
+              <em className="text-inkwarm not-italic font-medium">
+                One connected system,
+              </em>{" "}
+              not ten disconnected apps.
+            </p>
+            <div className="flex items-center gap-6 lg:pl-5">
+              <a
+                href="/schedule-call"
+                className="btn-stamp px-6 py-3.5 text-[14px] font-medium tracking-[-0.01em]"
+              >
+                Book a discovery call
+                <span aria-hidden className="font-mono text-[12px]">→</span>
+              </a>
+            </div>
+            <a
+              href="#index"
+              className="u-draw lg:pl-5 text-[13px] font-medium text-inkwarm"
+            >
+              Or read the index first ↓
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Fig. 01 — the plate sits on a blueprint band, breaking the boundary */}
+      <div className="relative">
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 top-[38%] graph-bg bg-sheet-deep/70 border-t rule overflow-hidden"
+        >
+          <div className="ruler-ticks absolute top-0 left-0 right-0 h-[10px]" />
+          <SignalTraces className="absolute inset-0 w-full h-full" />
+        </div>
+        <motion.div
+          initial={reduce ? {} : { opacity: 0, y: 44 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="relative max-w-[1240px] mx-auto px-4 sm:px-8 pb-8 sm:pb-10"
+        >
+          <motion.div style={reduce ? undefined : { y: drift }}>
+            <SystemSchematic />
+            <p className="anno mt-5 sm:mt-6 text-center">
+              Fig. 01 — How work moves once anymus is in
+            </p>
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

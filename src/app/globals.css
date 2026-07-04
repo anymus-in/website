@@ -18,6 +18,21 @@
   --color-accent: #F0A23C;
   --color-accent-ink: #A35F14;
 
+  /* ── Ledger / working-drawing layer ─────────────────────
+     The redesigned language: warm paper, warm ink, drafting-red
+     markup, mono annotations, hairline rules, sharp corners. */
+  --color-sheet: #F4F1E8;        /* body paper */
+  --color-sheet-deep: #ECE7DA;   /* recessed panels */
+  --color-sheet-lift: #FCFBF6;   /* raised panels */
+  --color-inkwarm: #1C1812;      /* warm near-black */
+  --color-inkwarm-soft: #55503F; /* secondary text */
+  --color-inkwarm-faint: #8D8672;/* tertiary / annotations */
+  --color-mark: #C8391B;         /* drafting red */
+  --color-mark-deep: #A32D12;
+  --color-live: #2E6E4E;         /* "system running" green */
+  --color-hairline: rgba(28, 24, 18, 0.16);
+  --color-hairline-strong: rgba(28, 24, 18, 0.42);
+
   /* Gradient accent colors */
   --color-grad-blue: #3B82F6;
   --color-grad-sky: #9CC9FF;
@@ -43,8 +58,8 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
+  --background: #F4F1E8;
+  --foreground: #1C1812;
 
   /* Layered soft shadow scale */
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px -12px rgba(0, 0, 0, 0.10);
@@ -63,7 +78,7 @@
 }
 
 ::selection {
-  background: rgba(240, 162, 60, 0.25);
+  background: rgba(200, 57, 27, 0.18);
 }
 
 html {
@@ -280,6 +295,274 @@ html {
   background: transparent;
 }
 
+/* ── Ledger / working-drawing utilities ───────────────── */
+
+/* Mono annotation label — the document's margin voice */
+.anno {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-inkwarm-faint);
+}
+.anno-mark {
+  color: var(--color-mark);
+}
+
+/* Hairline rules */
+.rule {
+  border-color: var(--color-hairline);
+}
+.rule-strong {
+  border-color: var(--color-hairline-strong);
+}
+
+/* Stamp button — a press, not a lift. Offset red plate collapses on click. */
+.btn-stamp {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--color-inkwarm);
+  color: #f4f1e8;
+  border-radius: 2px;
+  box-shadow: 4px 4px 0 0 var(--color-mark);
+  transition: transform 0.14s cubic-bezier(0.3, 0.9, 0.4, 1), box-shadow 0.14s cubic-bezier(0.3, 0.9, 0.4, 1);
+  will-change: transform;
+}
+.btn-stamp:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 0 var(--color-mark);
+}
+.btn-stamp:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 0 var(--color-mark);
+}
+.btn-stamp:focus-visible {
+  outline: 2px solid var(--color-mark);
+  outline-offset: 3px;
+}
+/* Inverse stamp for dark grounds */
+.btn-stamp-paper {
+  background: #f4f1e8;
+  color: #1c1812;
+}
+
+/* Red underline that draws in on hover (works on multi-line text) */
+.u-draw {
+  background-image: linear-gradient(var(--color-mark), var(--color-mark));
+  background-repeat: no-repeat;
+  background-position: left calc(100% - 0.02em);
+  background-size: 0% 1.5px;
+  transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  padding-bottom: 3px;
+}
+.u-draw:hover,
+a:hover .u-draw,
+.u-draw:focus-visible {
+  background-size: 100% 1.5px;
+}
+/* Pre-drawn variant that recedes from the right */
+.u-drawn {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: left calc(100% - 0.02em);
+  background-size: 100% 1px;
+  padding-bottom: 3px;
+}
+
+/* Registration marks — small crosshairs at the four corners of a figure */
+.reg-marks {
+  position: relative;
+}
+.reg-marks > .reg {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  pointer-events: none;
+  color: var(--color-hairline-strong);
+}
+.reg-marks > .reg::before,
+.reg-marks > .reg::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.reg-marks > .reg::before {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+.reg-marks > .reg::after {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+.reg-tl { top: -6px; left: -6px; }
+.reg-tr { top: -6px; right: -6px; }
+.reg-bl { bottom: -6px; left: -6px; }
+.reg-br { bottom: -6px; right: -6px; }
+
+/* Animated dashed connector — work flowing through the system */
+@keyframes dash-travel {
+  to { background-position: 24px 0; }
+}
+.flow-line {
+  height: 1px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-hairline-strong) 0 8px,
+    transparent 8px 16px
+  );
+  background-size: 24px 1px;
+  animation: dash-travel 0.9s linear infinite;
+}
+.flow-line-mark {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(200, 57, 27, 0.75) 0 8px,
+    transparent 8px 16px
+  );
+}
+@keyframes dash-travel-y {
+  to { background-position: 0 24px; }
+}
+.flow-line-y {
+  width: 1px;
+  background-image: repeating-linear-gradient(
+    180deg,
+    var(--color-hairline-strong) 0 8px,
+    transparent 8px 16px
+  );
+  background-size: 1px 24px;
+  animation: dash-travel-y 0.9s linear infinite;
+}
+
+/* Marquee */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 36s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Fine graph-paper grid — engineering drawing ground */
+.graph-bg {
+  background-image:
+    linear-gradient(var(--color-hairline) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-hairline) 1px, transparent 1px),
+    linear-gradient(rgba(28, 24, 18, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28, 24, 18, 0.05) 1px, transparent 1px);
+  background-size:
+    120px 120px,
+    120px 120px,
+    24px 24px,
+    24px 24px;
+}
+.graph-bg-dark {
+  background-image:
+    linear-gradient(rgba(244, 241, 232, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 241, 232, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(244, 241, 232, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 241, 232, 0.03) 1px, transparent 1px);
+  background-size:
+    120px 120px,
+    120px 120px,
+    24px 24px,
+    24px 24px;
+}
+
+/* Ruler tick strip — measurement marks along an edge */
+.ruler-ticks {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-hairline-strong) 0 1px,
+    transparent 1px 12px,
+    var(--color-hairline) 12px 13px,
+    transparent 13px 24px,
+    var(--color-hairline) 24px 25px,
+    transparent 25px 36px,
+    var(--color-hairline) 36px 37px,
+    transparent 37px 48px
+  );
+}
+
+/* Outlined display type — hollow serif for oversized numerals/watermarks */
+.text-hollow {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-hairline-strong);
+}
+.text-hollow-sheet {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244, 241, 232, 0.28);
+}
+.text-hollow-mark {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(200, 57, 27, 0.55);
+}
+
+/* Dimension line — a measured span with end caps, like a technical drawing */
+.dim-line {
+  position: relative;
+  height: 1px;
+  background: var(--color-hairline-strong);
+}
+.dim-line::before,
+.dim-line::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  width: 1px;
+  height: 9px;
+  background: var(--color-hairline-strong);
+}
+.dim-line::before { left: 0; }
+.dim-line::after { right: 0; }
+
+/* Raised paper plate — the frame around figures and mock-UIs */
+.plate {
+  background: var(--color-sheet-lift);
+  border: 1px solid var(--color-hairline);
+  border-radius: 3px;
+  box-shadow:
+    0 1px 0 rgba(28, 24, 18, 0.05),
+    0 14px 40px -18px rgba(28, 24, 18, 0.28),
+    0 40px 90px -40px rgba(28, 24, 18, 0.22);
+}
+
+/* Reverse-direction marquee (for counter-scrolling editorial strips) */
+@keyframes marquee-scroll-rev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.marquee-track-rev {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-rev 44s linear infinite;
+}
+.marquee:hover .marquee-track-rev {
+  animation-play-state: paused;
+}
+
+/* Live pulse dot */
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.75); }
+}
+.live-dot {
+  animation: live-pulse 1.8s ease-in-out infinite;
+}
+
 /* Respect reduced-motion globally */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -294,5 +577,16 @@ html {
   .animate-accordion-down,
   .animate-accordion-up {
     animation: none;
+  }
+  .flow-line,
+  .flow-line-y,
+  .marquee-track,
+  .marquee-track-rev,
+  .live-dot {
+    animation: none;
+  }
+  .btn-stamp,
+  .u-draw {
+    transition: none;
   }
 }
