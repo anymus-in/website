@@ -63,8 +63,7 @@ export default function ClosingCta() {
                 </span>
               </a>
               <p className="mt-6 text-[13.5px] sm:text-[14.5px] text-sheet/55 leading-relaxed max-w-[440px]">
-                We&rsquo;ll map how work moves through your business today — and
-                show you what it looks like running on one connected system.
+                We&rsquo;ll map how work moves through your business today.
                 Worst case, you leave with the map.
               </p>
             </div>

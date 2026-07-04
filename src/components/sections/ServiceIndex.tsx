@@ -91,19 +91,14 @@ function ServiceSpread({ service, index }: { service: Service; index: number }) 
             {service.outcomes.map((o, j) => (
               <RevealItem
                 key={o.title}
-                className="group/row border-t rule py-4 grid grid-cols-[44px_1fr] gap-x-4"
+                className="group/row border-t rule py-4 grid grid-cols-[44px_1fr] gap-x-4 items-baseline"
               >
-                <span className="anno pt-0.5 group-hover/row:text-mark transition-colors duration-300">{`${
+                <span className="anno group-hover/row:text-mark transition-colors duration-300">{`${
                   index + 1
                 }.${j + 1}`}</span>
-                <div>
-                  <p className="text-[14px] font-semibold text-inkwarm leading-snug mb-1">
-                    {o.title}
-                  </p>
-                  <p className="text-[12.5px] text-inkwarm-soft leading-relaxed max-w-[420px]">
-                    {o.description}
-                  </p>
-                </div>
+                <p className="text-[14.5px] font-medium text-inkwarm leading-snug">
+                  {o.title}
+                </p>
               </RevealItem>
             ))}
           </RevealGroup>
@@ -179,13 +174,6 @@ export default function ServiceIndex() {
               </span>,
             ]}
           />
-          <Reveal delay={0.25}>
-            <p className="mt-8 text-[14px] sm:text-[15px] text-inkwarm-soft leading-relaxed max-w-[480px] mx-auto">
-              Most firms hand you one piece and leave you to wire it together.
-              We build the site out front, the automations behind it, and the
-              tools you run on — nothing stitched together after the fact.
-            </p>
-          </Reveal>
         </div>
       </div>
 

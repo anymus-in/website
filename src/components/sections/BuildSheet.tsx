@@ -10,28 +10,24 @@ const PHASES = [
     week: "Wk 00",
     title: "Discovery",
     body: "A free call. We map how work actually moves through your business today — the handoffs, the workarounds, the things nobody wrote down.",
-    deliverable: "A map of how work moves today",
     pos: 0,
   },
   {
     week: "Wk 01",
     title: "Blueprint",
     body: "A clear scope, timeline, and price for exactly what gets built. You know what you're getting before anything gets built.",
-    deliverable: "Scope, timeline & price — on paper",
     pos: 1 / 6,
   },
   {
     week: "Wk 02–05",
     title: "Build",
     body: "We design, build, and wire the system into the tools you already use. You see working software early, not a big reveal at the end.",
-    deliverable: "Working software, shown weekly",
     pos: 3 / 6,
   },
   {
     week: "Wk 06 →",
     title: "Handover",
     body: "Your team trained hands-on, everything running against real work, and support on hand through the first weeks of going live.",
-    deliverable: "A trained team & a running system",
     pos: 1,
   },
 ];
@@ -139,15 +135,9 @@ export default function BuildSheet() {
                   <h3 className="font-serif text-[26px] leading-none text-inkwarm mb-3">
                     {p.title}
                   </h3>
-                  <p className="text-[12.5px] text-inkwarm-soft leading-relaxed mb-5">
+                  <p className="text-[12.5px] text-inkwarm-soft leading-relaxed">
                     {p.body}
                   </p>
-                  <div className="border-t rule pt-3">
-                    <span className="anno !text-[9px] block mb-1">You get</span>
-                    <span className="text-[12px] font-medium text-inkwarm leading-snug">
-                      {p.deliverable}
-                    </span>
-                  </div>
                 </div>
               </RevealItem>
             ))}
@@ -175,10 +165,9 @@ export default function BuildSheet() {
                 <h3 className="font-serif font-light text-[30px] leading-none text-inkwarm mb-2.5">
                   {p.title}
                 </h3>
-                <p className="text-[14px] text-inkwarm-soft leading-relaxed mb-2.5">
+                <p className="text-[14px] text-inkwarm-soft leading-relaxed">
                   {p.body}
                 </p>
-                <p className="anno">You get — {p.deliverable}</p>
               </Reveal>
             ))}
           </div>

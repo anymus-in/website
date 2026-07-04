@@ -5,29 +5,21 @@ const PRINCIPLES = [
   {
     lines: ["Software should fit the business —", "never the other way around."],
     italic: "fit",
-    gloss:
-      "We start from how your team actually works, then configure or build to match. No forcing your process into someone else's box.",
     tag: "On tools",
   },
   {
     lines: ["If a person has to remember it,", "the system is broken."],
     italic: "remember",
-    gloss:
-      "Follow-ups, handoffs, reminders — anything that depends on memory becomes a trigger, a rule, and a record.",
     tag: "On memory",
   },
   {
     lines: ["One source of truth beats ten", "almost-right spreadsheets."],
     italic: "truth",
-    gloss:
-      "Every number on the dashboard traces back to one record. When the numbers agree, decisions get easier.",
     tag: "On data",
   },
   {
     lines: ["Launch in weeks.", "Improve forever."],
     italic: "weeks",
-    gloss:
-      "A running system you can react to beats a perfect one that ships next year. We launch early and tune against real activity.",
     tag: "On speed",
   },
 ];
@@ -45,7 +37,7 @@ function emphasize(line: string, word: string) {
 }
 
 /** Dark centerpiece — the manifesto set as an architectural table:
-    hollow numeral / statement / margin gloss, each row its own plate. */
+    hollow numeral / statement, one rule per row. */
 export default function Principles() {
   return (
     <section id="principles" className="bg-inkwarm text-sheet relative overflow-hidden graph-bg-dark">
@@ -69,8 +61,8 @@ export default function Principles() {
         <div>
           {PRINCIPLES.map((p, i) => (
             <div
-              key={p.gloss}
-              className="group border-t border-sheet/20 last:border-b grid grid-cols-[64px_1fr] sm:grid-cols-[120px_1fr] lg:grid-cols-[160px_minmax(0,7fr)_minmax(0,3fr)] gap-x-5 sm:gap-x-8 py-10 sm:py-14 items-start"
+              key={p.tag}
+              className="group border-t border-sheet/20 last:border-b grid grid-cols-[64px_1fr] sm:grid-cols-[120px_1fr] lg:grid-cols-[160px_1fr] gap-x-5 sm:gap-x-8 py-10 sm:py-14 items-start"
             >
               {/* Hollow numeral */}
               <div className="relative">
@@ -92,21 +84,7 @@ export default function Principles() {
                     <span key={j}>{emphasize(line, p.italic)}</span>
                   ))}
                 />
-                {/* Gloss below statement on smaller screens */}
-                <p className="lg:hidden mt-5 text-[12.5px] text-sheet/55 leading-relaxed max-w-[420px] border-l border-sheet/25 pl-4">
-                  {p.gloss}
-                </p>
               </div>
-
-              {/* Margin gloss (desktop) */}
-              <Reveal delay={0.2} className="hidden lg:block pt-3">
-                <div className="border-l border-sheet/25 pl-5">
-                  <span className="anno !text-sheet/40 block mb-2.5">{`Note ${i + 1}.1`}</span>
-                  <p className="text-[12.5px] text-sheet/55 leading-relaxed">
-                    {p.gloss}
-                  </p>
-                </div>
-              </Reveal>
             </div>
           ))}
         </div>

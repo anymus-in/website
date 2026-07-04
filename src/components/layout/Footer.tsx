@@ -36,29 +36,6 @@ const COLUMNS = [
 export default function Footer() {
   return (
     <footer className="bg-[#14110C] text-sheet border-t-2 border-mark overflow-hidden">
-      {/* Top strip — one last door */}
-      <div className="border-b border-sheet/15">
-        <div className="max-w-[1380px] mx-auto px-5 sm:px-8 py-8 sm:py-10 flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
-          <span className="font-serif font-light text-[clamp(20px,2.6vw,30px)] leading-tight tracking-[-0.015em] text-sheet/85">
-            Still reading? That&rsquo;s usually a sign.
-          </span>
-          <a
-            href="/schedule-call"
-            className="group inline-flex items-baseline gap-3 shrink-0"
-          >
-            <span className="u-draw font-serif text-[clamp(18px,2.2vw,24px)] leading-none text-sheet">
-              Start a project
-            </span>
-            <span
-              aria-hidden
-              className="font-serif text-[clamp(18px,2.2vw,24px)] leading-none text-mark transition-transform duration-300 group-hover:translate-x-2"
-            >
-              →
-            </span>
-          </a>
-        </div>
-      </div>
-
       {/* Link ledger — ruled columns */}
       <div className="max-w-[1380px] mx-auto px-5 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-8 py-12 sm:py-16">
