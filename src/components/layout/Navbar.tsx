@@ -29,7 +29,8 @@ function Wordmark() {
       <span className="font-serif text-[19px] sm:text-[21px] font-medium tracking-tight leading-none">
         anymus
       </span>
-      <span className="anno hidden lg:inline-block pl-3 border-l rule leading-none pt-px">
+      <span className="anno hidden lg:inline-flex items-center gap-2 pl-3 border-l rule leading-none pt-px">
+        <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-live live-dot" />
         Systems for operations
       </span>
     </Link>

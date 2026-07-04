@@ -10,6 +10,7 @@ import {
   useTransform,
 } from "framer-motion";
 import LineReveal from "@/components/motion/LineReveal";
+import SignalTraces from "@/components/motion/SignalTraces";
 
 /* ── The schematic — how work moves once the system is in ── */
 
@@ -31,7 +32,7 @@ const STAGES = [
   {
     key: "automation",
     title: "Automation",
-    lines: ["Routed", "Followed up", "Escalated"],
+    lines: ["Routed", "AI follow-ups", "Escalated"],
     metric: "12 rules live",
     note: "No one has to remember",
   },
@@ -51,7 +52,7 @@ const FEED: { t: string; text: string; stage: number }[] = [
   { t: "10:44", text: "Pipeline updated · ₹1.4L added", stage: 3 },
   { t: "10:51", text: "Enquiry via website form — Sharma Traders", stage: 0 },
   { t: "10:51", text: "Duplicate check passed · record created", stage: 1 },
-  { t: "10:52", text: "Intro message sent automatically", stage: 2 },
+  { t: "10:52", text: "AI-drafted intro sent after review", stage: 2 },
   { t: "10:52", text: "Dashboard refreshed · 2 new this hour", stage: 3 },
 ];
 
@@ -309,9 +310,10 @@ export default function Hero() {
       <div className="relative">
         <div
           aria-hidden
-          className="absolute inset-x-0 bottom-0 top-[38%] graph-bg bg-sheet-deep/70 border-t rule"
+          className="absolute inset-x-0 bottom-0 top-[38%] graph-bg bg-sheet-deep/70 border-t rule overflow-hidden"
         >
           <div className="ruler-ticks absolute top-0 left-0 right-0 h-[10px]" />
+          <SignalTraces className="absolute inset-0 w-full h-full" />
         </div>
         <motion.div
           initial={reduce ? {} : { opacity: 0, y: 44 }}

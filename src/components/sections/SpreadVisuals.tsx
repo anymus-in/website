@@ -132,7 +132,7 @@ const RUN_STEPS = [
   { label: "Trigger — WhatsApp message received", meta: "10:42:07", state: "done" },
   { label: "Match contact · Mehta Textiles", meta: "10:42:08", state: "done" },
   { label: "Create deal — pipeline: New", meta: "10:42:08", state: "done" },
-  { label: "Notify owner · send intro reply", meta: "10:42:09", state: "run" },
+  { label: "AI drafts the reply · owner approves", meta: "10:42:09", state: "run" },
   { label: "Wait 2 days → nudge if silent", meta: "queued", state: "wait" },
 ];
 

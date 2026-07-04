@@ -2,6 +2,7 @@
 
 import Reveal from "@/components/motion/Reveal";
 import LineReveal from "@/components/motion/LineReveal";
+import SignalTraces from "@/components/motion/SignalTraces";
 import { CONTACT_EMAIL } from "@/lib/site";
 
 /** The culmination — a full-viewport dark spread with one giant action. */
@@ -11,8 +12,9 @@ export default function ClosingCta() {
       id="start"
       className="bg-inkwarm text-sheet relative overflow-hidden"
     >
-      {/* Blueprint ground + hollow chapter numeral */}
+      {/* Blueprint ground + signal traces + hollow chapter numeral */}
       <div aria-hidden className="absolute inset-0 graph-bg-dark" />
+      <SignalTraces dark className="absolute inset-0 w-full h-full opacity-70" />
       <span
         aria-hidden
         className="text-hollow-sheet pointer-events-none select-none absolute right-[-0.05em] bottom-[-0.12em] font-serif font-light leading-none text-[clamp(220px,34vw,540px)] tracking-[-0.04em]"
