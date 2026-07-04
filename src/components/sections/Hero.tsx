@@ -1,25 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
   useReducedMotion,
-  type Variants,
+  useScroll,
+  useSpring,
+  useTransform,
 } from "framer-motion";
-
-const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
-};
-const rise: Variants = {
-  hidden: { opacity: 0, y: 26 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
+import LineReveal from "@/components/motion/LineReveal";
 
 /* ── The schematic — how work moves once the system is in ── */
 
@@ -73,7 +63,7 @@ function StageCard({
   return (
     <div
       className={`relative flex-1 border rounded-[2px] px-4 py-3.5 sm:px-5 sm:py-4 transition-colors duration-500 ${
-        active ? "border-mark bg-sheet-lift" : "rule bg-sheet-lift/60"
+        active ? "border-mark bg-sheet-lift" : "rule bg-sheet-lift/70"
       }`}
     >
       <div className="flex items-baseline justify-between mb-2.5">
@@ -122,7 +112,7 @@ function SystemSchematic() {
   const activeStage = reduce ? 3 : event.stage;
 
   return (
-    <figure className="reg-marks border rule bg-sheet-deep/40 p-4 sm:p-6 md:p-8">
+    <figure className="reg-marks plate p-4 sm:p-6 md:p-8">
       <span aria-hidden className="reg reg-tl" />
       <span aria-hidden className="reg reg-tr" />
       <span aria-hidden className="reg reg-bl" />
@@ -135,11 +125,9 @@ function SystemSchematic() {
             <StageCard stage={s} active={activeStage === i} index={i} />
             {i < STAGES.length - 1 && (
               <>
-                {/* Horizontal connector (desktop) */}
                 <div className="hidden md:flex items-center w-10 lg:w-14 shrink-0 px-1">
                   <div className="flow-line w-full" />
                 </div>
-                {/* Vertical connector (mobile) */}
                 <div className="md:hidden flex justify-center h-7">
                   <div className="flow-line-y h-full" />
                 </div>
@@ -184,72 +172,111 @@ function SystemSchematic() {
   );
 }
 
-/* ── Hero ── */
+/* ── Hero — an editorial opening spread ── */
 
 export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const drift = useSpring(useTransform(scrollYProgress, [0, 1], [0, -60]), {
+    stiffness: 80,
+    damping: 24,
+  });
+  const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0.35]);
+
   return (
-    <section className="relative overflow-hidden">
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-[96px] sm:pt-[120px]"
+    <section ref={ref} id="top" className="relative">
+      {/* Vertical margin note (desktop) */}
+      <span
+        aria-hidden
+        className="hidden xl:block absolute right-4 top-[220px] anno whitespace-nowrap [writing-mode:vertical-rl]"
       >
+        Doc. 00 — Systems for operations / issued 2025
+      </span>
+
+      <div className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-[92px] sm:pt-[116px]">
         {/* Document header rule */}
         <motion.div
-          variants={rise}
-          className="flex items-baseline justify-between border-b rule-strong pb-3 mb-10 sm:mb-14"
+          initial={reduce ? {} : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="flex items-baseline justify-between border-b rule-strong pb-3"
         >
           <span className="anno">Anymus — Websites · Automation · Internal systems</span>
           <span className="anno anno-mark hidden sm:block">Doc. 00 / Index</span>
         </motion.div>
 
-        <div className="max-w-[1080px]">
-          <motion.h1
-            variants={rise}
-            className="font-serif font-light text-[clamp(42px,9.5vw,104px)] leading-[1.02] tracking-[-0.025em] text-inkwarm mb-7 sm:mb-9"
-          >
-            We build the system
-            <br />
-            your business{" "}
-            <em className="font-normal not-italic">
-              <span className="italic text-mark">runs</span>
-            </em>{" "}
-            on.
-          </motion.h1>
-
-          <motion.div
-            variants={rise}
-            className="flex flex-col md:flex-row md:items-end gap-7 md:gap-14 mb-12 sm:mb-16"
-          >
-            <p className="text-[15px] sm:text-[16.5px] text-inkwarm-soft leading-relaxed max-w-[520px]">
-              Websites, automations, and internal tools — designed, built, and
-              wired together around the tools you already use. One connected
-              system, instead of ten disconnected apps and a very tired team.
-            </p>
-            <div className="flex items-center gap-6 sm:gap-8 shrink-0">
-              <a
-                href="/schedule-call"
-                className="btn-stamp px-6 sm:px-7 py-3.5 text-[14px] sm:text-[15px] font-medium tracking-[-0.01em]"
-              >
-                Book a discovery call
-                <span aria-hidden className="font-mono text-[12px]">→</span>
-              </a>
-              <a
-                href="#index"
-                className="u-draw text-[14px] font-medium text-inkwarm hidden sm:inline-block"
-              >
-                Browse the index ↓
-              </a>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Fig. 01 — the schematic */}
-        <motion.div variants={rise} className="pb-16 sm:pb-24 px-1.5 sm:px-0">
-          <SystemSchematic />
+        {/* The statement — staggered, oversized, masked reveal */}
+        <motion.div style={reduce ? undefined : { opacity: fade }} className="pt-10 sm:pt-16 pb-6">
+          <LineReveal
+            as="h1"
+            className="font-serif font-light text-[clamp(46px,10.5vw,150px)] leading-[0.98] tracking-[-0.03em] text-inkwarm"
+            lineClassName={(i) =>
+              i === 1 ? "sm:pl-[8vw]" : i === 2 ? "sm:pl-[2vw]" : undefined
+            }
+            lines={[
+              <span key="l1">We build</span>,
+              <span key="l2">
+                the system{" "}
+                <span className="hidden md:inline-block align-middle -mt-3 ml-4 max-w-[200px] font-sans font-normal text-[12px] leading-snug tracking-normal text-inkwarm-faint">
+                  websites · automations
+                  <br />· internal tools, as one
+                </span>
+              </span>,
+              <span key="l3">
+                your business <span className="italic text-mark">runs</span> on.
+              </span>,
+            ]}
+          />
         </motion.div>
-      </motion.div>
+
+        {/* Sub + CTA — asymmetric, pushed to the right margin */}
+        <motion.div
+          initial={reduce ? {} : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col md:flex-row md:justify-end gap-8 md:gap-16 pb-14 sm:pb-20"
+        >
+          <p className="text-[15px] sm:text-[16px] text-inkwarm-soft leading-relaxed max-w-[400px] md:pt-1.5">
+            Designed, built, and wired together around the tools you already
+            use — one connected system, instead of ten disconnected apps and a
+            very tired team.
+          </p>
+          <div className="flex flex-col items-start gap-5 shrink-0">
+            <a
+              href="/schedule-call"
+              className="btn-stamp px-7 py-4 text-[15px] font-medium tracking-[-0.01em]"
+            >
+              Book a discovery call
+              <span aria-hidden className="font-mono text-[12px]">→</span>
+            </a>
+            <a
+              href="#index"
+              className="u-draw text-[13px] font-medium text-inkwarm"
+            >
+              Or read the index first ↓
+            </a>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Fig. 01 — the plate breaks across the section boundary */}
+      <div className="relative">
+        <div aria-hidden className="absolute inset-x-0 bottom-0 top-[45%] bg-sheet-deep/60 border-t rule" />
+        <motion.div
+          initial={reduce ? {} : { opacity: 0, y: 44 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          className="relative max-w-[1240px] mx-auto px-4 sm:px-8 pb-16 sm:pb-24"
+        >
+          <motion.div style={reduce ? undefined : { y: drift }}>
+            <SystemSchematic />
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

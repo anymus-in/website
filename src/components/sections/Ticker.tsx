@@ -10,30 +10,35 @@ const TRANSFORMS = [
 
 function Run() {
   return (
-    <div className="flex items-center shrink-0" aria-hidden>
-      {TRANSFORMS.map(([from, to]) => (
-        <span
-          key={from}
-          className="flex items-center font-mono text-[11px] sm:text-[12px] uppercase tracking-[0.16em] text-inkwarm-soft"
-        >
-          <span className="px-5 sm:px-7">{from}</span>
-          <span className="text-mark">→</span>
-          <span className="px-5 sm:px-7">{to}</span>
-          <span className="text-mark select-none">✳</span>
+    <div className="flex items-baseline shrink-0" aria-hidden>
+      {TRANSFORMS.map(([from, to], i) => (
+        <span key={from} className="flex items-baseline whitespace-nowrap">
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-inkwarm-faint px-6 sm:px-10">
+            {`№ ${String(i + 1).padStart(2, "0")}`}
+          </span>
+          <span className="font-serif font-light text-[clamp(24px,3.4vw,44px)] leading-none tracking-[-0.02em] text-inkwarm/70">
+            {from}
+          </span>
+          <span className="font-serif font-light text-[clamp(24px,3.4vw,44px)] leading-none px-4 sm:px-6 text-mark">
+            →
+          </span>
+          <span className="font-serif italic text-[clamp(24px,3.4vw,44px)] leading-none tracking-[-0.02em] text-inkwarm">
+            {to}
+          </span>
         </span>
       ))}
     </div>
   );
 }
 
-/** Full-bleed strip of before→after transformations. Pauses on hover. */
+/** Oversized editorial strip — everything the system turns into something better. */
 export default function Ticker() {
   return (
     <div
-      className="marquee border-y rule py-3.5 sm:py-4 overflow-hidden bg-sheet-deep/50"
+      className="marquee border-y rule py-6 sm:py-8 overflow-hidden"
       aria-label="WhatsApp becomes CRM, spreadsheets become dashboards, manual follow-ups become automatic"
     >
-      <div className="marquee-track">
+      <div className="marquee-track items-baseline">
         <Run />
         <Run />
       </div>

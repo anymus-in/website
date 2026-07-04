@@ -449,6 +449,41 @@ a:hover .u-draw,
   animation-play-state: paused;
 }
 
+/* Outlined display type — hollow serif for oversized numerals/watermarks */
+.text-hollow {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-hairline-strong);
+}
+.text-hollow-sheet {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244, 241, 232, 0.28);
+}
+
+/* Raised paper plate — the frame around figures and mock-UIs */
+.plate {
+  background: var(--color-sheet-lift);
+  border: 1px solid var(--color-hairline);
+  border-radius: 3px;
+  box-shadow:
+    0 1px 0 rgba(28, 24, 18, 0.05),
+    0 14px 40px -18px rgba(28, 24, 18, 0.28),
+    0 40px 90px -40px rgba(28, 24, 18, 0.22);
+}
+
+/* Reverse-direction marquee (for counter-scrolling editorial strips) */
+@keyframes marquee-scroll-rev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.marquee-track-rev {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-rev 44s linear infinite;
+}
+.marquee:hover .marquee-track-rev {
+  animation-play-state: paused;
+}
+
 /* Live pulse dot */
 @keyframes live-pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -476,6 +511,7 @@ a:hover .u-draw,
   .flow-line,
   .flow-line-y,
   .marquee-track,
+  .marquee-track-rev,
   .live-dot {
     animation: none;
   }
