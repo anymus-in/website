@@ -12,38 +12,7 @@ import {
 import LineReveal from "@/components/motion/LineReveal";
 import SignalTraces from "@/components/motion/SignalTraces";
 
-/* ── The schematic — how work moves once the system is in ── */
-
-const STAGES = [
-  {
-    key: "capture",
-    title: "Enquiry",
-    lines: ["WhatsApp", "Website", "Phone"],
-    metric: "3 new today",
-    note: "Every channel, captured",
-  },
-  {
-    key: "crm",
-    title: "CRM",
-    lines: ["One record", "Assigned owner", "Full history"],
-    metric: "1,204 records",
-    note: "Nothing lives in an inbox",
-  },
-  {
-    key: "automation",
-    title: "Automation",
-    lines: ["Routed", "AI follow-ups", "Escalated"],
-    metric: "12 rules live",
-    note: "No one has to remember",
-  },
-  {
-    key: "dashboard",
-    title: "Dashboard",
-    lines: ["Live pipeline", "Real numbers", "One truth"],
-    metric: "spark",
-    note: "Decisions on data",
-  },
-];
+/* ── The schematic — one enquiry travelling through the system ── */
 
 const FEED: { t: string; text: string; stage: number }[] = [
   { t: "10:42", text: "Enquiry via WhatsApp — Mehta Textiles", stage: 0 },
@@ -56,48 +25,186 @@ const FEED: { t: string; text: string; stage: number }[] = [
   { t: "10:52", text: "Dashboard refreshed · 2 new this hour", stage: 3 },
 ];
 
-const SPARK = [3, 5, 4, 7, 6, 9];
+const STAGE_META = [
+  { title: "Enquiry", verb: "capture", metric: "3 new today", note: "Every channel, captured" },
+  { title: "CRM", verb: "record", metric: "1,204 records", note: "Nothing lives in an inbox" },
+  { title: "Automation", verb: "act", metric: "12 rules live", note: "No one has to remember" },
+  { title: "Dashboard", verb: "see", metric: "one truth", note: "Decisions on data" },
+];
 
-function Sparkline({ active }: { active: boolean }) {
-  return (
-    <span className="inline-flex items-end gap-[2px] h-[12px]" aria-hidden>
-      {SPARK.map((h, i) => (
-        <span
-          key={i}
-          className={`w-[3px] rounded-t-[1px] transition-colors duration-500 ${
-            active && i === SPARK.length - 1 ? "bg-mark" : "bg-inkwarm/20"
-          }`}
-          style={{ height: `${h + 3}px` }}
-        />
-      ))}
-    </span>
-  );
-}
-
-function StageCard({
-  stage,
+/* A mini interface row inside a stage card */
+function MiniRow({
   active,
-  index,
+  className,
+  children,
 }: {
-  stage: (typeof STAGES)[number];
-  active: boolean;
-  index: number;
+  active?: boolean;
+  className?: string;
+  children: React.ReactNode;
 }) {
   return (
     <div
-      className={`relative flex-1 border rounded-[2px] px-4 py-3.5 sm:px-5 sm:py-4 transition-all duration-500 ${
+      className={`flex items-center justify-between gap-2 h-[26px] px-2.5 border rounded-[2px] transition-colors duration-500 ${
+        active ? "border-mark/70 bg-mark/[0.06]" : "rule bg-white/50"
+      } ${className ?? ""}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+const mono = "font-mono text-[9.5px] sm:text-[10px] leading-none";
+
+/* 01 — channels; WhatsApp lights up when the enquiry arrives */
+function EnquiryBody({ active }: { active: boolean }) {
+  return (
+    <div className="space-y-1.5">
+      <MiniRow active={active}>
+        <span className={`${mono} text-inkwarm`}>WhatsApp</span>
+        <span
+          className={`${mono} text-mark transition-opacity duration-500 ${
+            active ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          Mehta Textiles →
+        </span>
+      </MiniRow>
+      <MiniRow>
+        <span className={`${mono} text-inkwarm-soft`}>Website</span>
+        <span aria-hidden className="w-1 h-1 rounded-full bg-hairline" />
+      </MiniRow>
+      <MiniRow>
+        <span className={`${mono} text-inkwarm-soft`}>Phone</span>
+        <span aria-hidden className="w-1 h-1 rounded-full bg-hairline" />
+      </MiniRow>
+    </div>
+  );
+}
+
+/* 02 — the record appears among the ledger */
+function CrmBody({ active }: { active: boolean }) {
+  return (
+    <div className="space-y-1.5">
+      <motion.div
+        animate={active ? { scale: [0.96, 1] } : {}}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <MiniRow active={active}>
+          <span className="flex items-center gap-2 min-w-0">
+            <span
+              className={`w-[16px] h-[16px] rounded-full flex items-center justify-center text-[7px] font-mono shrink-0 transition-colors duration-500 ${
+                active ? "bg-mark text-sheet" : "bg-inkwarm/15 text-inkwarm"
+              }`}
+            >
+              MT
+            </span>
+            <span className={`${mono} text-inkwarm truncate`}>Mehta Textiles</span>
+          </span>
+          <span className={`${mono} text-inkwarm-faint shrink-0`}>Priya</span>
+        </MiniRow>
+      </motion.div>
+      {[14, 10].map((w, i) => (
+        <MiniRow key={i}>
+          <span className="flex items-center gap-2">
+            <span aria-hidden className="w-[16px] h-[16px] rounded-full bg-inkwarm/10 shrink-0" />
+            <span aria-hidden className="h-[5px] rounded-full bg-inkwarm/15" style={{ width: w * 4 }} />
+          </span>
+          <span aria-hidden className="h-[5px] w-6 rounded-full bg-inkwarm/10" />
+        </MiniRow>
+      ))}
+    </div>
+  );
+}
+
+/* 03 — rules fire in order while active */
+const RULES = ["Route to owner", "AI drafts reply", "Nudge in 2 days"];
+
+function AutomationBody({ active }: { active: boolean }) {
+  const reduce = useReducedMotion();
+  return (
+    <div className="space-y-1.5">
+      {RULES.map((r, i) => (
+        <MiniRow key={r} active={active && i < 2}>
+          <span className={`${mono} ${active && i < 2 ? "text-inkwarm" : "text-inkwarm-soft"}`}>
+            {r}
+          </span>
+          <motion.span
+            className={`${mono} ${i < 2 ? "text-live" : "text-inkwarm-faint"}`}
+            animate={
+              active && !reduce
+                ? { opacity: [0, 1] }
+                : { opacity: i < 2 ? 0.9 : 0.6 }
+            }
+            transition={{ delay: 0.25 + i * 0.35, duration: 0.3 }}
+          >
+            {i < 2 ? "✓" : "◷ 2d"}
+          </motion.span>
+        </MiniRow>
+      ))}
+    </div>
+  );
+}
+
+/* 04 — the number moves */
+const SPARK = [5, 8, 6, 10, 9, 12, 15];
+
+function DashboardBody({ active }: { active: boolean }) {
+  return (
+    <div className="space-y-1.5">
+      <MiniRow active={active}>
+        <span className={`${mono} text-inkwarm-soft`}>Pipeline</span>
+        <span className="flex items-baseline gap-1.5">
+          <span className={`${mono} !text-[11px] font-medium text-inkwarm`}>
+            {active ? "₹96.2L" : "₹94.8L"}
+          </span>
+          <span
+            className={`${mono} text-mark transition-opacity duration-500 ${
+              active ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            +1.4
+          </span>
+        </span>
+      </MiniRow>
+      <div className="flex items-end gap-[3px] h-[24px] px-1 pt-1" aria-hidden>
+        {SPARK.map((h, i) => (
+          <span
+            key={i}
+            className={`flex-1 rounded-t-[1px] transition-colors duration-500 ${
+              active && i === SPARK.length - 1 ? "bg-mark" : "bg-inkwarm/15"
+            }`}
+            style={{ height: `${h + 4}px` }}
+          />
+        ))}
+      </div>
+      <MiniRow>
+        <span className={`${mono} text-inkwarm-soft`}>Overdue follow-ups</span>
+        <span className={`${mono} text-live`}>0</span>
+      </MiniRow>
+    </div>
+  );
+}
+
+const STAGE_BODIES = [EnquiryBody, CrmBody, AutomationBody, DashboardBody];
+
+function StageCard({ active, index }: { active: boolean; index: number }) {
+  const meta = STAGE_META[index];
+  const Body = STAGE_BODIES[index];
+  return (
+    <div
+      className={`relative flex-1 border rounded-[2px] px-3.5 py-3.5 sm:px-4 sm:py-4 transition-all duration-500 ${
         active
-          ? "border-mark bg-sheet-lift shadow-[4px_4px_0_0_rgba(200,57,27,0.18)]"
+          ? "border-mark bg-sheet-lift shadow-[4px_4px_0_0_rgba(200,57,27,0.18)] md:-translate-y-1"
           : "rule bg-sheet-lift/80"
       }`}
     >
-      <div className="flex items-baseline justify-between mb-2.5">
+      <div className="flex items-baseline justify-between mb-2">
         <span
           className={`anno !text-[9px] transition-colors duration-500 ${
             active ? "text-mark" : ""
           }`}
         >
-          {`0${index + 1}`}
+          {`0${index + 1} · ${meta.verb}`}
         </span>
         <span
           aria-hidden
@@ -106,31 +213,18 @@ function StageCard({
           }`}
         />
       </div>
-      <p className="font-serif text-[17px] sm:text-[19px] leading-none text-inkwarm mb-2.5">
-        {stage.title}
+      <p className="font-serif text-[17px] sm:text-[19px] leading-none text-inkwarm mb-3">
+        {meta.title}
       </p>
-      <ul className="space-y-1 mb-3">
-        {stage.lines.map((l) => (
-          <li
-            key={l}
-            className="text-[10.5px] sm:text-[11px] font-mono text-inkwarm-soft leading-snug"
-          >
-            {l}
-          </li>
-        ))}
-      </ul>
-      <div className="border-t rule pt-2 flex items-center justify-between min-h-[22px]">
-        {stage.metric === "spark" ? (
-          <Sparkline active={active} />
-        ) : (
-          <span
-            className={`font-mono text-[9px] transition-colors duration-500 ${
-              active ? "text-mark" : "text-inkwarm-faint"
-            }`}
-          >
-            {stage.metric}
-          </span>
-        )}
+      <Body active={active} />
+      <div className="border-t rule mt-3 pt-2 flex items-center justify-between">
+        <span
+          className={`font-mono text-[9px] transition-colors duration-500 ${
+            active ? "text-mark" : "text-inkwarm-faint"
+          }`}
+        >
+          {meta.metric}
+        </span>
       </div>
     </div>
   );
@@ -142,7 +236,19 @@ function Connector({ active, tick }: { active: boolean; tick: number }) {
   return (
     <>
       <div className="hidden md:flex items-center w-10 lg:w-14 shrink-0 px-1 relative">
-        <div className="flow-line w-full" />
+        <div
+          className={`flow-line w-full transition-opacity duration-500 ${
+            active ? "flow-line-mark" : ""
+          }`}
+        />
+        <span
+          aria-hidden
+          className={`font-mono text-[11px] leading-none -ml-1 transition-colors duration-500 ${
+            active ? "text-mark" : "text-inkwarm-faint/60"
+          }`}
+        >
+          ›
+        </span>
         {active && !reduce && (
           <motion.span
             key={tick}
@@ -155,7 +261,7 @@ function Connector({ active, tick }: { active: boolean; tick: number }) {
         )}
       </div>
       <div className="md:hidden flex justify-center h-7">
-        <div className="flow-line-y h-full" />
+        <div className={`flow-line-y h-full ${active ? "opacity-100" : "opacity-70"}`} />
       </div>
     </>
   );
@@ -183,10 +289,10 @@ function SystemSchematic() {
 
       {/* Stage flow */}
       <div className="flex flex-col md:flex-row md:items-stretch gap-0">
-        {STAGES.map((s, i) => (
-          <div key={s.key} className="contents">
-            <StageCard stage={s} active={activeStage === i} index={i} />
-            {i < STAGES.length - 1 && (
+        {STAGE_META.map((s, i) => (
+          <div key={s.title} className="contents">
+            <StageCard active={activeStage === i} index={i} />
+            {i < STAGE_META.length - 1 && (
               <Connector active={activeStage === i + 1} tick={tick} />
             )}
           </div>
@@ -216,7 +322,7 @@ function SystemSchematic() {
           </AnimatePresence>
         </div>
         <span className="anno !text-[9px] hidden sm:block shrink-0">
-          {STAGES[activeStage].note}
+          {STAGE_META[activeStage].note}
         </span>
       </div>
     </figure>

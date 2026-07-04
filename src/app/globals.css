@@ -421,6 +421,13 @@ a:hover .u-draw,
   background-size: 24px 1px;
   animation: dash-travel 0.9s linear infinite;
 }
+.flow-line-mark {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(200, 57, 27, 0.75) 0 8px,
+    transparent 8px 16px
+  );
+}
 @keyframes dash-travel-y {
   to { background-position: 0 24px; }
 }
