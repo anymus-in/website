@@ -127,12 +127,12 @@ function WebsiteScene() {
   );
 }
 
-/* ── 02 · Automation — a workflow run, step by step ── */
+/* ── 02 · Automation — a run log beside the conversation it's handling ── */
 const RUN_STEPS = [
-  { label: "Trigger — WhatsApp message received", meta: "10:42:07", state: "done" },
+  { label: "Trigger — WhatsApp received", meta: "10:42:07", state: "done" },
   { label: "Match contact · Mehta Textiles", meta: "10:42:08", state: "done" },
   { label: "Create deal — pipeline: New", meta: "10:42:08", state: "done" },
-  { label: "AI drafts the reply · owner approves", meta: "10:42:09", state: "run" },
+  { label: "AI drafts reply → approval", meta: "10:42:09", state: "run" },
   { label: "Wait 2 days → nudge if silent", meta: "queued", state: "wait" },
 ];
 
@@ -141,8 +141,8 @@ function AutomationScene() {
   return (
     <div className="absolute inset-0 flex flex-col">
       <WindowChrome label="Run #4,182" />
-      <div className="relative flex-1 bg-white p-5 sm:p-7 overflow-hidden">
-        <div className="flex items-baseline justify-between mb-5">
+      <div className="relative flex-1 bg-white p-4 sm:p-6 overflow-hidden flex flex-col">
+        <div className="flex items-baseline justify-between mb-4">
           <span className="font-mono text-[10px] text-inkwarm uppercase tracking-[0.14em]">
             Workflow — new enquiry
           </span>
@@ -152,53 +152,90 @@ function AutomationScene() {
           </span>
         </div>
 
-        <div className="relative">
-          <div aria-hidden className="absolute left-[5px] top-2 bottom-2 w-px bg-hairline" />
-          <div className="space-y-2.5">
-            {RUN_STEPS.map((s, i) => (
-              <PopIn key={s.label} delay={0.25 + i * 0.28} className="relative pl-7">
-                <span
-                  aria-hidden
-                  className={`absolute left-0 top-[7px] w-[11px] h-[11px] rounded-full border ${
-                    s.state === "done"
-                      ? "bg-live/80 border-live"
-                      : s.state === "run"
-                        ? "bg-mark border-mark"
-                        : "bg-sheet border-hairline-strong"
-                  } ${s.state === "run" && !reduce ? "live-dot" : ""}`}
-                />
-                <div
-                  className={`flex items-baseline justify-between gap-3 border rounded-[2px] px-3 py-2 ${
-                    s.state === "run"
-                      ? "border-mark bg-sheet-lift"
-                      : "rule bg-sheet-lift/50"
-                  }`}
-                >
-                  <span className="font-mono text-[9.5px] text-inkwarm-soft truncate">
-                    {s.label}
-                  </span>
-                  <span className="font-mono text-[8.5px] text-inkwarm-faint shrink-0">
-                    {s.meta}
-                  </span>
-                </div>
-              </PopIn>
-            ))}
+        <div className="flex-1 grid grid-cols-1 sm:grid-cols-[1.15fr_1fr] gap-5 min-h-0">
+          {/* Run log */}
+          <div className="relative">
+            <div aria-hidden className="absolute left-[5px] top-2 bottom-2 w-px bg-hairline" />
+            <div className="flex flex-col justify-between h-full gap-2">
+              {RUN_STEPS.map((s, i) => (
+                <PopIn key={s.label} delay={0.2 + i * 0.24} className="relative pl-6">
+                  <span
+                    aria-hidden
+                    className={`absolute left-0 top-[8px] w-[11px] h-[11px] rounded-full border ${
+                      s.state === "done"
+                        ? "bg-live/80 border-live"
+                        : s.state === "run"
+                          ? "bg-mark border-mark"
+                          : "bg-sheet border-hairline-strong"
+                    } ${s.state === "run" && !reduce ? "live-dot" : ""}`}
+                  />
+                  <div
+                    className={`flex items-baseline justify-between gap-2 border rounded-[2px] px-2.5 py-2 ${
+                      s.state === "run"
+                        ? "border-mark bg-sheet-lift"
+                        : "rule bg-sheet-lift/50"
+                    }`}
+                  >
+                    <span className="font-mono text-[9px] sm:text-[9.5px] text-inkwarm-soft truncate">
+                      {s.label}
+                    </span>
+                    <span className="font-mono text-[8px] text-inkwarm-faint shrink-0">
+                      {s.meta}
+                    </span>
+                  </div>
+                </PopIn>
+              ))}
+            </div>
+          </div>
+
+          {/* The conversation being handled */}
+          <div className="hidden sm:flex flex-col border rule rounded-[3px] bg-sheet-lift/60 p-3 min-h-0">
+            <div className="flex items-center justify-between border-b rule pb-2 mb-3">
+              <span className="font-mono text-[8.5px] uppercase tracking-[0.12em] text-inkwarm-soft">
+                WhatsApp · Mehta Textiles
+              </span>
+              <span className="anno !text-[8px]">Live thread</span>
+            </div>
+
+            {/* Incoming — the trigger */}
+            <PopIn delay={0.15} className="max-w-[88%]">
+              <div className="rounded-[9px] rounded-bl-[2px] bg-[#E7F6E9] border border-[#c9e6cd] px-3 py-2">
+                <p className="text-[10px] text-inkwarm leading-snug">
+                  Hi, need 400m of the printed cotton — rate?
+                </p>
+                <p className="text-[7.5px] text-inkwarm-faint text-right mt-1">10:42 ✓✓</p>
+              </div>
+              <p className="anno !text-[7.5px] mt-1">The trigger</p>
+            </PopIn>
+
+            {/* Outgoing — the AI draft awaiting approval */}
+            <PopIn delay={0.9} className="max-w-[92%] self-end mt-auto pt-3">
+              <div className="rounded-[9px] rounded-br-[2px] border border-mark/50 bg-white px-3 py-2">
+                <p className="font-mono text-[7.5px] uppercase tracking-[0.12em] text-mark mb-1.5">
+                  AI draft — for approval
+                </p>
+                <p className="text-[10px] text-inkwarm leading-snug">
+                  Namaste! Printed cotton is ₹68/m. 400m is in stock — can
+                  dispatch Friday. Shall I hold it?
+                </p>
+              </div>
+              <div className="flex items-center justify-end gap-2 mt-1.5">
+                <span className="font-mono text-[8px] text-inkwarm-faint">Priya reviews —</span>
+                <span className="inline-flex items-center gap-1 border border-mark bg-mark/[0.06] rounded-[2px] px-2 py-1 font-mono text-[8px] text-mark">
+                  ✓ Approve &amp; send
+                </span>
+              </div>
+            </PopIn>
           </div>
         </div>
 
-        {/* WhatsApp bubble — the trigger, pinned like evidence */}
-        <PopIn
-          delay={0.1}
-          className="absolute right-4 sm:right-6 bottom-5 sm:bottom-7 max-w-[190px] -rotate-[1.5deg]"
-        >
-          <div className="rounded-[10px] rounded-bl-[2px] bg-[#E7F6E9] border border-[#c9e6cd] px-3 py-2 shadow-sm">
-            <p className="text-[10px] text-inkwarm leading-snug">
-              Hi, need 400m of the printed cotton — rate?
-            </p>
-            <p className="text-[8px] text-inkwarm-faint text-right mt-1">10:42 ✓✓</p>
-          </div>
-          <p className="anno !text-[8px] mt-1.5 text-right">The trigger</p>
-        </PopIn>
+        {/* Run tally */}
+        <div className="border-t rule mt-4 pt-2.5 flex items-baseline justify-between">
+          <span className="font-mono text-[8.5px] text-inkwarm-faint">
+            4,182 runs this month
+          </span>
+          <span className="font-mono text-[8.5px] text-live">0 enquiries missed</span>
+        </div>
       </div>
     </div>
   );
