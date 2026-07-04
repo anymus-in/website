@@ -207,7 +207,7 @@ function StageCard({ active, index }: { active: boolean; index: number }) {
   const Body = STAGE_BODIES[index];
   return (
     <div
-      className={`relative flex-1 border rounded-[2px] px-3.5 py-3.5 sm:px-4 sm:py-4 transition-all duration-500 ${
+      className={`relative snap-center shrink-0 w-[78vw] max-w-[300px] md:w-auto md:max-w-none md:shrink md:flex-1 border rounded-[2px] px-3.5 py-3.5 sm:px-4 sm:py-4 transition-all duration-500 ${
         active
           ? "border-mark bg-sheet-lift shadow-[4px_4px_0_0_rgba(200,57,27,0.18)] md:-translate-y-1"
           : "rule bg-sheet-lift/80"
@@ -275,9 +275,15 @@ function Connector({ active, tick }: { active: boolean; tick: number }) {
           />
         )}
       </div>
-      <div className="md:hidden flex justify-center h-7">
-        <div className={`flow-line-y h-full ${active ? "opacity-100" : "opacity-70"}`} />
-      </div>
+      {/* Mobile: a small arrow between carousel cards */}
+      <span
+        aria-hidden
+        className={`md:hidden self-center shrink-0 font-mono text-[14px] px-0.5 transition-colors duration-500 ${
+          active ? "text-mark" : "text-inkwarm-faint/60"
+        }`}
+      >
+        ›
+      </span>
     </>
   );
 }
@@ -302,8 +308,8 @@ function SystemSchematic() {
       <span aria-hidden className="reg reg-bl" />
       <span aria-hidden className="reg reg-br" />
 
-      {/* Stage flow */}
-      <div className="flex flex-col md:flex-row md:items-stretch gap-0">
+      {/* Stage flow — horizontal snap carousel on mobile, full row on desktop */}
+      <div className="flex md:items-stretch gap-2 md:gap-0 overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
         {STAGE_META.map((s, i) => (
           <div key={s.title} className="contents">
             <StageCard active={activeStage === i} index={i} />
@@ -311,6 +317,20 @@ function SystemSchematic() {
               <Connector active={activeStage === i + 1} tick={tick} />
             )}
           </div>
+        ))}
+      </div>
+
+      {/* Mobile stage dots */}
+      <div className="md:hidden flex items-center justify-center gap-4 mt-4" aria-hidden>
+        {STAGE_META.map((s, i) => (
+          <span
+            key={s.title}
+            className={`font-mono text-[9px] tracking-[0.14em] transition-colors duration-500 ${
+              activeStage === i ? "text-mark" : "text-inkwarm-faint/60"
+            }`}
+          >
+            {`0${i + 1}`}
+          </span>
         ))}
       </div>
 
@@ -341,6 +361,30 @@ function SystemSchematic() {
         </span>
       </div>
     </figure>
+  );
+}
+
+/* A hand-drawn red pencil stroke that draws itself under a word */
+function PencilStroke({ delay = 1.15 }: { delay?: number }) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.svg
+      aria-hidden
+      viewBox="0 0 100 10"
+      preserveAspectRatio="none"
+      className="absolute left-[-3%] bottom-[-0.06em] w-[106%] h-[0.13em] pointer-events-none"
+    >
+      <motion.path
+        d="M2 6.5 C 22 3.5, 44 8, 63 5.5 S 90 4, 98 6"
+        fill="none"
+        stroke="var(--color-mark)"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+        initial={reduce ? { pathLength: 1 } : { pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ delay, duration: 0.55, ease: "easeOut" }}
+      />
+    </motion.svg>
   );
 }
 
@@ -382,13 +426,22 @@ export default function Hero() {
             as="h1"
             className="font-serif font-light text-[clamp(46px,10.5vw,150px)] leading-[0.98] tracking-[-0.03em] text-inkwarm"
             lineClassName={(i) =>
-              i === 1 ? "sm:pl-[8vw]" : i === 2 ? "sm:pl-[2vw]" : undefined
+              i === 1
+                ? "sm:pl-[8vw]"
+                : i === 2
+                  ? "sm:pl-[2vw] pb-[0.1em] -mb-[0.1em]"
+                  : undefined
             }
             lines={[
               <span key="l1">We build</span>,
               <span key="l2">the system</span>,
               <span key="l3">
-                your business <span className="italic text-mark">runs</span> on.
+                your business{" "}
+                <span className="relative inline-block">
+                  <span className="italic">runs</span>
+                  <PencilStroke />
+                </span>{" "}
+                on.
               </span>,
             ]}
           />
@@ -426,6 +479,10 @@ export default function Hero() {
             >
               Or read the index first ↓
             </a>
+            <p className="anno !text-[9.5px] lg:pl-5 border-t rule pt-3 w-full whitespace-nowrap">
+              <span className="text-mark">✳</span> Free 30-min call · no
+              lock-in · 24h reply
+            </p>
           </motion.div>
         </motion.div>
       </div>
