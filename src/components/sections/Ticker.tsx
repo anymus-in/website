@@ -13,16 +13,16 @@ function Run() {
     <div className="flex items-baseline shrink-0" aria-hidden>
       {TRANSFORMS.map(([from, to], i) => (
         <span key={from} className="flex items-baseline whitespace-nowrap">
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-inkwarm-faint px-6 sm:px-10">
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-sheet/50 px-6 sm:px-10">
             {`№ ${String(i + 1).padStart(2, "0")}`}
           </span>
-          <span className="font-serif font-light text-[clamp(24px,3.4vw,44px)] leading-none tracking-[-0.02em] text-inkwarm/70">
+          <span className="font-serif font-light text-[clamp(26px,3.8vw,52px)] leading-none tracking-[-0.02em] text-sheet/75">
             {from}
           </span>
-          <span className="font-serif font-light text-[clamp(24px,3.4vw,44px)] leading-none px-4 sm:px-6 text-mark">
+          <span className="font-serif font-light text-[clamp(26px,3.8vw,52px)] leading-none px-4 sm:px-6 text-sheet">
             →
           </span>
-          <span className="font-serif italic text-[clamp(24px,3.4vw,44px)] leading-none tracking-[-0.02em] text-inkwarm">
+          <span className="font-serif italic text-[clamp(26px,3.8vw,52px)] leading-none tracking-[-0.02em] text-sheet">
             {to}
           </span>
         </span>
@@ -31,17 +31,21 @@ function Run() {
   );
 }
 
-/** Oversized editorial strip — everything the system turns into something better. */
+/** The red band — everything the system turns into something better. */
 export default function Ticker() {
   return (
     <div
-      className="marquee border-y rule py-6 sm:py-8 overflow-hidden"
+      className="marquee relative bg-mark border-y border-mark-deep overflow-hidden"
       aria-label="WhatsApp becomes CRM, spreadsheets become dashboards, manual follow-ups become automatic"
     >
-      <div className="marquee-track items-baseline">
-        <Run />
-        <Run />
+      <div className="ruler-ticks absolute top-1 left-0 right-0 h-[8px] opacity-30 invert" aria-hidden />
+      <div className="py-7 sm:py-10">
+        <div className="marquee-track items-baseline">
+          <Run />
+          <Run />
+        </div>
       </div>
+      <div className="ruler-ticks absolute bottom-1 left-0 right-0 h-[8px] opacity-30 invert rotate-180" aria-hidden />
     </div>
   );
 }

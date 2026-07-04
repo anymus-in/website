@@ -449,6 +449,47 @@ a:hover .u-draw,
   animation-play-state: paused;
 }
 
+/* Fine graph-paper grid — engineering drawing ground */
+.graph-bg {
+  background-image:
+    linear-gradient(var(--color-hairline) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-hairline) 1px, transparent 1px),
+    linear-gradient(rgba(28, 24, 18, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28, 24, 18, 0.05) 1px, transparent 1px);
+  background-size:
+    120px 120px,
+    120px 120px,
+    24px 24px,
+    24px 24px;
+}
+.graph-bg-dark {
+  background-image:
+    linear-gradient(rgba(244, 241, 232, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 241, 232, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(244, 241, 232, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 241, 232, 0.03) 1px, transparent 1px);
+  background-size:
+    120px 120px,
+    120px 120px,
+    24px 24px,
+    24px 24px;
+}
+
+/* Ruler tick strip — measurement marks along an edge */
+.ruler-ticks {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-hairline-strong) 0 1px,
+    transparent 1px 12px,
+    var(--color-hairline) 12px 13px,
+    transparent 13px 24px,
+    var(--color-hairline) 24px 25px,
+    transparent 25px 36px,
+    var(--color-hairline) 36px 37px,
+    transparent 37px 48px
+  );
+}
+
 /* Outlined display type — hollow serif for oversized numerals/watermarks */
 .text-hollow {
   color: transparent;
@@ -458,6 +499,28 @@ a:hover .u-draw,
   color: transparent;
   -webkit-text-stroke: 1px rgba(244, 241, 232, 0.28);
 }
+.text-hollow-mark {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(200, 57, 27, 0.55);
+}
+
+/* Dimension line — a measured span with end caps, like a technical drawing */
+.dim-line {
+  position: relative;
+  height: 1px;
+  background: var(--color-hairline-strong);
+}
+.dim-line::before,
+.dim-line::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  width: 1px;
+  height: 9px;
+  background: var(--color-hairline-strong);
+}
+.dim-line::before { left: 0; }
+.dim-line::after { right: 0; }
 
 /* Raised paper plate — the frame around figures and mock-UIs */
 .plate {

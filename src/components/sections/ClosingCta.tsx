@@ -4,14 +4,23 @@ import Reveal from "@/components/motion/Reveal";
 import LineReveal from "@/components/motion/LineReveal";
 import { CONTACT_EMAIL } from "@/lib/site";
 
-/** The final spread — a full-viewport invitation set in display sizes. */
+/** The culmination — a full-viewport dark spread with one giant action. */
 export default function ClosingCta() {
   return (
     <section
       id="start"
       className="bg-inkwarm text-sheet relative overflow-hidden"
     >
-      <div className="relative max-w-[1380px] mx-auto px-5 sm:px-8 min-h-[92vh] flex flex-col justify-between py-14 sm:py-16">
+      {/* Blueprint ground + hollow chapter numeral */}
+      <div aria-hidden className="absolute inset-0 graph-bg-dark" />
+      <span
+        aria-hidden
+        className="text-hollow-sheet pointer-events-none select-none absolute right-[-0.05em] bottom-[-0.12em] font-serif font-light leading-none text-[clamp(220px,34vw,540px)] tracking-[-0.04em]"
+      >
+        04
+      </span>
+
+      <div className="relative max-w-[1380px] mx-auto px-5 sm:px-8 min-h-[94vh] flex flex-col justify-between py-14 sm:py-16">
         <Reveal>
           <div className="flex items-baseline justify-between border-b border-sheet/25 pb-3">
             <span className="anno !text-sheet/50">Sec. 04 — Start</span>
@@ -19,48 +28,58 @@ export default function ClosingCta() {
           </div>
         </Reveal>
 
-        <div className="py-14">
+        <div className="py-16 sm:py-20">
+          <Reveal>
+            <p className="anno !text-sheet/45 mb-8">The short version</p>
+          </Reveal>
           <LineReveal
             as="h2"
-            className="font-serif font-light text-[clamp(44px,9.5vw,136px)] leading-[0.98] tracking-[-0.03em]"
-            lineClassName={(i) => (i === 1 ? "sm:pl-[10vw]" : undefined)}
+            className="font-serif font-light text-[clamp(40px,8.5vw,124px)] leading-[1.0] tracking-[-0.03em]"
+            lineClassName={(i) => (i === 1 ? "sm:pl-[7vw]" : i === 2 ? "sm:pl-[2vw]" : undefined)}
             lines={[
-              <span key="1">Put your operation</span>,
+              <span key="1">Well-run companies</span>,
               <span key="2">
-                on <span className="italic text-mark">rails</span>.
+                aren&rsquo;t lucky. They&rsquo;re{" "}
+                <span className="italic text-mark">built</span>.
               </span>,
             ]}
           />
 
-          <Reveal delay={0.25}>
-            <div className="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
-              <p className="md:col-span-5 text-[14.5px] sm:text-[15.5px] text-sheet/60 leading-relaxed max-w-[440px]">
-                A 30-minute discovery call. We&rsquo;ll map how work moves
-                through your business today — and show you what it could look
-                like running on one connected system.
+          {/* The one action — an oversized drawn link */}
+          <Reveal delay={0.3}>
+            <div className="mt-14 sm:mt-20">
+              <a
+                href="/schedule-call"
+                className="group inline-flex items-baseline gap-5 focus-visible:outline-2 focus-visible:outline-mark focus-visible:outline-offset-8"
+              >
+                <span className="u-draw font-serif font-light text-[clamp(26px,4.6vw,58px)] leading-none tracking-[-0.02em] text-sheet">
+                  Book a 30-minute discovery call
+                </span>
+                <span
+                  aria-hidden
+                  className="font-serif font-light text-[clamp(26px,4.6vw,58px)] leading-none text-mark transition-transform duration-300 group-hover:translate-x-3"
+                >
+                  →
+                </span>
+              </a>
+              <p className="mt-6 text-[13.5px] sm:text-[14.5px] text-sheet/55 leading-relaxed max-w-[440px]">
+                We&rsquo;ll map how work moves through your business today — and
+                show you what it looks like running on one connected system.
+                Worst case, you leave with the map.
               </p>
-              <div className="md:col-span-7 flex flex-col sm:flex-row sm:items-center md:justify-end gap-6 sm:gap-10">
-                <a
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className="u-draw font-mono text-[12px] uppercase tracking-[0.14em] text-sheet/60 hover:text-sheet transition-colors"
-                >
-                  {CONTACT_EMAIL}
-                </a>
-                <a
-                  href="/schedule-call"
-                  className="btn-stamp btn-stamp-paper px-8 sm:px-10 py-4 sm:py-5 text-[15px] sm:text-[16px] font-medium tracking-[-0.01em]"
-                >
-                  Book the call
-                  <span aria-hidden className="font-mono text-[12px]">→</span>
-                </a>
-              </div>
             </div>
           </Reveal>
         </div>
 
         <Reveal delay={0.1}>
-          <div className="flex items-baseline justify-between border-t border-sheet/25 pt-3">
+          <div className="flex flex-col sm:flex-row items-start sm:items-baseline justify-between gap-3 border-t border-sheet/25 pt-4">
             <span className="anno !text-sheet/40">End of document</span>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="u-draw font-mono text-[11px] uppercase tracking-[0.14em] text-sheet/60 hover:text-sheet transition-colors"
+            >
+              Prefer writing? {CONTACT_EMAIL}
+            </a>
             <span className="anno !text-sheet/40 hidden sm:block">
               Continued below — colophon
             </span>
