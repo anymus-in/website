@@ -8,6 +8,7 @@ import Ticker from "@/components/sections/Ticker";
 import ServiceIndex from "@/components/sections/ServiceIndex";
 import Interlude from "@/components/sections/Interlude";
 import BuildSheet from "@/components/sections/BuildSheet";
+import Testimonials from "@/components/sections/Testimonials";
 import Principles from "@/components/sections/Principles";
 import ClosingCta from "@/components/sections/ClosingCta";
 import JsonLd from "@/components/seo/JsonLd";
@@ -36,6 +37,7 @@ export default function Home() {
         <Principles />
         <Interlude />
         <BuildSheet />
+        <Testimonials />
         <ClosingCta />
       </main>
       <Footer />
