@@ -23,7 +23,7 @@ export default function ClientSignInForm() {
     >
       <span className="absolute top-0 left-0 right-0 h-[2px] bg-mark" />
       <label className="block">
-        <span className="anno !text-[10px] block mb-2">Email</span>
+        <span className="anno !text-[11px] sm:!text-[10px] block mb-2">Email</span>
         <input
           required
           type="email"
@@ -35,7 +35,7 @@ export default function ClientSignInForm() {
       </label>
 
       <label className="block">
-        <span className="anno !text-[10px] block mb-2">Password</span>
+        <span className="anno !text-[11px] sm:!text-[10px] block mb-2">Password</span>
         <input
           required
           type="password"

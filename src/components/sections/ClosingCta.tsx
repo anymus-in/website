@@ -46,14 +46,14 @@ export default function ClosingCta() {
             <div className="mt-14 sm:mt-20">
               <a
                 href="/schedule-call"
-                className="group inline-flex items-baseline gap-5 focus-visible:outline-2 focus-visible:outline-mark focus-visible:outline-offset-8"
+                className="group inline-flex items-baseline gap-5 py-2 -my-2 focus-visible:outline-2 focus-visible:outline-mark focus-visible:outline-offset-8"
               >
                 <span className="u-draw font-serif font-light text-[clamp(26px,4.6vw,58px)] leading-none tracking-[-0.02em] text-sheet">
                   Book a 30-minute discovery call
                 </span>
                 <span
                   aria-hidden
-                  className="font-serif font-light text-[clamp(26px,4.6vw,58px)] leading-none text-mark transition-transform duration-300 group-hover:translate-x-3"
+                  className="font-serif font-light text-[clamp(26px,4.6vw,58px)] leading-none text-mark transition-transform duration-300 group-hover:translate-x-3 group-active:translate-x-3"
                 >
                   →
                 </span>
@@ -71,7 +71,7 @@ export default function ClosingCta() {
             <span className="anno !text-sheet/40">anymus — end of document</span>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="u-draw font-mono text-[11px] uppercase tracking-[0.14em] text-sheet/60 hover:text-sheet transition-colors"
+              className="u-draw inline-flex items-center min-h-11 -my-3 sm:min-h-0 sm:my-0 font-mono text-[11px] uppercase tracking-[0.14em] text-sheet/60 hover:text-sheet active:text-sheet transition-colors"
             >
               Prefer writing? {CONTACT_EMAIL}
             </a>

@@ -55,7 +55,7 @@ function MiniRow({
   );
 }
 
-const mono = "font-mono text-[9.5px] sm:text-[10px] leading-none";
+const mono = "font-mono text-[11px] sm:text-[10px] leading-none";
 
 /* 01 — channels; WhatsApp lights up when the enquiry arrives */
 function EnquiryBody({ active }: { active: boolean }) {
@@ -215,7 +215,7 @@ function StageCard({ active, index }: { active: boolean; index: number }) {
     >
       <div className="flex items-baseline justify-between mb-2">
         <span
-          className={`anno !text-[9px] transition-colors duration-500 ${
+          className={`anno !text-[11px] sm:!text-[9px] transition-colors duration-500 ${
             active ? "text-mark" : ""
           }`}
         >
@@ -234,7 +234,7 @@ function StageCard({ active, index }: { active: boolean; index: number }) {
       <Body active={active} />
       <div className="border-t rule mt-3 pt-2 flex items-center justify-between">
         <span
-          className={`font-mono text-[9px] transition-colors duration-500 ${
+          className={`font-mono text-[11px] sm:text-[9px] transition-colors duration-500 ${
             active ? "text-mark" : "text-inkwarm-faint"
           }`}
         >
@@ -291,12 +291,46 @@ function Connector({ active, tick }: { active: boolean; tick: number }) {
 function SystemSchematic() {
   const reduce = useReducedMotion();
   const [tick, setTick] = useState(0);
+  const [scrolledStage, setScrolledStage] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (reduce) return;
     const id = setInterval(() => setTick((t) => t + 1), 2600);
     return () => clearInterval(id);
   }, [reduce]);
+
+  // Mobile: track which card the carousel has snapped to
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const max = track.scrollWidth - track.clientWidth;
+        if (max <= 0) return;
+        setScrolledStage(
+          Math.round((track.scrollLeft / max) * (STAGE_META.length - 1)),
+        );
+      });
+    };
+    track.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      track.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const scrollToStage = (i: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const max = track.scrollWidth - track.clientWidth;
+    track.scrollTo({
+      left: (max * i) / (STAGE_META.length - 1),
+      behavior: reduce ? "auto" : "smooth",
+    });
+  };
 
   const event = FEED[tick % FEED.length];
   const activeStage = reduce ? 3 : event.stage;
@@ -309,7 +343,10 @@ function SystemSchematic() {
       <span aria-hidden className="reg reg-br" />
 
       {/* Stage flow — horizontal snap carousel on mobile, full row on desktop */}
-      <div className="flex md:items-stretch gap-2 md:gap-0 overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+      <div
+        ref={trackRef}
+        className="flex md:items-stretch gap-2 md:gap-0 overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 [mask-image:linear-gradient(to_right,transparent,black_20px,black_calc(100%-20px),transparent)] md:[mask-image:none]"
+      >
         {STAGE_META.map((s, i) => (
           <div key={s.title} className="contents">
             <StageCard active={activeStage === i} index={i} />
@@ -320,17 +357,20 @@ function SystemSchematic() {
         ))}
       </div>
 
-      {/* Mobile stage dots */}
-      <div className="md:hidden flex items-center justify-center gap-4 mt-4" aria-hidden>
+      {/* Mobile stage dots — tap to jump, highlight follows the swipe */}
+      <div className="md:hidden flex items-center justify-center gap-1 mt-2">
         {STAGE_META.map((s, i) => (
-          <span
+          <button
             key={s.title}
-            className={`font-mono text-[9px] tracking-[0.14em] transition-colors duration-500 ${
-              activeStage === i ? "text-mark" : "text-inkwarm-faint/60"
+            type="button"
+            onClick={() => scrollToStage(i)}
+            aria-label={`Go to stage ${i + 1}: ${s.title}`}
+            className={`font-mono text-[11px] tracking-[0.14em] min-w-11 min-h-11 transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-mark ${
+              scrolledStage === i ? "text-mark" : "text-inkwarm-faint/60"
             }`}
           >
             {`0${i + 1}`}
-          </span>
+          </button>
         ))}
       </div>
 
@@ -338,7 +378,7 @@ function SystemSchematic() {
       <div className="mt-5 sm:mt-6 border-t rule pt-3.5 flex items-center gap-3 sm:gap-4 overflow-hidden">
         <span className="inline-flex items-center gap-1.5 shrink-0">
           <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-live live-dot" />
-          <span className="anno !text-[9px] !text-live">Live</span>
+          <span className="anno !text-[11px] sm:!text-[9px] !text-live">Live</span>
         </span>
         <div className="relative flex-1 h-[16px]">
           <AnimatePresence mode="wait">
@@ -348,7 +388,7 @@ function SystemSchematic() {
               animate={{ opacity: 1, y: 0 }}
               exit={reduce ? { opacity: 1 } : { opacity: 0, y: -8 }}
               transition={{ duration: 0.35, ease: "easeOut" }}
-              className="absolute inset-0 font-mono text-[10.5px] sm:text-[11.5px] text-inkwarm-soft whitespace-nowrap overflow-hidden text-ellipsis leading-[16px]"
+              className="absolute inset-0 font-mono text-[11px] sm:text-[11.5px] text-inkwarm-soft whitespace-nowrap overflow-hidden text-ellipsis leading-[16px]"
             >
               <span className="text-inkwarm-faint">{event.t}</span>
               {"  —  "}
@@ -405,7 +445,7 @@ export default function Hero() {
 
   return (
     <section ref={ref} id="top" className="relative">
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-[92px] sm:pt-[116px]">
+      <div className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-[calc(92px+env(safe-area-inset-top))] sm:pt-[calc(116px+env(safe-area-inset-top))]">
         {/* Document header rule */}
         <motion.div
           initial={reduce ? {} : { opacity: 0 }}
@@ -413,8 +453,13 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="flex items-baseline justify-between border-b rule-strong pb-3"
         >
-          <span className="anno">Anymus — Websites · Automation · Internal systems</span>
-          <span className="anno anno-mark hidden sm:block">Doc. 00 / Index</span>
+          <span className="anno hidden sm:inline">
+            Anymus — Websites · Automation · Internal systems
+          </span>
+          <span className="anno sm:hidden">Anymus — Doc. 00</span>
+          <span className="anno anno-mark">
+            <span className="hidden sm:inline">Doc. 00 / </span>Index
+          </span>
         </motion.div>
 
         {/* The statement — sub-copy set into the headline's whitespace */}
@@ -424,7 +469,7 @@ export default function Hero() {
         >
           <LineReveal
             as="h1"
-            className="font-serif font-light text-[clamp(46px,10.5vw,150px)] leading-[0.98] tracking-[-0.03em] text-inkwarm"
+            className="font-serif font-light text-[clamp(38px,10.5vw,150px)] leading-[1.02] sm:leading-[0.98] tracking-[-0.03em] text-inkwarm"
             lineClassName={(i) =>
               i === 1
                 ? "sm:pl-[8vw]"
@@ -457,12 +502,20 @@ export default function Hero() {
               <span className="font-serif text-[17px] sm:text-[18px] text-inkwarm">
                 anymus
               </span>{" "}
-              designs, builds, and wires together your websites, automations,
-              and internal tools — around the ones you already use.{" "}
-              <em className="text-inkwarm not-italic font-medium">
-                One connected system,
-              </em>{" "}
-              not ten disconnected apps.
+              <span className="sm:hidden">
+                builds your websites, automations, and internal tools —{" "}
+                <em className="text-inkwarm not-italic font-medium">
+                  as one connected system.
+                </em>
+              </span>
+              <span className="hidden sm:inline">
+                designs, builds, and wires together your websites, automations,
+                and internal tools — around the ones you already use.{" "}
+                <em className="text-inkwarm not-italic font-medium">
+                  One connected system,
+                </em>{" "}
+                not ten disconnected apps.
+              </span>
             </p>
             <div className="flex items-center gap-6 lg:pl-5">
               <a
@@ -475,11 +528,11 @@ export default function Hero() {
             </div>
             <a
               href="#index"
-              className="u-draw lg:pl-5 text-[13px] font-medium text-inkwarm"
+              className="u-draw lg:pl-5 text-[13px] font-medium text-inkwarm hidden sm:inline-block"
             >
               Or read the index first ↓
             </a>
-            <p className="anno !text-[9.5px] lg:pl-5 border-t rule pt-3 w-full whitespace-nowrap">
+            <p className="anno !text-[11px] sm:!text-[9.5px] leading-relaxed lg:pl-5 border-t rule pt-3 w-full whitespace-normal sm:whitespace-nowrap">
               <span className="text-mark">✳</span> Free 30-min call · no
               lock-in · 24h reply
             </p>

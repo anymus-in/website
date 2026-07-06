@@ -69,7 +69,7 @@ function ServiceSpread({ service, index }: { service: Service; index: number }) 
                   : [service.name]
               }
             />
-            <span className="u-draw mt-5 inline-block font-serif text-[17px] sm:text-[19px] text-inkwarm">
+            <span className="u-draw mt-5 inline-block font-serif text-[17px] sm:text-[19px] text-inkwarm group-active:text-mark transition-colors">
               {service.intro}
               <span aria-hidden className="text-mark"> →</span>
             </span>

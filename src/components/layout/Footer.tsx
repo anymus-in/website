@@ -52,7 +52,7 @@ export default function Footer() {
               <p className="anno !text-sheet/45">Write to us</p>
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="u-draw inline-block font-mono text-[13px] tracking-[0.04em] text-sheet/85 hover:text-sheet transition-colors"
+                className="u-draw inline-flex items-center min-h-11 -my-3 sm:min-h-0 sm:my-0 font-mono text-[13px] tracking-[0.04em] text-sheet/85 hover:text-sheet active:text-sheet transition-colors"
               >
                 {CONTACT_EMAIL}
               </a>
@@ -67,15 +67,15 @@ export default function Footer() {
                 <p className="border-b border-sheet/15 pb-2.5 mb-5">
                   <span className="anno !text-sheet/45">{col.label}</span>
                 </p>
-                <ul className="space-y-3.5">
+                <ul className="space-y-1 sm:space-y-3.5">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="group inline-flex items-baseline gap-2 text-sheet/65 hover:text-sheet transition-colors"
+                        className="group inline-flex items-baseline gap-2 py-2.5 sm:py-0 text-sheet/65 hover:text-sheet active:text-sheet transition-colors"
                       >
                         {"num" in link && link.num && (
-                          <span className="font-mono text-[9px] text-sheet/35 group-hover:text-mark transition-colors">
+                          <span aria-hidden className="font-mono text-[9px] text-sheet/35 group-hover:text-mark transition-colors">
                             {link.num}
                           </span>
                         )}
@@ -126,10 +126,10 @@ export default function Footer() {
 
         {/* Bottom line */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-t border-sheet/15 py-5 mt-6">
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-sheet/40">
+          <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-sheet/40">
             © {new Date().getFullYear()} anymus
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-sheet/40">
+          <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-sheet/40">
             Set in Newsreader &amp; JetBrains Mono
           </span>
         </div>

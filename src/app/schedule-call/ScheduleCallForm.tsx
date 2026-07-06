@@ -13,7 +13,7 @@ const fieldClass =
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="anno !text-[10px] block mb-2">{label}</span>
+      <span className="anno !text-[11px] sm:!text-[10px] block mb-2">{label}</span>
       {children}
     </label>
   );
@@ -174,7 +174,7 @@ export default function ScheduleCallForm() {
         )}
       </button>
 
-      <p className="anno !text-[9px] text-center block">We typically respond within 24 hours</p>
+      <p className="anno !text-[11px] sm:!text-[9px] text-center block">We typically respond within 24 hours</p>
     </form>
   );
 }

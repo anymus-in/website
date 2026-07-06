@@ -4,6 +4,7 @@ import ScrollProgress from "@/components/motion/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Reveal from "@/components/motion/Reveal";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -16,8 +17,6 @@ export const metadata: Metadata = {
     url: "/contact",
   },
 };
-
-const CONTACT_EMAIL = "anymus.shared@gmail.com";
 
 export default function ContactPage() {
   return (

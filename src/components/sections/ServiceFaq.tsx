@@ -15,7 +15,7 @@ export default function ServiceFaq({ faqs }: { faqs: ServiceFaqItem[] }) {
             <Accordion.Item value={`item-${i}`}>
               <Accordion.Header>
                 <Accordion.Trigger className="group w-full flex items-center justify-between py-4 sm:py-5 text-left">
-                  <h3 className="font-serif font-normal text-[16px] sm:text-[18px] text-black group-hover:opacity-70 transition-opacity pr-4 sm:pr-8 flex-1">
+                  <h3 className="font-serif font-normal text-[17px] sm:text-[19px] text-inkwarm group-hover:opacity-70 transition-opacity pr-4 sm:pr-8 flex-1">
                     {faq.question}
                   </h3>
                   <span

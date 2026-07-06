@@ -3,6 +3,7 @@ import ScrollProgress from "@/components/motion/ScrollProgress";
 import ChapterRail from "@/components/motion/ChapterRail";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import Hero from "@/components/sections/Hero";
 import Ticker from "@/components/sections/Ticker";
 import ServiceIndex from "@/components/sections/ServiceIndex";
@@ -40,6 +41,7 @@ export default function Home() {
         <Testimonials />
         <ClosingCta />
       </main>
+      <MobileCtaBar />
       <Footer />
     </>
   );
