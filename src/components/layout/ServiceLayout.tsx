@@ -1,236 +1,350 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
 import ScrollProgress from "@/components/motion/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CtaBand from "@/components/sections/CtaBand";
+import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import ServiceFaq from "@/components/sections/ServiceFaq";
 import SpreadVisual from "@/components/sections/SpreadVisuals";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { services, type Service } from "@/lib/services";
 
+/**
+ * Service detail page, set as a numbered chapter of the same technical
+ * document as the homepage — Doc. 01/02/03. Same voice throughout: mono
+ * annotations, serif statements, plates with registration marks, graph-paper
+ * bands, and the red mark.
+ */
 export default function ServiceLayout({ service }: { service: Service }) {
-  const others = services.filter((s) => s.slug !== service.slug);
-  const Icon = service.icon;
+  const index = services.findIndex((s) => s.slug === service.slug);
+  const doc = `0${index + 1}`;
+  const prev = services[(index + services.length - 1) % services.length];
+  const next = services[(index + 1) % services.length];
 
   return (
     <>
       <ScrollProgress />
       <Navbar />
-      <main className="pt-24 sm:pt-28 md:pt-32">
-        {/* Hero */}
-        <section className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8 pt-6 sm:pt-10 pb-14 sm:pb-20">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-8 sm:mb-12">
-            <ol className="flex items-center gap-2 text-[12px] sm:text-[13px] text-ink-500">
-              <li>
-                <Link href="/" className="hover:text-black transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden className="text-ink-400">/</li>
-              <li>
-                <Link href="/services" className="hover:text-black transition-colors">
-                  Services
-                </Link>
-              </li>
-              <li aria-hidden className="text-ink-400">/</li>
-              <li className="text-black" aria-current="page">
-                {service.name}
-              </li>
-            </ol>
-          </nav>
+      <main className="pt-[calc(62px+env(safe-area-inset-top))] sm:pt-[70px]">
+        {/* ── Document header ─────────────────────────────── */}
+        <header id="top" className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-8 sm:pt-12">
+          <div className="flex items-baseline justify-between border-b rule-strong pb-3 gap-4">
+            <nav aria-label="Breadcrumb" className="min-w-0">
+              <ol className="anno flex items-center gap-2 whitespace-nowrap overflow-hidden">
+                <li className="hidden sm:block">
+                  <Link
+                    href="/"
+                    className="inline-flex items-center min-h-11 -my-4 sm:min-h-0 sm:my-0 hover:text-mark transition-colors"
+                  >
+                    Anymus
+                  </Link>
+                </li>
+                <li aria-hidden className="hidden sm:block">/</li>
+                <li>
+                  <Link
+                    href="/services"
+                    className="inline-flex items-center min-h-11 -my-4 sm:min-h-0 sm:my-0 hover:text-mark transition-colors"
+                  >
+                    Services
+                  </Link>
+                </li>
+                <li aria-hidden>/</li>
+                <li className="truncate" aria-current="page">
+                  {service.name}
+                </li>
+              </ol>
+            </nav>
+            <span className="anno anno-mark shrink-0">{`Doc. ${doc}`}</span>
+          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-10 lg:gap-14 items-center">
-            <Reveal className="flex flex-col items-start">
-              <span className={"w-12 h-12 rounded-[2px] border rule bg-sheet-lift text-inkwarm flex items-center justify-center mb-6"}>
-                <Icon className="w-6 h-6" strokeWidth={1.7} />
-              </span>
-              <p className="eyebrow mb-4">{service.eyebrow}</p>
-              <h1 className="font-serif font-light text-[clamp(34px,5.5vw,56px)] leading-[1.04] tracking-[-0.025em] text-inkwarm mb-5 max-w-[620px]">
+          {/* ── Title block ──────────────────────────────── */}
+          <Reveal className="pt-10 sm:pt-16 pb-12 sm:pb-20">
+            <p className="eyebrow mb-5 sm:mb-7">{`Sec. ${doc} — ${service.serviceType}`}</p>
+            <div className="lg:grid lg:grid-cols-12 lg:gap-8 items-end">
+              <h1 className="lg:col-span-8 font-serif font-light text-[clamp(38px,7.5vw,96px)] leading-[1.02] tracking-[-0.03em] text-inkwarm">
                 {service.intro}
               </h1>
-              <p className="text-[15px] sm:text-[16px] md:text-[17px] text-ink-600 leading-relaxed mb-8 max-w-[560px]">
-                {service.body}
-              </p>
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-                <a
-                  href="/schedule-call"
-                  className="btn-stamp px-6 sm:px-7 py-3.5 text-[14px] sm:text-[15px] font-medium tracking-[-0.01em]"
-                >
-                  Book a discovery call
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-                <Link
-                  href="/services"
-                  className="u-draw inline-flex items-center text-[14px] font-medium text-inkwarm"
-                >
-                  All services
-                </Link>
+              <div className="lg:col-span-4 mt-8 lg:mt-0 flex flex-col items-start gap-6">
+                <p className="text-[15px] sm:text-[16px] text-inkwarm-soft leading-relaxed lg:border-l lg:rule lg:pl-5">
+                  {service.body}
+                </p>
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 lg:pl-5">
+                  <a
+                    href="/schedule-call"
+                    className="btn-stamp px-6 py-3.5 text-[14px] font-medium tracking-[-0.01em]"
+                  >
+                    Book a discovery call
+                    <span aria-hidden className="font-mono text-[12px]">→</span>
+                  </a>
+                  <Link
+                    href="/services"
+                    className="u-draw inline-flex items-center min-h-11 text-[13px] font-medium text-inkwarm"
+                  >
+                    All services
+                  </Link>
+                </div>
               </div>
-            </Reveal>
+            </div>
+          </Reveal>
+        </header>
 
-            {/* Live product mockup */}
-            <Reveal className="w-full">
-              <figure className="reg-marks plate relative aspect-[4/3] overflow-hidden">
+        {/* ── Fig. — the plate on a blueprint band ────────── */}
+        <div className="relative">
+          <div
+            aria-hidden
+            className="absolute inset-x-0 bottom-0 top-[34%] graph-bg bg-sheet-deep/70 border-t rule"
+          />
+          <div className="relative max-w-[1100px] mx-auto px-5 sm:px-8">
+            <Reveal>
+              <figure className="reg-marks plate p-4 sm:p-6 md:p-8">
                 <span aria-hidden className="reg reg-tl" />
                 <span aria-hidden className="reg reg-tr" />
                 <span aria-hidden className="reg reg-bl" />
                 <span aria-hidden className="reg reg-br" />
-                <SpreadVisual visualKey={service.visualKey} />
+                <div className="relative aspect-[4/3] sm:aspect-[16/9] overflow-hidden">
+                  <SpreadVisual visualKey={service.visualKey} />
+                </div>
               </figure>
             </Reveal>
+            <p className="anno text-center pt-5 pb-10 sm:pb-14">
+              {`Fig. ${doc} — ${service.eyebrow} in operation`}
+            </p>
           </div>
-        </section>
+        </div>
 
-        {/* Who this is for */}
-        <section className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8 pb-14 sm:pb-20">
-          <div>
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-8 lg:gap-16">
-              <Reveal className="flex flex-col items-start">
-                <p className="eyebrow mb-3 sm:mb-4">Is this you?</p>
-                <h2 className="font-serif font-light text-[26px] sm:text-[32px] md:text-[36px] leading-[1.1] tracking-[-0.02em] text-inkwarm mb-5 max-w-[360px]">
-                  Signs it&apos;s time for {service.eyebrow.toLowerCase()}
-                </h2>
-                <p className="text-[14px] sm:text-[15px] text-ink-600 leading-relaxed max-w-[340px] mb-6">
-                  If more than one of these sounds familiar, it&apos;s worth a
-                  conversation.
-                </p>
-                <a
-                  href="/schedule-call"
-                  className="u-draw inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-medium text-mark hover:gap-2.5 transition-all"
+        {/* ── Spec strip — the red band ───────────────────── */}
+        <div className="bg-mark border-y border-mark-deep overflow-hidden">
+          <div className="max-w-[1380px] mx-auto px-5 sm:px-8 py-3.5 flex items-center justify-between gap-6 overflow-x-auto no-scrollbar">
+            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-sheet/90 whitespace-nowrap">
+              {`Doc. ${doc} · ${service.name}`}
+            </span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-sheet/70 whitespace-nowrap hidden sm:block">
+              Weeks, not months
+            </span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-sheet/90 whitespace-nowrap">
+              ✳ No lock-in
+            </span>
+          </div>
+        </div>
+
+        {/* ── Sec. N.1 — Diagnostic ───────────────────────── */}
+        <section className="max-w-[1380px] mx-auto px-5 sm:px-8 py-16 sm:py-24">
+          <div className="flex items-baseline justify-between border-b rule pb-3 mb-10 sm:mb-14">
+            <span className="eyebrow !mb-0">{`Sec. ${doc}.1 — Diagnostic`}</span>
+            <span className="anno hidden sm:block">Is this you?</span>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
+            <Reveal className="lg:col-span-5">
+              <h2 className="font-serif font-light text-[clamp(28px,4vw,44px)] leading-[1.06] tracking-[-0.02em] text-inkwarm max-w-[400px]">
+                Signs it&rsquo;s time for{" "}
+                <span className="italic text-mark">
+                  {service.eyebrow.toLowerCase()}
+                </span>
+                .
+              </h2>
+              {/* Pinned margin note */}
+              <div className="relative mt-8 max-w-[360px]">
+                <span
+                  aria-hidden
+                  className="absolute -top-[5px] left-8 w-2.5 h-2.5 rounded-full bg-mark shadow-[0_1px_2px_rgba(0,0,0,0.25)]"
+                />
+                <div className="border rule bg-sheet-lift rounded-[2px] px-5 py-4 rotate-[-0.6deg]">
+                  <p className="font-mono text-[11.5px] text-inkwarm-soft leading-relaxed">
+                    <span className="text-mark">Field note:</span> if two or more
+                    of these sound familiar, it&rsquo;s worth a conversation.
+                  </p>
+                </div>
+              </div>
+              <a
+                href="/schedule-call"
+                className="u-draw inline-flex items-center min-h-11 gap-1.5 mt-6 text-[14px] font-medium text-mark"
+              >
+                Talk it through
+                <span aria-hidden className="font-mono text-[12px]">→</span>
+              </a>
+            </Reveal>
+            <RevealGroup className="lg:col-span-7" stagger={0.07}>
+              {service.signs.map((sign, i) => (
+                <RevealItem
+                  key={sign}
+                  className="group border-t rule py-5 sm:py-6 grid grid-cols-[minmax(44px,auto)_1fr] gap-x-4 sm:gap-x-6 items-baseline"
                 >
-                  Talk it through
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-              </Reveal>
-              <RevealGroup stagger={0.06}>
-                {service.signs.map((sign) => (
-                  <RevealItem key={sign} className="border-t border-line py-4 sm:py-5">
-                    <p
-                      className={"text-[14px] sm:text-[15px] text-inkwarm-soft leading-relaxed border-l-2 border-mark pl-3 sm:pl-4"}
-                    >
-                      {sign}
-                    </p>
-                  </RevealItem>
-                ))}
-                <div className="border-t border-line" />
-              </RevealGroup>
-            </div>
+                  <span className="font-mono text-[11px] text-inkwarm-faint">
+                    {`☐ ${doc}.1.${i + 1}`}
+                  </span>
+                  <p className="font-serif text-[17px] sm:text-[20px] leading-snug text-inkwarm">
+                    {sign}
+                  </p>
+                </RevealItem>
+              ))}
+              <div className="border-t rule" />
+            </RevealGroup>
           </div>
         </section>
 
-        {/* Outcomes detail */}
-        <section className="bg-sheet-deep/40 border-y rule">
-          <div className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8 py-14 sm:py-20">
+        {/* ── Sec. N.2 — Deliverables (stamped tickets) ───── */}
+        <section className="graph-bg bg-sheet-deep/60 border-y rule">
+          <div className="max-w-[1380px] mx-auto px-5 sm:px-8 py-16 sm:py-24">
+            <div className="flex items-baseline justify-between border-b rule pb-3 mb-10 sm:mb-14">
+              <span className="eyebrow !mb-0">{`Sec. ${doc}.2 — Deliverables`}</span>
+              <span className="anno hidden sm:block">What you get</span>
+            </div>
             <Reveal>
-              <p className="eyebrow mb-3 sm:mb-4">What you get</p>
-              <h2 className="font-serif font-light text-[26px] sm:text-[32px] md:text-[36px] leading-[1.1] tracking-[-0.02em] text-inkwarm mb-8 sm:mb-12 max-w-[520px]">
-                Outcomes, not just software
+              <h2 className="font-serif font-light text-[clamp(28px,4vw,44px)] leading-[1.06] tracking-[-0.02em] text-inkwarm mb-10 sm:mb-14 max-w-[560px]">
+                Outcomes, not just <span className="italic">software</span>.
               </h2>
             </Reveal>
             <RevealGroup
               className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5"
-              stagger={0.08}
+              stagger={0.09}
             >
               {service.outcomes.map((o, i) => (
-                <RevealItem
-                  key={o.title}
-                  className="bg-sheet-lift border rule rounded-[2px] p-6 sm:p-7 h-full"
-                >
-                  <span className={`font-mono text-[12px] text-mark block mb-5`}>
-                    0{i + 1}
-                  </span>
-                  <p className="text-[15px] font-semibold text-inkwarm mb-2 leading-snug">
-                    {o.title}
-                  </p>
-                  <p className="text-[13px] sm:text-[14px] text-ink-600 leading-relaxed">
-                    {o.description}
-                  </p>
+                <RevealItem key={o.title} className="h-full">
+                  <div className="group relative border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[6px_6px_0_0_rgba(200,57,27,0.9)] hover:border-mark">
+                    <div className="flex items-baseline justify-between mb-5">
+                      <span className="anno anno-mark">{`✳ Item ${i + 1}`}</span>
+                      <span className="anno !text-[11px] sm:!text-[9px]">{`0${i + 1}/0${service.outcomes.length}`}</span>
+                    </div>
+                    <p className="font-serif text-[20px] sm:text-[22px] leading-tight text-inkwarm mb-3">
+                      {o.title}
+                    </p>
+                    <p className="text-[13.5px] sm:text-[14px] text-inkwarm-soft leading-relaxed">
+                      {o.description}
+                    </p>
+                  </div>
                 </RevealItem>
               ))}
             </RevealGroup>
           </div>
         </section>
 
-        {/* Process */}
-        <section className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8 py-14 sm:py-20">
-          <Reveal>
-            <p className="eyebrow mb-3 sm:mb-4">How it works</p>
-            <h2 className="font-serif font-light text-[26px] sm:text-[32px] md:text-[36px] leading-[1.1] tracking-[-0.02em] text-inkwarm mb-8 sm:mb-12 max-w-[520px]">
-              What an engagement looks like
-            </h2>
-          </Reveal>
-          <div>
-            {service.process.map((step, i) => (
-              <div key={step.title} className="border-t border-line py-6 sm:py-8">
-                <div className="flex items-baseline gap-3 sm:gap-4">
-                  <p className={"font-serif text-[22px] sm:text-[26px] text-mark shrink-0"}>
-                    {i + 1}.
-                  </p>
-                  <p className="text-[17px] sm:text-[19px] font-semibold text-inkwarm">
-                    {step.title}
-                  </p>
-                </div>
-                <p className="text-[15px] sm:text-[16px] text-ink-600 leading-relaxed mt-2 ml-[32px] sm:ml-[38px] max-w-[640px]">
-                  {step.description}
-                </p>
-              </div>
-            ))}
-            <div className="border-t border-line" />
+        {/* ── Sec. N.3 — Procedure (the spine) ────────────── */}
+        <section className="max-w-[1380px] mx-auto px-5 sm:px-8 py-16 sm:py-24">
+          <div className="flex items-baseline justify-between border-b rule pb-3 mb-10 sm:mb-14">
+            <span className="eyebrow !mb-0">{`Sec. ${doc}.3 — Procedure`}</span>
+            <span className="anno hidden sm:block">How it works</span>
           </div>
-        </section>
-
-        {/* Service-specific FAQ */}
-        <section className="bg-sheet-deep/40 border-y rule">
-          <div className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8 py-14 sm:py-20">
-            <Reveal>
-              <p className="eyebrow mb-3 sm:mb-4">Questions</p>
-              <h2 className="font-serif font-light text-[26px] sm:text-[32px] md:text-[36px] leading-[1.1] tracking-[-0.02em] text-inkwarm mb-8 sm:mb-10 max-w-[520px]">
-                Frequently asked about {service.eyebrow.toLowerCase()}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
+            <Reveal className="lg:col-span-4">
+              <h2 className="font-serif font-light text-[clamp(28px,4vw,44px)] leading-[1.06] tracking-[-0.02em] text-inkwarm max-w-[360px]">
+                What an engagement looks like.
               </h2>
+              <p className="mt-6 text-[14px] text-inkwarm-soft leading-relaxed max-w-[340px]">
+                You&rsquo;ll know what &ldquo;done&rdquo; means before we start —
+                and see it running before we leave.
+              </p>
             </Reveal>
-            <ServiceFaq faqs={service.faqs} />
+            <div className="lg:col-span-8 relative">
+              <div aria-hidden className="absolute left-[5px] top-2 bottom-2 w-px bg-hairline" />
+              <div className="space-y-10 sm:space-y-12">
+                {service.process.map((step, i) => (
+                  <Reveal key={step.title} className="relative pl-10" amount={0.3}>
+                    <span
+                      aria-hidden
+                      className="absolute left-0 top-[4px] w-[11px] h-[11px] rounded-full border-2 border-mark bg-sheet"
+                    />
+                    <span className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-mark block mb-1.5">
+                      {`Step ${i + 1} · 0${i + 1}/0${service.process.length}`}
+                    </span>
+                    <h3 className="font-serif font-light text-[26px] sm:text-[30px] leading-none text-inkwarm mb-2.5">
+                      {step.title}
+                    </h3>
+                    <p className="text-[14px] sm:text-[15px] text-inkwarm-soft leading-relaxed max-w-[560px]">
+                      {step.description}
+                    </p>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Cross-links to other services */}
-        <section className="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-8 py-14 sm:py-20">
-          <Reveal>
-            <p className="eyebrow mb-3 sm:mb-4">One connected system</p>
-            <h2 className="font-serif font-light text-[26px] sm:text-[32px] tracking-[-0.02em] text-inkwarm mb-8 sm:mb-10 max-w-[480px]">
-              Explore the rest of the stack
-            </h2>
-          </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-3 border rule divide-y sm:divide-y-0 sm:divide-x divide-[rgba(28,24,18,0.16)] rounded-[2px] overflow-hidden">
-            {others.map((s) => {
-              const OIcon = s.icon;
+        {/* ── Sec. N.4 — Questions ────────────────────────── */}
+        <section className="bg-sheet-deep/40 border-y rule">
+          <div className="max-w-[1380px] mx-auto px-5 sm:px-8 py-16 sm:py-24">
+            <div className="flex items-baseline justify-between border-b rule pb-3 mb-10 sm:mb-14">
+              <span className="eyebrow !mb-0">{`Sec. ${doc}.4 — Questions`}</span>
+              <span className="anno hidden sm:block">Asked before signing</span>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
+              <Reveal className="lg:col-span-4">
+                <h2 className="font-serif font-light text-[clamp(28px,4vw,44px)] leading-[1.06] tracking-[-0.02em] text-inkwarm max-w-[340px]">
+                  Fair questions, straight answers.
+                </h2>
+              </Reveal>
+              <div className="lg:col-span-8">
+                <ServiceFaq faqs={service.faqs} />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Continue reading — chapter navigation ───────── */}
+        <nav
+          aria-label="Other services"
+          className="max-w-[1380px] mx-auto px-5 sm:px-8 py-16 sm:py-24"
+        >
+          <div className="flex items-baseline justify-between border-b rule pb-3 mb-2">
+            <span className="eyebrow !mb-0">Continue reading</span>
+            <span className="anno hidden sm:block">One connected system</span>
+          </div>
+          {[prev, next]
+            .filter((s, i, arr) => arr.indexOf(s) === i)
+            .map((s) => {
+              const sDoc = `0${services.findIndex((x) => x.slug === s.slug) + 1}`;
               return (
                 <Link
                   key={s.slug}
                   href={`/services/${s.slug}`}
-                  className="group bg-sheet-lift/60 p-6 sm:p-7 flex flex-col hover:bg-sheet-lift transition-colors"
+                  className="group flex items-baseline justify-between gap-4 border-b rule py-6 sm:py-8 transition-colors active:bg-sheet-deep/60"
                 >
-                  <span className={"w-10 h-10 rounded-[2px] border rule bg-sheet text-inkwarm flex items-center justify-center mb-5"}>
-                    <OIcon className="w-5 h-5" strokeWidth={1.7} />
+                  <span className="flex items-baseline gap-4 sm:gap-6 min-w-0">
+                    <span className="anno anno-mark shrink-0">{`Doc. ${sDoc}`}</span>
+                    <span className="min-w-0">
+                      <span className="u-draw font-serif font-light text-[clamp(24px,4vw,44px)] leading-[1.05] tracking-[-0.02em] text-inkwarm block">
+                        {s.name}
+                      </span>
+                      <span className="block mt-1.5 text-[13px] sm:text-[14px] text-inkwarm-soft truncate">
+                        {s.intro}
+                      </span>
+                    </span>
                   </span>
-                  <span className="text-[15px] font-semibold text-inkwarm mb-1.5">
-                    {s.name}
-                  </span>
-                  <span className="text-[13px] text-ink-600 leading-relaxed flex-1 mb-4">
-                    {s.intro}
-                  </span>
-                  <span className="u-draw inline-flex items-center gap-1 text-[13px] font-medium text-inkwarm">
-                    Read the spec
-                    <ArrowUpRight className="w-4 h-4 text-mark group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <span
+                    aria-hidden
+                    className="font-serif font-light text-[clamp(22px,3vw,34px)] leading-none text-mark shrink-0 transition-transform duration-300 group-hover:translate-x-2 group-active:translate-x-2"
+                  >
+                    →
                   </span>
                 </Link>
               );
             })}
+        </nav>
+
+        {/* ── Closing — the one action ────────────────────── */}
+        <section id="start" className="relative bg-inkwarm graph-bg-dark overflow-hidden">
+          <div className="max-w-[1380px] mx-auto px-5 sm:px-8 py-20 sm:py-28">
+            <Reveal>
+              <p className="anno anno-mark mb-6">{`Doc. ${doc} — end of chapter`}</p>
+              <h2 className="font-serif font-light text-[clamp(30px,5.5vw,64px)] leading-[1.05] tracking-[-0.025em] text-sheet max-w-[720px]">
+                Ready to put {service.eyebrow.toLowerCase()} to{" "}
+                <span className="italic text-mark">work</span>?
+              </h2>
+              <div className="mt-10 sm:mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
+                <a
+                  href="/schedule-call"
+                  className="btn-stamp btn-stamp-paper px-7 sm:px-9 py-4 text-[15px] font-medium tracking-[-0.01em]"
+                >
+                  Book a discovery call
+                  <span aria-hidden className="font-mono text-[12px]">→</span>
+                </a>
+                <span className="anno !text-sheet/45">
+                  Free 30-min call · no lock-in · reply &lt; 24h
+                </span>
+              </div>
+            </Reveal>
           </div>
         </section>
       </main>
-      <CtaBand />
+      <MobileCtaBar />
       <Footer />
     </>
   );

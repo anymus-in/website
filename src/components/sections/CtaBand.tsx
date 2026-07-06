@@ -2,7 +2,7 @@ import Reveal from "@/components/motion/Reveal";
 
 export default function CtaBand() {
   return (
-    <section className="relative bg-inkwarm graph-bg-dark py-20 sm:py-28 md:py-32 overflow-hidden">
+    <section id="start" className="relative bg-inkwarm graph-bg-dark py-20 sm:py-28 md:py-32 overflow-hidden">
       <Reveal className="relative z-10 flex flex-col items-center text-center px-5 sm:px-8">
         <p className="anno anno-mark mb-6">Start</p>
         <h2 className="font-serif font-light text-[clamp(28px,4.5vw,48px)] leading-[1.08] tracking-[-0.02em] text-sheet mb-8 sm:mb-10 max-w-[560px]">

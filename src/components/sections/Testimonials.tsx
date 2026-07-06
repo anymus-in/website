@@ -100,7 +100,7 @@ export default function Testimonials() {
                     <span className="block text-[13.5px] font-semibold text-inkwarm leading-tight">
                       {r.name}
                     </span>
-                    <span className="block font-mono text-[10px] text-inkwarm-faint uppercase tracking-[0.1em] mt-1 truncate">
+                    <span className="block font-mono text-[11px] sm:text-[10px] text-inkwarm-faint uppercase tracking-[0.1em] mt-1 truncate">
                       {r.role} · {r.place}
                     </span>
                   </span>

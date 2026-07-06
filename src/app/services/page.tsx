@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import ScrollProgress from "@/components/motion/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import CtaBand from "@/components/sections/CtaBand";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import JsonLd from "@/components/seo/JsonLd";
@@ -34,70 +34,116 @@ export default function ServicesHubPage() {
       />
       <ScrollProgress />
       <Navbar />
-      <main className="pt-[92px] sm:pt-[116px]">
-        {/* Hero */}
-        <section className="max-w-[1100px] mx-auto px-5 sm:px-8 pb-10 sm:pb-14">
+      <main className="pt-[calc(62px+env(safe-area-inset-top))] sm:pt-[70px]">
+        {/* ── Document header ─────────────────────────────── */}
+        <header id="top" className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-8 sm:pt-12">
           <Reveal>
-            <div className="flex items-baseline justify-between border-b rule-strong pb-3 mb-10 sm:mb-14">
+            <div className="flex items-baseline justify-between border-b rule-strong pb-3">
               <span className="anno">Anymus — Services</span>
-              <span className="anno anno-mark hidden sm:block">The index</span>
+              <span className="anno anno-mark">Table of contents</span>
             </div>
           </Reveal>
-          <Reveal className="flex flex-col items-start">
-            <h1 className="font-serif font-light text-[clamp(36px,6vw,64px)] leading-[1.02] tracking-[-0.025em] text-inkwarm mb-6 max-w-[680px]">
-              Three services.
-              <br />
-              One <span className="italic text-mark">connected</span> system.
-            </h1>
-            <p className="text-[15px] sm:text-[16px] text-inkwarm-soft leading-relaxed max-w-[560px]">
-              Most agencies hand you one piece and leave you to wire it
-              together. We build the whole stack: the site out front, the
-              automations behind it, and the tools you run on, so nothing is
-              stitched together after the fact.
-            </p>
-          </Reveal>
-        </section>
 
-        {/* Service cards */}
-        <section className="max-w-[1100px] mx-auto px-5 sm:px-8 pb-16 sm:pb-24">
-          <RevealGroup
-            className="grid grid-cols-1 md:grid-cols-3 border rule divide-y md:divide-y-0 md:divide-x divide-[rgba(28,24,18,0.16)] rounded-[2px] overflow-hidden"
-            stagger={0.06}
-          >
-            {services.map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <RevealItem key={s.slug} className="bg-sheet-lift/60">
-                  <Link
-                    href={`/services/${s.slug}`}
-                    className="group relative block h-full p-7 sm:p-9 hover:bg-sheet-lift transition-colors"
-                  >
-                    <span className="absolute top-0 left-0 h-[2px] w-0 group-hover:w-full bg-mark transition-all duration-500" />
-                    <div className="flex items-start justify-between mb-8 sm:mb-10">
-                      <span className="w-11 h-11 rounded-[2px] border rule bg-sheet flex items-center justify-center text-inkwarm">
-                        <Icon className="w-5 h-5" strokeWidth={1.6} />
+          {/* ── Title block ──────────────────────────────── */}
+          <Reveal className="pt-10 sm:pt-16 pb-12 sm:pb-20">
+            <div className="lg:grid lg:grid-cols-12 lg:gap-8 items-end">
+              <h1 className="lg:col-span-8 font-serif font-light text-[clamp(38px,7.5vw,96px)] leading-[1.02] tracking-[-0.03em] text-inkwarm">
+                Three chapters.
+                <br />
+                One <span className="italic text-mark">connected</span> system.
+              </h1>
+              <div className="lg:col-span-4 mt-8 lg:mt-0">
+                <p className="text-[15px] sm:text-[16px] text-inkwarm-soft leading-relaxed lg:border-l lg:rule lg:pl-5">
+                  Most agencies hand you one piece and leave you to wire it
+                  together. We build the whole stack — the site out front, the
+                  automations behind it, and the tools you run on — so nothing
+                  is stitched together after the fact.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        </header>
+
+        {/* ── The chain — how the chapters connect ────────── */}
+        <div className="graph-bg bg-sheet-deep/60 border-y rule overflow-hidden">
+          <div className="max-w-[1380px] mx-auto px-5 sm:px-8 py-4 flex items-center justify-start sm:justify-center gap-3 sm:gap-6 overflow-x-auto no-scrollbar">
+            {services.map((s, i) => (
+              <span key={s.slug} className="flex items-center gap-3 sm:gap-6 shrink-0">
+                <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-inkwarm-soft whitespace-nowrap">
+                  <span className="text-mark">{`0${i + 1}`}</span> {s.name}
+                </span>
+                {i < services.length - 1 && (
+                  <span aria-hidden className="font-mono text-[13px] text-mark">
+                    →
+                  </span>
+                )}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Contents ledger ─────────────────────────────── */}
+        <section className="max-w-[1380px] mx-auto px-5 sm:px-8 py-14 sm:py-20">
+          <RevealGroup stagger={0.09}>
+            {services.map((s, i) => (
+              <RevealItem key={s.slug}>
+                <Link
+                  href={`/services/${s.slug}`}
+                  className="group grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-5 border-t rule py-9 sm:py-12 transition-colors active:bg-sheet-deep/60 hover:bg-sheet-lift/40"
+                >
+                  {/* Chapter stamp */}
+                  <div className="lg:col-span-2 flex lg:flex-col items-baseline lg:items-start justify-between lg:justify-start gap-2">
+                    <span className="anno anno-mark">{`Doc. 0${i + 1}`}</span>
+                    <span className="anno hidden sm:block">{s.serviceType}</span>
+                  </div>
+
+                  {/* Name + intro */}
+                  <div className="lg:col-span-6 min-w-0">
+                    <h2 className="font-serif font-light text-[clamp(30px,5vw,56px)] leading-[1.02] tracking-[-0.025em] text-inkwarm">
+                      <span className="u-draw">{s.name}</span>
+                      <span
+                        aria-hidden
+                        className="text-mark inline-block ml-3 transition-transform duration-300 group-hover:translate-x-2 group-active:translate-x-2"
+                      >
+                        →
                       </span>
-                      <span className="anno group-hover:text-mark transition-colors">
-                        0{i + 1}
-                      </span>
-                    </div>
-                    <h2 className="font-serif font-light text-[24px] sm:text-[28px] tracking-[-0.01em] text-inkwarm mb-2">
-                      {s.name}
                     </h2>
-                    <p className="text-[13.5px] sm:text-[14px] text-inkwarm-soft leading-relaxed mb-6 max-w-[360px]">
-                      {s.intro}
+                    <p className="mt-3 text-[14.5px] sm:text-[15.5px] text-inkwarm-soft leading-relaxed max-w-[480px]">
+                      {s.body.split(". ")[0]}.
                     </p>
-                    <span className="u-draw inline-flex items-center gap-1 text-[13px] sm:text-[14px] font-medium text-inkwarm">
-                      Read the spec
-                      <ArrowUpRight className="w-4 h-4 text-mark group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                    </span>
-                  </Link>
-                </RevealItem>
-              );
-            })}
+                  </div>
+
+                  {/* Deliverables index */}
+                  <div className="lg:col-span-4 lg:border-l lg:rule lg:pl-6">
+                    <p className="anno mb-3">In this chapter</p>
+                    <ul className="space-y-2">
+                      {s.outcomes.map((o, j) => (
+                        <li
+                          key={o.title}
+                          className="flex items-baseline gap-3 text-[13px] sm:text-[13.5px] text-inkwarm leading-snug"
+                        >
+                          <span className="font-mono text-[11px] text-inkwarm-faint shrink-0">
+                            {`0${i + 1}.${j + 1}`}
+                          </span>
+                          {o.title}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Link>
+              </RevealItem>
+            ))}
+            <div className="border-t rule" />
           </RevealGroup>
+
+          {/* Footnote */}
+          <p className="anno mt-6">
+            <span className="text-mark">✳</span> Each chapter stands alone —
+            together they run the business.
+          </p>
         </section>
       </main>
+      <MobileCtaBar />
       <CtaBand />
       <Footer />
     </>

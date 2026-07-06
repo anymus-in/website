@@ -16,7 +16,7 @@ function Wordmark() {
   return (
     <Link
       href="/"
-      className="flex items-center gap-2.5 text-inkwarm focus-visible:outline-2 focus-visible:outline-mark focus-visible:outline-offset-4"
+      className="flex items-center gap-2.5 py-2.5 text-inkwarm focus-visible:outline-2 focus-visible:outline-mark focus-visible:outline-offset-4"
     >
       <Image
         src="/final-logo.svg"
@@ -60,7 +60,7 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-[env(safe-area-inset-top)]",
         scrolled && !open
           ? "bg-sheet/90 backdrop-blur-md border-b rule"
           : "bg-transparent border-b border-transparent",
@@ -95,11 +95,11 @@ export default function Navbar() {
         {/* Mobile menu button */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden inline-flex items-center gap-2 py-2 pl-3 text-inkwarm focus-visible:outline-2 focus-visible:outline-mark"
+          className="md:hidden inline-flex items-center gap-2 py-3.5 pl-3 text-inkwarm focus-visible:outline-2 focus-visible:outline-mark"
           aria-label="Toggle menu"
           aria-expanded={open}
         >
-          <span className="anno !text-[10px] text-inkwarm">
+          <span className="anno !text-[11px] text-inkwarm">
             {open ? "Close" : "Menu"}
           </span>
           <span className="relative w-5 h-3 block" aria-hidden>
@@ -127,7 +127,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden fixed inset-0 top-[62px] bg-sheet z-40 flex flex-col"
+            className="md:hidden fixed inset-0 top-[calc(62px+env(safe-area-inset-top))] bg-sheet z-40 flex flex-col"
           >
             <div className="flex-1 flex flex-col justify-center px-6">
               {NAV_LINKS.map((l, i) => (
@@ -141,7 +141,7 @@ export default function Navbar() {
                   <Link
                     href={l.href}
                     onClick={() => setOpen(false)}
-                    className="flex items-baseline gap-4 py-5"
+                    className="flex items-baseline gap-4 py-5 transition-colors active:bg-sheet-deep/60"
                   >
                     <span className="anno text-mark">{l.index}</span>
                     <span className="font-serif text-[34px] leading-none text-inkwarm">
