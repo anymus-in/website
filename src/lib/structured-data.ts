@@ -5,7 +5,6 @@ import {
   CONTACT_EMAIL,
   SOCIALS,
 } from "./site";
-import { faqs } from "./faqs";
 import { services, type Service } from "./services";
 
 /** schema.org Organization — brand entity for Google's Knowledge Graph. */
@@ -58,19 +57,21 @@ export const websiteSchema = {
   publisher: { "@id": `${SITE_URL}/#organization` },
 };
 
-/** schema.org FAQPage — built from the same FAQ data the page renders. */
-export const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: f.answer,
-    },
-  })),
-};
+/** schema.org FAQPage — built from the same FAQ data the service page renders. */
+export function serviceFaqSchema(service: Service) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: service.faqs.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.answer,
+      },
+    })),
+  };
+}
 
 /** schema.org Service for a single service detail page. */
 export function serviceSchema(service: Service) {

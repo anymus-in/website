@@ -3,7 +3,11 @@ import { notFound } from "next/navigation";
 import ServiceLayout from "@/components/layout/ServiceLayout";
 import JsonLd from "@/components/seo/JsonLd";
 import { services, getService } from "@/lib/services";
-import { serviceSchema, breadcrumbList } from "@/lib/structured-data";
+import {
+  serviceSchema,
+  serviceFaqSchema,
+  breadcrumbList,
+} from "@/lib/structured-data";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -45,6 +49,7 @@ export default async function ServicePage({
       <JsonLd
         data={[
           serviceSchema(service),
+          serviceFaqSchema(service),
           breadcrumbList([
             { name: "Home", path: "/" },
             { name: "Services", path: "/services" },
