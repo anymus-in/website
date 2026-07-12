@@ -540,6 +540,24 @@ a:hover .u-draw,
     0 40px 90px -40px rgba(28, 24, 18, 0.22);
 }
 
+/* Card lift — the red offset-plate hover used on file/playbook cards.
+   Bakes in the focus-visible treatment so keyboard users get the outline. */
+.card-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s;
+}
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 6px 6px 0 0 rgba(200, 57, 27, 0.9);
+  border-color: var(--color-mark);
+}
+.card-lift:focus-visible {
+  outline: 2px solid var(--color-mark);
+  outline-offset: 4px;
+}
+
 /* Reverse-direction marquee (for counter-scrolling editorial strips) */
 @keyframes marquee-scroll-rev {
   from { transform: translateX(-50%); }
@@ -579,7 +597,8 @@ a:hover .u-draw,
   .aurora-blob {
     animation: none;
   }
-  .card-hover:hover {
+  .card-hover:hover,
+  .card-lift:hover {
     transform: none;
   }
   .animate-accordion-down,

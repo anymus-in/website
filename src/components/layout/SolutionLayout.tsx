@@ -5,7 +5,10 @@ import Footer from "@/components/layout/Footer";
 import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import ServiceFaq from "@/components/sections/ServiceFaq";
 import SystemFlowVisual from "@/components/sections/SystemFlowVisual";
+import ExhibitToggle from "@/components/sections/ExhibitToggle";
+import EndCta from "@/components/sections/EndCta";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import { Timeline, TimelineDot } from "@/components/motion/Timeline";
 import { getService } from "@/lib/services";
 import { solutions, type Solution } from "@/lib/solutions";
 import { getIndustry } from "@/lib/industries";
@@ -150,40 +153,42 @@ export default function SolutionLayout({ solution }: { solution: Solution }) {
               <span className="eyebrow !mb-0">{`Sec. ${file}.1 — The problem, then the system`}</span>
               <span className="anno hidden sm:block">Before / After</span>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
-              <Reveal>
-                <div className="h-full border rule bg-sheet-lift rounded-[2px] px-6 sm:px-8 pt-6 pb-7">
-                  <div className="flex items-baseline justify-between mb-6">
-                    <span className="anno">Exhibit A — today</span>
-                    <span className="font-mono text-[11px] text-inkwarm-faint">manual</span>
+            <Reveal>
+              <ExhibitToggle
+                a={
+                  <div className="h-full border rule bg-sheet-lift rounded-[2px] px-6 sm:px-8 pt-6 pb-7">
+                    <div className="flex items-baseline justify-between mb-6">
+                      <span className="anno">Exhibit A — today</span>
+                      <span className="font-mono text-[11px] text-inkwarm-faint">manual</span>
+                    </div>
+                    <h2 className="font-serif font-light text-[24px] sm:text-[28px] leading-tight text-inkwarm mb-4">
+                      The manual loop.
+                    </h2>
+                    <p className="text-[14.5px] sm:text-[15px] text-inkwarm-soft leading-relaxed">
+                      {solution.problem}
+                    </p>
                   </div>
-                  <h2 className="font-serif font-light text-[24px] sm:text-[28px] leading-tight text-inkwarm mb-4">
-                    The manual loop.
-                  </h2>
-                  <p className="text-[14.5px] sm:text-[15px] text-inkwarm-soft leading-relaxed">
-                    {solution.problem}
-                  </p>
-                </div>
-              </Reveal>
-              <Reveal>
-                <div className="relative h-full reg-marks border border-mark bg-sheet rounded-[2px] px-6 sm:px-8 pt-6 pb-7 shadow-[6px_6px_0_0_rgba(200,57,27,0.9)]">
-                  <span aria-hidden className="reg reg-tl" />
-                  <span aria-hidden className="reg reg-tr" />
-                  <span aria-hidden className="reg reg-bl" />
-                  <span aria-hidden className="reg reg-br" />
-                  <div className="flex items-baseline justify-between mb-6">
-                    <span className="anno anno-mark">Exhibit B — on the system</span>
-                    <span className="font-mono text-[11px] text-mark">automatic</span>
+                }
+                b={
+                  <div className="relative h-full reg-marks border border-mark bg-sheet rounded-[2px] px-6 sm:px-8 pt-6 pb-7 shadow-[6px_6px_0_0_rgba(200,57,27,0.9)]">
+                    <span aria-hidden className="reg reg-tl" />
+                    <span aria-hidden className="reg reg-tr" />
+                    <span aria-hidden className="reg reg-bl" />
+                    <span aria-hidden className="reg reg-br" />
+                    <div className="flex items-baseline justify-between mb-6">
+                      <span className="anno anno-mark">Exhibit B — on the system</span>
+                      <span className="font-mono text-[11px] text-mark">automatic</span>
+                    </div>
+                    <h2 className="font-serif font-light text-[24px] sm:text-[28px] leading-tight text-inkwarm mb-4">
+                      The system handles it.
+                    </h2>
+                    <p className="text-[14.5px] sm:text-[15px] text-inkwarm-soft leading-relaxed">
+                      {solution.outcome}
+                    </p>
                   </div>
-                  <h2 className="font-serif font-light text-[24px] sm:text-[28px] leading-tight text-inkwarm mb-4">
-                    The system handles it.
-                  </h2>
-                  <p className="text-[14.5px] sm:text-[15px] text-inkwarm-soft leading-relaxed">
-                    {solution.outcome}
-                  </p>
-                </div>
-              </Reveal>
-            </div>
+                }
+              />
+            </Reveal>
             <p className="anno mt-6">
               <span className="text-mark">✳</span> If someone has to remember it,
               the system is broken.
@@ -258,15 +263,11 @@ export default function SolutionLayout({ solution }: { solution: Solution }) {
                   fit first, software second.
                 </p>
               </Reveal>
-              <div className="lg:col-span-8 relative">
-                <div aria-hidden className="absolute left-[5px] top-2 bottom-2 w-px bg-hairline" />
+              <Timeline className="lg:col-span-8">
                 <div className="space-y-10 sm:space-y-12">
                   {solution.howItWorks.map((step, i) => (
                     <Reveal key={step.title} className="relative pl-10" amount={0.3}>
-                      <span
-                        aria-hidden
-                        className="absolute left-0 top-[4px] w-[11px] h-[11px] rounded-full border-2 border-mark bg-sheet"
-                      />
+                      <TimelineDot state="mark" />
                       <span className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-mark block mb-1.5">
                         {`Step ${i + 1} · 0${i + 1}/0${solution.howItWorks.length}`}
                       </span>
@@ -279,7 +280,7 @@ export default function SolutionLayout({ solution }: { solution: Solution }) {
                     </Reveal>
                   ))}
                 </div>
-              </div>
+              </Timeline>
             </div>
           </div>
         </section>
@@ -315,7 +316,7 @@ export default function SolutionLayout({ solution }: { solution: Solution }) {
                       <Link
                         key={s.slug}
                         href={`/industries/${s.slug}`}
-                        className="font-mono text-[11px] uppercase tracking-[0.12em] text-inkwarm-soft border rule rounded-[2px] px-2.5 py-1.5 hover:border-mark hover:text-mark transition-colors"
+                        className="inline-flex items-center min-h-11 lg:min-h-0 font-mono text-[11px] uppercase tracking-[0.12em] text-inkwarm-soft border rule rounded-[2px] px-2.5 py-1.5 hover:border-mark hover:text-mark transition-colors focus-visible:outline-2 focus-visible:outline-mark focus-visible:outline-offset-2"
                       >
                         {s.shortName}
                       </Link>
@@ -374,29 +375,15 @@ export default function SolutionLayout({ solution }: { solution: Solution }) {
         </nav>
 
         {/* ── Closing — the one action ────────────────────── */}
-        <section id="start" className="relative bg-inkwarm graph-bg-dark overflow-hidden">
-          <div className="max-w-[1380px] mx-auto px-5 sm:px-8 py-20 sm:py-28">
-            <Reveal>
-              <p className="anno anno-mark mb-6">{`File ${file} — end of playbook`}</p>
-              <h2 className="font-serif font-light text-[clamp(30px,5.5vw,64px)] leading-[1.05] tracking-[-0.025em] text-sheet max-w-[720px]">
-                Ready to take this off{" "}
-                <span className="italic text-mark">memory</span>?
-              </h2>
-              <div className="mt-10 sm:mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
-                <a
-                  href="/schedule-call"
-                  className="btn-stamp btn-stamp-paper px-7 sm:px-9 py-4 text-[15px] font-medium tracking-[-0.01em]"
-                >
-                  Book a discovery call
-                  <span aria-hidden className="font-mono text-[12px]">→</span>
-                </a>
-                <span className="anno !text-sheet/45">
-                  Free 30-min call · no lock-in · reply &lt; 24h
-                </span>
-              </div>
-            </Reveal>
-          </div>
-        </section>
+        <EndCta
+          stamp={`File ${file} — end of playbook`}
+          heading={
+            <>
+              Ready to take this off{" "}
+              <span className="italic text-mark">memory</span>?
+            </>
+          }
+        />
       </main>
       <MobileCtaBar />
       <Footer />

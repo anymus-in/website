@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import ServiceFaq from "@/components/sections/ServiceFaq";
 import SystemFlowVisual from "@/components/sections/SystemFlowVisual";
+import EndCta from "@/components/sections/EndCta";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { getService } from "@/lib/services";
 import { getSolution } from "@/lib/solutions";
@@ -205,7 +206,7 @@ export default function IndustryLayout({ industry }: { industry: Industry }) {
                 <RevealItem key={s.slug} className="h-full">
                   <Link
                     href={`/services/${s.slug}`}
-                    className="group block border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[6px_6px_0_0_rgba(200,57,27,0.9)] hover:border-mark"
+                    className="group block border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] card-lift"
                   >
                     <div className="flex items-baseline justify-between mb-4">
                       <span className="anno anno-mark">Service</span>
@@ -237,7 +238,7 @@ export default function IndustryLayout({ industry }: { industry: Industry }) {
                 <RevealItem key={p.slug} className="h-full">
                   <Link
                     href={`/solutions/${p.slug}`}
-                    className="group block border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[6px_6px_0_0_rgba(200,57,27,0.9)] hover:border-mark"
+                    className="group block border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] card-lift"
                   >
                     <div className="flex items-baseline justify-between mb-4">
                       <span className="anno anno-mark">Playbook</span>
@@ -323,32 +324,18 @@ export default function IndustryLayout({ industry }: { industry: Industry }) {
         </nav>
 
         {/* ── Closing ─────────────────────────────────────── */}
-        <section id="start" className="relative bg-inkwarm graph-bg-dark overflow-hidden">
-          <div className="max-w-[1380px] mx-auto px-5 sm:px-8 py-20 sm:py-28">
-            <Reveal>
-              <p className="anno anno-mark mb-6">{`Sector ${sector} — end of survey`}</p>
-              <h2 className="font-serif font-light text-[clamp(30px,5.5vw,64px)] leading-[1.05] tracking-[-0.025em] text-sheet max-w-[760px]">
-                Ready to build the system your{" "}
-                <span className="italic text-mark">
-                  {industry.shortName.toLowerCase()}
-                </span>{" "}
-                business runs on?
-              </h2>
-              <div className="mt-10 sm:mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
-                <a
-                  href="/schedule-call"
-                  className="btn-stamp btn-stamp-paper px-7 sm:px-9 py-4 text-[15px] font-medium tracking-[-0.01em]"
-                >
-                  Book a discovery call
-                  <span aria-hidden className="font-mono text-[12px]">→</span>
-                </a>
-                <span className="anno !text-sheet/45">
-                  Free 30-min call · no lock-in · reply &lt; 24h
-                </span>
-              </div>
-            </Reveal>
-          </div>
-        </section>
+        <EndCta
+          stamp={`Sector ${sector} — end of survey`}
+          heading={
+            <>
+              Ready to build the system your{" "}
+              <span className="italic text-mark">
+                {industry.shortName.toLowerCase()}
+              </span>{" "}
+              business runs on?
+            </>
+          }
+        />
       </main>
       <MobileCtaBar />
       <Footer />

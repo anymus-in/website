@@ -6,7 +6,9 @@ import Footer from "@/components/layout/Footer";
 import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import ServiceFaq from "@/components/sections/ServiceFaq";
 import ProposalDoc from "@/components/sections/ProposalDoc";
+import { StampIn } from "@/components/sections/SpreadVisuals";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import Highlight from "@/components/motion/Highlight";
 import JsonLd from "@/components/seo/JsonLd";
 import { faqSchema, breadcrumbList } from "@/lib/structured-data";
 import type { ServiceFaqItem } from "@/lib/services";
@@ -129,7 +131,10 @@ export default function HowWeWorkPage() {
                 We don&rsquo;t begin with a proposal.
                 <br />
                 We begin with{" "}
-                <span className="italic text-mark">understanding</span>.
+                <Highlight color="#C8391B">
+                  <span className="italic text-mark">understanding</span>
+                </Highlight>
+                .
               </h1>
               <div className="lg:col-span-4 mt-8 lg:mt-0">
                 <p className="text-[15px] sm:text-[16px] text-inkwarm-soft leading-relaxed lg:border-l lg:rule lg:pl-5">
@@ -175,7 +180,7 @@ export default function HowWeWorkPage() {
           >
             {STEPS.map((step, i) => (
               <RevealItem key={step.title} className="h-full">
-                <div className="group relative border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[6px_6px_0_0_rgba(200,57,27,0.9)] hover:border-mark flex flex-col">
+                <div className="group relative border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] card-lift flex flex-col">
                   <span className="anno anno-mark block mb-4">{`Step 0${i + 1}`}</span>
                   <p className="font-serif text-[22px] sm:text-[24px] leading-tight text-inkwarm mb-1.5">
                     {step.title}
@@ -238,15 +243,19 @@ export default function HowWeWorkPage() {
                         {row.detail}
                       </span>
                     </span>
-                    <span
-                      className={
-                        row.pays
-                          ? "font-mono text-[10px] uppercase tracking-[0.16em] text-mark border border-mark/40 rounded-[2px] px-2 py-1"
-                          : "font-mono text-[10px] uppercase tracking-[0.16em] text-inkwarm-faint px-2 py-1"
-                      }
-                    >
-                      {row.pays ? "Payment" : "Included"}
-                    </span>
+                    {row.pays ? (
+                      <StampIn
+                        delay={0.15}
+                        rotate={0}
+                        className="font-mono text-[10px] uppercase tracking-[0.16em] text-mark border border-mark/40 rounded-[2px] px-2 py-1"
+                      >
+                        Payment
+                      </StampIn>
+                    ) : (
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-inkwarm-faint px-2 py-1">
+                        Included
+                      </span>
+                    )}
                   </RevealItem>
                 ))}
                 <div className="border-t rule" />

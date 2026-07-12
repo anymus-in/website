@@ -7,6 +7,8 @@ import Footer from "@/components/layout/Footer";
 import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import CtaBand from "@/components/sections/CtaBand";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import Highlight from "@/components/motion/Highlight";
+import { StampIn } from "@/components/sections/SpreadVisuals";
 import JsonLd from "@/components/seo/JsonLd";
 import { faqSchema, breadcrumbList } from "@/lib/structured-data";
 import { CONTACT_EMAIL } from "@/lib/site";
@@ -95,11 +97,50 @@ export default function ContactPage() {
           </Reveal>
 
           {/* ── Title block ──────────────────────────────── */}
-          <Reveal className="pt-10 sm:pt-16 pb-12 sm:pb-16">
+          <Reveal className="relative pt-10 sm:pt-16 pb-12 sm:pb-16">
+            {/* Postmark */}
+            <StampIn
+              delay={0.5}
+              rotate={8}
+              className="hidden sm:block absolute right-2 lg:right-[36%] top-8 sm:top-12 w-[92px] h-[92px] opacity-70 pointer-events-none"
+            >
+              <svg viewBox="0 0 100 100" aria-hidden className="w-full h-full">
+                <defs>
+                  <path
+                    id="postmark-circle"
+                    d="M 50,50 m -33,0 a 33,33 0 1,1 66,0 a 33,33 0 1,1 -66,0"
+                  />
+                </defs>
+                <circle cx="50" cy="50" r="46" fill="none" stroke="#C8391B" strokeOpacity="0.55" strokeWidth="1.4" />
+                <circle cx="50" cy="50" r="22" fill="none" stroke="#C8391B" strokeOpacity="0.45" strokeWidth="1" />
+                <text
+                  fill="#C8391B"
+                  fillOpacity="0.7"
+                  style={{ fontSize: "8.4px", letterSpacing: "1.6px", fontFamily: "var(--font-mono, monospace)" }}
+                >
+                  <textPath href="#postmark-circle">
+                    ANYMUS · CORRESPONDENCE · REPLY &lt; 24H
+                  </textPath>
+                </text>
+                <text
+                  x="50"
+                  y="53.5"
+                  textAnchor="middle"
+                  fill="#C8391B"
+                  fillOpacity="0.6"
+                  style={{ fontSize: "7px", letterSpacing: "1px", fontFamily: "var(--font-mono, monospace)" }}
+                >
+                  2026
+                </text>
+              </svg>
+            </StampIn>
             <div className="lg:grid lg:grid-cols-12 lg:gap-8 items-end">
               <h1 className="lg:col-span-8 font-serif font-light text-[clamp(38px,7.5vw,96px)] leading-[1.02] tracking-[-0.03em] text-inkwarm">
                 Start the{" "}
-                <span className="italic text-mark">conversation</span>.
+                <Highlight color="#C8391B">
+                  <span className="italic text-mark">conversation</span>
+                </Highlight>
+                .
               </h1>
               <div className="lg:col-span-4 mt-8 lg:mt-0">
                 <p className="text-[15px] sm:text-[16px] text-inkwarm-soft leading-relaxed lg:border-l lg:rule lg:pl-5">
@@ -142,7 +183,7 @@ export default function ContactPage() {
                 <RevealItem key={ch.label} className="h-full">
                   <Link
                     href={ch.action.href}
-                    className="group flex flex-col h-full border rule bg-sheet-lift rounded-[2px] px-6 sm:px-7 pt-6 pb-5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[6px_6px_0_0_rgba(200,57,27,0.9)] hover:border-mark"
+                    className="group flex flex-col h-full border rule bg-sheet-lift rounded-[2px] px-6 sm:px-7 pt-6 pb-5 card-lift"
                   >
                     <div className="flex items-center justify-between mb-5">
                       <span className="anno anno-mark">{`Ch. 0${i + 1}`}</span>

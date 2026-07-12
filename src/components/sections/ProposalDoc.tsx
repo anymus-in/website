@@ -1,6 +1,6 @@
 "use client";
 
-import { PopIn } from "@/components/sections/SpreadVisuals";
+import { PopIn, StampIn } from "@/components/sections/SpreadVisuals";
 
 const SECTIONS = [
   { item: "Deliverables", note: "itemised, testable" },
@@ -74,14 +74,15 @@ export default function ProposalDoc() {
               Agreed before work begins
             </p>
           </div>
-          <PopIn
+          <StampIn
             delay={0.9}
-            className="rotate-[-3deg] border-2 border-mark/70 rounded-[2px] px-3 py-1.5 bg-sheet-lift/80"
+            rotate={-3}
+            className="border-2 border-mark/70 rounded-[2px] px-3 py-1.5 bg-sheet-lift/80"
           >
             <span className="font-mono text-[8.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-mark whitespace-nowrap">
               No hidden charges — ever
             </span>
-          </PopIn>
+          </StampIn>
         </div>
       </div>
     </figure>
