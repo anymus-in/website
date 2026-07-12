@@ -5,7 +5,10 @@ import {
   CONTACT_EMAIL,
   SOCIALS,
 } from "./site";
-import { services, type Service } from "./services";
+import { services, type Service, type ServiceFaqItem } from "./services";
+import type { Solution } from "./solutions";
+import type { PostMeta } from "./blog";
+import type { Industry } from "./industries";
 
 /** schema.org Organization — brand entity for Google's Knowledge Graph. */
 export const organizationSchema = {
@@ -57,12 +60,12 @@ export const websiteSchema = {
   publisher: { "@id": `${SITE_URL}/#organization` },
 };
 
-/** schema.org FAQPage — built from the same FAQ data the service page renders. */
-export function serviceFaqSchema(service: Service) {
+/** schema.org FAQPage from any FAQ list — built from the same data the page renders. */
+export function faqSchema(faqs: ServiceFaqItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: service.faqs.map((f) => ({
+    mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.question,
       acceptedAnswer: {
@@ -71,6 +74,11 @@ export function serviceFaqSchema(service: Service) {
       },
     })),
   };
+}
+
+/** schema.org FAQPage for a service detail page. */
+export function serviceFaqSchema(service: Service) {
+  return faqSchema(service.faqs);
 }
 
 /** schema.org Service for a single service detail page. */
@@ -84,6 +92,56 @@ export function serviceSchema(service: Service) {
     url: `${SITE_URL}/services/${service.slug}`,
     provider: { "@id": `${SITE_URL}/#organization` },
     areaServed: "Worldwide",
+  };
+}
+
+/** schema.org Service for a solution detail page — a narrower-scoped offering. */
+export function solutionSchema(solution: Solution) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: solution.name,
+    serviceType: solution.serviceType,
+    description: solution.metaDescription,
+    url: `${SITE_URL}/solutions/${solution.slug}`,
+    provider: { "@id": `${SITE_URL}/#organization` },
+    areaServed: "Worldwide",
+  };
+}
+
+/** schema.org Service scoped to an industry page, with an explicit audience. */
+export function industrySchema(industry: Industry) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: industry.seoTitle,
+    serviceType: industry.serviceType,
+    description: industry.metaDescription,
+    url: `${SITE_URL}/industries/${industry.slug}`,
+    provider: { "@id": `${SITE_URL}/#organization` },
+    areaServed: "Worldwide",
+    audience: {
+      "@type": "Audience",
+      audienceType: industry.name,
+    },
+  };
+}
+
+/** schema.org BlogPosting for a blog post page. Author is the organization —
+ * no named authors exist yet. */
+export function articleSchema(post: PostMeta) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.metaDescription,
+    datePublished: post.date,
+    dateModified: post.updated,
+    url: `${SITE_URL}/blog/${post.slug}`,
+    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+    author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    keywords: post.tags.join(", "),
   };
 }
 

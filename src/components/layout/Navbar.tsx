@@ -8,8 +8,9 @@ import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
   { index: "01", label: "Services", href: "/services" },
-  { index: "02", label: "Client sign-in", href: "/client-sign-in" },
-  { index: "03", label: "Contact", href: "/contact" },
+  { index: "02", label: "Solutions", href: "/solutions" },
+  { index: "03", label: "How we work", href: "/how-we-work" },
+  { index: "04", label: "Contact", href: "/contact" },
 ];
 
 function Wordmark() {

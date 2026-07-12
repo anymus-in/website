@@ -16,6 +16,10 @@ const COLUMNS = [
   {
     label: "Anymus",
     links: [
+      { label: "Solutions", href: "/solutions" },
+      { label: "Industries", href: "/industries" },
+      { label: "How we work", href: "/how-we-work" },
+      { label: "Field notes", href: "/blog" },
       { label: "Client sign-in", href: "/client-sign-in" },
       { label: "Contact", href: "/contact" },
       { label: "Schedule a call", href: "/schedule-call" },
