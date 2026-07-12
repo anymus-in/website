@@ -7,6 +7,7 @@ import ServiceFaq from "@/components/sections/ServiceFaq";
 import SpreadVisual from "@/components/sections/SpreadVisuals";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { services, type Service } from "@/lib/services";
+import { solutions, solutionsForService } from "@/lib/solutions";
 
 /**
  * Service detail page, set as a numbered chapter of the same technical
@@ -19,6 +20,7 @@ export default function ServiceLayout({ service }: { service: Service }) {
   const doc = `0${index + 1}`;
   const prev = services[(index + services.length - 1) % services.length];
   const next = services[(index + 1) % services.length];
+  const playbooks = solutionsForService(service.slug);
 
   return (
     <>
@@ -277,6 +279,56 @@ export default function ServiceLayout({ service }: { service: Service }) {
             </div>
           </div>
         </section>
+
+        {/* ── Sec. N.5 — Playbooks filed under this chapter ─ */}
+        {playbooks.length > 0 && (
+          <section className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-16 sm:pt-24">
+            <div className="flex items-baseline justify-between border-b rule pb-3 mb-10 sm:mb-14">
+              <span className="eyebrow !mb-0">{`Sec. ${doc}.5 — Playbooks`}</span>
+              <span className="anno hidden sm:block">Filed under this chapter</span>
+            </div>
+            <Reveal>
+              <h2 className="font-serif font-light text-[clamp(28px,4vw,44px)] leading-[1.06] tracking-[-0.02em] text-inkwarm mb-10 sm:mb-14 max-w-[620px]">
+                Specific problems this chapter{" "}
+                <span className="italic text-mark">solves</span>.
+              </h2>
+            </Reveal>
+            <RevealGroup
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+              stagger={0.08}
+            >
+              {playbooks.map((p) => {
+                const pFile = `S.${String(
+                  solutions.findIndex((x) => x.slug === p.slug) + 1,
+                ).padStart(2, "0")}`;
+                return (
+                  <RevealItem key={p.slug} className="h-full">
+                    <Link
+                      href={`/solutions/${p.slug}`}
+                      className="group block border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[6px_6px_0_0_rgba(200,57,27,0.9)] hover:border-mark"
+                    >
+                      <div className="flex items-baseline justify-between mb-5">
+                        <span className="anno anno-mark">{`File ${pFile}`}</span>
+                        <span
+                          aria-hidden
+                          className="font-mono text-[12px] text-mark transition-transform duration-300 group-hover:translate-x-1"
+                        >
+                          →
+                        </span>
+                      </div>
+                      <p className="font-serif text-[19px] sm:text-[21px] leading-tight text-inkwarm mb-2.5">
+                        {p.name}
+                      </p>
+                      <p className="text-[13px] sm:text-[13.5px] text-inkwarm-soft leading-relaxed">
+                        {p.intro}
+                      </p>
+                    </Link>
+                  </RevealItem>
+                );
+              })}
+            </RevealGroup>
+          </section>
+        )}
 
         {/* ── Continue reading — chapter navigation ───────── */}
         <nav

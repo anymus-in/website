@@ -3,20 +3,44 @@
 import { useState, useTransition } from "react";
 import {
   ArrowRight,
+  Check,
   CheckCircle,
   AlertCircle,
+  ChevronDown,
   Loader2,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { submitDiscovery, type DiscoveryData } from "./actions";
 
 const fieldClass =
   "w-full bg-sheet-lift border rounded-[2px] px-3.5 py-2.5 text-sm text-inkwarm placeholder:text-inkwarm-faint outline-none min-h-12 transition-colors border-[rgba(28,24,18,0.16)] hover:border-[rgba(28,24,18,0.42)] focus-visible:border-mark focus-visible:shadow-[2px_2px_0_0_var(--color-mark)] disabled:opacity-50 disabled:cursor-not-allowed";
 
 const selectFieldClass =
-  "w-full bg-sheet-lift border rounded-[2px] px-3.5 py-2.5 text-sm text-inkwarm outline-none min-h-12 transition-colors border-[rgba(28,24,18,0.16)] hover:border-[rgba(28,24,18,0.42)] focus-visible:border-mark focus-visible:shadow-[2px_2px_0_0_var(--color-mark)] disabled:opacity-50 disabled:cursor-not-allowed appearance-none";
+  "w-full bg-sheet-lift border rounded-[2px] pl-3.5 pr-9 py-2.5 text-sm text-inkwarm outline-none min-h-12 transition-colors border-[rgba(28,24,18,0.16)] hover:border-[rgba(28,24,18,0.42)] focus-visible:border-mark focus-visible:shadow-[2px_2px_0_0_var(--color-mark)] disabled:opacity-50 disabled:cursor-not-allowed appearance-none";
 
 const checkboxLabelClass =
-  "flex items-center gap-2.5 text-sm text-inkwarm cursor-pointer select-none";
+  "flex items-center gap-2.5 text-sm text-inkwarm cursor-pointer select-none group";
+
+function SectionLabel({ index, label }: { index: string; label: string }) {
+  return (
+    <div className="flex items-center gap-2.5 pt-1">
+      <span className="anno !text-[10px] !tracking-[0.14em] !text-mark shrink-0">
+        {index}
+      </span>
+      <span className="h-px flex-1 bg-hairline" />
+      <span className="anno !text-[10px] !tracking-[0.14em]">{label}</span>
+    </div>
+  );
+}
+
+function Select(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
+  return (
+    <div className="relative">
+      <select {...props} className={selectFieldClass} />
+      <ChevronDown className="w-3.5 h-3.5 text-inkwarm-faint absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+    </div>
+  );
+}
 
 const servicesOptions = ["Website", "SEO", "Automation"] as const;
 
@@ -145,6 +169,8 @@ export default function DiscoveryForm() {
     >
       <span className="absolute top-0 left-0 right-0 h-[2px] bg-mark" />
 
+      <SectionLabel index="01" label="Business" />
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="Business name">
           <input
@@ -204,38 +230,40 @@ export default function DiscoveryForm() {
         />
       </Field>
 
+      <SectionLabel index="02" label="Digital presence" />
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="Existing website">
-          <select
+          <Select
             required
             value={existingWebsite}
             onChange={(e) => setExistingWebsite(e.target.value)}
             disabled={isPending}
-            className={selectFieldClass}
           >
             {yesNoOptions.map((opt) => (
               <option key={opt} value={opt} disabled={opt === ""}>
                 {opt === "" ? "Select…" : opt}
               </option>
             ))}
-          </select>
+          </Select>
         </Field>
         <Field label="Google Business Profile">
-          <select
+          <Select
             required
             value={googleBusinessProfile}
             onChange={(e) => setGoogleBusinessProfile(e.target.value)}
             disabled={isPending}
-            className={selectFieldClass}
           >
             {yesNoOptions.map((opt) => (
               <option key={opt} value={opt} disabled={opt === ""}>
                 {opt === "" ? "Select…" : opt}
               </option>
             ))}
-          </select>
+          </Select>
         </Field>
       </div>
+
+      <SectionLabel index="03" label="Discovery notes" />
 
       <Field label="Main lead sources" optional>
         <textarea
@@ -265,18 +293,37 @@ export default function DiscoveryForm() {
           <span className="text-inkwarm-faint ml-1">(optional)</span>
         </span>
         <div className="flex flex-wrap gap-x-6 gap-y-2.5">
-          {servicesOptions.map((service) => (
-            <label key={service} className={checkboxLabelClass}>
-              <input
-                type="checkbox"
-                checked={services.includes(service)}
-                onChange={() => toggleService(service)}
-                disabled={isPending}
-                className="accent-[#C8391B] w-4 h-4"
-              />
-              {service}
-            </label>
-          ))}
+          {servicesOptions.map((service) => {
+            const checked = services.includes(service);
+            return (
+              <label key={service} className={checkboxLabelClass}>
+                <span
+                  className={cn(
+                    "relative w-4 h-4 shrink-0 rounded-[2px] border flex items-center justify-center transition-colors",
+                    checked
+                      ? "bg-mark border-mark"
+                      : "bg-sheet-lift border-[rgba(28,24,18,0.32)] group-hover:border-mark/60",
+                  )}
+                >
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={() => toggleService(service)}
+                    disabled={isPending}
+                    className="absolute inset-0 opacity-0 cursor-pointer disabled:cursor-not-allowed"
+                  />
+                  <Check
+                    className={cn(
+                      "w-3 h-3 text-sheet-lift transition-opacity",
+                      checked ? "opacity-100" : "opacity-0",
+                    )}
+                    strokeWidth={3}
+                  />
+                </span>
+                {service}
+              </label>
+            );
+          })}
         </div>
       </fieldset>
 
