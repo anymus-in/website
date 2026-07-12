@@ -126,6 +126,20 @@ export default async function BlogPostPage({
             <p className="mt-6 text-[16px] sm:text-[18px] font-serif italic text-inkwarm-soft leading-relaxed max-w-[640px]">
               {post.standfirst}
             </p>
+            {/* Meta row — mobile/tablet only; the sticky marginalia covers lg+ */}
+            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 lg:hidden">
+              {service && (
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="font-mono text-[10px] uppercase tracking-[0.12em] text-inkwarm-soft border rule rounded-[2px] px-2.5 py-1.5 hover:border-mark hover:text-mark transition-colors"
+                >
+                  Re: {service.name}
+                </Link>
+              )}
+              <span className="font-mono text-[10px] text-inkwarm-faint">
+                {post.tags.map((t) => `#${t}`).join("  ")}
+              </span>
+            </div>
           </Reveal>
         </header>
 

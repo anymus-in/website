@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import ServiceFaq from "@/components/sections/ServiceFaq";
+import ProposalDoc from "@/components/sections/ProposalDoc";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import JsonLd from "@/components/seo/JsonLd";
 import { faqSchema, breadcrumbList } from "@/lib/structured-data";
@@ -67,16 +68,6 @@ const PAYMENT_ROWS = [
   { event: "Testing & QA", detail: "Included in the build — not a line item surprise", pays: false },
   { event: "Deployment, documentation & training", detail: "Included before handover", pays: false },
   { event: "Final handover", detail: "Remaining balance on delivery", pays: true },
-];
-
-const DEFINED_ITEMS = [
-  "Deliverables",
-  "Milestones",
-  "Timeline",
-  "Payment schedule",
-  "Support period",
-  "Ownership",
-  "Handover",
 ];
 
 const FAQS: ServiceFaqItem[] = [
@@ -285,27 +276,12 @@ export default function HowWeWorkPage() {
                 exactly what you get, when, and on what terms — in one document.
               </p>
             </Reveal>
-            <RevealGroup
-              className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 content-start"
-              stagger={0.05}
-            >
-              {DEFINED_ITEMS.map((item, i) => (
-                <RevealItem key={item}>
-                  <div className="border rule bg-sheet-lift rounded-[2px] px-4 py-4 h-full">
-                    <span className="anno anno-mark block mb-1.5">{`§ ${String(i + 1).padStart(2, "0")}`}</span>
-                    <span className="font-serif text-[16px] sm:text-[17px] leading-snug text-inkwarm">
-                      {item}
-                    </span>
-                  </div>
-                </RevealItem>
-              ))}
-              <RevealItem className="col-span-2 sm:col-span-3">
-                <p className="anno pt-2">
-                  <span className="text-mark">✳</span> No hidden charges.
-                  Ever.
-                </p>
-              </RevealItem>
-            </RevealGroup>
+            <Reveal className="lg:col-span-7">
+              <ProposalDoc />
+              <p className="anno text-center pt-4">
+                Fig. 03 — every engagement term, on one signed page
+              </p>
+            </Reveal>
           </div>
         </section>
 
