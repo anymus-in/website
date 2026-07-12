@@ -80,7 +80,7 @@ export default function IndustriesHubPage() {
                       <span className="anno anno-mark">{`Sector I.${String(i + 1).padStart(2, "0")}`}</span>
                       <Icon
                         aria-hidden
-                        className="hidden lg:block w-4 h-4 mt-3 text-inkwarm-faint group-hover:text-mark transition-colors"
+                        className="w-4 h-4 lg:mt-3 text-inkwarm-faint group-hover:text-mark transition-colors self-center lg:self-auto"
                       />
                     </div>
 

@@ -119,7 +119,7 @@ export default function SolutionsHubPage() {
                             <span className="anno anno-mark">{`File ${file}`}</span>
                             <Icon
                               aria-hidden
-                              className="hidden lg:block w-4 h-4 mt-3 text-inkwarm-faint group-hover:text-mark transition-colors"
+                              className="w-4 h-4 lg:mt-3 text-inkwarm-faint group-hover:text-mark transition-colors self-center lg:self-auto"
                             />
                           </div>
 

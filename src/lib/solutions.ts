@@ -18,6 +18,13 @@ import type { ServiceAccent, ServiceFaqItem, ServiceProcessStep } from "./servic
  * solution detail pages, the sitemap, JSON-LD, and cross-links from service
  * pages. Same shape discipline as services.ts.
  */
+/** One row of the animated run-log figure on solution/industry pages. */
+export interface FlowStep {
+  label: string;
+  meta: string;
+  state: "done" | "run" | "wait";
+}
+
 export interface Solution {
   slug: string;
   /** Full solution name — used as the page <h1> and card label. */
@@ -50,6 +57,10 @@ export interface Solution {
   icon: LucideIcon;
   /** Brand accent — inherits the parent service's accent by convention. */
   accent: ServiceAccent;
+  /** Rows of the run-log figure shown in the page hero plate. */
+  flow: FlowStep[];
+  /** Figure footer tally: [left caption, right result — rendered green]. */
+  flowTally: [string, string];
 }
 
 export const solutions: Solution[] = [
@@ -58,6 +69,13 @@ export const solutions: Solution[] = [
     name: "WhatsApp Lead Automation",
     icon: MessageCircle,
     accent: "green",
+    flow: [
+      { label: "WhatsApp — new enquiry received", meta: "10:42", state: "done" },
+      { label: "CRM record created · source tagged", meta: "10:42", state: "done" },
+      { label: "Routed → Priya · first reply sent", meta: "10:43", state: "done" },
+      { label: "No reply in 2 days → auto nudge", meta: "queued", state: "wait" },
+    ],
+    flowTally: ["Enquiries this week: 63", "Forgotten: 0"],
     relatedServiceSlug: "automation",
     relatedIndustrySlugs: ["clinics-healthcare", "real-estate", "education-coaching"],
     serviceType: "WhatsApp lead capture and follow-up automation",
@@ -126,6 +144,13 @@ export const solutions: Solution[] = [
     name: "SMS Follow-Up Automation",
     icon: MessageSquareText,
     accent: "green",
+    flow: [
+      { label: "Missed call — +1 415 ··· 882", meta: "14:05", state: "done" },
+      { label: "Text-back sent in 28 seconds", meta: "14:05", state: "done" },
+      { label: "Reply received → lead created", meta: "14:11", state: "done" },
+      { label: "Appointment booked — Tue 10:00", meta: "14:14", state: "run" },
+    ],
+    flowTally: ["Calls missed today: 6", "Conversations lost: 0"],
     relatedServiceSlug: "automation",
     relatedIndustrySlugs: ["clinics-healthcare", "professional-services", "real-estate"],
     serviceType: "SMS and missed-call follow-up automation",
@@ -184,6 +209,13 @@ export const solutions: Solution[] = [
     name: "CRM Setup & Configuration",
     icon: Database,
     accent: "green",
+    flow: [
+      { label: "Imported 2,410 contacts from Excel", meta: "step 1", state: "done" },
+      { label: "De-duplicated → 1,986 clean records", meta: "step 2", state: "done" },
+      { label: "Pipeline configured — your 5 stages", meta: "step 3", state: "done" },
+      { label: "Website + WhatsApp wired in", meta: "live", state: "run" },
+    ],
+    flowTally: ["Manual data entry", "retired"],
     relatedServiceSlug: "automation",
     relatedIndustrySlugs: ["real-estate", "professional-services", "education-coaching"],
     serviceType: "CRM setup, configuration, and adoption",
@@ -247,6 +279,13 @@ export const solutions: Solution[] = [
     name: "Website-to-CRM Integration",
     icon: Link2,
     accent: "blue",
+    flow: [
+      { label: "Form submitted — /contact", meta: "09:31", state: "done" },
+      { label: "Lead created · source: Google Ads", meta: "09:31", state: "done" },
+      { label: "Owner notified → SLA timer on", meta: "09:31", state: "done" },
+      { label: "Acknowledgement sent to the lead", meta: "09:32", state: "done" },
+    ],
+    flowTally: ["Click → follow-up", "under 2 minutes"],
     relatedServiceSlug: "digital-presence",
     relatedIndustrySlugs: ["real-estate", "professional-services", "retail-ecommerce"],
     serviceType: "Website, form, and CRM integration",
@@ -305,6 +344,13 @@ export const solutions: Solution[] = [
     name: "Appointment Booking Automation",
     icon: CalendarClock,
     accent: "green",
+    flow: [
+      { label: "Customer picks a slot — Thu 11:30", meta: "18:20", state: "done" },
+      { label: "Calendar + CRM updated together", meta: "18:20", state: "done" },
+      { label: "Confirmation sent on WhatsApp", meta: "18:20", state: "done" },
+      { label: "Reminder fires — day before, hour before", meta: "queued", state: "wait" },
+    ],
+    flowTally: ["Scheduling back-and-forth", "0 messages"],
     relatedServiceSlug: "automation",
     relatedIndustrySlugs: ["clinics-healthcare", "education-coaching", "professional-services"],
     serviceType: "Appointment booking and reminder automation",
@@ -363,6 +409,13 @@ export const solutions: Solution[] = [
     name: "Invoice & Billing Automation",
     icon: Receipt,
     accent: "amber",
+    flow: [
+      { label: "Milestone marked delivered", meta: "17:02", state: "done" },
+      { label: "Invoice #482 generated — GST ready", meta: "17:02", state: "done" },
+      { label: "Sent to client · logged in Tally", meta: "17:03", state: "done" },
+      { label: "Reminder if unpaid — day 7, day 14", meta: "queued", state: "wait" },
+    ],
+    flowTally: ["Invoices late this month", "0"],
     relatedServiceSlug: "automation",
     relatedIndustrySlugs: ["professional-services", "manufacturing-distribution", "retail-ecommerce"],
     serviceType: "Invoice generation and payment follow-up automation",
@@ -421,6 +474,13 @@ export const solutions: Solution[] = [
     name: "Lead Routing & Qualification",
     icon: GitBranch,
     accent: "green",
+    flow: [
+      { label: "New lead — budget signal: high", meta: "12:04", state: "done" },
+      { label: "Scored 86 → priority queue", meta: "12:04", state: "done" },
+      { label: "Assigned Rohan · load-balanced", meta: "12:05", state: "done" },
+      { label: "Untouched in 1 hour → escalate", meta: "armed", state: "wait" },
+    ],
+    flowTally: ["Speed-to-lead", "minutes, not days"],
     relatedServiceSlug: "automation",
     relatedIndustrySlugs: ["real-estate", "professional-services", "education-coaching"],
     serviceType: "Lead routing and qualification automation",
@@ -479,6 +539,13 @@ export const solutions: Solution[] = [
     name: "Client Portals",
     icon: PanelsTopLeft,
     accent: "amber",
+    flow: [
+      { label: "Client signs in — Acme Ltd", meta: "11:14", state: "done" },
+      { label: "Status + documents · self-served", meta: "11:15", state: "done" },
+      { label: "Approval requested → one click", meta: "11:16", state: "run" },
+      { label: "Invoice viewed · payment link ready", meta: "11:17", state: "wait" },
+    ],
+    flowTally: ["“Any update?” emails", "↓ 80%"],
     relatedServiceSlug: "internal-systems",
     relatedIndustrySlugs: ["professional-services", "education-coaching", "manufacturing-distribution"],
     serviceType: "Client portal design and development",
@@ -537,6 +604,13 @@ export const solutions: Solution[] = [
     name: "Business Dashboards",
     icon: Gauge,
     accent: "amber",
+    flow: [
+      { label: "Tally synced — 248 entries", meta: "07:58", state: "done" },
+      { label: "CRM pipeline refreshed", meta: "07:59", state: "done" },
+      { label: "Receivables flagged: 2 overdue", meta: "08:00", state: "run" },
+      { label: "Owner's view — live before office opens", meta: "08:00", state: "done" },
+    ],
+    flowTally: ["Friday compilation ritual", "retired"],
     relatedServiceSlug: "internal-systems",
     relatedIndustrySlugs: ["manufacturing-distribution", "retail-ecommerce", "professional-services"],
     serviceType: "Real-time business dashboard development",

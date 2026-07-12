@@ -8,6 +8,7 @@ import {
   Stethoscope,
 } from "lucide-react";
 import type { ServiceAccent, ServiceFaqItem } from "./services";
+import type { FlowStep } from "./solutions";
 
 /**
  * Canonical industry definitions — vertical-specific pages that map the
@@ -44,6 +45,10 @@ export interface Industry {
   /** Icon used in cards and page headers. */
   icon: LucideIcon;
   accent: ServiceAccent;
+  /** Rows of the "day on the system" figure shown in the page hero plate. */
+  flow: FlowStep[];
+  /** Figure footer tally: [left caption, right result — rendered green]. */
+  flowTally: [string, string];
 }
 
 export const industries: Industry[] = [
@@ -53,6 +58,13 @@ export const industries: Industry[] = [
     shortName: "Clinics",
     icon: Stethoscope,
     accent: "green",
+    flow: [
+      { label: "WhatsApp: “Is the doctor in today?”", meta: "08:55", state: "done" },
+      { label: "Slot offered from live calendar", meta: "08:56", state: "done" },
+      { label: "Booked 11:30 · confirmation sent", meta: "08:57", state: "done" },
+      { label: "Reminder fires — 10:30", meta: "queued", state: "wait" },
+    ],
+    flowTally: ["No-shows this week", "↓ 3"],
     serviceType: "Systems and automation for clinics and healthcare practices",
     seoTitle: "Automation & Systems for Clinics & Healthcare Practices",
     metaDescription:
@@ -96,6 +108,13 @@ export const industries: Industry[] = [
     shortName: "Real estate",
     icon: Building2,
     accent: "blue",
+    flow: [
+      { label: "Portal lead — 3BHK · budget matched", meta: "12:04", state: "done" },
+      { label: "Scored high → assigned to Kabir", meta: "12:04", state: "done" },
+      { label: "Site visit booked — Saturday 11:00", meta: "12:19", state: "done" },
+      { label: "Document checklist queued post-visit", meta: "queued", state: "wait" },
+    ],
+    flowTally: ["First response", "under 5 minutes"],
     serviceType: "CRM and automation for real estate businesses",
     seoTitle: "CRM & Automation for Real Estate Agencies",
     metaDescription:
@@ -139,6 +158,13 @@ export const industries: Industry[] = [
     shortName: "Retail & D2C",
     icon: ShoppingBag,
     accent: "amber",
+    flow: [
+      { label: "Order on WhatsApp — 2 units", meta: "13:22", state: "done" },
+      { label: "Stock decremented · Tally synced", meta: "13:22", state: "done" },
+      { label: "Invoice + tracking sent to customer", meta: "13:23", state: "done" },
+      { label: "Low-stock alert — SKU 114", meta: "13:24", state: "run" },
+    ],
+    flowTally: ["Three channels", "one operation"],
     serviceType: "Systems and automation for retail and D2C businesses",
     seoTitle: "Systems for Retail & D2C Brands",
     metaDescription:
@@ -182,6 +208,13 @@ export const industries: Industry[] = [
     shortName: "Professional services",
     icon: Briefcase,
     accent: "amber",
+    flow: [
+      { label: "Client opens portal — Acme Ltd", meta: "11:14", state: "done" },
+      { label: "Status self-served · no email sent", meta: "11:15", state: "done" },
+      { label: "Milestone delivered → invoice #218", meta: "16:40", state: "done" },
+      { label: "Payment reminder — day 7 if unpaid", meta: "queued", state: "wait" },
+    ],
+    flowTally: ["“Any update?” emails", "↓ 80%"],
     serviceType: "Internal systems for professional services firms",
     seoTitle: "Internal Systems for Consultancies & Agencies",
     metaDescription:
@@ -225,6 +258,13 @@ export const industries: Industry[] = [
     shortName: "Education",
     icon: GraduationCap,
     accent: "green",
+    flow: [
+      { label: "Parent enquiry — Class 11 batch", meta: "17:40", state: "done" },
+      { label: "Instant reply + brochure sent", meta: "17:40", state: "done" },
+      { label: "Counsellor call booked — 18:30", meta: "17:52", state: "done" },
+      { label: "Fee reminder cycle — automated", meta: "monthly", state: "wait" },
+    ],
+    flowTally: ["Admissions season", "a pipeline, not chaos"],
     serviceType: "CRM and automation for education and coaching businesses",
     seoTitle: "CRM & Automation for Coaching Institutes",
     metaDescription:
@@ -268,6 +308,13 @@ export const industries: Industry[] = [
     shortName: "Manufacturing",
     icon: Factory,
     accent: "blue",
+    flow: [
+      { label: "Order #883 — dispatch confirmed", meta: "10:12", state: "done" },
+      { label: "E-invoice pushed to Tally", meta: "10:12", state: "done" },
+      { label: "Dealer portal updated · dues visible", meta: "10:13", state: "done" },
+      { label: "Owner dashboard — live all day", meta: "08:00", state: "run" },
+    ],
+    flowTally: ["“What's the status?” calls", "↓"],
     serviceType: "Internal systems for manufacturing and distribution businesses",
     seoTitle: "Internal Systems for Manufacturing & Distribution",
     metaDescription:

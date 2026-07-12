@@ -9,7 +9,7 @@ import type { ServiceVisualKey } from "@/lib/services";
    with a realistic interface and one living detail, framed like an
    instrument rather than a floating screenshot. */
 
-function WindowChrome({ label, url }: { label: string; url?: string }) {
+export function WindowChrome({ label, url }: { label: string; url?: string }) {
   return (
     <div className="flex items-center gap-3 border-b rule px-4 py-2.5 bg-sheet-lift shrink-0">
       <div className="flex items-center gap-1.5" aria-hidden>
@@ -34,7 +34,7 @@ function WindowChrome({ label, url }: { label: string; url?: string }) {
   );
 }
 
-function PopIn({
+export function PopIn({
   children,
   delay,
   className,

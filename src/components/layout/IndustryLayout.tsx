@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import ServiceFaq from "@/components/sections/ServiceFaq";
+import SystemFlowVisual from "@/components/sections/SystemFlowVisual";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { getService } from "@/lib/services";
 import { getSolution } from "@/lib/solutions";
@@ -105,6 +106,34 @@ export default function IndustryLayout({ industry }: { industry: Industry }) {
             <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-sheet/90 whitespace-nowrap">
               ✳ No lock-in
             </span>
+          </div>
+        </div>
+
+        {/* ── Fig. — a day on the system ──────────────────── */}
+        <div className="relative">
+          <div
+            aria-hidden
+            className="absolute inset-x-0 bottom-0 top-[38%] graph-bg bg-sheet-deep/70 border-t rule"
+          />
+          <div className="relative max-w-[820px] mx-auto px-5 sm:px-8 pt-10 sm:pt-14">
+            <Reveal>
+              <figure className="reg-marks plate p-3 sm:p-5">
+                <span aria-hidden className="reg reg-tl" />
+                <span aria-hidden className="reg reg-tr" />
+                <span aria-hidden className="reg reg-bl" />
+                <span aria-hidden className="reg reg-br" />
+                <div className="relative overflow-hidden border rule">
+                  <SystemFlowVisual
+                    label="A day on the system"
+                    steps={industry.flow}
+                    tally={industry.flowTally}
+                  />
+                </div>
+              </figure>
+            </Reveal>
+            <p className="anno text-center pt-5 pb-10 sm:pb-12">
+              {`Fig. ${sector} — a working day in ${industry.shortName.toLowerCase()}`}
+            </p>
           </div>
         </div>
 
