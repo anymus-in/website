@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import CtaBand from "@/components/sections/CtaBand";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import Highlight from "@/components/motion/Highlight";
 import JsonLd from "@/components/seo/JsonLd";
 import { postsByDate } from "@/lib/blog";
 import { getService } from "@/lib/services";
@@ -59,7 +60,11 @@ export default function BlogIndexPage() {
           <Reveal className="pt-10 sm:pt-16 pb-12 sm:pb-20">
             <div className="lg:grid lg:grid-cols-12 lg:gap-8 items-end">
               <h1 className="lg:col-span-8 font-serif font-light text-[clamp(38px,7.5vw,96px)] leading-[1.02] tracking-[-0.03em] text-inkwarm">
-                Field <span className="italic text-mark">notes</span>.
+                Field{" "}
+                <Highlight color="#C8391B">
+                  <span className="italic text-mark">notes</span>
+                </Highlight>
+                .
               </h1>
               <div className="lg:col-span-4 mt-8 lg:mt-0">
                 <p className="text-[15px] sm:text-[16px] text-inkwarm-soft leading-relaxed lg:border-l lg:rule lg:pl-5">
@@ -81,13 +86,19 @@ export default function BlogIndexPage() {
                 <RevealItem key={post.slug}>
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="group grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-4 border-t rule py-8 sm:py-10 transition-colors active:bg-sheet-deep/60 hover:bg-sheet-lift/40"
+                    className="group grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-4 border-t rule py-8 sm:py-10 transition-colors active:bg-sheet-deep/60 hover:bg-sheet-lift/40 focus-visible:outline-2 focus-visible:outline-mark focus-visible:-outline-offset-2"
                   >
                     {/* Entry stamp */}
-                    <div className="lg:col-span-2 flex lg:flex-col items-baseline lg:items-start justify-between lg:justify-start gap-2">
-                      <span className="anno anno-mark">{`Entry ${String(
-                        posts.length - i,
-                      ).padStart(2, "0")}`}</span>
+                    <div className="lg:col-span-2 flex lg:flex-col items-baseline lg:items-start justify-between lg:justify-start gap-2 lg:gap-3">
+                      <span className="flex items-baseline gap-2.5">
+                        <span
+                          aria-hidden
+                          className="text-hollow font-serif font-light text-[34px] sm:text-[42px] leading-none group-hover:[-webkit-text-stroke-color:var(--color-mark)] transition-[color]"
+                        >
+                          {String(posts.length - i).padStart(2, "0")}
+                        </span>
+                        <span className="anno anno-mark">Entry</span>
+                      </span>
                       <span className="anno">{formatDate(post.date)}</span>
                     </div>
 

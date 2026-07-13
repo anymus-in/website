@@ -58,6 +58,41 @@ export function PopIn({
   );
 }
 
+/**
+ * Rubber-stamp entrance — the element lands on the page with a spring
+ * "thunk", settling at `rotate`. Static (pre-rotated) under reduced motion.
+ */
+export function StampIn({
+  children,
+  delay = 0,
+  rotate = -3,
+  className,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  rotate?: number;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+  if (reduce)
+    return (
+      <div className={className} style={{ transform: `rotate(${rotate}deg)` }}>
+        {children}
+      </div>
+    );
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, scale: 1.6, rotate: rotate - 9 }}
+      whileInView={{ opacity: 1, scale: 1, rotate }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ type: "spring", stiffness: 340, damping: 17, delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 /* ── 01 · Digital Presence — a site capturing a lead ── */
 function WebsiteScene() {
   return (
@@ -322,14 +357,15 @@ function DashboardScene() {
         </div>
 
         {/* The point, stamped on the glass */}
-        <PopIn
+        <StampIn
           delay={0.9}
-          className="absolute right-4 sm:right-6 bottom-4 sm:bottom-6 rotate-[2deg] border-2 border-mark/60 rounded-[2px] px-3 py-1.5 bg-sheet-lift/90"
+          rotate={2}
+          className="absolute right-4 sm:right-6 bottom-4 sm:bottom-6 border-2 border-mark/60 rounded-[2px] px-3 py-1.5 bg-sheet-lift/90"
         >
           <span className="font-mono text-[8.5px] uppercase tracking-[0.16em] text-mark/90">
             Zero spreadsheets harmed
           </span>
-        </PopIn>
+        </StampIn>
       </div>
     </div>
   );

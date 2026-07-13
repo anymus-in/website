@@ -6,6 +6,8 @@ import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import ServiceFaq from "@/components/sections/ServiceFaq";
 import SpreadVisual from "@/components/sections/SpreadVisuals";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import { Timeline, TimelineDot } from "@/components/motion/Timeline";
+import EndCta from "@/components/sections/EndCta";
 import { services, type Service } from "@/lib/services";
 import { solutions, solutionsForService } from "@/lib/solutions";
 
@@ -201,7 +203,7 @@ export default function ServiceLayout({ service }: { service: Service }) {
             >
               {service.outcomes.map((o, i) => (
                 <RevealItem key={o.title} className="h-full">
-                  <div className="group relative border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[6px_6px_0_0_rgba(200,57,27,0.9)] hover:border-mark">
+                  <div className="group relative border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] card-lift">
                     <div className="flex items-baseline justify-between mb-5">
                       <span className="anno anno-mark">{`✳ Item ${i + 1}`}</span>
                       <span className="anno !text-[11px] sm:!text-[9px]">{`0${i + 1}/0${service.outcomes.length}`}</span>
@@ -235,15 +237,11 @@ export default function ServiceLayout({ service }: { service: Service }) {
                 and see it running before we leave.
               </p>
             </Reveal>
-            <div className="lg:col-span-8 relative">
-              <div aria-hidden className="absolute left-[5px] top-2 bottom-2 w-px bg-hairline" />
+            <Timeline className="lg:col-span-8">
               <div className="space-y-10 sm:space-y-12">
                 {service.process.map((step, i) => (
                   <Reveal key={step.title} className="relative pl-10" amount={0.3}>
-                    <span
-                      aria-hidden
-                      className="absolute left-0 top-[4px] w-[11px] h-[11px] rounded-full border-2 border-mark bg-sheet"
-                    />
+                    <TimelineDot state="mark" />
                     <span className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-mark block mb-1.5">
                       {`Step ${i + 1} · 0${i + 1}/0${service.process.length}`}
                     </span>
@@ -256,7 +254,7 @@ export default function ServiceLayout({ service }: { service: Service }) {
                   </Reveal>
                 ))}
               </div>
-            </div>
+            </Timeline>
           </div>
         </section>
 
@@ -305,7 +303,7 @@ export default function ServiceLayout({ service }: { service: Service }) {
                   <RevealItem key={p.slug} className="h-full">
                     <Link
                       href={`/solutions/${p.slug}`}
-                      className="group block border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[6px_6px_0_0_rgba(200,57,27,0.9)] hover:border-mark"
+                      className="group block border rule bg-sheet-lift h-full px-6 pt-6 pb-5 rounded-[2px] card-lift"
                     >
                       <div className="flex items-baseline justify-between mb-5">
                         <span className="anno anno-mark">{`File ${pFile}`}</span>
@@ -372,29 +370,15 @@ export default function ServiceLayout({ service }: { service: Service }) {
         </nav>
 
         {/* ── Closing — the one action ────────────────────── */}
-        <section id="start" className="relative bg-inkwarm graph-bg-dark overflow-hidden">
-          <div className="max-w-[1380px] mx-auto px-5 sm:px-8 py-20 sm:py-28">
-            <Reveal>
-              <p className="anno anno-mark mb-6">{`Doc. ${doc} — end of chapter`}</p>
-              <h2 className="font-serif font-light text-[clamp(30px,5.5vw,64px)] leading-[1.05] tracking-[-0.025em] text-sheet max-w-[720px]">
-                Ready to put {service.eyebrow.toLowerCase()} to{" "}
-                <span className="italic text-mark">work</span>?
-              </h2>
-              <div className="mt-10 sm:mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
-                <a
-                  href="/schedule-call"
-                  className="btn-stamp btn-stamp-paper px-7 sm:px-9 py-4 text-[15px] font-medium tracking-[-0.01em]"
-                >
-                  Book a discovery call
-                  <span aria-hidden className="font-mono text-[12px]">→</span>
-                </a>
-                <span className="anno !text-sheet/45">
-                  Free 30-min call · no lock-in · reply &lt; 24h
-                </span>
-              </div>
-            </Reveal>
-          </div>
-        </section>
+        <EndCta
+          stamp={`Doc. ${doc} — end of chapter`}
+          heading={
+            <>
+              Ready to put {service.eyebrow.toLowerCase()} to{" "}
+              <span className="italic text-mark">work</span>?
+            </>
+          }
+        />
       </main>
       <MobileCtaBar />
       <Footer />

@@ -6,6 +6,8 @@ import Footer from "@/components/layout/Footer";
 import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import CtaBand from "@/components/sections/CtaBand";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import LineReveal from "@/components/motion/LineReveal";
+import Highlight from "@/components/motion/Highlight";
 import JsonLd from "@/components/seo/JsonLd";
 import { services } from "@/lib/services";
 import { solutions, solutionsForService } from "@/lib/solutions";
@@ -43,42 +45,65 @@ export default function SolutionsHubPage() {
               <span className="anno">Anymus — Solutions</span>
               <span className="anno anno-mark">Playbook index</span>
             </div>
+            <div aria-hidden className="ruler-ticks h-[8px] opacity-60" />
           </Reveal>
 
           {/* ── Title block ──────────────────────────────── */}
-          <Reveal className="pt-10 sm:pt-16 pb-12 sm:pb-20">
+          <div className="pt-10 sm:pt-16 pb-12 sm:pb-20">
             <div className="lg:grid lg:grid-cols-12 lg:gap-8 items-end">
-              <h1 className="lg:col-span-8 font-serif font-light text-[clamp(38px,7.5vw,96px)] leading-[1.02] tracking-[-0.03em] text-inkwarm">
-                Playbooks for work that
-                <br />
-                still runs on <span className="italic text-mark">memory</span>.
-              </h1>
-              <div className="lg:col-span-4 mt-8 lg:mt-0">
+              <LineReveal
+                as="h1"
+                className="lg:col-span-8 font-serif font-light text-[clamp(38px,7.5vw,96px)] leading-[1.02] tracking-[-0.03em] text-inkwarm"
+                lines={[
+                  "Playbooks for work",
+                  "that still runs on",
+                  <span key="l3">
+                    <Highlight color="#C8391B">
+                      <span className="italic text-mark">memory</span>
+                    </Highlight>
+                    .
+                  </span>,
+                ]}
+              />
+              <Reveal className="lg:col-span-4 mt-8 lg:mt-0" delay={0.25}>
                 <p className="text-[15px] sm:text-[16px] text-inkwarm-soft leading-relaxed lg:border-l lg:rule lg:pl-5">
                   Each playbook takes one specific leak — a lead that can be
                   forgotten, an invoice made by hand, a report compiled every
                   Friday — and hands it to a system that doesn&rsquo;t forget.
                 </p>
-              </div>
+              </Reveal>
             </div>
-          </Reveal>
+          </div>
         </header>
 
-        {/* ── Index strip ─────────────────────────────────── */}
-        <div className="graph-bg bg-sheet-deep/60 border-y rule overflow-hidden">
-          <div className="max-w-[1380px] mx-auto px-5 sm:px-8 py-4 flex items-center justify-start sm:justify-center gap-3 sm:gap-6 overflow-x-auto no-scrollbar">
-            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-inkwarm-soft whitespace-nowrap">
-              <span className="text-mark">{String(solutions.length).padStart(2, "0")}</span>{" "}
-              playbooks
-            </span>
-            <span aria-hidden className="font-mono text-[13px] text-mark">·</span>
-            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-inkwarm-soft whitespace-nowrap">
-              filed under <span className="text-mark">03</span> services
-            </span>
-            <span aria-hidden className="font-mono text-[13px] text-mark">·</span>
-            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-inkwarm-soft whitespace-nowrap">
-              one connected system
-            </span>
+        {/* ── Index strip — the full drawer, on a loop ────── */}
+        <div
+          className="marquee graph-bg bg-sheet-deep/60 border-y rule overflow-hidden"
+          aria-label={`${solutions.length} playbooks, filed under 3 services, one connected system`}
+        >
+          <div className="py-4">
+            <div className="marquee-track items-baseline">
+              {[0, 1].map((run) => (
+                <div key={run} className="flex items-baseline shrink-0" aria-hidden>
+                  {solutions.map((s, i) => (
+                    <span
+                      key={s.slug}
+                      className="flex items-baseline whitespace-nowrap px-4 sm:px-6"
+                    >
+                      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-mark mr-3">
+                        {`S.${String(i + 1).padStart(2, "0")}`}
+                      </span>
+                      <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-inkwarm-soft">
+                        {s.name}
+                      </span>
+                      <span className="font-mono text-[11px] text-mark ml-4 sm:ml-6">
+                        →
+                      </span>
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -112,7 +137,7 @@ export default function SolutionsHubPage() {
                       <RevealItem key={s.slug}>
                         <Link
                           href={`/solutions/${s.slug}`}
-                          className="group grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-4 border-t rule py-7 sm:py-9 transition-colors active:bg-sheet-deep/60 hover:bg-sheet-lift/40"
+                          className="group grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-4 border-t rule py-7 sm:py-9 transition-colors active:bg-sheet-deep/60 hover:bg-sheet-lift/40 focus-visible:outline-2 focus-visible:outline-mark focus-visible:-outline-offset-2"
                         >
                           {/* File stamp */}
                           <div className="lg:col-span-2 flex lg:flex-col items-baseline lg:items-start justify-between lg:justify-start gap-2">

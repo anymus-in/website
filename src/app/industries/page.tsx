@@ -6,6 +6,8 @@ import Footer from "@/components/layout/Footer";
 import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import CtaBand from "@/components/sections/CtaBand";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import LineReveal from "@/components/motion/LineReveal";
+import Highlight from "@/components/motion/Highlight";
 import JsonLd from "@/components/seo/JsonLd";
 import { industries } from "@/lib/industries";
 import { breadcrumbList } from "@/lib/structured-data";
@@ -42,26 +44,36 @@ export default function IndustriesHubPage() {
               <span className="anno">Anymus — Industries</span>
               <span className="anno anno-mark">Sector surveys</span>
             </div>
+            <div aria-hidden className="ruler-ticks h-[8px] opacity-60" />
           </Reveal>
 
           {/* ── Title block ──────────────────────────────── */}
-          <Reveal className="pt-10 sm:pt-16 pb-12 sm:pb-20">
+          <div className="pt-10 sm:pt-16 pb-12 sm:pb-20">
             <div className="lg:grid lg:grid-cols-12 lg:gap-8 items-end">
-              <h1 className="lg:col-span-8 font-serif font-light text-[clamp(38px,7.5vw,96px)] leading-[1.02] tracking-[-0.03em] text-inkwarm">
-                Same wall.
-                <br />
-                Different <span className="italic text-mark">shape</span>.
-              </h1>
-              <div className="lg:col-span-4 mt-8 lg:mt-0">
+              <LineReveal
+                as="h1"
+                className="lg:col-span-8 font-serif font-light text-[clamp(38px,7.5vw,96px)] leading-[1.02] tracking-[-0.03em] text-inkwarm"
+                lines={[
+                  "Same wall.",
+                  <span key="l2">
+                    Different{" "}
+                    <Highlight color="#C8391B">
+                      <span className="italic text-mark">shape</span>
+                    </Highlight>
+                    .
+                  </span>,
+                ]}
+              />
+              <Reveal className="lg:col-span-4 mt-8 lg:mt-0" delay={0.25}>
                 <p className="text-[15px] sm:text-[16px] text-inkwarm-soft leading-relaxed lg:border-l lg:rule lg:pl-5">
                   Every sector hits the growth wall in its own way — missed
                   calls in a clinic, cold leads in real estate, register-bound
                   orders in a factory. These surveys map how, and what we
                   deploy.
                 </p>
-              </div>
+              </Reveal>
             </div>
-          </Reveal>
+          </div>
         </header>
 
         {/* ── Sector ledger ───────────────────────────────── */}
@@ -73,7 +85,7 @@ export default function IndustriesHubPage() {
                 <RevealItem key={ind.slug}>
                   <Link
                     href={`/industries/${ind.slug}`}
-                    className="group grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-4 border-t rule py-8 sm:py-10 transition-colors active:bg-sheet-deep/60 hover:bg-sheet-lift/40"
+                    className="group grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-4 border-t rule py-8 sm:py-10 transition-colors active:bg-sheet-deep/60 hover:bg-sheet-lift/40 focus-visible:outline-2 focus-visible:outline-mark focus-visible:-outline-offset-2"
                   >
                     {/* Sector stamp */}
                     <div className="lg:col-span-2 flex lg:flex-col items-baseline lg:items-start justify-between lg:justify-start gap-2">
