@@ -5,12 +5,12 @@
  */
 export const SITE_URL = "https://anymus.in";
 
-export const SITE_NAME = "anymus";
+export const SITE_NAME = "Anymus";
 
 export const SITE_TAGLINE = "Websites, Automation & Internal Systems";
 
 export const SITE_DESCRIPTION =
-  "anymus designs and builds the websites, automations, and internal tools that growing businesses run on — one connected system, built around the tools you already use.";
+  "Anymus designs and builds the websites, automations, and internal tools that growing businesses run on — one connected system, built around the tools you already use.";
 
 export const CONTACT_EMAIL = "support@anymus.in";
 

@@ -80,7 +80,7 @@ export default function BuildSheet() {
           />
           <Reveal delay={0.2}>
             <p className="text-[13.5px] text-inkwarm-soft leading-relaxed max-w-[340px] lg:text-right lg:pb-2">
-              Four milestones, one anymus team, no surprises. You&rsquo;ll know
+              Four milestones, one Anymus team, no surprises. You&rsquo;ll know
               what &ldquo;done&rdquo; means before we start — and see it running
               before we leave.
             </p>

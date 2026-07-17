@@ -5,7 +5,7 @@ import ClientSignInForm from "./ClientSignInForm";
 
 export const metadata: Metadata = {
   title: "Client Sign In",
-  description: "Sign in to your anymus client portal.",
+  description: "Sign in to your Anymus client portal.",
   alternates: { canonical: "/client-sign-in" },
   robots: { index: false, follow: false },
 };
@@ -67,7 +67,7 @@ export default function ClientSignInPage() {
                 WebkitMaskPosition: "center",
               }}
             />
-            <span className="font-serif text-[19px] font-medium tracking-tight">anymus</span>
+            <span className="font-serif text-[19px] font-medium tracking-tight">Anymus</span>
           </Link>
           <span className="anno anno-mark">Client portal</span>
         </div>
@@ -97,7 +97,7 @@ export default function ClientSignInPage() {
           <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-mark/75 leading-relaxed text-center">
             Access ✳ granted
             <br />
-            by anymus
+            by Anymus
           </span>
         </div>
       </section>

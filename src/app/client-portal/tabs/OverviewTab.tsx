@@ -50,7 +50,7 @@ const statCards = [
 const nextAction = {
   title: "Review & approve: Automation Workflow Map",
   description:
-    "Your anymus team needs your sign-off before automations move from staging to production.",
+    "Your Anymus team needs your sign-off before automations move from staging to production.",
   due: "Due in 2 days",
 };
 

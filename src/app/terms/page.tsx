@@ -3,7 +3,7 @@ import LegalLayout, { LegalSection } from "@/components/legal/LegalLayout";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
-  description: "The terms governing your use of the anymus website and platform.",
+  description: "The terms governing your use of the Anymus website and platform.",
   alternates: { canonical: "/terms" },
 };
 
@@ -13,7 +13,7 @@ export default function TermsOfUsePage() {
       <LegalSection heading="1. Acceptance of terms">
         <p>
           These Terms of Use (&quot;Terms&quot;) govern your access to and use of the
-          website, software, and services provided by anymus (&quot;anymus,&quot;
+          website, software, and services provided by Anymus (&quot;Anymus,&quot;
           &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). By accessing our website, creating an
           account, or otherwise using our services (collectively, the
           &quot;Service&quot;), you agree to be bound by these Terms. If you are
@@ -25,7 +25,7 @@ export default function TermsOfUsePage() {
 
       <LegalSection heading="2. Description of the service">
         <p>
-          anymus provides implementation and consulting services for
+          Anymus provides implementation and consulting services for
           growing businesses, delivered individually or together: (a)
           implementation and configuration of enterprise resource planning
           (ERP) systems; (b) implementation and configuration of customer
@@ -33,10 +33,10 @@ export default function TermsOfUsePage() {
           of automation and workflows that connect those systems and
           reduce manual operational work; and (d) integration of
           AI-powered features, such as reporting and forecasting, on top
-          of a Customer&apos;s systems and data. anymus is a software and
+          of a Customer&apos;s systems and data. Anymus is a software and
           services provider and does not provide legal, financial, or
           other licensed advisory services. Any system configurations,
-          workflows, or recommendations generated through anymus services
+          workflows, or recommendations generated through Anymus services
           are based on the configuration and data provided by the customer
           using the Service (&quot;Customer&quot;).
         </p>
@@ -82,7 +82,7 @@ export default function TermsOfUsePage() {
         <p>
           Customers retain all rights to the product information, scripts,
           documents, and other materials they upload or configure within the
-          Service (&quot;Customer Content&quot;). You grant anymus a worldwide,
+          Service (&quot;Customer Content&quot;). You grant Anymus a worldwide,
           non-exclusive license to host, process, and use Customer Content
           solely to provide and improve the Service. You are responsible for
           ensuring that you have the necessary rights and consents to submit
@@ -92,13 +92,13 @@ export default function TermsOfUsePage() {
 
       <LegalSection heading="6. AI-generated content">
         <p>
-          Where the Service includes AI integrations, anymus uses
+          Where the Service includes AI integrations, Anymus uses
           artificial intelligence to generate reporting, forecasting, or
           other recommendations based on Customer data. While we work to
           make this output accurate and helpful, AI-generated content may
           occasionally be incomplete, outdated, or incorrect. This output
           is based on the configuration and data supplied by the Customer,
-          and neither anymus nor the Customer guarantees its accuracy. You
+          and neither Anymus nor the Customer guarantees its accuracy. You
           should independently verify any information that is material to
           a business decision.
         </p>
@@ -107,7 +107,7 @@ export default function TermsOfUsePage() {
       <LegalSection heading="7. Intellectual property">
         <p>
           The Service, including its software, design, and underlying
-          technology, is owned by anymus and protected by intellectual
+          technology, is owned by Anymus and protected by intellectual
           property laws. Except for the limited rights expressly granted to
           you under these Terms, no rights or licenses are granted to you by
           implication or otherwise.
@@ -119,7 +119,7 @@ export default function TermsOfUsePage() {
           If you purchase a paid plan, you agree to pay the fees described at
           the time of purchase or in your order form. Fees are non-refundable
           except as required by law or as expressly stated in a separate
-          agreement with anymus. We may change our pricing on a going-forward
+          agreement with Anymus. We may change our pricing on a going-forward
           basis with reasonable notice.
         </p>
       </LegalSection>
@@ -128,7 +128,7 @@ export default function TermsOfUsePage() {
         <p>
           You may stop using the Service at any time. We may suspend or
           terminate your access to the Service if you breach these Terms or
-          if we reasonably believe your use poses a risk to anymus, other
+          if we reasonably believe your use poses a risk to Anymus, other
           users, or third parties. Upon termination, your right to use the
           Service will immediately cease.
         </p>
@@ -138,7 +138,7 @@ export default function TermsOfUsePage() {
         <p>
           The Service is provided &quot;as is&quot; and &quot;as available,&quot; without
           warranties of any kind, express or implied. To the maximum extent
-          permitted by law, anymus will not be liable for any indirect,
+          permitted by law, Anymus will not be liable for any indirect,
           incidental, special, consequential, or punitive damages, or for any
           loss of profits, revenue, or data, arising from your use of the
           Service.
@@ -147,7 +147,7 @@ export default function TermsOfUsePage() {
 
       <LegalSection heading="11. Indemnification">
         <p>
-          You agree to indemnify and hold anymus harmless from any claims,
+          You agree to indemnify and hold Anymus harmless from any claims,
           damages, or expenses arising from your use of the Service, your
           Customer Content, or your violation of these Terms.
         </p>

@@ -153,7 +153,7 @@ export default function ServiceIndex() {
 
         <div className="py-16 sm:py-24 text-center flex flex-col items-center">
           <Reveal>
-            <span className="anno anno-mark block mb-6">What anymus builds</span>
+            <span className="anno anno-mark block mb-6">What Anymus builds</span>
           </Reveal>
           <LineReveal
             as="h2"

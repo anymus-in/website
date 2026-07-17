@@ -50,7 +50,7 @@ export default function Footer() {
           <div className="lg:col-span-5 lg:pr-12 lg:border-r lg:border-sheet/15 flex flex-col">
             <p className="font-serif font-light text-[clamp(22px,2.8vw,32px)] leading-[1.18] tracking-[-0.015em] text-sheet/90 max-w-[400px] mb-8">
               The system your business runs on — designed, built, and wired by{" "}
-              <span className="italic text-mark">anymus</span>.
+              <span className="italic text-mark">Anymus</span>.
             </p>
             <div className="mt-auto space-y-3">
               <p className="anno !text-sheet/45">Write to us</p>
@@ -131,7 +131,7 @@ export default function Footer() {
         {/* Bottom line */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-t border-sheet/15 py-5 mt-6">
           <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-sheet/40">
-            © {new Date().getFullYear()} anymus
+            © {new Date().getFullYear()} Anymus
           </span>
           <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-sheet/40">
             Set in Newsreader &amp; JetBrains Mono
@@ -147,7 +147,7 @@ export default function Footer() {
               WebkitTextStroke: "1px rgba(244, 241, 232, 0.22)",
             }}
           >
-            anymus
+            Anymus
           </span>
         </div>
       </div>

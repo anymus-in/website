@@ -29,7 +29,7 @@ export async function submitDiscovery(
       data.services.length > 0 ? data.services.join(", ") : "Not specified";
 
     await resend.emails.send({
-      from: "anymus <onboarding@resend.dev>",
+      from: "Anymus <onboarding@resend.dev>",
       to: [TO],
       replyTo: data.email,
       subject: `Discovery — ${data.businessName}`,

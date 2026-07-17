@@ -34,7 +34,7 @@ export async function generateMetadata({
     description: post.metaDescription,
     alternates: { canonical: path },
     openGraph: {
-      title: `${post.seoTitle} | anymus`,
+      title: `${post.seoTitle} | Anymus`,
       description: post.metaDescription,
       url: path,
       type: "article",

@@ -3,7 +3,7 @@ import LegalLayout, { LegalSection } from "@/components/legal/LegalLayout";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How anymus collects, uses, and protects your information.",
+  description: "How Anymus collects, uses, and protects your information.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -12,11 +12,11 @@ export default function PrivacyPolicyPage() {
     <LegalLayout title="Privacy Policy" updated="June 17, 2026">
       <LegalSection heading="1. Overview">
         <p>
-          This Privacy Policy explains how anymus (&quot;anymus,&quot; &quot;we,&quot;
+          This Privacy Policy explains how Anymus (&quot;Anymus,&quot; &quot;we,&quot;
           &quot;us,&quot; or &quot;our&quot;) collects, uses, discloses, and protects
           information when you visit our website or use our platform
           (collectively, the &quot;Service&quot;). It applies to visitors,
-          prospective customers, and Customers who engage anymus to
+          prospective customers, and Customers who engage Anymus to
           implement ERP or CRM systems, automate workflows, or integrate
           AI on top of their data (each, a &quot;Customer&quot;).
         </p>
@@ -61,12 +61,12 @@ export default function PrivacyPolicyPage() {
 
       <LegalSection heading="4. AI processing">
         <p>
-          Where a Customer engages anymus for AI integrations, anymus may
+          Where a Customer engages Anymus for AI integrations, Anymus may
           use artificial intelligence to process Customer Content in order
           to generate reporting, forecasting, or other insights. This
           processing may involve sending relevant data to third-party AI
           model providers under contractual terms that restrict their use
-          of the data to providing the requested processing. anymus does
+          of the data to providing the requested processing. Anymus does
           not use Customer Content to train models for the benefit of
           other customers.
         </p>
@@ -98,7 +98,7 @@ export default function PrivacyPolicyPage() {
           <li>
             <span className="text-[#18181B] font-medium">Legal and safety</span>{" "}
             — when required to comply with law, enforce our agreements, or
-            protect the rights, property, or safety of anymus, our users, or
+            protect the rights, property, or safety of Anymus, our users, or
             others; and
           </li>
           <li>

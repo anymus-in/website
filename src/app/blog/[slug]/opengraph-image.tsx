@@ -8,7 +8,7 @@ export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
 }
 
-export const alt = "anymus field note";
+export const alt = "Anymus field note";
 
 export default async function Image({
   params,
@@ -17,5 +17,5 @@ export default async function Image({
 }) {
   const { slug } = await params;
   const post = getPostMeta(slug);
-  return renderOgImage(post ? post.title : "anymus");
+  return renderOgImage(post ? post.title : "Anymus");
 }

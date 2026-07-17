@@ -24,7 +24,7 @@ export interface Industry {
   shortName: string;
   /** schema.org serviceType / category keyword. */
   serviceType: string;
-  /** <title> tag (the template appends "| anymus"). */
+  /** <title> tag (the template appends "| Anymus"). */
   seoTitle: string;
   /** Meta description + OG description. */
   metaDescription: string;
@@ -68,7 +68,7 @@ export const industries: Industry[] = [
     serviceType: "Systems and automation for clinics and healthcare practices",
     seoTitle: "Automation & Systems for Clinics & Healthcare Practices",
     metaDescription:
-      "anymus builds the systems clinics run on — WhatsApp enquiry capture, automated appointment booking and reminders, and patient records that don't live in registers.",
+      "Anymus builds the systems clinics run on — WhatsApp enquiry capture, automated appointment booking and reminders, and patient records that don't live in registers.",
     eyebrow: "Clinics & Healthcare",
     intro: "A practice that runs on systems, not the front desk's memory.",
     body: "A clinic's operations live or die at the front desk: enquiries on WhatsApp and phone, appointments in a register or a shared calendar, reminders that happen when someone has a spare minute. Every missed call is a patient who books elsewhere; every forgotten reminder is an empty slot that cost real money. The clinical work is excellent — it's the operational layer around it that leaks. That layer is precisely what a connected system fixes: enquiries captured automatically, bookings that make themselves, reminders that fire on schedule, and a front desk freed to look after the patients actually standing in front of it.",
@@ -118,7 +118,7 @@ export const industries: Industry[] = [
     serviceType: "CRM and automation for real estate businesses",
     seoTitle: "CRM & Automation for Real Estate Agencies",
     metaDescription:
-      "anymus builds the lead engine real estate runs on — every portal, WhatsApp, and site-visit enquiry captured, qualified, routed to the right agent, and followed up until it closes.",
+      "Anymus builds the lead engine real estate runs on — every portal, WhatsApp, and site-visit enquiry captured, qualified, routed to the right agent, and followed up until it closes.",
     eyebrow: "Real Estate",
     intro: "Every lead worked, from first enquiry to handover.",
     body: "Real estate is a speed-to-lead business with long, expensive sales cycles — the worst possible combination to run on memory. Leads arrive from portals, ads, WhatsApp, and walk-ins; the serious buyer and the casual browser land in the same inbox; and follow-up over a months-long decision depends on individual agents' discipline. Meanwhile every lost lead has a five- or six-figure price tag. A connected system captures every enquiry with its source, qualifies and routes it in minutes, and keeps the follow-up alive across the whole cycle — site visit reminders, document nudges, stage-by-stage updates — so no buyer goes quiet because the agency did.",
@@ -168,7 +168,7 @@ export const industries: Industry[] = [
     serviceType: "Systems and automation for retail and D2C businesses",
     seoTitle: "Systems for Retail & D2C Brands",
     metaDescription:
-      "anymus connects the systems retail runs on — orders, inventory, billing, and customer communication in one flow, whether the sale happens in-store, online, or on WhatsApp.",
+      "Anymus connects the systems retail runs on — orders, inventory, billing, and customer communication in one flow, whether the sale happens in-store, online, or on WhatsApp.",
     eyebrow: "Retail & D2C",
     intro: "In-store, online, and WhatsApp — one connected operation.",
     body: "Modern retail sells everywhere at once — the counter, the website, Instagram, WhatsApp — and each channel spawns its own orders, stock questions, and customer chats. The result is re-typed order details, inventory that disagrees with reality, billing that lags the sale, and customer data scattered across platforms that never talk. The fix isn't another sales channel or another app; it's wiring the ones you have into one flow: orders from any channel landing in one place, stock and accounts updating themselves, invoices generating on the sale, and every customer conversation attached to their history.",
@@ -218,7 +218,7 @@ export const industries: Industry[] = [
     serviceType: "Internal systems for professional services firms",
     seoTitle: "Internal Systems for Consultancies & Agencies",
     metaDescription:
-      "anymus builds the operating layer for services firms — client portals that end status-update email, automated billing, and one live view of projects, people, and cash.",
+      "Anymus builds the operating layer for services firms — client portals that end status-update email, automated billing, and one live view of projects, people, and cash.",
     eyebrow: "Professional Services",
     intro: "Client work is the product. Everything else should run itself.",
     body: "Services firms sell expertise, but their weeks get eaten by everything around it: status update emails, resent documents, invoices raised late, receivables chased awkwardly, and a partner-level view of the business that only exists when someone assembles it. Every one of those hours is billable time spent on being your own back office. The system fix is well-trodden: a client portal that answers \"where are we?\" before it's asked, billing that generates itself from delivered work, and a live dashboard of projects, utilisation, and cash — so the firm's operations feel as sharp as its work.",
@@ -268,7 +268,7 @@ export const industries: Industry[] = [
     serviceType: "CRM and automation for education and coaching businesses",
     seoTitle: "CRM & Automation for Coaching Institutes",
     metaDescription:
-      "anymus builds the enquiry-to-enrolment engine for coaching institutes — every parent enquiry captured and followed up, batches and fees tracked, reminders on autopilot.",
+      "Anymus builds the enquiry-to-enrolment engine for coaching institutes — every parent enquiry captured and followed up, batches and fees tracked, reminders on autopilot.",
     eyebrow: "Education & Coaching",
     intro: "From first enquiry to enrolment, without a lead going cold.",
     body: "Admissions season decides a coaching institute's year, and admissions run on enquiries — WhatsApp messages from parents, walk-ins, calls after a school seminar. Each one is a family actively comparing options on a deadline; a reply that comes two days late is a seat filled by a competitor. After enrolment, the operational load shifts: fee reminders, batch communication, attendance follow-ups — all of it manual, all of it on memory. A connected system captures every enquiry with an owner and a follow-up schedule, converts admissions season from chaos into a pipeline, and puts fees and parent communication on autopilot.",
@@ -318,7 +318,7 @@ export const industries: Industry[] = [
     serviceType: "Internal systems for manufacturing and distribution businesses",
     seoTitle: "Internal Systems for Manufacturing & Distribution",
     metaDescription:
-      "anymus builds the operational layer for manufacturers and distributors — orders, dispatches, outstanding payments, and production status in one live system instead of registers and calls.",
+      "Anymus builds the operational layer for manufacturers and distributors — orders, dispatches, outstanding payments, and production status in one live system instead of registers and calls.",
     eyebrow: "Manufacturing & Distribution",
     intro: "Orders, dispatches, and dues — visible without a phone call.",
     body: "In most manufacturing and distribution businesses, the truth lives in registers, in Tally, and in the heads of two indispensable people. Order status requires a phone call to the factory floor; outstanding payments require someone to cross-check ledgers; dispatch coordination happens over calls and chat. The business works — but every question costs a conversation, and every conversation interrupts someone. The system fix is a connected operational layer over what already exists: orders tracked from booking to dispatch, receivables visible and chased automatically, and a dashboard where the owner sees production, dispatches, and dues without calling anyone.",

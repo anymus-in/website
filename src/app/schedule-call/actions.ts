@@ -15,7 +15,7 @@ export async function submitDiscoveryCall(data: {
 }): Promise<{ success: boolean; error?: string }> {
   try {
     await resend.emails.send({
-      from: "anymus <onboarding@resend.dev>",
+      from: "Anymus <onboarding@resend.dev>",
       to: [TO],
       replyTo: data.email,
       subject: `Discovery call — ${data.company || data.name}`,

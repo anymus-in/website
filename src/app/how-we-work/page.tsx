@@ -16,10 +16,10 @@ import type { ServiceFaqItem } from "@/lib/services";
 export const metadata: Metadata = {
   title: "How We Work | Discovery First, Payment Tied to Delivery",
   description:
-    "How an anymus engagement runs — a complimentary discovery session, a written proposal in 2–3 business days, and modular payments released only against delivered milestones. No hidden charges. Ever.",
+    "How an Anymus engagement runs — a complimentary discovery session, a written proposal in 2–3 business days, and modular payments released only against delivered milestones. No hidden charges. Ever.",
   alternates: { canonical: "/how-we-work" },
   openGraph: {
-    title: "How We Work | anymus",
+    title: "How We Work | Anymus",
     description:
       "Discovery first. Proposal in writing. Payment tied to delivery. No hidden charges.",
     url: "/how-we-work",

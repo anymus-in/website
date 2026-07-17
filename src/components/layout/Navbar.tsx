@@ -28,7 +28,7 @@ function Wordmark() {
         priority
       />
       <span className="font-serif text-[19px] sm:text-[21px] font-medium tracking-tight leading-none">
-        anymus
+        Anymus
       </span>
       <span className="anno hidden lg:inline-flex items-center gap-2 pl-3 border-l rule leading-none pt-px">
         <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-live live-dot" />
@@ -168,7 +168,7 @@ export default function Navbar() {
               </motion.div>
             </div>
             <div className="px-6 pb-8 flex items-center justify-between">
-              <span className="anno">anymus — est. 2025</span>
+              <span className="anno">Anymus — est. 2025</span>
               <span className="anno anno-mark">Reply &lt; 24h</span>
             </div>
           </motion.nav>

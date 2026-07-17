@@ -68,7 +68,7 @@ export default function ClosingCta() {
 
         <Reveal delay={0.1}>
           <div className="flex flex-col sm:flex-row items-start sm:items-baseline justify-between gap-3 border-t border-sheet/25 pt-4">
-            <span className="anno !text-sheet/40">anymus — end of document</span>
+            <span className="anno !text-sheet/40">Anymus — end of document</span>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
               className="u-draw inline-flex items-center min-h-11 -my-3 sm:min-h-0 sm:my-0 font-mono text-[11px] uppercase tracking-[0.14em] text-sheet/60 hover:text-sheet active:text-sheet transition-colors"
@@ -87,7 +87,7 @@ export default function ClosingCta() {
         <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-mark/80 leading-relaxed text-center">
           No lock-in ✳ est. 2025
           <br />
-          anymus / systems
+          Anymus / systems
         </span>
       </div>
     </section>

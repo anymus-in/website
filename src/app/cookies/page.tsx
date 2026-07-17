@@ -3,7 +3,7 @@ import LegalLayout, { LegalSection } from "@/components/legal/LegalLayout";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
-  description: "How anymus uses cookies and similar technologies on our website.",
+  description: "How Anymus uses cookies and similar technologies on our website.",
   alternates: { canonical: "/cookies" },
 };
 
@@ -12,7 +12,7 @@ export default function CookiePolicyPage() {
     <LegalLayout title="Cookie Policy" updated="June 17, 2026">
       <LegalSection heading="1. Overview">
         <p>
-          This Cookie Policy explains how anymus (&quot;anymus,&quot; &quot;we,&quot;
+          This Cookie Policy explains how Anymus (&quot;Anymus,&quot; &quot;we,&quot;
           &quot;us,&quot; or &quot;our&quot;) uses cookies and similar technologies when
           you visit our website. It should be read alongside our{" "}
           <a href="/privacy" className="text-accent-ink underline underline-offset-1 hover:text-accent transition-colors">

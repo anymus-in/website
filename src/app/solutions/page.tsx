@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "Nine playbooks for the problems growing businesses hit — WhatsApp lead capture, CRM setup, booking and billing automation, client portals, dashboards, and more.",
   alternates: { canonical: "/solutions" },
   openGraph: {
-    title: "Solutions | anymus",
+    title: "Solutions | Anymus",
     description:
       "Playbooks for the work that still runs on memory — lead capture, follow-ups, billing, portals, dashboards.",
     url: "/solutions",
