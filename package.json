@@ -12,6 +12,7 @@
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
     "@next/mdx": "^16.2.10",
+    "@next/third-parties": "^16.2.10",
     "@radix-ui/react-accordion": "^1.2.14",
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.12.97",
