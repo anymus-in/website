@@ -32,7 +32,7 @@ export interface Service {
   name: string;
   /** schema.org serviceType / category keyword. */
   serviceType: string;
-  /** <title> tag (the template appends "— anymus"). */
+  /** <title> tag (the template appends "— Anymus"). */
   seoTitle: string;
   /** Meta description + OG description. */
   metaDescription: string;
@@ -78,7 +78,7 @@ export const services: Service[] = [
     serviceType: "Website design and development",
     seoTitle: "Digital Presence — Websites & Landing Pages",
     metaDescription:
-      "anymus designs and builds fast, conversion-focused websites and landing pages — wired into the CRM and automations that turn every visitor into a tracked, followed-up lead.",
+      "Anymus designs and builds fast, conversion-focused websites and landing pages — wired into the CRM and automations that turn every visitor into a tracked, followed-up lead.",
     eyebrow: "Digital Presence",
     intro: "A website that turns visitors into customers.",
     body: "Your website is the first impression and the front door to everything else. We design and build fast, polished sites and landing pages that look like the company you're becoming — then wire them into your CRM and automations so every enquiry is captured, routed, and followed up, instead of lost in an inbox.",
@@ -159,7 +159,7 @@ export const services: Service[] = [
     serviceType: "Business process and workflow automation",
     seoTitle: "Automation — WhatsApp, CRM & Workflows",
     metaDescription:
-      "anymus automates the busywork between your tools — WhatsApp and CRM workflows, lead routing, and follow-ups that run themselves — so no enquiry is ever lost or forgotten.",
+      "Anymus automates the busywork between your tools — WhatsApp and CRM workflows, lead routing, and follow-ups that run themselves — so no enquiry is ever lost or forgotten.",
     eyebrow: "Automation",
     intro: "Workflows that run themselves.",
     body: "Every lead, follow-up, and handoff that depends on someone remembering is a leak in the business. We automate the work between your tools — capturing enquiries from WhatsApp and your website into a CRM, routing them to the right person, and firing off follow-ups the moment something changes. Nothing waits on a reminder, and exceptions get flagged instead of slipping through.",
@@ -240,7 +240,7 @@ export const services: Service[] = [
     serviceType: "Custom internal tools, dashboards, and portals",
     seoTitle: "Internal Systems — Dashboards & Portals",
     metaDescription:
-      "anymus builds the dashboards, portals, and internal tools that run your operations — real-time visibility and one source of truth, instead of a dozen disconnected spreadsheets.",
+      "Anymus builds the dashboards, portals, and internal tools that run your operations — real-time visibility and one source of truth, instead of a dozen disconnected spreadsheets.",
     eyebrow: "Internal Systems",
     intro: "Custom tools to run your operations.",
     body: "When the business runs on a dozen spreadsheets and gut feel, growth gets risky. We build the internal tools that give you a single source of truth — dashboards that show how the business is really doing, client and team portals, and management software shaped around how you actually operate. Real-time visibility, one trusted record, decisions you can stand behind.",

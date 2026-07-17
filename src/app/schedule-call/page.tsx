@@ -9,11 +9,11 @@ import ScheduleCallForm from "./ScheduleCallForm";
 export const metadata: Metadata = {
   title: "Schedule a Call",
   description:
-    "Book a free 30-minute discovery call with the anymus team to scope your website, automation, or internal systems project.",
+    "Book a free 30-minute discovery call with the Anymus team to scope your website, automation, or internal systems project.",
   alternates: { canonical: "/schedule-call" },
   openGraph: {
-    title: "Schedule a Call | anymus",
-    description: "Book a free discovery call with the anymus team.",
+    title: "Schedule a Call | Anymus",
+    description: "Book a free discovery call with the Anymus team.",
     url: "/schedule-call",
   },
 };

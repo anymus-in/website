@@ -17,10 +17,10 @@ import { organizationSchema, websiteSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "anymus | Websites, Automation & Internal Systems for Growing Businesses",
+    absolute: "Anymus | Websites, Automation & Internal Systems for Growing Businesses",
   },
   description:
-    "anymus designs and builds the websites, automations, and internal tools that growing businesses run on, one connected system, built around the tools you already use.",
+    "Anymus designs and builds the websites, automations, and internal tools that growing businesses run on, one connected system, built around the tools you already use.",
   alternates: { canonical: "/" },
 };
 

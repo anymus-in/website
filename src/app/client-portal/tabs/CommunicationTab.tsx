@@ -7,21 +7,21 @@ import { PortalCard, TabHeader } from "../components";
 const initialUpdates = [
   {
     id: 1,
-    author: "anymus Team",
+    author: "Anymus Team",
     date: "Jun 16, 2026",
     message:
       "Automation workflows for order processing are now live in staging. Review link sent via email.",
   },
   {
     id: 2,
-    author: "anymus Team",
+    author: "Anymus Team",
     date: "Jun 9, 2026",
     message:
       "Training guide draft uploaded to Documents. Let us know if anything needs adjusting.",
   },
   {
     id: 3,
-    author: "anymus Team",
+    author: "Anymus Team",
     date: "May 19, 2026",
     message: "Discovery phase wrapped up. Summary document available in Documents tab.",
   },
@@ -42,7 +42,7 @@ export default function CommunicationTab() {
 
   return (
     <div>
-      <TabHeader title="Messages" subtitle="Direct line to your anymus team." />
+      <TabHeader title="Messages" subtitle="Direct line to your Anymus team." />
 
       <PortalCard className="p-3 sm:p-4 mb-5 sm:mb-6">
         <textarea
@@ -55,7 +55,7 @@ export default function CommunicationTab() {
             }
           }}
           rows={2}
-          placeholder="Send a message to your anymus team..."
+          placeholder="Send a message to your Anymus team..."
           className="focus-accent w-full bg-transparent text-[13px] sm:text-[14px] text-black placeholder:text-ink-400 outline-none resize-none mb-2"
         />
         <div className="flex justify-end">

@@ -17,11 +17,11 @@ import type { ServiceFaqItem } from "@/lib/services";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with the anymus team about websites, automation, and internal systems, a demo, or a project scope. Reply within 24 hours.",
+    "Get in touch with the Anymus team about websites, automation, and internal systems, a demo, or a project scope. Reply within 24 hours.",
   alternates: { canonical: "/contact" },
   openGraph: {
-    title: "Contact Us | anymus",
-    description: "Get in touch with the anymus team. Reply within 24 hours.",
+    title: "Contact Us | Anymus",
+    description: "Get in touch with the Anymus team. Reply within 24 hours.",
     url: "/contact",
   },
 };

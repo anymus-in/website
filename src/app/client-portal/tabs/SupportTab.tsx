@@ -27,7 +27,7 @@ export default function SupportTab({ onNavigate }: { onNavigate: (tab: TabId) =>
 
   return (
     <div>
-      <TabHeader title="Support" subtitle="Get help from your anymus team, fast." />
+      <TabHeader title="Support" subtitle="Get help from your Anymus team, fast." />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
         <button

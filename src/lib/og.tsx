@@ -33,12 +33,12 @@ async function loadGoogleFont(
 }
 
 /**
- * Shared 1200×630 social card: dark background, gradient accent bar, anymus
+ * Shared 1200×630 social card: dark background, gradient accent bar, Anymus
  * logo + wordmark, a serif title, and the site URL. Used by the homepage and
  * every per-route opengraph-image.
  */
 export async function renderOgImage(title: string) {
-  const wordmark = "anymus";
+  const wordmark = "Anymus";
 
   const [serifFont, logoData] = await Promise.all([
     loadGoogleFont("Newsreader:wght@500", wordmark + title),

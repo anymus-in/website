@@ -9,7 +9,7 @@ export interface PostMeta {
   slug: string;
   /** Display title — the page <h1> and index label. */
   title: string;
-  /** <title> tag (the template appends "| anymus"). */
+  /** <title> tag (the template appends "| Anymus"). */
   seoTitle: string;
   /** Meta description + OG description. */
   metaDescription: string;
@@ -34,7 +34,7 @@ export const posts: PostMeta[] = [
     title: "If Someone Has to Remember It, the System Is Broken",
     seoTitle: "If Someone Has to Remember It, the System Is Broken",
     metaDescription:
-      "The operating philosophy behind everything anymus builds: any process that depends on a person remembering — a follow-up, an invoice, a report — is a leak. Here's how to find yours.",
+      "The operating philosophy behind everything Anymus builds: any process that depends on a person remembering — a follow-up, an invoice, a report — is a leak. Here's how to find yours.",
     standfirst:
       "The single test we apply to every business process — and what it reveals about where growth quietly leaks away.",
     date: "2026-07-12",

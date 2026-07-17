@@ -15,10 +15,10 @@ import { breadcrumbList } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "Field Notes | Writing on Systems, Automation & Operations",
   description:
-    "Field notes from anymus — how growing businesses leak leads, why spreadsheets stall growth, what automation actually costs, and how to build the system your business runs on.",
+    "Field notes from Anymus — how growing businesses leak leads, why spreadsheets stall growth, what automation actually costs, and how to build the system your business runs on.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Field Notes | anymus",
+    title: "Field Notes | Anymus",
     description:
       "Writing on systems, automation, and the operations of growing businesses.",
     url: "/blog",

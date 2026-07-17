@@ -500,7 +500,7 @@ export default function Hero() {
           >
             <p className="text-[15px] sm:text-[16px] text-inkwarm-soft leading-relaxed max-w-[440px] lg:max-w-none lg:border-l lg:rule lg:pl-5">
               <span className="font-serif text-[17px] sm:text-[18px] text-inkwarm">
-                anymus
+                Anymus
               </span>{" "}
               <span className="sm:hidden">
                 builds your websites, automations, and internal tools —{" "}
@@ -558,7 +558,7 @@ export default function Hero() {
           <motion.div style={reduce ? undefined : { y: drift }}>
             <SystemSchematic />
             <p className="anno mt-5 sm:mt-6 text-center">
-              Fig. 01 — How work moves once anymus is in
+              Fig. 01 — How work moves once Anymus is in
             </p>
           </motion.div>
         </motion.div>

@@ -31,7 +31,7 @@ export interface Solution {
   name: string;
   /** schema.org serviceType / category keyword. */
   serviceType: string;
-  /** <title> tag (the template appends "| anymus"). */
+  /** <title> tag (the template appends "| Anymus"). */
   seoTitle: string;
   /** Meta description + OG description. */
   metaDescription: string;
@@ -81,7 +81,7 @@ export const solutions: Solution[] = [
     serviceType: "WhatsApp lead capture and follow-up automation",
     seoTitle: "WhatsApp Lead Capture & Follow-Up Automation",
     metaDescription:
-      "anymus wires WhatsApp into your CRM so every enquiry is captured, routed, and followed up automatically — no lead left sitting unread in a chat.",
+      "Anymus wires WhatsApp into your CRM so every enquiry is captured, routed, and followed up automatically — no lead left sitting unread in a chat.",
     eyebrow: "WhatsApp Automation",
     intro: "Every WhatsApp enquiry, captured and followed up.",
     problem:
@@ -156,7 +156,7 @@ export const solutions: Solution[] = [
     serviceType: "SMS and missed-call follow-up automation",
     seoTitle: "SMS Follow-Up & Missed-Call Text-Back Automation",
     metaDescription:
-      "anymus builds SMS follow-up and missed-call text-back automation — every missed call gets an instant text, every lead gets a timely follow-up, automatically.",
+      "Anymus builds SMS follow-up and missed-call text-back automation — every missed call gets an instant text, every lead gets a timely follow-up, automatically.",
     eyebrow: "SMS Automation",
     intro: "Missed the call? The system already texted them back.",
     problem:
@@ -221,7 +221,7 @@ export const solutions: Solution[] = [
     serviceType: "CRM setup, configuration, and adoption",
     seoTitle: "CRM Setup & Configuration — HubSpot, Zoho & More",
     metaDescription:
-      "anymus sets up and configures your CRM — HubSpot, Zoho, or the right fit for you — around how you actually sell, with your data migrated and your team onboard.",
+      "Anymus sets up and configures your CRM — HubSpot, Zoho, or the right fit for you — around how you actually sell, with your data migrated and your team onboard.",
     eyebrow: "CRM Setup",
     intro: "A CRM your team actually uses.",
     problem:
@@ -291,7 +291,7 @@ export const solutions: Solution[] = [
     serviceType: "Website, form, and CRM integration",
     seoTitle: "Website to CRM Integration — No Lead Left in an Inbox",
     metaDescription:
-      "anymus connects your website forms, chat, and calls to your CRM — every visitor enquiry becomes a tracked, routed, followed-up lead instead of an email nobody saw.",
+      "Anymus connects your website forms, chat, and calls to your CRM — every visitor enquiry becomes a tracked, routed, followed-up lead instead of an email nobody saw.",
     eyebrow: "Website + CRM",
     intro: "From form fill to follow-up, automatically.",
     problem:
@@ -356,7 +356,7 @@ export const solutions: Solution[] = [
     serviceType: "Appointment booking and reminder automation",
     seoTitle: "Automated Appointment Booking & Reminders",
     metaDescription:
-      "anymus automates appointment booking, confirmations, and reminders — customers book themselves in, no-shows drop, and the calendar stops living in someone's head.",
+      "Anymus automates appointment booking, confirmations, and reminders — customers book themselves in, no-shows drop, and the calendar stops living in someone's head.",
     eyebrow: "Booking Automation",
     intro: "Bookings that make themselves. Reminders that send themselves.",
     problem:
@@ -421,7 +421,7 @@ export const solutions: Solution[] = [
     serviceType: "Invoice generation and payment follow-up automation",
     seoTitle: "Automated Invoice Generation & Payment Follow-Ups",
     metaDescription:
-      "anymus automates invoicing and payment follow-ups — invoices generate themselves from your data, reminders chase what's due, and cash stops waiting on paperwork.",
+      "Anymus automates invoicing and payment follow-ups — invoices generate themselves from your data, reminders chase what's due, and cash stops waiting on paperwork.",
     eyebrow: "Billing Automation",
     intro: "Invoices out on time. Payments chased without the awkwardness.",
     problem:
@@ -486,7 +486,7 @@ export const solutions: Solution[] = [
     serviceType: "Lead routing and qualification automation",
     seoTitle: "Lead Routing & Qualification Automation",
     metaDescription:
-      "anymus automates lead routing and qualification — every enquiry scored, assigned to the right person instantly, and followed up before the competition answers.",
+      "Anymus automates lead routing and qualification — every enquiry scored, assigned to the right person instantly, and followed up before the competition answers.",
     eyebrow: "Lead Routing",
     intro: "The right lead, with the right person, in minutes.",
     problem:
@@ -551,7 +551,7 @@ export const solutions: Solution[] = [
     serviceType: "Client portal design and development",
     seoTitle: "Client Portals for Service Businesses",
     metaDescription:
-      "anymus builds client portals for service businesses — a professional, branded place where clients see status, documents, and invoices without emailing you for updates.",
+      "Anymus builds client portals for service businesses — a professional, branded place where clients see status, documents, and invoices without emailing you for updates.",
     eyebrow: "Client Portals",
     intro: "One place where clients see everything — without asking.",
     problem:
@@ -616,7 +616,7 @@ export const solutions: Solution[] = [
     serviceType: "Real-time business dashboard development",
     seoTitle: "Real-Time Business Dashboards — Beyond Spreadsheets",
     metaDescription:
-      "anymus builds real-time business dashboards that replace the weekly spreadsheet ritual — revenue, pipeline, and operations in one live view you can actually trust.",
+      "Anymus builds real-time business dashboards that replace the weekly spreadsheet ritual — revenue, pipeline, and operations in one live view you can actually trust.",
     eyebrow: "Dashboards",
     intro: "The state of the business, live — not compiled every Friday.",
     problem:

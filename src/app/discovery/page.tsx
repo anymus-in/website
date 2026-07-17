@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "Capture prospect details on the go — business info, challenges, and services interested in.",
   alternates: { canonical: "/discovery" },
   openGraph: {
-    title: "Sales Discovery | anymus",
+    title: "Sales Discovery | Anymus",
     description: "Capture prospect details on the go.",
     url: "/discovery",
   },

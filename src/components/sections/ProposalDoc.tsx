@@ -68,7 +68,7 @@ export default function ProposalDoc() {
         <div className="border-t rule px-5 sm:px-7 py-4 flex items-end justify-between gap-4">
           <div>
             <p className="font-serif italic text-[15px] text-inkwarm/70 leading-none mb-1.5">
-              anymus
+              Anymus
             </p>
             <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-inkwarm-faint">
               Agreed before work begins

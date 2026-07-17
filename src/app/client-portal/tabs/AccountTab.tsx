@@ -67,7 +67,7 @@ export default function AccountTab() {
             <p className="text-ink-500">jane@acme.com</p>
           </div>
           <div>
-            <p className="text-ink-500 mb-1">anymus account lead</p>
+            <p className="text-ink-500 mb-1">Anymus account lead</p>
             <p className="text-black font-medium">Sarah Chen</p>
             <p className="text-ink-500">sarah@anymus.io</p>
           </div>

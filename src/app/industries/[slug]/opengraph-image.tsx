@@ -8,7 +8,7 @@ export function generateStaticParams() {
   return industries.map((i) => ({ slug: i.slug }));
 }
 
-export const alt = "anymus industry";
+export const alt = "Anymus industry";
 
 export default async function Image({
   params,
@@ -17,5 +17,5 @@ export default async function Image({
 }) {
   const { slug } = await params;
   const industry = getIndustry(slug);
-  return renderOgImage(industry ? industry.name : "anymus");
+  return renderOgImage(industry ? industry.name : "Anymus");
 }

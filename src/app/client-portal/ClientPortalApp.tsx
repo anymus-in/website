@@ -77,7 +77,7 @@ export default function ClientPortalApp() {
       <header className="relative z-50 bg-white border-b border-[#E4E4E1] px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between shrink-0">
         <Link href="/" className="flex items-center gap-2">
           <Image src="/final-logo.svg" alt="" width={24} height={24} className="shrink-0" />
-          <span className="font-serif text-[16px] sm:text-[18px] text-black">anymus</span>
+          <span className="font-serif text-[16px] sm:text-[18px] text-black">Anymus</span>
         </Link>
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Notifications */}

@@ -8,7 +8,7 @@ export function generateStaticParams() {
   return solutions.map((s) => ({ slug: s.slug }));
 }
 
-export const alt = "anymus solution";
+export const alt = "Anymus solution";
 
 export default async function Image({
   params,
@@ -17,5 +17,5 @@ export default async function Image({
 }) {
   const { slug } = await params;
   const solution = getSolution(slug);
-  return renderOgImage(solution ? solution.name : "anymus");
+  return renderOgImage(solution ? solution.name : "Anymus");
 }

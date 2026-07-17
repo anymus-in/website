@@ -13,10 +13,10 @@ import { breadcrumbList } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "Services | Websites, Automation & Internal Systems",
   description:
-    "anymus builds the whole stack: websites, automation, and internal systems, as one connected system for growing businesses.",
+    "Anymus builds the whole stack: websites, automation, and internal systems, as one connected system for growing businesses.",
   alternates: { canonical: "/services" },
   openGraph: {
-    title: "Services | anymus",
+    title: "Services | Anymus",
     description:
       "Digital presence, automation, and internal systems. One connected stack.",
     url: "/services",

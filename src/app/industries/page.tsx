@@ -15,10 +15,10 @@ import { breadcrumbList } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "Industries | Systems for the Sectors We Know",
   description:
-    "How anymus applies websites, automation, and internal systems to specific industries — clinics, real estate, retail, professional services, education, and manufacturing.",
+    "How Anymus applies websites, automation, and internal systems to specific industries — clinics, real estate, retail, professional services, education, and manufacturing.",
   alternates: { canonical: "/industries" },
   openGraph: {
-    title: "Industries | anymus",
+    title: "Industries | Anymus",
     description:
       "The same wall, a different shape in every sector — and the systems that get through it.",
     url: "/industries",
