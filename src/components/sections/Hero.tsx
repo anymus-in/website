@@ -43,10 +43,10 @@ export default function Hero() {
       id="top"
       className="relative lg:max-h-screen overflow-hidden"
     >
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-[calc(104px+env(safe-area-inset-top))] sm:pt-[calc(132px+env(safe-area-inset-top))] flex flex-col items-center text-center">
+      <div className="max-w-[1380px] mx-auto px-5 sm:px-8 pt-[calc(104px+env(safe-area-inset-top))] sm:pt-[calc(116px+env(safe-area-inset-top))] flex flex-col items-center text-center">
         <motion.h1
           {...rise(0.1)}
-          className="font-serif font-light text-[clamp(38px,7.5vw,92px)] leading-[1.05] tracking-[-0.03em] text-inkwarm max-w-[16ch]"
+          className="font-serif font-light text-[clamp(38px,7.5vw,84px)] leading-[1.05] tracking-[-0.03em] text-inkwarm max-w-[16ch]"
         >
           We build the system your business{" "}
           <span className="relative inline-block">
@@ -85,7 +85,7 @@ export default function Hero() {
       {/* The real product — cropped by the fold on tall viewports */}
       <motion.div
         {...rise(0.55)}
-        className="relative max-w-[1140px] mx-auto px-4 sm:px-8 mt-12 sm:mt-16"
+        className="relative max-w-[1140px] mx-auto px-4 sm:px-8 mt-10 sm:mt-12"
       >
         <div className="rounded-[8px] border rule shadow-[var(--shadow-card)] overflow-hidden bg-white">
           <Image
