@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Newsreader, Inter, JetBrains_Mono } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import {
@@ -89,6 +89,7 @@ export default function RootLayout({
       lang="en"
       className={`${newsreader.variable} ${inter.variable} ${jetbrainsMono.variable} h-full`}
     >
+      <GoogleTagManager gtmId="GTM-5D2JMXPB" />
       <body className="min-h-full antialiased">
         {children}
         <Analytics />
