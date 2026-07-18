@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Newsreader, Inter, JetBrains_Mono } from "next/font/google";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import {
@@ -96,6 +97,12 @@ export default function RootLayout({
         <SpeedInsights />
       </body>
       <GoogleAnalytics gaId="G-L4DH7HNBC8" />
+      {/* Second GA4 property — gtag.js is already loaded by GoogleAnalytics above */}
+      <Script id="ga-secondary" strategy="afterInteractive">
+        {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('config', 'G-LVT7Y0LVW3');`}
+      </Script>
     </html>
   );
 }
